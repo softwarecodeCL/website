@@ -2,11 +2,15 @@
 export interface Props {
   title?: string;
   description?: string;
+  image?: string;
+  url?: string;
 }
 
 const {
   title = 'SoftwareCode.cl - Desarrollo de Software a Medida',
-  description = 'Soluciones digitales: software a medida, CRM, ERP, apps móviles y marketing digital.',
+  description = 'Soluciones digitales: desarrollo de software, CRM, ERP, apps móviles, SEO y marketing digital.',
+  image = '/sclogo.png',
+  url = 'https://www.softwarecode.cl',
 } = Astro.props;
 ---
 
@@ -17,14 +21,24 @@ const {
     <meta name="description" content={description} />
     <title>{title}</title>
 
+    <!-- Open Graph (Facebook, LinkedIn, WhatsApp) -->
+    <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta property="og:image" content="/sclogo.png" />
-    <meta property="og:url" content="https://www.softwarecode.cl" />
+    <meta property="og:image" content={image} />
+    <meta property="og:url" content={url} />
+
+    <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content={title} />
     <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content="/sclogo.png" />
+    <meta name="twitter:image" content={image} />
+
+    <!-- Canonical -->
+    <link rel="canonical" href={url} />
+
+    <!-- Robots -->
+    <meta name="robots" content="index, follow" />
     <link rel="icon" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/sclogo.png" />
 
@@ -47,10 +61,27 @@ const {
         overflow-x: hidden;
       }
     </style>
-	
-
+      
+    <!-- Google Tag Manager -->
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-KCK6Z8MQ');</script>
+    <!-- End Google Tag Manager -->
   </head>
   
+
+  <!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-4DCWK6F49Y"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-4DCWK6F49Y');
+</script>
+
 <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
 	<div class="container">
 	  <a class="navbar-brand" href="/"><img src="/logosc.png" alt="logo" style="max-width: 150px;"></a>
@@ -74,7 +105,10 @@ const {
 	</div>
   </nav>  
   <body>
-	
+	<!-- Google Tag Manager (noscript) -->
+<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCK6Z8MQ"
+height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+<!-- End Google Tag Manager (noscript) -->
     <slot />
 
     <!-- Scripts -->
