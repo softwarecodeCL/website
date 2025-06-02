@@ -6,6 +6,7 @@ import node from '@astrojs/node';
 
 // https://astro.build/config
 export default defineConfig({
+  
     output: 'server', // Habilitar SSR
     adapter: node({
       mode: 'standalone', // Genera un servidor independiente listo para producción
