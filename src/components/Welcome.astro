@@ -348,9 +348,25 @@
   </footer>		<div class="contacto" id="contacto">
 	<a href="https://wa.me/56988396128?text=¡Hola!%20Quiero%20más%20información." 
 	 class="whatsapp-float" 
+   id="whatsapp-boton"
 	 target="_blank">
 	<img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
   </a>
+
+  <script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('whatsapp-boton');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17146702154/Jq-TCLf0ltIaEMrSl_A_',
+          'value': 1.0,
+          'currency': 'CLP'
+        });
+      });
+    }
+  });
+</script>
 </div>
   <!--====  End of Footer  ====-->
   <router-outlet />
