@@ -6,6 +6,45 @@
  */
 
 
+ /* transicion section*/
+.transition-overlay {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  height: 1000px;
+  width: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+
+.transition-overlay img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* Responsive: ajuste para móviles */
+@media (max-width: 768px) {
+  .transition-overlay {
+    /*height: auto;*/
+    bottom: -1px; /* o ajústalo si necesitas que se superponga más */
+    position: absolute;
+    left: -583px;
+    height: 626px;
+    width: 257%;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .transition-overlay img {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+ /* end transicion section*/
+
  /* tecnologicas css*/
 .tech-icon {
   transition: transform 0.4s ease, box-shadow 0.3s ease;
