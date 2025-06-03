@@ -30,7 +30,7 @@
     bottom: -1px; /* o ajústalo si necesitas que se superponga más */
     position: absolute;
     left: -583px;
-    height: 626px;
+    height: 557px;
     width: 257%;
     z-index: 1;
     pointer-events: none;
