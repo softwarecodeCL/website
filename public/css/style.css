@@ -11,7 +11,7 @@
   position: absolute;
   bottom: -1px;
   left: 0;
-  height: 1000px;
+  height: 890px;
   width: 100%;
   z-index: 1;
   pointer-events: none;
@@ -543,7 +543,7 @@ button:focus,
 .btn-main {
   padding: 25px 45px;
   border-radius: 3px;
-  background: #2e7eed;
+  background: #743387;
   color: #fff;
   outline: none;
 }
@@ -558,7 +558,7 @@ button:focus,
 .btn-main-md {
   padding: 17px 38px;
   border-radius: 3px;
-  background: #2e7eed;
+  background: #743387;
   color: #fff;
   outline: none;
 }
@@ -573,7 +573,7 @@ button:focus,
 .btn-main-sm {
   padding: 15px 35px;
   border-radius: 3px;
-  background: #2e7eed;
+  background: #743387;
   color: #fff;
   outline: none;
   font-size: 14px;
@@ -588,7 +588,7 @@ button:focus,
 
 .btn-white {
   background: white;
-  color: #2e7eed;
+  color: #743387;
 }
 
 .btn-rounded-icon {
@@ -1262,7 +1262,7 @@ button:focus,
   width: 200%;
   height: 200%;
   border-radius: 50%;
-  background-image: linear-gradient(45deg, #009EC5 0%, #2e7eed 20%, #02225B 50%);
+  background-image: linear-gradient(45deg, #009EC5 0%, #4b00ff 20%, #7c0f6e 50%);
 }
 
 .pull-top {
