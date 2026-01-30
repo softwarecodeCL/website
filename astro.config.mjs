@@ -1,7 +1,7 @@
 // @ts-check
 import { defineConfig } from 'astro/config';
 
-
+import mdx from '@astrojs/mdx'
 import node from '@astrojs/node';
 
 // https://astro.build/config
@@ -15,4 +15,5 @@ export default defineConfig({
     srcDir: './src',    // Define que los archivos fuente están en `src/`
     publicDir: './public', // Define que los archivos estáticos están en `public/`
     outDir: './dist',   // Carpeta de salida tras el build
+    integrations: [mdx()],
 }); 

@@ -10,7 +10,9 @@
   },
   "dependencies": {
     "@astrojs/cloudflare": "^12.5.2",
+    "@astrojs/mdx": "^4.3.13",
     "@astrojs/node": "^9.2.1",
+    "@astrojs/rss": "^4.0.15",
     "astro": "^5.7.12",
     "cookie": "^1.0.2",
     "lucide-static": "^0.508.0"

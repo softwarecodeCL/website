@@ -1,0 +1,382 @@
+---
+import Layout from '../../layouts/Layout.astro'
+import { getCollection } from 'astro:content'
+
+export async function getStaticPaths() {
+  const posts = (await getCollection('blog')).filter(p => !p.data.draft)
+  return posts.map(p => ({
+    params: { slug: p.slug },
+  }))
+}
+
+const { slug } = Astro.params
+
+// Busca el post por slug (esto evita el undefined)
+const allPosts = (await getCollection('blog')).filter(p => !p.data.draft)
+const post = allPosts.find(p => p.slug === slug)
+
+if (!post) {
+  // Si no existe, lanza 404 real
+  throw new Error(`Post no encontrado: ${slug}`)
+}
+
+const { Content } = await post.render()
+
+const title = post.data.title
+const description = post.data.description
+const image = post.data.image || '/img/blog/blog-hero.jpg'
+const publishedTime = post.data.date
+const updatedTime = post.data.updatedAt || post.data.date
+const category = post.data.category
+const tags = post.data.tags || []
+
+// Canonical robusto (sin romper si Astro.site viene vacío)
+const siteOrigin = Astro.site?.origin || 'https://www.softwarecode.cl'
+const canonical = `${siteOrigin}/blog/${post.slug}`
+
+// Datos base para schema (sin inventar dirección/ratings)
+const orgName = 'SoftwareCode.cl'
+const orgLogo = `${siteOrigin}/sclogo.png`
+const blogUrl = `${siteOrigin}/blog`
+
+// ✅ JSON-LD mejorado (sin borrar tu idea original, solo reforzado)
+const jsonLdGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteOrigin}#organization`,
+      "name": orgName,
+      "url": siteOrigin,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${siteOrigin}#logo`,
+        "url": orgLogo
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteOrigin}#website`,
+      "url": siteOrigin,
+      "name": orgName,
+      "publisher": { "@id": `${siteOrigin}#organization` },
+      "inLanguage": "es-CL"
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${canonical}#webpage`,
+      "url": canonical,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteOrigin}#website` },
+      "inLanguage": "es-CL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${canonical}#breadcrumbs`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteOrigin },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": blogUrl },
+        { "@type": "ListItem", "position": 3, "name": title, "item": canonical }
+      ]
+    },
+    {
+      "@type": "BlogPosting",
+      "@id": `${canonical}#blogposting`,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
+      "headline": title,
+      "description": description,
+      "image": [image],
+      "datePublished": publishedTime,
+      "dateModified": updatedTime,
+      "inLanguage": "es-CL",
+      "articleSection": category,
+      "keywords": tags,
+      "author": {
+        "@type": "Person",
+        "name": post.data.author || "Software Code"
+      },
+      "publisher": {
+        "@type": "Organization",
+        "@id": `${siteOrigin}#organization`,
+        "name": orgName,
+        "url": siteOrigin,
+        "logo": {
+          "@type": "ImageObject",
+          "url": orgLogo
+        }
+      }
+    }
+  ]
+}
+---
+
+<Layout title={title} description={description} image={image} url={canonical}>
+  <head>
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+
+    <!-- OpenGraph -->
+    <meta property="og:type" content="article" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={image} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+
+    <!-- ✅ JSON-LD (mejorado) -->
+    <script type="application/ld+json">
+      {JSON.stringify(jsonLdGraph)}
+    </script>
+  </head>
+
+  <header class="article-hero">
+    <div class="container py-4 py-lg-5">
+      <nav aria-label="breadcrumb" class="mb-3">
+        <ol class="breadcrumb bg-transparent p-0 mb-0">
+          <li class="breadcrumb-item"><a href="/" class="text-muted">Inicio</a></li>
+          <li class="breadcrumb-item"><a href="/blog" class="text-muted">Blog</a></li>
+          <li class="breadcrumb-item active" aria-current="page">{title}</li>
+        </ol>
+      </nav>
+
+      <div class="row align-items-center">
+        <div class="col-lg-7">
+          <div class="d-flex flex-wrap align-items-center mb-3">
+            <!-- BS4 -> BS5: mr-2 => me-2 -->
+            <span class="article-pill me-2">{category}</span>
+
+            <small class="text-muted">
+              {post.data.date.toLocaleDateString('es-CL', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+              })}
+            </small>
+
+            {post.data.updatedAt && (
+              // BS4 -> BS5: ml-3 => ms-3
+              <small class="text-muted ms-3">
+                • Actualizado: {post.data.updatedAt.toLocaleDateString('es-CL', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric'
+                })}
+              </small>
+            )}
+          </div>
+
+          <h1 class="article-title mb-3">{title}</h1>
+          <p class="article-subtitle mb-4">{description}</p>
+
+          {tags.length > 0 && (
+            <div class="d-flex flex-wrap">
+              {tags.map(t => (
+                // BS4 -> BS5: mr-2 => me-2
+                <a class="article-tag me-2 mb-2" href={`/tag/${encodeURIComponent(t)}`}>
+                  #{t}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+
+        <div class="col-lg-5 mt-4 mt-lg-0">
+          <div class="article-media">
+            <img
+              src={image}
+              alt={title}
+              class="img-fluid article-img"
+              loading="eager"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="article-wave" aria-hidden="true"></div>
+  </header>
+
+  <main class="container my-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <article class="article-content">
+          <Content />
+        </article>
+
+        <hr class="my-5" />
+
+        <div class="d-flex flex-column flex-md-row align-items-md-center justify-content-between">
+          <a class="btn btn-outline-secondary mb-3 mb-md-0" href="/blog">
+            ← Volver al blog
+          </a>
+
+          <div class="text-muted small">
+            Categoría: <strong>{category}</strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+/* ===== Article (detail) ===== */
+
+.article-hero{
+  position: relative;
+  background: #fff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* fondo con textura sutil (consistente con el blog) */
+.article-hero::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:
+    radial-gradient(900px 420px at 12% 10%, rgba(121, 40, 202, 0.10), transparent 60%),
+    radial-gradient(800px 380px at 82% 20%, rgba(0, 153, 255, 0.10), transparent 55%),
+    radial-gradient(700px 360px at 55% 85%, rgba(16, 185, 129, 0.08), transparent 55%);
+  pointer-events:none;
+}
+
+.article-title{
+  font-size: 2.3rem;
+  line-height: 1.12;
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  color:#111827;
+}
+
+.article-subtitle{
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color:#4b5563;
+  max-width: 60ch;
+}
+
+.article-pill{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 12px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: .03em;
+  color:#111827;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+}
+
+.article-tag{
+  display:inline-flex;
+  align-items:center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 700;
+  color:#2563eb;
+  background: rgba(37,99,235,0.08);
+  border: 1px solid rgba(37,99,235,0.18);
+  text-decoration: none !important;
+  transition: transform .2s ease, background .2s ease;
+}
+
+.article-tag:hover{
+  transform: translateY(-2px);
+  background: rgba(37,99,235,0.12);
+}
+
+.article-media{
+  border-radius: 22px;
+  background:#fff;
+  padding: 10px;
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.article-img{
+  border-radius: 16px;
+  width: 100%;
+  height: 340px;
+  object-fit: cover;
+}
+
+.article-wave{
+  height: 36px;
+  background:
+    radial-gradient(60px 30px at 10% 0, rgba(0,0,0,0.05), transparent 60%),
+    radial-gradient(90px 40px at 40% 0, rgba(0,0,0,0.04), transparent 60%),
+    radial-gradient(70px 35px at 75% 0, rgba(0,0,0,0.04), transparent 60%);
+}
+
+/* Tipografía para contenido largo (Markdown/MDX) */
+.article-content{
+  font-size: 1.05rem;
+  line-height: 1.85;
+  color:#111827;
+}
+
+.article-content h2{
+  margin-top: 2.2rem;
+  margin-bottom: 0.8rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+}
+
+.article-content h3{
+  margin-top: 1.6rem;
+  margin-bottom: 0.6rem;
+  font-weight: 800;
+}
+
+.article-content p{
+  margin-bottom: 1.1rem;
+  color:#111827;
+}
+
+.article-content strong{
+  font-weight: 900;
+}
+
+.article-content a{
+  color:#2563eb;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.article-content blockquote{
+  margin: 1.5rem 0;
+  padding: 1rem 1.25rem;
+  border-left: 4px solid rgba(124,58,237,0.55);
+  background: rgba(124,58,237,0.06);
+  border-radius: 12px;
+  color:#374151;
+}
+
+.article-content ul, .article-content ol{
+  margin-bottom: 1.25rem;
+}
+
+.article-content img{
+  max-width: 100%;
+  border-radius: 16px;
+  box-shadow: 0 14px 35px rgba(17,24,39,0.10);
+  margin: 1.2rem 0;
+}
+
+/* reduce motion */
+@media (prefers-reduced-motion: reduce){
+  .article-tag{ transition: none !important; }
+}
+</style>
