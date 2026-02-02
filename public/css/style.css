@@ -2136,8 +2136,8 @@ hr {
 
 .whatsapp-float {
   position: fixed;
-  bottom: 150px;
-  right: 20px;
+  bottom: 25px;
+  right: 6px;
   z-index: 1000;
   background-color: #25d366;
   border-radius: 50%;
