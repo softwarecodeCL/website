@@ -13,8 +13,9 @@
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/node": "^9.2.1",
     "@astrojs/rss": "^4.0.15",
+    "@astrojs/sitemap": "^3.7.0",
     "astro": "^5.7.12",
-    "cookie": "^1.0.2",
+    "cookie": "^1.1.1",
     "lucide-static": "^0.508.0"
   }
 }
