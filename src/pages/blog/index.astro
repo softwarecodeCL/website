@@ -1,0 +1,540 @@
+---
+export const prerender = true;
+import { getCollection } from 'astro:content'
+import Layout from '../../layouts/Layout.astro'
+
+const title = 'Blog y Noticias de Desarrollo de Software — SoftwareCode.cl'
+const description =
+  'Noticias, tendencias y análisis sobre desarrollo de software, tecnología, arquitectura, performance y SEO técnico. Contenido claro y orientado a negocio.'
+
+const siteUrl = 'https://www.softwarecode.cl'
+const pageUrl = `${siteUrl}/blog`
+const logoUrl = `${siteUrl}/sclogo.png`
+
+// Obtiene todas las noticias
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+
+// Para JSON-LD (evita payload gigante)
+const topPosts = posts.slice(0, 24)
+---
+
+<Layout title={title} description={description}>
+  <section class="container my-5">
+    <!-- SEO H1 -->
+    <header class="blog-hero">
+  <div class="container py-5">
+    <div class="row align-items-center">
+
+      <div class="col-lg-7">
+        <div class="d-inline-flex align-items-center blog-pill mb-3">
+          <span class="blog-dot me-2"></span>
+          <small class="text-uppercase fw-bold">Blog / Noticias</small>
+        </div>
+
+        <h1 class="blog-title mb-3">
+          Noticias de Desarrollo de Software
+        </h1>
+
+        <p class="blog-subtitle mb-4">
+          Actualidad, tendencias y análisis sobre desarrollo de software, tecnología y
+          externalización de servicios digitales. Contenido extenso, claro y orientado a Clientes.
+        </p>
+
+        <div class="d-flex flex-wrap">
+          <a href="#posts" class="btn btn-primary me-2 mb-4">
+            Ver noticias
+          </a>
+          <a href="/" class="btn btn-outline-secondary mb-4">
+            Volver al inicio
+          </a>
+        </div>
+      </div>
+
+      <div class="col-lg-5 mt-4 mt-lg-0">
+        <div class="blog-hero-media">
+          <img
+            src="/img/blog/portada.jpg"
+            alt="Blog de desarrollo de software"
+            class="img-fluid blog-hero-img"
+            loading="lazy"
+          />
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="blog-wave" aria-hidden="true"></div>
+</header>
+
+<div class="row mt-4" id="posts">
+  {posts.map(post => (
+    <div class="col-md-6 col-lg-4 mb-4">
+      <article class="post-card h-100">
+        <a href={`/blog/${post.slug}`} class="post-card__link" aria-label={`Leer: ${post.data.title}`}>
+          {/* Media */}
+          <div class="post-card__media">
+            {post.data.image ? (
+              <img
+                src={post.data.image}
+                alt={post.data.title}
+                class="post-card__img"
+                loading="lazy"
+              />
+            ) : (
+              <div class="post-card__img post-card__img--placeholder"></div>
+            )}
+
+            <div class="post-card__overlay"></div>
+
+            <div class="post-card__meta">
+              <span class="post-card__pill">{post.data.category}</span>
+              <span class="post-card__date">
+                {post.data.date.toLocaleDateString('es-CL', {
+                  year: 'numeric',
+                  month: 'short',
+                  day: 'numeric'
+                })}
+              </span>
+            </div>
+          </div>
+
+          {/* Body */}
+          <div class="post-card__body">
+            <h2 class="post-card__title">
+              {post.data.title}
+            </h2>
+
+            <p class="post-card__desc">
+              {post.data.description}
+            </p>
+
+            <div class="post-card__footer">
+              <span class="post-card__cta">
+                Leer artículo <span class="post-card__arrow">→</span>
+              </span>
+            </div>
+          </div>
+        </a>
+      </article>
+    </div>
+  ))}
+</div>
+
+  </section>
+
+  <!-- JSON-LD (SEO) -->
+  <script type="application/ld+json">
+    {JSON.stringify({
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Organization",
+          "@id": `${siteUrl}#organization`,
+          "name": "SoftwareCode.cl",
+          "url": siteUrl,
+          "logo": {
+            "@type": "ImageObject",
+            "@id": `${siteUrl}#logo`,
+            "url": logoUrl
+          }
+        },
+        {
+          "@type": "WebSite",
+          "@id": `${siteUrl}#website`,
+          "url": siteUrl,
+          "name": "SoftwareCode.cl",
+          "publisher": { "@id": `${siteUrl}#organization` },
+          "inLanguage": "es-CL"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": `${pageUrl}#breadcrumbs`,
+          "itemListElement": [
+            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+            { "@type": "ListItem", "position": 2, "name": "Blog", "item": pageUrl }
+          ]
+        },
+        {
+          "@type": ["CollectionPage", "Blog"],
+          "@id": `${pageUrl}#webpage`,
+          "url": pageUrl,
+          "name": title,
+          "description": description,
+          "isPartOf": { "@id": `${siteUrl}#website` },
+          "publisher": { "@id": `${siteUrl}#organization` },
+          "inLanguage": "es-CL",
+          "mainEntity": {
+            "@type": "ItemList",
+            "itemListOrder": "https://schema.org/ItemListOrderDescending",
+            "numberOfItems": topPosts.length,
+            "itemListElement": topPosts.map((p, idx) => ({
+              "@type": "ListItem",
+              "position": idx + 1,
+              "url": `${siteUrl}/blog/${p.slug}`
+            }))
+          }
+        },
+        ...topPosts.map((p) => ({
+          "@type": "BlogPosting",
+          "@id": `${siteUrl}/blog/${p.slug}#blogposting`,
+          "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${p.slug}` },
+          "headline": p.data.title,
+          "description": p.data.description,
+          "datePublished": p.data.date,
+          "inLanguage": "es-CL",
+          "author": { "@type": "Organization", "@id": `${siteUrl}#organization` },
+          "publisher": { "@id": `${siteUrl}#organization` },
+          "image": p.data.image ? [p.data.image.startsWith('http') ? p.data.image : `${siteUrl}${p.data.image}`] : undefined,
+          "articleSection": p.data.category || "Blog"
+        }))
+      ].map(x => JSON.parse(JSON.stringify(x)))
+    })}
+  </script>
+
+</Layout>
+
+
+<style>
+
+html { scroll-behavior: smooth; }
+
+.blog-hero {
+  position: relative;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  overflow: hidden;
+}
+
+/* textura suave (no “oscuro”, no plano) */
+.blog-hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(900px 420px at 15% 10%, rgba(121, 40, 202, 0.10), transparent 60%),
+    radial-gradient(800px 380px at 80% 20%, rgba(0, 153, 255, 0.10), transparent 55%),
+    radial-gradient(700px 360px at 50% 80%, rgba(16, 185, 129, 0.08), transparent 55%);
+  pointer-events: none;
+}
+
+.blog-title {
+  font-size: 3rem;
+  line-height: 1.08;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #111827;
+}
+
+.blog-subtitle {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  color: #4b5563;
+  max-width: 52ch;
+}
+
+.blog-pill {
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  background: rgba(17, 24, 39, 0.04);
+  color: #374151;
+}
+
+.blog-dot {
+  position: relative;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #7c3aed;
+  animation: corePulse 2.6s ease-in-out infinite;
+}
+
+/* halo cercano */
+.blog-dot::before {
+  content: "";
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.55) 0%,
+    rgba(124, 58, 237, 0.35) 40%,
+    rgba(124, 58, 237, 0.15) 60%,
+    transparent 72%
+  );
+  animation: haloPulse 2.6s ease-in-out infinite;
+}
+
+/* aura expansiva */
+.blog-dot::after {
+  content: "";
+  position: absolute;
+  inset: -18px;
+  border-radius: 50%;
+  background: radial-gradient(
+    circle,
+    rgba(124, 58, 237, 0.25) 0%,
+    rgba(124, 58, 237, 0.15) 45%,
+    rgba(124, 58, 237, 0.05) 65%,
+    transparent 80%
+  );
+  animation: auraPulse 2.6s ease-in-out infinite;
+}
+
+/* ================== ANIMACIONES ================== */
+
+@keyframes corePulse {
+  0%, 100% {
+    transform: scale(1);
+    box-shadow:
+      0 0 6px rgba(124, 58, 237, 0.8),
+      0 0 14px rgba(124, 58, 237, 0.6);
+  }
+  50% {
+    transform: scale(1.25);
+    box-shadow:
+      0 0 10px rgba(124, 58, 237, 1),
+      0 0 28px rgba(124, 58, 237, 0.85);
+  }
+}
+
+@keyframes haloPulse {
+  0%, 100% {
+    opacity: 0.45;
+    transform: scale(0.85);
+  }
+  50% {
+    opacity: 0.8;
+    transform: scale(1.15);
+  }
+}
+
+@keyframes auraPulse {
+  0%, 100% {
+    opacity: 0.25;
+    transform: scale(0.9);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.25);
+  }
+}
+
+/* accesibilidad */
+@media (prefers-reduced-motion: reduce) {
+  .blog-dot,
+  .blog-dot::before,
+  .blog-dot::after {
+    animation: none;
+  }
+}
+
+
+
+.blog-hero-media {
+  position: relative;
+  border-radius: 22px;
+  background: #fff;
+  padding: 10px;
+  box-shadow: 0 18px 40px rgba(17, 24, 39, 0.12);
+  border: 1px solid rgba(0,0,0,0.06);
+}
+
+.blog-hero-img {
+  border-radius: 16px;
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+/* onda suave abajo para separar del blanco sin “oscuro” */
+.blog-wave {
+  height: 42px;
+  background:
+    radial-gradient(60px 30px at 10% 0, rgba(0,0,0,0.05), transparent 60%),
+    radial-gradient(90px 40px at 40% 0, rgba(0,0,0,0.04), transparent 60%),
+    radial-gradient(70px 35px at 75% 0, rgba(0,0,0,0.04), transparent 60%);
+}
+
+
+
+
+
+/* ===== Modern Post Card (Bootstrap 4.5.3 friendly) ===== */
+
+.post-card {
+  height: 100%;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.06);
+  box-shadow: 0 10px 30px rgba(17, 24, 39, 0.08);
+  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+}
+
+.post-card__link {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  color: inherit;
+  text-decoration: none !important;
+}
+
+.post-card:hover {
+  transform: translateY(-6px);
+  border-color: rgba(0,0,0,0.10);
+  box-shadow: 0 22px 55px rgba(17, 24, 39, 0.14);
+}
+
+/* Media */
+.post-card__media {
+  position: relative;
+  height: 210px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.post-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1);
+  transition: transform .45s ease;
+}
+
+.post-card:hover .post-card__img {
+  transform: scale(1.06);
+}
+
+/* Placeholder if no image */
+.post-card__img--placeholder {
+  background:
+    radial-gradient(800px 240px at 10% 10%, rgba(124, 58, 237, 0.18), transparent 55%),
+    radial-gradient(600px 220px at 90% 20%, rgba(0, 153, 255, 0.14), transparent 55%),
+    linear-gradient(135deg, #f6f7fb, #eef2ff);
+}
+
+/* Overlay */
+.post-card__overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.00) 40%, rgba(0,0,0,0.45) 100%);
+  opacity: .9;
+  pointer-events: none;
+}
+
+/* Meta pill + date on image */
+.post-card__meta {
+  position: absolute;
+  left: 14px;
+  right: 14px;
+  bottom: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  z-index: 2;
+}
+
+.post-card__pill {
+  display: inline-flex;
+  align-items: center;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  text-transform: uppercase;
+  color: #111827;
+  background: rgba(255,255,255,0.92);
+  border: 1px solid rgba(0,0,0,0.06);
+  backdrop-filter: blur(6px);
+}
+
+.post-card__date {
+  font-size: 12px;
+  color: rgba(255,255,255,0.92);
+  font-weight: 600;
+}
+
+/* Body */
+.post-card__body {
+  padding: 16px 16px 18px 16px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.post-card__title {
+  font-size: 1.05rem;
+  font-weight: 800;
+  line-height: 1.25;
+  color: #111827;
+  margin: 0 0 8px 0;
+
+  /* clamp 2 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card__desc {
+  margin: 0 0 14px 0;
+  color: #6b7280;
+  line-height: 1.55;
+
+  /* clamp 3 lines */
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.post-card__footer {
+  margin-top: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.post-card__cta {
+  font-weight: 700;
+  color: #2563eb;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.post-card__arrow {
+  display: inline-block;
+  transform: translateX(0);
+  transition: transform .25s ease;
+}
+
+.post-card:hover .post-card__arrow {
+  transform: translateX(4px);
+}
+
+/* Focus visible (accesibilidad) */
+.post-card__link:focus {
+  outline: none;
+}
+
+.post-card__link:focus-visible {
+  box-shadow: 0 0 0 4px rgba(37, 99, 235, 0.25);
+  border-radius: 18px;
+}
+
+/* Reduce motion */
+@media (prefers-reduced-motion: reduce) {
+  .post-card,
+  .post-card__img,
+  .post-card__arrow {
+    transition: none !important;
+  }
+}
+
+</style>

@@ -1,0 +1,967 @@
+---
+import Layout from '../layouts/Layout.astro'
+
+const title = 'Desarrollo web a medida en Chile y Latinoamérica — Nuxt, NestJS, Headless CMS y SEO técnico'
+const description =
+  'Desarrollo web a medida para pymes, startups y empresas medianas. Migración desde WordPress, webs que venden, integraciones con pagos/APIs/sistemas, performance y SEO técnico con Nuxt + NestJS + Headless CMS.'
+
+// ===== SEO: JSON-LD enriquecido (Service + WebPage + Breadcrumb + FAQ + Organization) =====
+const siteUrl = 'https://www.softwarecode.cl';
+const pageUrl = `${siteUrl}/desarrollo-web-a-medida`;
+const orgName = 'SoftwareCode.cl';
+const phone = '+56988396128';
+const waUrl = 'https://wa.me/56988396128';
+const logoUrl = `${siteUrl}/sclogo.png`;
+const primaryImageUrl = `${siteUrl}/sclogo.png`;
+
+const faq = [
+  {
+    q: '¿Cuándo conviene pasar de WordPress a una web a medida?',
+    a: 'Cuando tu sitio se vuelve lento, dependes de demasiados plugins, necesitas integraciones reales (pagos, CRM, APIs) o quieres posicionarte con SEO técnico serio. Si cada cambio implica “parches”, normalmente ya es momento de una base moderna.'
+  },
+  {
+    q: '¿Qué significa “SEO técnico desde el inicio”?',
+    a: 'Significa construir estructura, semántica, performance, URLs y enlazado interno de forma correcta desde el primer día. Así el contenido que publiques tiene una base sólida para posicionar en Chile y Latinoamérica.'
+  },
+  {
+    q: '¿Pueden integrar pagos y sistemas?',
+    a: 'Sí. Integramos pasarelas de pago, APIs externas, CRM y sistemas internos mediante backend con NestJS y arquitectura preparada para crecer.'
+  },
+  {
+    q: '¿Qué es un Headless CMS y por qué ayuda?',
+    a: 'Es un CMS donde el contenido se administra separado de la web. Eso mejora performance, seguridad y te permite evolucionar el sitio sin quedar amarrado a plantillas ni plugins. Es ideal para blogs/noticias y páginas comerciales.'
+  },
+  {
+    q: '¿Entregan soporte y evolución?',
+    a: 'Sí. Podemos acompañarte con mejoras, performance, SEO técnico, nuevas integraciones y evolución de funcionalidades. La idea es que tu web no se quede estática mientras tu negocio crece.'
+  }
+];
+
+const jsonLdGraph = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      "name": orgName,
+      "url": siteUrl,
+      "logo": { "@type": "ImageObject", "@id": `${siteUrl}#logo`, "url": logoUrl },
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "telephone": phone,
+          "contactType": "sales",
+          "availableLanguage": ["es"],
+          "areaServed": ["CL", "LATAM"]
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      "url": siteUrl,
+      "name": orgName,
+      "publisher": { "@id": `${siteUrl}#organization` },
+      "inLanguage": "es-CL",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${siteUrl}/blog?q={search_term_string}`,
+        "query-input": "required name=search_term_string"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteUrl}#website` },
+      "about": { "@id": `${siteUrl}#service` },
+      "primaryImageOfPage": { "@type": "ImageObject", "@id": `${pageUrl}#primaryimage`, "url": primaryImageUrl },
+      "inLanguage": "es-CL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumbs`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+        { "@type": "ListItem", "position": 2, "name": "Software a medida", "item": pageUrl }
+      ]
+    },
+    {
+      "@type": "Service",
+      "@id": `${siteUrl}#service`,
+      "name": "Desarrollo web a medida",
+      "serviceType": ["Web Development", "Custom Software Development", "SEO Technical Consulting"],
+      "description": description,
+      "url": pageUrl,
+      "provider": { "@id": `${siteUrl}#organization` },
+      "areaServed": [
+        { "@type": "Country", "name": "Chile" },
+        { "@type": "AdministrativeArea", "name": "Latinoamérica" }
+      ],
+      "audience": [
+        { "@type": "Audience", "audienceType": "pymes" },
+        { "@type": "Audience", "audienceType": "startups" },
+        { "@type": "Audience", "audienceType": "empresas medianas" }
+      ],
+      "offers": {
+        "@type": "Offer",
+        "availability": "https://schema.org/InStock",
+        "priceCurrency": "CLP",
+        "url": waUrl,
+        "description": "Cotización a medida según alcance (diagnóstico + propuesta)."
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${pageUrl}#faq`,
+      "url": pageUrl,
+      "mainEntity": faq.map((x) => ({
+        "@type": "Question",
+        "name": x.q,
+        "acceptedAnswer": { "@type": "Answer", "text": x.a }
+      }))
+    }
+  ]
+};
+---
+<Layout title={title} description={description}>
+  <style>
+    :root{
+      --c1:#6f42c1; /* purple */
+      --c2:#2563eb; /* blue */
+      --c3:#10b981; /* green */
+      --c4:#f59e0b; /* amber */
+      --ink:#0f172a;
+      --muted:#475569;
+      --card: rgba(255,255,255,0.92);
+      --line: rgba(15, 23, 42, 0.08);
+      --shadow: 0 18px 50px rgba(15, 23, 42, .12);
+    }
+
+    .mk-hero{
+      position: relative;
+      overflow: hidden;
+      border-bottom: 1px solid var(--line);
+      background:
+        radial-gradient(900px 420px at 15% 12%, rgba(111,66,193,.16), transparent 60%),
+        radial-gradient(800px 380px at 85% 20%, rgba(37,99,235,.14), transparent 55%),
+        radial-gradient(700px 360px at 55% 85%, rgba(16,185,129,.10), transparent 55%),
+        linear-gradient(180deg, #ffffff, #fbfbff);
+    }
+
+    .mk-hero::after{
+      content:"";
+      position:absolute;
+      left:-20%;
+      right:-20%;
+      bottom:-80px;
+      height: 160px;
+      background: linear-gradient(90deg, rgba(111,66,193,.12), rgba(37,99,235,.10), rgba(16,185,129,.10));
+      filter: blur(30px);
+      transform: rotate(-2deg);
+      opacity:.75;
+      pointer-events:none;
+    }
+
+    .mk-title{
+      color: var(--ink);
+      letter-spacing: -0.03em;
+      font-weight: 900;
+      line-height: 1.08;
+    }
+
+    .mk-subtitle{
+      color: var(--muted);
+      font-size: 1.15rem;
+      line-height: 1.7;
+      max-width: 68ch;
+      margin-left:auto;
+      margin-right:auto;
+    }
+
+    .mk-badges .badge{
+      border: 1px solid rgba(0,0,0,0.06);
+      font-weight: 800;
+      padding: .45rem .6rem;
+      border-radius: 999px;
+      color: #2e2e2e;
+    }
+
+    .mk-card{
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: var(--card);
+      box-shadow: var(--shadow);
+      transition: transform .25s ease, box-shadow .25s ease;
+      overflow: hidden;
+    }
+
+    .mk-card:hover{
+      transform: translateY(-4px);
+      box-shadow: 0 22px 65px rgba(15, 23, 42, .16);
+    }
+
+    .mk-mini{
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      background: #fff;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, .08);
+      transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .mk-mini:hover{
+      transform: translateY(-3px);
+      box-shadow: 0 16px 40px rgba(15, 23, 42, .12);
+    }
+
+    .mk-icon{
+      width: 38px; height: 38px;
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      border-radius: 12px;
+      background: rgba(37,99,235,.10);
+      border: 1px solid rgba(37,99,235,.18);
+      flex: 0 0 auto;
+    }
+
+    .mk-icon.purple{ background: rgba(111,66,193,.12); border-color: rgba(111,66,193,.18); }
+    .mk-icon.green{ background: rgba(16,185,129,.12); border-color: rgba(16,185,129,.18); }
+    .mk-icon.amber{ background: rgba(245,158,11,.14); border-color: rgba(245,158,11,.20); }
+    .mk-icon.red{ background: rgba(239,68,68,.12); border-color: rgba(239,68,68,.20); }
+
+    .mk-kicker{
+      font-weight: 900;
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      color: rgba(15,23,42,.65);
+      font-size: .75rem;
+    }
+
+    .mk-section-title{
+      color: var(--ink);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+    }
+
+    .mk-lead{
+      color: var(--muted);
+      line-height: 1.85;
+      font-size: 1.05rem;
+    }
+
+    .mk-hr{
+      border-top: 1px solid var(--line);
+      margin: 2.5rem 0;
+    }
+
+    .mk-pill{
+      display:inline-flex;
+      align-items:center;
+      border-radius:999px;
+      padding:.35rem .65rem;
+      font-weight:800;
+      border:1px solid rgba(0,0,0,0.06);
+      background: rgba(255,255,255,.85);
+      margin: .25rem .35rem 0 0;
+      color: rgba(15,23,42,.78);
+      font-size: .85rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .mk-anchor{
+      scroll-margin-top: 90px;
+    }
+
+    
+
+    html{ scroll-behavior: smooth; }
+
+    .mk-anchor:target{
+      outline: 3px solid rgba(111,66,193,.18);
+      border-radius: 16px;
+    }
+.mk-cta{
+      background:
+        radial-gradient(900px 420px at 20% 10%, rgba(111,66,193,.16), transparent 60%),
+        radial-gradient(800px 380px at 85% 10%, rgba(37,99,235,.14), transparent 55%),
+        linear-gradient(180deg, #ffffff, #fbfbff);
+      border: 1px solid var(--line);
+      border-radius: 22px;
+      box-shadow: var(--shadow);
+    }
+
+    /* Bootstrap 4 accordion polish */
+    .accordion .card{
+      border-radius: 14px !important;
+      overflow:hidden;
+      border:1px solid var(--line);
+      box-shadow: 0 12px 30px rgba(15,23,42,.06);
+    }
+    .accordion .card-header{
+      background: #fff;
+      border-bottom:1px solid var(--line);
+    }
+    .accordion .btn-link{
+      text-decoration:none !important;
+      font-weight:800;
+      color: var(--ink) !important;
+      width:100%;
+      text-align:left;
+    }
+    .accordion .card-header button{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: .75rem;
+      padding: .9rem 1rem;
+    }
+  </style>
+
+  <!-- HERO -->
+  <header class="mk-hero py-5">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-10 text-center">
+          <div class="mk-kicker mb-2">Chile · Latinoamérica · Remoto</div>
+          <h1 class="mk-title display-4 mb-3">
+            Desarrollo web a medida<br/>para empresas que necesitan crecer
+          </h1>
+          <p class="mk-subtitle mb-4">
+            Si tu web actual <strong>no vende</strong>, es <strong>lenta</strong>, quedó chica con <strong>WordPress</strong>
+            o necesitas <strong>integraciones con pagos / APIs / sistemas</strong>, construimos una solución moderna y escalable
+            con <strong>Vue/Nuxt</strong>, <strong>NestJS</strong>, arquitectura <strong>Headless</strong> y <strong>SEO técnico</strong> desde el inicio.
+          </p>
+
+          <div class="mk-badges mb-4">
+            <span class="badge text-bg-primary mx-1 my-1">⚡ Performance</span>
+            <span class="badge text-bg-info mx-1 my-1">🔍 SEO Técnico</span>
+            <span class="badge text-bg-secondary mx-1 my-1">🧩 Headless CMS</span>
+            <span class="badge text-bg-success mx-1 my-1">🔌 Integraciones</span>
+            <span class="badge text-bg-light mx-1 my-1" style="border:1px solid rgba(0,0,0,0.08);">🧱 Nuxt + NestJS</span>
+          </div>
+
+          <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+            <a href="https://wa.me/56988396128" target="_blank" class="btn btn-primary btn-lg px-5 mb-2 mb-sm-0 me-sm-2">
+              📩 Cotizar proyecto
+            </a>
+            <a href="#servicios" class="btn btn-outline-secondary btn-lg px-4">
+              Ver cómo trabajamos ↓
+            </a>
+          </div>
+
+          <div class="mt-4">
+            <span class="mk-pill">✅ A medida (sin themes)</span>
+            <span class="mk-pill">✅ Migración WordPress</span>
+            <span class="mk-pill">✅ Web que convierte</span>
+            <span class="mk-pill">✅ Soporte y evolución</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Quick value cards -->
+      <div class="row mt-5">
+        <div class="col-md-4 mb-3">
+          <div class="mk-mini p-4 h-100">
+            <div class="d-flex align-items-start">
+              <span class="mk-icon amber me-3">📈</span>
+              <div>
+                <h3 class="h6 font-weight-bold mb-1">Web orientada a ventas</h3>
+                <p class="mb-0 text-muted">Estructura pensada para convertir: velocidad, UX y SEO técnico.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="mk-mini p-4 h-100">
+            <div class="d-flex align-items-start">
+              <span class="mk-icon green me-3">⚙️</span>
+              <div>
+                <h3 class="h6 font-weight-bold mb-1">Integraciones reales</h3>
+                <p class="mb-0 text-muted">Pagos, APIs, CRM, automatizaciones y sistemas internos.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4 mb-3">
+          <div class="mk-mini p-4 h-100">
+            <div class="d-flex align-items-start">
+              <span class="mk-icon purple me-3">🧠</span>
+              <div>
+                <h3 class="h6 font-weight-bold mb-1">Stack moderno y escalable</h3>
+                <p class="mb-0 text-muted">Nuxt + NestJS + Headless CMS para crecer sin rehacer todo.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- NAV ANCHORS -->
+  <section class="container py-4">
+    <div class="mk-card p-3">
+      <div class="d-flex flex-wrap justify-content-center">
+        <a class="btn btn-link font-weight-bold" href="#servicios">🧩 Servicios</a>
+        <a class="btn btn-link font-weight-bold" href="#seo">🔍 SEO</a>
+        <a class="btn btn-link font-weight-bold" href="#tecnologias">🧱 Tecnologías</a>
+        <a class="btn btn-link font-weight-bold" href="#proceso">🛠️ Proceso</a>
+        <a class="btn btn-link font-weight-bold" href="#integraciones">🔌 Integraciones</a>
+        <a class="btn btn-link font-weight-bold" href="#faq">❓ FAQ</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section id="servicios" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">Para pymes · startups tech · empresas medianas</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Qué hacemos en desarrollo web a medida</h2>
+          <p class="mk-lead mb-0">
+            No construimos “páginas”. Construimos <strong>plataformas web</strong> que pueden crecer:
+            rápidas, seguras, mantenibles y listas para posicionar en Google.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon me-3">🚀</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Web profesional que vende</h3>
+                  <p class="mk-lead mb-3">
+                    Convertimos tu sitio en una herramienta de negocio: performance, arquitectura clara, UX enfocada y mensajes orientados a conversión.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Landing pages y sitios corporativos modernos</li>
+                    <li>Estructura para captación de leads y cotizaciones</li>
+                    <li>Optimización móvil y tiempos de carga</li>
+                    <li>Medición (eventos, analytics, embudos)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon green me-3">🔄</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Migración desde WordPress</h3>
+                  <p class="mk-lead mb-3">
+                    Si WordPress quedó lento o frágil, migramos a una base moderna sin perder tu contenido ni tu posicionamiento.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Migración de contenidos y estructura</li>
+                    <li>Mejoras de performance y seguridad</li>
+                    <li>Redirecciones y preservación SEO</li>
+                    <li>Headless CMS para editar sin depender de plugins</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon purple me-3">🧩</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Arquitectura Headless CMS</h3>
+                  <p class="mk-lead mb-3">
+                    Separar contenido de presentación te da velocidad, seguridad y libertad. Ideal para crecimiento y equipos que publican.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Contenido administrable (blog, páginas, FAQs)</li>
+                    <li>Mayor performance que CMS tradicional</li>
+                    <li>Menos superficie de ataque</li>
+                    <li>Escalable a multisitio o multilenguaje</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon amber me-3">🛡️</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Soporte y evolución</h3>
+                  <p class="mk-lead mb-3">
+                    No entregamos y desaparecemos. Acompañamos mejoras, correcciones, nuevas funcionalidades e integraciones.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Mantenimiento y mejoras continuas</li>
+                    <li>Roadmap y prioridades por impacto</li>
+                    <li>Monitoreo, performance y SEO técnico</li>
+                    <li>Mejoras para conversión (CRO) y contenido</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="alert alert-info mt-3">
+          <strong>📌 En simple:</strong> Si tu web actual no vende, WordPress te quedó chico o necesitas integraciones serias,
+          el desarrollo web a medida te da una base que no se rompe al primer crecimiento.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEO -->
+  <section id="seo" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">SEO orientado a negocio</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">SEO técnico desde el inicio</h2>
+          <p class="mk-lead mb-0">
+            “Escribir artículos” no basta si la base técnica está mal. Para posicionar en Chile y Latinoamérica,
+            necesitas estructura, performance y una arquitectura que Google entienda.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon me-3">📍</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">SEO local Chile + LatAm</h3>
+                  <p class="mk-lead mb-2">
+                    Optimizamos páginas comerciales para búsquedas con intención de compra: “desarrollo web a medida”, “empresa de desarrollo web”, “migración WordPress”, etc.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Arquitectura de URLs y enlazado interno</li>
+                    <li>Landing pages por servicio/industria</li>
+                    <li>Contenido con intención comercial real</li>
+                    <li>Metadatos y estructura semántica</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon green me-3">⚡</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Performance que ayuda a posicionar</h3>
+                  <p class="mk-lead mb-2">
+                    Una web lenta se nota: sube rebote, baja conversión y cuesta posicionar. Construimos para velocidad.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Optimización de imágenes y recursos</li>
+                    <li>Render SSR/SSG con Nuxt cuando corresponde</li>
+                    <li>Buenas prácticas de carga y caché</li>
+                    <li>Base preparada para Core Web Vitals</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-2">
+            <div class="mk-card p-4">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon purple me-3">🧠</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">SEO técnico + contenido que convierte</h3>
+                  <p class="mk-lead mb-0">
+                    El objetivo no es “visitas”. Es <strong>visitas correctas</strong> (pymes, startups y empresas medianas buscando proveedor).
+                    Por eso alineamos estructura, keywords y mensajes con intención comercial.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <hr class="mk-hr" />
+
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="mk-mini p-4 h-100">
+              <h4 class="h6 font-weight-bold mb-2">✅ Estructura</h4>
+              <p class="mb-0 text-muted">H1/H2/H3, enlaces internos, páginas por servicio, semántica y arquitectura.</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="mk-mini p-4 h-100">
+              <h4 class="h6 font-weight-bold mb-2">✅ Performance</h4>
+              <p class="mb-0 text-muted">Carga rápida en móvil, imágenes optimizadas y base lista para crecer.</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="mk-mini p-4 h-100">
+              <h4 class="h6 font-weight-bold mb-2">✅ Conversión</h4>
+              <p class="mb-0 text-muted">Mensajes, pruebas, medición y llamadas a la acción que generan leads.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGIAS -->
+  <section id="tecnologias" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">Stack moderno</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Nuxt + NestJS + Headless CMS</h2>
+          <p class="mk-lead mb-0">
+            Elegimos tecnologías por impacto: velocidad, mantenibilidad, seguridad e integraciones. Esto evita rehacer tu web cada vez que creces.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon me-3">🖥️</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Frontend con Vue / Nuxt</h3>
+                  <p class="mk-lead mb-2">
+                    Ideal para sitios modernos que necesitan SEO y performance, desde páginas corporativas hasta plataformas.
+                  </p>
+                  <ul class="mb-0">
+                    <li>SSR/SSG según el tipo de proyecto</li>
+                    <li>Experiencia rápida y fluida</li>
+                    <li>Componentes reutilizables</li>
+                    <li>Listo para crecer con nuevas secciones</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon green me-3">🧱</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Backend con NestJS</h3>
+                  <p class="mk-lead mb-2">
+                    APIs robustas para integraciones con pagos, CRM, sistemas internos o servicios externos.
+                  </p>
+                  <ul class="mb-0">
+                    <li>Arquitectura ordenada y escalable</li>
+                    <li>Seguridad y control de datos</li>
+                    <li>Integraciones con terceros (APIs)</li>
+                    <li>Preparado para crecer a microservicios</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-2">
+            <div class="mk-card p-4">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon purple me-3">🧩</span>
+                <div>
+                  <h3 class="h5 font-weight-bold mb-2">Headless CMS</h3>
+                  <p class="mk-lead mb-0">
+                    Publica contenido sin depender de plugins ni plantillas pesadas. Mantienes control editorial con una base más rápida y segura.
+                    Perfecto para posicionar con blog/noticias y páginas comerciales.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESO -->
+  <section id="proceso" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">Claridad y control</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Proceso de desarrollo</h2>
+          <p class="mk-lead mb-0">
+            Para pymes y empresas medianas, lo más importante es saber qué se hace, cuándo y por qué. Nuestro proceso es simple y transparente.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-6 mb-4">
+            <div class="mk-mini p-4 h-100">
+              <div class="d-flex">
+                <span class="mk-icon me-3">🧭</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">1) Diagnóstico y objetivos</h3>
+                  <p class="mb-0 text-muted">
+                    Entendemos tu negocio, tu cliente ideal y qué significa “que la web venda” en tu caso.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-mini p-4 h-100">
+              <div class="d-flex">
+                <span class="mk-icon green me-3">🧱</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">2) Arquitectura y SEO</h3>
+                  <p class="mb-0 text-muted">
+                    Definimos estructura, URLs, contenido clave, performance y base técnica para posicionar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-mini p-4 h-100">
+              <div class="d-flex">
+                <span class="mk-icon purple me-3">🎨</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">3) UI/UX y componentes</h3>
+                  <p class="mb-0 text-muted">
+                    Diseño moderno, claro y orientado a conversión. Mobile-first.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="mk-mini p-4 h-100">
+              <div class="d-flex">
+                <span class="mk-icon amber me-3">🧪</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">4) Desarrollo, QA y despliegue</h3>
+                  <p class="mb-0 text-muted">
+                    Construimos, probamos y publicamos. Entregamos una base lista para evolucionar.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="alert alert-success">
+          <strong>✅ Resultado:</strong> una web moderna, rápida y escalable, con SEO técnico sólido y lista para integraciones.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- INTEGRACIONES -->
+  <section id="integraciones" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">Pagos · APIs · Sistemas</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Integraciones que tu negocio necesita</h2>
+          <p class="mk-lead mb-0">
+            Si estás cansado de plugins y soluciones frágiles, las integraciones a medida te permiten automatizar y escalar sin dolor.
+          </p>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon me-3">💳</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">Pagos</h3>
+                  <p class="mb-0 text-muted">Checkout, links de pago, suscripciones, confirmaciones y flujos personalizados.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon green me-3">🔌</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">APIs externas</h3>
+                  <p class="mb-0 text-muted">Catálogos, datos, mapas, servicios, autenticación, integraciones con terceros.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4 mb-4">
+            <div class="mk-card p-4 h-100">
+              <div class="d-flex align-items-start">
+                <span class="mk-icon purple me-3">🏢</span>
+                <div>
+                  <h3 class="h6 font-weight-bold mb-2">Sistemas internos</h3>
+                  <p class="mb-0 text-muted">CRM, ERP, inventario, automatizaciones, paneles y backoffice.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <p class="mk-lead">
+          Muchas veces, “mi web no vende” es el síntoma. La causa real es que tu sitio no acompaña tu operación:
+          no integra, no mide, no automatiza y no escala. El desarrollo web a medida soluciona esa base.
+        </p>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section id="faq" class="container py-5 mk-anchor">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <div class="text-center mb-4">
+          <div class="mk-kicker">Preguntas frecuentes</div>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">FAQ sobre desarrollo web a medida</h2>
+          <p class="mk-lead mb-0">
+            Respuestas directas para quienes están evaluando dejar atrás WordPress, mejorar performance, integrar pagos/APIs o posicionar en Google.
+          </p>
+        </div>
+
+        <div class="accordion" id="faqAcc">
+
+          <div class="card mb-3">
+            <div class="card-header" id="q1">
+              <h3 class="mb-0">
+                <button class="btn btn-link" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#a1"
+                  aria-expanded="true" aria-controls="a1">
+                  ✅ ¿Cuándo conviene pasar de WordPress a una web a medida?
+                </button>
+              </h3>
+            </div>
+            <div id="a1" class="accordion-collapse collapse show" aria-labelledby="q1" data-bs-parent="#faqAcc">
+              <div class="card-body">
+                Cuando tu sitio se vuelve lento, dependes de demasiados plugins, necesitas integraciones reales o quieres posicionarte con SEO técnico serio.
+                Si cada cambio implica “parches”, normalmente ya es momento de una base moderna.
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header" id="q2">
+              <h3 class="mb-0">
+                <button class="btn btn-link collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#a2"
+                  aria-expanded="false" aria-controls="a2">
+                  🔍 ¿Qué significa “SEO técnico desde el inicio”?
+                </button>
+              </h3>
+            </div>
+            <div id="a2" class="accordion-collapse collapse" aria-labelledby="q2" data-bs-parent="#faqAcc">
+              <div class="card-body">
+                Significa construir estructura, semántica, performance, URLs y enlazado interno de forma correcta desde el primer día.
+                Así el contenido que publiques tiene una base sólida para posicionar en Chile y Latinoamérica.
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header" id="q3">
+              <h3 class="mb-0">
+                <button class="btn btn-link collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#a3"
+                  aria-expanded="false" aria-controls="a3">
+                  🔌 ¿Pueden integrar pagos y sistemas?
+                </button>
+              </h3>
+            </div>
+            <div id="a3" class="accordion-collapse collapse" aria-labelledby="q3" data-bs-parent="#faqAcc">
+              <div class="card-body">
+                Sí. Integramos pasarelas de pago, APIs externas, CRM y sistemas internos mediante backend con NestJS y arquitectura preparada para crecer.
+                El objetivo es evitar soluciones frágiles y mantener tu operación conectada.
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header" id="q4">
+              <h3 class="mb-0">
+                <button class="btn btn-link collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#a4"
+                  aria-expanded="false" aria-controls="a4">
+                  🧩 ¿Qué es un Headless CMS y por qué ayuda?
+                </button>
+              </h3>
+            </div>
+            <div id="a4" class="accordion-collapse collapse" aria-labelledby="q4" data-bs-parent="#faqAcc">
+              <div class="card-body">
+                Es un CMS donde el contenido se administra separado de la web. Eso mejora performance, seguridad y te permite evolucionar el sitio
+                sin quedar amarrado a plantillas ni plugins. Es ideal para blogs/noticias y páginas comerciales.
+              </div>
+            </div>
+          </div>
+
+          <div class="card mb-3">
+            <div class="card-header" id="q5">
+              <h3 class="mb-0">
+                <button class="btn btn-link collapsed" type="button"
+                  data-bs-toggle="collapse" data-bs-target="#a5"
+                  aria-expanded="false" aria-controls="a5">
+                  🤝 ¿Entregan soporte y evolución?
+                </button>
+              </h3>
+            </div>
+            <div id="a5" class="accordion-collapse collapse" aria-labelledby="q5" data-bs-parent="#faqAcc">
+              <div class="card-body">
+                Sí. Podemos acompañarte con mejoras, performance, SEO técnico, nuevas integraciones y evolución de funcionalidades.
+                La idea es que tu web no se quede estática mientras tu negocio crece.
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="alert alert-light mt-4" style="border:1px solid rgba(0,0,0,0.08);">
+          <strong>📌 Nota:</strong> esta página está pensada para atraer búsquedas comerciales como
+          “desarrollo web a medida”, “empresa desarrollo web”, “migración WordPress”, “web profesional Chile”, “desarrollo web con Nuxt y NestJS”.
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="container py-5">
+    <div class="mk-cta p-4 p-md-5 text-center">
+      <div class="mk-kicker mb-2">Listo para dar el salto</div>
+      <h2 class="mk-section-title mb-3" style="font-size:2rem;">¿Conversamos tu proyecto?</h2>
+      <p class="mk-lead mb-4">
+        Si tu web actual no convierte, WordPress te quedó chico o necesitas integraciones con pagos/APIs/sistemas,
+        te ayudamos a construir una solución moderna para Chile y Latinoamérica.
+      </p>
+
+      <div class="d-flex flex-column flex-sm-row justify-content-center align-items-center">
+        <a href="https://wa.me/56988396128" target="_blank" class="btn btn-primary btn-lg px-5 mb-2 mb-sm-0 me-sm-2">📩 Pedir propuesta</a>
+        <a href="/blog" class="btn btn-outline-secondary btn-lg px-4">Leer el blog</a>
+      </div>
+
+      <p class="text-muted mt-4 mb-0">
+        Desarrollo web a medida · Vue/Nuxt · NestJS · Headless CMS · SEO técnico — Chile · Latinoamérica
+      </p>
+    </div>
+  </section>
+
+  <!-- JSON-LD (SEO) -->
+  <script type="application/ld+json">
+    {JSON.stringify(jsonLdGraph)}
+  </script>
+</Layout>

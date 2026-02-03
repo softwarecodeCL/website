@@ -6,6 +6,14 @@ export interface Props {
   url?: string;
 }
 
+const currentPath = Astro.url.pathname;
+
+const navItems = [
+  { label: 'Inicio', href: '/' },
+  { label: 'Software a medida', href: '/desarrollo-web-a-medida' },
+  { label: 'Noticias', href: '/blog' },
+];
+
 const {
   title = 'SoftwareCode.cl - Desarrollo de Software a Medida',
   description = 'Soluciones digitales: desarrollo de software, CRM, ERP, apps móviles, SEO y marketing digital.',
@@ -56,6 +64,9 @@ const {
       }
     </style>
 
+</script>
+<!-- End GTM -->
+
 
 <!-- Google Tag Manager -->
 <script>
@@ -69,7 +80,6 @@ const {
 </script>
 <!-- End GTM -->
 
-
   </head>
 
   <body>
@@ -80,27 +90,75 @@ const {
 </noscript>
 <!-- End GTM -->
 
-    <!-- Navbar -->
-    <nav class="navbar main-nav navbar-expand-lg px-2 px-sm-0 py-2 py-lg-0">
-      <div class="container">
-        <a class="navbar-brand" href="/">
-          <img src="/logosc.png" alt="logo" style="max-width: 150px;" loading="lazy">
+<!-- Navbar MODERNO (Bootstrap 5.3.x) -->
+<nav class="navbar navbar-expand-lg main-nav sticky-top">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center" href="/">
+      <img src="/logosc.png" alt="logo" class="nav-logo" loading="lazy">
+    </a>
+
+    <!-- Toggler moderno -->
+    <button class="navbar-toggler hamburger collapsed d-lg-none" type="button"
+      data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span></span><span></span><span></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+  {navItems.map(item => {
+    const isActive =
+      item.href === '/'
+        ? currentPath === '/'
+        : currentPath.startsWith(item.href);
+
+    return (
+      <li class="nav-item">
+        <a
+          href={item.href}
+          class={`nav-link nav-link-modern ${isActive ? 'active' : ''}`}
+        >
+          {item.label}
         </a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
-          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="ti-menu"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-          <ul class="navbar-nav ms-auto">
-            <li class="nav-item"><a class="nav-link" href="#inicio">Inicio</a></li>
-           <!-- <li class="nav-item"><a class="nav-link" href="/noticias">noticias</a></li> -->
-          </ul>
-        </div>
-      </div>
-    </nav>
+      </li>
+    );
+  })}
+
+  <li class="nav-item ms-lg-2">
+    <a class="btn btn-cta" href="https://wa.me/56988396128" target="_blank">⚡Cotizar</a>
+  </li>
+</ul>
+
+    </div>
+  </div>
+</nav>
 
     <!-- Contenido principal -->
     <slot />
+
+
+    <div class="contacto" id="contacto">
+	<a href="https://wa.me/56988396128?text=¡Hola!%20Quiero%20más%20información." 
+	 class="whatsapp-float" 
+   id="whatsapp-boton"
+	 target="_blank">
+	<img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
+  </a>
+
+  <script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const btn = document.getElementById('whatsapp-boton');
+    if (btn) {
+      btn.addEventListener('click', () => {
+        gtag('event', 'conversion', {
+          'send_to': 'AW-17146702154/Jq-TCLf0ltIaEMrSl_A_',
+          'value': 1.0,
+          'currency': 'CLP'
+        });
+      });
+    }
+  });
+</script>
 
     <!-- Scripts -->
     <script src="/plugins/jquery/jquery.min.js" is:inline></script>
@@ -121,3 +179,148 @@ const {
     </script>
   </body>
 </html>
+<style>
+  :root{
+  --brand: #6f42c1;           /* morado */
+  --brand-soft: rgba(111,66,193,.12);
+  --text: #111;
+}
+
+/* Navbar look SaaS */
+.main-nav{
+  background: rgba(255,255,255,.86);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(0,0,0,.06);
+}
+
+/* Logo */
+.nav-logo{
+  max-width: 150px;
+  height: auto;
+}
+
+/* Links modernos */
+.nav-link-modern{
+  display: inline-flex;
+  align-items: center;
+  line-height: 1;
+  padding: .62rem .95rem !important;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: .95rem;
+  color: var(--text) !important;
+  opacity: .85;
+  transition: all .18s ease;
+}
+
+.nav-link-modern:hover{
+  opacity: 1;
+  background: rgba(111,66,193,.10);
+  color: var(--brand) !important;
+  transform: translateY(-1px);
+}
+
+/* Active (sin “subirse”) */
+.nav-link-modern.active{
+  opacity: 1;
+  background: var(--brand-soft);
+  color: var(--brand) !important;
+}
+
+/* CTA */
+.btn-cta{
+  border-radius: 999px;
+  padding: .62rem 1.05rem;
+  font-weight: 800;
+  border: 1px solid rgba(111,66,193,.35);
+  color: var(--brand);
+  background: #fff;
+  transition: all .18s ease;
+  white-space: nowrap;
+}
+
+.btn-cta:hover{
+  transform: translateY(-1px);
+  box-shadow: 0 12px 28px rgba(0,0,0,.10);
+  border-color: var(--brand);
+}
+
+/* Hamburguesa moderna */
+.hamburger{
+  width: 46px;
+  height: 42px;
+  border: 0;
+  padding: 0;
+  border-radius: 14px;
+  background: rgba(111,66,193,.10);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex-direction: column;
+  box-shadow: none !important;
+}
+
+.hamburger span{
+  width: 22px;
+  height: 2px;
+  background: var(--brand);
+  border-radius: 2px;
+  transition: transform .18s ease, opacity .18s ease, width .18s ease;
+}
+
+/* cuando está abierto, Bootstrap quita .collapsed */
+.hamburger:not(.collapsed) span:nth-child(1){
+  transform: translateY(8px) rotate(45deg);
+}
+.hamburger:not(.collapsed) span:nth-child(2){
+  opacity: 0;
+  width: 16px;
+}
+.hamburger:not(.collapsed) span:nth-child(3){
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+/* Mobile dropdown más pro */
+@media (max-width: 991.98px){
+  .navbar-collapse{
+    margin-top: .75rem;
+    padding: .75rem;
+    border: 1px solid rgba(0,0,0,.06);
+    border-radius: 16px;
+    background: rgba(255,255,255,.95);
+  }
+  .nav-link-modern{
+    width: 100%;
+    justify-content: center;
+    border-radius: 14px;
+    padding: .85rem 1rem !important;
+  }
+  .btn-cta{
+    width: 100%;
+    justify-content: center;
+    display: inline-flex;
+  }
+}
+
+</style>
+
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const nav = document.getElementById('navbarNav');
+    if (!nav) return;
+
+    nav.addEventListener('click', (e) => {
+      const link = e.target.closest('a');
+      if (!link) return;
+
+      const collapseEl = document.getElementById('navbarNav');
+      const isShown = collapseEl.classList.contains('show');
+      if (isShown && window.bootstrap) {
+        window.bootstrap.Collapse.getOrCreateInstance(collapseEl).hide();
+      }
+    });
+  });
+</script>
