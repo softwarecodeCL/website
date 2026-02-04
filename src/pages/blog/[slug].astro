@@ -87,9 +87,12 @@ const jsonLdGraph = {
       "mainEntityOfPage": { "@type": "WebPage", "@id": canonical },
       "headline": title,
       "description": description,
-      "image": [image],
-      "datePublished": publishedTime,
-      "dateModified": updatedTime,
+      "image": [
+        image.startsWith("http") ? image : `${siteOrigin}${image}`
+      ],
+      "datePublished": (publishedTime instanceof Date) ? publishedTime.toISOString() : publishedTime,
+      "dateModified": (updatedTime instanceof Date) ? updatedTime.toISOString() : updatedTime,
+
       "inLanguage": "es-CL",
       "articleSection": category,
       "keywords": tags,
@@ -112,30 +115,11 @@ const jsonLdGraph = {
 }
 ---
 
-<Layout title={title} description={description} image={image} url={canonical}>
-  <head>
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <link rel="canonical" href={canonical} />
-
-    <!-- OpenGraph -->
-    <meta property="og:type" content="article" />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={canonical} />
-    <meta property="og:image" content={image} />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={image} />
-
-    <!-- ✅ JSON-LD (mejorado) -->
-    <script type="application/ld+json">
-      {JSON.stringify(jsonLdGraph)}
-    </script>
-  </head>
+<Layout title={title} description={description} image={image} url={canonical} type="article"
+  publishedTime={(publishedTime instanceof Date) ? publishedTime.toISOString() : publishedTime}
+  modifiedTime={(updatedTime instanceof Date) ? updatedTime.toISOString() : updatedTime}>
+  
+  <script type="application/ld+json" set:html={JSON.stringify(jsonLdGraph)}></script>
 
   <header class="article-hero">
     <div class="container py-4 py-lg-5">

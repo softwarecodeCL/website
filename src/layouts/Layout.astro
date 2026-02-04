@@ -170,11 +170,7 @@ if (type === 'article' && publishedTime) {
     <meta name="twitter:image" content={imageUrl} />
 
     <!-- JSON-LD -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify(jsonLd)}
-    />
-
+    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
 
     <link rel="icon" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/logosc-original.png" />

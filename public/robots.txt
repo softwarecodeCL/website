@@ -1,0 +1,25 @@
+# robots.txt — SoftwareCode.cl
+# SEO agency-grade baseline (Astro + SSR)
+# Last update: 2026-02-04
+
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /auth/
+Disallow: /private/
+Disallow: /_astro/
+Disallow: /src/
+Disallow: /dist/
+Disallow: /node_modules/
+
+# If you use internal search pages or query-based results, keep them out of index:
+Disallow: /*?*
+Disallow: /*&*
+
+Allow: /
+
+# Sitemaps
+Sitemap: https://www.softwarecode.cl/sitemap-0.xml
+# Si más adelante Astro genera más sitemaps, agrégalos aquí:
+# Sitemap: https://www.softwarecode.cl/sitemap-1.xml

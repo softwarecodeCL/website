@@ -18,6 +18,75 @@ const posts = (await getCollection('blog'))
 
 // Para JSON-LD (evita payload gigante)
 const topPosts = posts.slice(0, 24)
+
+
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${siteUrl}#organization`,
+      "name": "SoftwareCode.cl",
+      "url": siteUrl,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${siteUrl}#logo`,
+        "url": logoUrl
+      }
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${siteUrl}#website`,
+      "url": siteUrl,
+      "name": "SoftwareCode.cl",
+      "publisher": { "@id": `${siteUrl}#organization` },
+      "inLanguage": "es-CL"
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumbs`,
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
+        { "@type": "ListItem", "position": 2, "name": "Blog", "item": pageUrl }
+      ]
+    },
+    {
+      "@type": ["CollectionPage", "Blog"],
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${siteUrl}#website` },
+      "publisher": { "@id": `${siteUrl}#organization` },
+      "inLanguage": "es-CL",
+      "mainEntity": {
+        "@type": "ItemList",
+        "itemListOrder": "https://schema.org/ItemListOrderDescending",
+        "numberOfItems": topPosts.length,
+        "itemListElement": topPosts.map((p, idx) => ({
+          "@type": "ListItem",
+          "position": idx + 1,
+          "url": `${siteUrl}/blog/${p.slug}`
+        }))
+      }
+    },
+    ...topPosts.map((p) => ({
+      "@type": "BlogPosting",
+      "@id": `${siteUrl}/blog/${p.slug}#blogposting`,
+      "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${p.slug}` },
+      "headline": p.data.title,
+      "description": p.data.description,
+      "datePublished": (p.data.date instanceof Date) ? p.data.date.toISOString() : p.data.date,
+      "inLanguage": "es-CL",
+      "author": { "@type": "Organization", "@id": `${siteUrl}#organization` },
+      "publisher": { "@id": `${siteUrl}#organization` },
+      ...(p.data.image ? {
+        "image": [p.data.image.startsWith("http") ? p.data.image : `${siteUrl}${p.data.image}`]
+      } : {}),
+      "articleSection": p.data.category || "Blog"
+    }))
+  ]
+}
 ---
 
 <Layout title={title} description={description}>
@@ -125,74 +194,8 @@ const topPosts = posts.slice(0, 24)
 
   </section>
 
-  <!-- JSON-LD (SEO) -->
-  <script type="application/ld+json">
-    {JSON.stringify({
-      "@context": "https://schema.org",
-      "@graph": [
-        {
-          "@type": "Organization",
-          "@id": `${siteUrl}#organization`,
-          "name": "SoftwareCode.cl",
-          "url": siteUrl,
-          "logo": {
-            "@type": "ImageObject",
-            "@id": `${siteUrl}#logo`,
-            "url": logoUrl
-          }
-        },
-        {
-          "@type": "WebSite",
-          "@id": `${siteUrl}#website`,
-          "url": siteUrl,
-          "name": "SoftwareCode.cl",
-          "publisher": { "@id": `${siteUrl}#organization` },
-          "inLanguage": "es-CL"
-        },
-        {
-          "@type": "BreadcrumbList",
-          "@id": `${pageUrl}#breadcrumbs`,
-          "itemListElement": [
-            { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
-            { "@type": "ListItem", "position": 2, "name": "Blog", "item": pageUrl }
-          ]
-        },
-        {
-          "@type": ["CollectionPage", "Blog"],
-          "@id": `${pageUrl}#webpage`,
-          "url": pageUrl,
-          "name": title,
-          "description": description,
-          "isPartOf": { "@id": `${siteUrl}#website` },
-          "publisher": { "@id": `${siteUrl}#organization` },
-          "inLanguage": "es-CL",
-          "mainEntity": {
-            "@type": "ItemList",
-            "itemListOrder": "https://schema.org/ItemListOrderDescending",
-            "numberOfItems": topPosts.length,
-            "itemListElement": topPosts.map((p, idx) => ({
-              "@type": "ListItem",
-              "position": idx + 1,
-              "url": `${siteUrl}/blog/${p.slug}`
-            }))
-          }
-        },
-        ...topPosts.map((p) => ({
-          "@type": "BlogPosting",
-          "@id": `${siteUrl}/blog/${p.slug}#blogposting`,
-          "mainEntityOfPage": { "@type": "WebPage", "@id": `${siteUrl}/blog/${p.slug}` },
-          "headline": p.data.title,
-          "description": p.data.description,
-          "datePublished": p.data.date,
-          "inLanguage": "es-CL",
-          "author": { "@type": "Organization", "@id": `${siteUrl}#organization` },
-          "publisher": { "@id": `${siteUrl}#organization` },
-          "image": p.data.image ? [p.data.image.startsWith('http') ? p.data.image : `${siteUrl}${p.data.image}`] : undefined,
-          "articleSection": p.data.category || "Blog"
-        }))
-      ].map(x => JSON.parse(JSON.stringify(x)))
-    })}
-  </script>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+
 
 </Layout>
 
