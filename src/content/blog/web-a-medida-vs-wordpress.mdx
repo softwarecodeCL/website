@@ -1,0 +1,346 @@
+---
+title: "Web a medida vs WordPress: cuándo una plantilla deja de servir (y qué hacer después)"
+description: "¿Tu WordPress se volvió lento, frágil o difícil de escalar? Aprende cuándo conviene migrar a una web a medida, qué beneficios reales obtienes y cómo hacerlo sin perder SEO."
+date: 2026-01-30
+category: "Desarrollo de Software"
+tags: ["desarrollo web a medida", "wordpress", "migración", "seo técnico", "pymes", "nuxt", "nestjs", "headless cms", "agencia seo", "posicionamiento web"]
+image: "/img/blog/wp-slow.jpg"
+draft: false
+---
+
+# Web a medida vs WordPress: cuándo una plantilla deja de servir (y qué hacer después)
+
+<div className="container my-4 my-lg-5">
+  <div
+    className="p-4 p-lg-5 rounded-4 border"
+    style={{
+      background:
+        "radial-gradient(1100px 420px at 10% 0%, rgba(111,66,193,.16), transparent 60%), radial-gradient(900px 380px at 100% 30%, rgba(13,110,253,.12), transparent 55%), rgba(255,255,255,.96)",
+      borderColor: "rgba(0,0,0,.08)",
+      boxShadow: "0 16px 50px rgba(0,0,0,.10)",
+    }}
+  >
+    <div className="d-flex flex-column flex-lg-row gap-3 align-items-lg-center justify-content-between">
+      <div>
+        <div className="d-flex flex-wrap gap-2 mb-2">
+          <span className="badge rounded-pill"
+            style={{ background: "rgba(13,110,253,.12)", color: "#0b3d91", border: "1px solid rgba(13,110,253,.25)" }}>
+            ⚡ Performance
+          </span>
+          <span className="badge rounded-pill"
+            style={{ background: "rgba(111,66,193,.12)", color: "#4b2a8a", border: "1px solid rgba(111,66,193,.25)" }}>
+            🔍 SEO técnico
+          </span>
+          <span className="badge rounded-pill"
+            style={{ background: "rgba(25,135,84,.12)", color: "#0f5132", border: "1px solid rgba(25,135,84,.25)" }}>
+            🧩 Headless CMS
+          </span>
+          <span className="badge rounded-pill"
+            style={{ background: "rgba(255,193,7,.16)", color: "#664d03", border: "1px solid rgba(255,193,7,.28)" }}>
+            🔌 Integraciones
+          </span>
+        </div>
+
+        <p className="mb-0"
+          style={{ color: "rgba(0,0,0,.70)", fontSize: "1.05rem", lineHeight: "1.65" }}>
+          Si tu sitio en WordPress se volvió <strong>lento</strong>, <strong>frágil</strong> o cada mejora es “un plugin más”,
+          este artículo te ayuda a decidir, con criterios claros, cuándo conviene pasar a una <strong>web a medida</strong>
+          y cómo hacerlo sin perder <strong>posicionamiento</strong>.
+        </p>
+      </div>
+
+      <div className="d-flex gap-2 flex-wrap">
+        <a
+          href="/desarrollo-web-a-medida"
+          className="btn btn-primary btn-lg"
+          style={{ borderRadius: "14px", boxShadow: "0 12px 28px rgba(13,110,253,.22)" }}
+        >
+          Ver desarrollo a medida
+        </a>
+        <a
+          href="/blog"
+          className="btn btn-outline-dark btn-lg"
+          style={{ borderRadius: "14px" }}
+        >
+          Más artículos
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div className="row g-4 mt-1">
+    <div className="col-lg-8">
+      <div className="card border-0 rounded-4"
+        style={{ boxShadow: "0 14px 40px rgba(0,0,0,.08)" }}>
+        <div className="card-body p-4 p-lg-5">
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>Resumen rápido (TL;DR)</h2>
+
+          <div className="p-3 p-lg-4 rounded-4 border"
+            style={{ background: "rgba(248,249,250,.9)", borderColor: "rgba(0,0,0,.08)" }}>
+            <ul className="mb-0" style={{ lineHeight: "1.7" }}>
+              <li><strong>WordPress</strong> es ideal para partir rápido, pero puede volverse un límite cuando el negocio crece.</li>
+              <li>Si tu web está lenta, no convierte, o requiere integraciones serias (CRM, pagos, reservas, inventario), una <strong>web a medida</strong> suele ser el siguiente paso lógico.</li>
+              <li>Una migración bien hecha puede <strong>mejorar performance</strong>, <strong>SEO</strong> y <strong>conversión</strong> sin perder tráfico si se respeta la parte técnica.</li>
+              <li>Si estás comparando <em>“agencia SEO”</em> vs <em>“hacer SEO con plugins”</em>, lo que manda es: velocidad, estructura, contenido y estrategia (no el plugin).</li>
+            </ul>
+          </div>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>La verdad incómoda: WordPress no “es malo”… pero no siempre es lo correcto</h2>
+
+          <p style={{ color: "rgba(0,0,0,.78)", lineHeight: "1.75" }}>
+            WordPress sigue siendo una gran herramienta para muchos casos. El problema empieza cuando tu sitio se transforma en
+            un <strong>rompecabezas de plugins</strong>, el rendimiento cae y cada cambio “simple” termina siendo riesgo (o costo).
+          </p>
+
+          <div className="row g-3">
+            <div className="col-md-6">
+              <div className="p-4 rounded-4 border h-100"
+                style={{ background: "rgba(13,110,253,.06)", borderColor: "rgba(13,110,253,.18)" }}>
+                <div className="fw-semibold mb-2">✅ WordPress brilla cuando…</div>
+                <ul className="mb-0" style={{ lineHeight: "1.7" }}>
+                  <li>Necesitas salir rápido con un presupuesto controlado.</li>
+                  <li>Tu web es informativa (pocas funciones especiales).</li>
+                  <li>Tu equipo sabe mantenerlo y actualizarlo con cuidado.</li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="col-md-6">
+              <div className="p-4 rounded-4 border h-100"
+                style={{ background: "rgba(220,53,69,.06)", borderColor: "rgba(220,53,69,.18)" }}>
+                <div className="fw-semibold mb-2">⚠️ WordPress se vuelve un freno cuando…</div>
+                <ul className="mb-0" style={{ lineHeight: "1.7" }}>
+                  <li>Tu sitio se vuelve lento (Core Web Vitals malos).</li>
+                  <li>Necesitas integraciones reales (ERP/CRM, pagos, reservas).</li>
+                  <li>Hay caídas, conflictos de plugins o hackeos frecuentes.</li>
+                  <li>Quieres SEO serio (estructura, performance, contenido) y no solo “poner keywords”.</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>Señales claras de que ya superaste WordPress</h2>
+
+          <div className="p-4 rounded-4 border"
+            style={{ background: "rgba(248,249,250,.85)", borderColor: "rgba(0,0,0,.08)" }}>
+            <div className="row g-3">
+              {[
+                ["🚀 Tu web tarda más de 3s", "Si tu página carga lento, pierdes leads y Google te castiga en rankings."],
+                ["🧯 Actualizas y “se rompe”", "Dependencias frágiles: plugin A choca con plugin B (y todo cae)."],
+                ["🔐 Seguridad como preocupación constante", "Parchear no es estrategia. Necesitas base sólida y control."],
+                ["📈 Quieres crecer en SEO en serio", "Para competir con una agencia SEO fuerte, la base técnica importa: velocidad, estructura, indexación, contenido."],
+                ["🔌 Integraciones reales", "Cuando conectas CRM, reservas, pagos, BI, stock… una arquitectura a medida se vuelve ventaja."],
+                ["🧪 A/B testing y analítica fina", "Si quieres medir conversión, eventos, funnels y optimizar, necesitas estabilidad y performance."],
+              ].map(([t, d], i) => (
+                <div className="col-lg-6" key={i}>
+                  <div className="p-3 rounded-4 h-100"
+                    style={{ background: "#fff", border: "1px solid rgba(0,0,0,.08)", boxShadow: "0 10px 24px rgba(0,0,0,.06)" }}>
+                    <div className="fw-semibold mb-1">{t}</div>
+                    <div style={{ color: "rgba(0,0,0,.70)", lineHeight: "1.65" }}>{d}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>Comparación honesta: Web a medida vs WordPress</h2>
+
+          <div className="table-responsive">
+            <table className="table align-middle"
+              style={{ borderCollapse: "separate", borderSpacing: "0 10px" }}>
+              <thead>
+                <tr>
+                  <th style={{ border: 0, color: "rgba(0,0,0,.55)" }}>Criterio</th>
+                  <th style={{ border: 0, color: "rgba(0,0,0,.55)" }}>WordPress</th>
+                  <th style={{ border: 0, color: "rgba(0,0,0,.55)" }}>Web a medida (Nuxt/Nest u otra)</th>
+                </tr>
+              </thead>
+              <tbody>
+                {[
+                  ["Tiempo de salida", "Rápido (plantilla + plugins)", "Medio (planificación + construcción)"],
+                  ["Performance", "Variable; depende mucho de plugins/hosting", "Alto control (optimización real)"],
+                  ["SEO técnico", "Posible, pero se vuelve frágil si está pesado", "Base sólida: estructura + velocidad + control"],
+                  ["Seguridad", "Frecuente foco de ataques / plugins vulnerables", "Superficie controlada + prácticas modernas"],
+                  ["Escalabilidad", "Se complica con funcionalidades complejas", "Pensado para crecer e integrar"],
+                  ["Mantenimiento", "A veces barato, a veces “caro por sorpresa”", "Más predecible si hay buena arquitectura"],
+                ].map((row, i) => (
+                  <tr key={i} style={{ background: "#fff", boxShadow: "0 10px 24px rgba(0,0,0,.06)" }}>
+                    <td className="p-3" style={{ border: "1px solid rgba(0,0,0,.08)", borderRight: 0, borderRadius: "16px 0 0 16px" }}>
+                      <strong>{row[0]}</strong>
+                    </td>
+                    <td className="p-3" style={{ border: "1px solid rgba(0,0,0,.08)", borderRight: 0 }}>
+                      {row[1]}
+                    </td>
+                    <td className="p-3" style={{ border: "1px solid rgba(0,0,0,.08)", borderRadius: "0 16px 16px 0" }}>
+                      {row[2]}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>¿Qué pasa con el SEO al migrar? (lo que una buena empresa SEO cuida)</h2>
+
+          <p style={{ color: "rgba(0,0,0,.78)", lineHeight: "1.75" }}>
+            Si llegaste aquí buscando <strong>“empresa de SEO”, “agencia SEO”, “posicionamiento web”</strong> o <strong>“consultoría SEO”</strong>,
+            esto te importa: <strong>migrar no debería destruir tu tráfico</strong>. Lo destruye una migración improvisada.
+          </p>
+
+          <div className="p-4 rounded-4 border"
+            style={{ background: "rgba(25,135,84,.06)", borderColor: "rgba(25,135,84,.18)" }}>
+            <div className="fw-semibold mb-2">Checklist mínimo para migrar sin perder posicionamiento</div>
+            <ul className="mb-0" style={{ lineHeight: "1.75" }}>
+              <li><strong>Redirecciones 301</strong> para cada URL antigua que cambie (nada de “que Google lo adivine”).</li>
+              <li><strong>Title + meta description</strong> bien armados, coherentes con intención de búsqueda.</li>
+              <li><strong>Canonical</strong> correcto (evita duplicados).</li>
+              <li><strong>Sitemap</strong> actualizado y enviado en Search Console.</li>
+              <li><strong>Structured data (JSON-LD)</strong>: Organization, WebSite, Article, Breadcrumbs, etc.</li>
+              <li><strong>Performance</strong>: LCP/INP/CLS, compresión, lazy-loading, imágenes optimizadas.</li>
+              <li><strong>Contenido</strong>: no recortar texto clave “por estética”. SEO y ventas lo necesitan.</li>
+            </ul>
+          </div>
+
+          <div className="mt-3 p-4 rounded-4 border"
+            style={{ background: "rgba(13,110,253,.06)", borderColor: "rgba(13,110,253,.18)" }}>
+            <div className="fw-semibold mb-2">Tip real de “agencias SEO” que sí hacen bien su pega</div>
+            <p className="mb-0" style={{ color: "rgba(0,0,0,.75)", lineHeight: "1.75" }}>
+              El SEO no es solo “poner palabras clave”. Una agencia SEO seria prioriza:
+              <strong> arquitectura</strong>, <strong>velocidad</strong>, <strong>contenido</strong> y <strong>medición</strong>.
+              Si tu web es lenta o frágil, el SEO se vuelve cuesta arriba aunque tengas buenos textos.
+            </p>
+          </div>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>Ruta recomendada: de WordPress a una web a medida sin drama</h2>
+
+          <ol style={{ lineHeight: "1.85", color: "rgba(0,0,0,.80)" }}>
+            <li><strong>Auditoría</strong> (SEO técnico + performance + contenido): qué se mantiene, qué se mejora, qué se elimina.</li>
+            <li><strong>Mapa de URLs</strong>: todas las URLs actuales, estado y prioridad (tráfico, backlinks, conversiones).</li>
+            <li><strong>Definir arquitectura</strong>: SSR/SSG/híbrido, CMS (Headless), analítica, tracking y eventos.</li>
+            <li><strong>Construir y probar</strong>: staging, QA, Lighthouse, indexabilidad, crawl (sin bloquear robots).</li>
+            <li><strong>Plan de redirecciones 301</strong>: uno a uno, revisado.</li>
+            <li><strong>Salida controlada</strong>: monitorear Search Console, logs, 404, rankings y conversiones.</li>
+          </ol>
+
+          <hr className="my-4" />
+
+          <h2 className="h4 mb-3" style={{ letterSpacing: "-.02em" }}>FAQ (preguntas típicas que hacen cuando buscan “agencia SEO” o “posicionamiento web”)</h2>
+
+          <div className="accordion" id="faqSeoWpCustom">
+            {[
+              ["¿Una web a medida posiciona mejor que WordPress?",
+               "No por arte de magia. Posiciona mejor cuando te permite tener mejor performance, estructura, contenido, UX y control técnico. Si haces una web a medida pero queda lenta o mal estructurada, no ganas nada."],
+              ["¿Puedo hacer SEO solo con plugins?",
+               "Puedes partir, pero los plugins no arreglan arquitectura, rendimiento, contenido ni estrategia. Para competir en mercados duros (ej: 'agencia SEO' o 'empresa de SEO'), necesitas base técnica + contenido de calidad + autoridad."],
+              ["¿Qué debería pedirme una empresa SEO seria antes de prometer resultados?",
+               "Acceso a Search Console/Analytics, auditoría técnica, revisión de tu oferta y competencia, propuesta de contenido, plan de mejoras y métricas claras (leads, conversiones, CTR, rankings, CWV)."],
+            ].map(([q, a], i) => (
+              <div className="accordion-item mb-2"
+                key={i}
+                style={{ borderRadius: "16px", overflow: "hidden", border: "1px solid rgba(0,0,0,.10)" }}>
+                <h2 className="accordion-header" id={`h${i}`}>
+                  <button
+                    className="accordion-button collapsed"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target={`#c${i}`}
+                    aria-expanded="false"
+                    aria-controls={`c${i}`}
+                    style={{ background: "rgba(248,249,250,.9)" }}
+                  >
+                    {q}
+                  </button>
+                </h2>
+                <div id={`c${i}`} className="accordion-collapse collapse" aria-labelledby={`h${i}`} data-bs-parent="#faqSeoWpCustom">
+                  <div className="accordion-body" style={{ background: "#fff", lineHeight: "1.75", color: "rgba(0,0,0,.78)" }}>
+                    {a}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <hr className="my-4" />
+
+          <div className="p-4 p-lg-5 rounded-4"
+            style={{
+              background:
+                "linear-gradient(135deg, rgba(13,110,253,.12), rgba(111,66,193,.12))",
+              border: "1px solid rgba(0,0,0,.08)",
+              boxShadow: "0 16px 50px rgba(0,0,0,.10)"
+            }}>
+            <h2 className="h4 mb-2" style={{ letterSpacing: "-.02em" }}>
+              ¿Quieres que revisemos tu WordPress y te digamos si conviene migrar?
+            </h2>
+            <p className="mb-4" style={{ color: "rgba(0,0,0,.75)", lineHeight: "1.75" }}>
+              Si estás evaluando <strong>desarrollo web a medida</strong>, <strong>consultoría SEO</strong> o buscas una
+              <strong> agencia SEO</strong> que piense en performance + negocio (no solo “rankings”), podemos ayudarte con una auditoría clara.
+            </p>
+
+            <div className="d-grid gap-2 d-sm-flex justify-content-sm-center my-3">
+              <a href="/desarrollo-web-a-medida"
+                className="btn btn-primary btn-lg"
+                style={{ borderRadius: "14px", boxShadow: "0 12px 28px rgba(13,110,253,.22)" }}>
+                Solicitar auditoría
+              </a>
+              <a href="/"
+                className="btn btn-outline-dark btn-lg"
+                style={{ borderRadius: "14px" }}>
+                Volver al inicio
+              </a>
+            </div>
+
+            <div className="small" style={{ color: "rgba(0,0,0,.60)" }}>
+              Palabras que la gente usa al buscar esto: <em>empresa de SEO</em>, <em>agencia SEO</em>, <em>posicionamiento web</em>,
+              <em>SEO técnico</em>, <em>auditoría SEO</em>, <em>SEO en Chile</em>, <em>optimización web</em>.
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <div className="col-lg-4">
+      <div className="position-sticky" style={{ top: "90px" }}>
+        <div className="card border-0 rounded-4"
+          style={{ boxShadow: "0 14px 40px rgba(0,0,0,.08)" }}>
+          <div className="card-body p-4">
+            <div className="fw-semibold mb-2">📌 Checklist express</div>
+            <ul className="mb-0" style={{ lineHeight: "1.8", color: "rgba(0,0,0,.75)" }}>
+              <li>¿Carga &lt; 3s?</li>
+              <li>¿Plugins sin conflicto?</li>
+              <li>¿Redirecciones 301 planificadas?</li>
+              <li>¿Sitemap + Search Console ok?</li>
+              <li>¿Contenido orientado a intención?</li>
+            </ul>
+
+            <hr className="my-3" />
+
+            <div className="fw-semibold mb-2">🔎 Si estás buscando “empresa SEO”</div>
+            <p className="mb-3" style={{ color: "rgba(0,0,0,.72)", lineHeight: "1.7" }}>
+              Prioriza quien hable de <strong>métricas</strong> (leads, conversiones), <strong>estructura</strong>,
+              <strong>velocidad</strong> y <strong>contenido</strong>. Lo demás es humo.
+            </p>
+
+            <a href="/desarrollo-web-a-medida"
+              className="btn btn-outline-primary w-100"
+              style={{ borderRadius: "14px" }}>
+              Ver servicios
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
