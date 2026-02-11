@@ -142,7 +142,7 @@ const jsonLd = {
   {posts.map(post => (
     <div class="col-md-6 col-lg-4 mb-4">
       <article class="post-card h-100">
-        <a href={`/blog/${post.slug}`} class="post-card__link" aria-label={`Leer: ${post.data.title}`}>
+        <a href={`/blog/${post.slug}/`} class="post-card__link" aria-label={`Leer: ${post.data.title}`}>
           {/* Media */}
           <div class="post-card__media">
             {post.data.image ? (

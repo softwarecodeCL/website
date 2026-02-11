@@ -20,7 +20,7 @@ export interface Props {
 const currentPath = Astro.url.pathname;
 
 // Base del sitio (una sola fuente de verdad)
-const SITE_URL = 'https://www.softwarecode.cl';
+const SITE_URL = 'https://www.softwarecode.cl/';
 const SITE_NAME = 'SoftwareCode.cl';
 const DEFAULT_IMAGE = '/logosc-original.png';
 
@@ -69,7 +69,7 @@ const jsonLd: any[] =  [
       {
         "@type": "ContactPoint",
         "contactType": "sales",
-        "telephone": "+56-9-8839-6128",
+        "telephone": "+56988396128",
         "areaServed": "CL",
         "availableLanguage": ["es"]
       }
@@ -102,11 +102,13 @@ const jsonLd: any[] =  [
     "primaryImageOfPage": {
       "@type": "ImageObject",
       "url": imageUrl
-    }
+    },
+    "breadcrumb": { "@id": `${pageUrl}#breadcrumb` }
   },
   {
     "@context": "https://schema.org",
     "@type": "BreadcrumbList",
+    "@id": `${pageUrl}#breadcrumb`,
     "itemListElement": breadcrumbItems.map((b, idx) => ({
       "@type": "ListItem",
       "position": idx + 1,
