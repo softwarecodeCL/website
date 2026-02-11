@@ -58,7 +58,7 @@ const jsonLd: any[] =  [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
-    "@id": `${SITE_URL}/#organization`,
+    "@id": `${SITE_URL}#organization`,
     "name": SITE_NAME,
     "url": SITE_URL,
     "logo": {
@@ -78,14 +78,14 @@ const jsonLd: any[] =  [
   {
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "@id": `${SITE_URL}/#website`,
+    "@id": `${SITE_URL}#website`,
     "url": SITE_URL,
     "name": SITE_NAME,
-    "publisher": { "@id": `${SITE_URL}/#organization` },
+    "publisher": { "@id": `${SITE_URL}#organization` },
     "inLanguage": "es-CL",
     "potentialAction": {
       "@type": "SearchAction",
-      "target": `${SITE_URL}/blog?search={search_term_string}`,
+      "target": `${SITE_URL}blog?search={search_term_string}`,
       "query-input": "required name=search_term_string"
     }
   },
@@ -96,8 +96,8 @@ const jsonLd: any[] =  [
     "url": pageUrl,
     "name": title,
     "description": description,
-    "isPartOf": { "@id": `${SITE_URL}/#website` },
-    "about": { "@id": `${SITE_URL}/#organization` },
+    "isPartOf": { "@id": `${SITE_URL}#website` },
+    "about": { "@id": `${SITE_URL}#organization` },
     "inLanguage": "es-CL",
     "primaryImageOfPage": {
       "@type": "ImageObject",
@@ -132,7 +132,7 @@ if (type === 'article' && publishedTime) {
       name: SITE_NAME,
       url: SITE_URL,
     },
-    publisher: { '@id': `${SITE_URL}/#organization` },
+    publisher: { '@id': `${SITE_URL}#organization` },
     datePublished: publishedTime,
     dateModified: modifiedTime || publishedTime,
     inLanguage: 'es-CL',
