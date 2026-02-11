@@ -213,81 +213,152 @@
 
 </section>
 
-<section class="container-fluid section-modern position-relative" style="background-image: url('/SKY.jpg');">
-  <div class="container mb-4">
-    <h2 class="text-center mb-5 fw-bold">Principales Tecnologías</h2>
-    
-    <div class="row justify-content-center g-4 tech-grid">
+<section class="sc-tech section-modern position-relative" style="background-image:url('/SKY.jpg');">
+  <div class="tech-overlay" aria-hidden="true"></div>
 
-      <!-- Íconos individuales -->
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="go.png" alt="GOLANG" class="img-fluid">
-        <p class="mt-2">GOLANG</p>
-      </div>
-
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="ng.png" alt="ANGULAR" class="img-fluid">
-        <p class="mt-2">ANGULAR</p>
-      </div>
-
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="NX.png" alt="NUXT" class="img-fluid">
-        <p class="mt-2">NUXT JS</p>
-      </div>
-
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="ns.svg" alt="NEST" class="img-fluid">
-        <p class="mt-2">NEST JS</p>
-      </div>
-
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="sym.png" alt="Symfony" class="img-fluid">
-        <p class="mt-2">Symfony</p>
-      </div>
-
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="aws.png" alt="aws" class="img-fluid">
-        <p class="mt-2">AWS</p>
-      </div>
-
+  <div class="container py-5 py-lg-6">
+    <div class="text-center mb-4 mb-lg-5">
+      <div class="tech-kicker">STACK</div>
+      <h2 class="tech-title mb-2">Principales Tecnologías</h2>
+      <p class="tech-subtitle mb-0">
+        Herramientas modernas para construir productos rápidos, escalables y mantenibles.
+      </p>
     </div>
 
-	<div class="row justify-content-center g-4 tech-grid" style="padding-top: 100px;">
+    <!-- Grid premium sin cajas -->
+    <div class="tech-logos">
+      <!-- fila 1 -->
+      <a class="tech-item"  aria-label="Golang">
+        <img src="go.png" alt="Golang">
+        <span>Golang</span>
+      </a>
 
-      <!-- Íconos individuales -->
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="vuejs.png" alt="VUE" class="img-fluid">
-        <p class="mt-2">VUE JS</p>
-      </div>
+      <a class="tech-item"  aria-label="Angular">
+        <img src="ng.png" alt="Angular">
+        <span>Angular</span>
+      </a>
 
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="wordpress.png" alt="Wordpress" class="img-fluid">
-        <p class="mt-2">Wordpress</p>
-      </div>
+      <a class="tech-item tech-item--big"  aria-label="Nuxt">
+        <img src="NX.png" alt="Nuxt">
+        <span>Nuxt</span>
+      </a>
 
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="javascript.png" alt="JavaScript" class="img-fluid">
-        <p class="mt-2">JavaScript</p>
-      </div>
+      <a class="tech-item"  aria-label="NestJS">
+        <img src="ns.svg" alt="NestJS">
+        <span>NestJS</span>
+      </a>
 
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="nodejs.png" alt="NODE" class="img-fluid">
-        <p class="mt-2">NODE JS</p>
-      </div>
+      <a class="tech-item" aria-label="Symfony">
+        <img src="sym.png" alt="Symfony">
+        <span>Symfony</span>
+      </a>
 
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="astro.png" alt="ASTRO" class="img-fluid">
-        <p class="mt-2">ASTRO</p>
-      </div>
+      <a class="tech-item" aria-label="AWS">
+        <img src="aws.png" alt="AWS">
+        <span>AWS</span>
+      </a>
 
-      <div class="col-4 col-md-2 text-center tech-icon">
-        <img src="python.png" alt="Python" class="img-fluid">
-        <p class="mt-2">Python</p>
-      </div>
+      <!-- fila 2 -->
+      <a class="tech-item" aria-label="Vue">
+        <img src="vuejs.png" alt="Vue">
+        <span>Vue</span>
+      </a>
 
+      <a class="tech-item" aria-label="WordPress">
+        <img src="wordpress.png" alt="WordPress">
+        <span>WordPress</span>
+      </a>
+
+      <a class="tech-item"  aria-label="JavaScript">
+        <img src="javascript.png" alt="JavaScript">
+        <span>JavaScript</span>
+      </a>
+
+      <a class="tech-item" aria-label="Node.js">
+        <img src="nodejs.png" alt="Node.js">
+        <span>Node.js</span>
+      </a>
+
+      <a class="tech-item"  aria-label="Astro">
+        <img src="astro.png" alt="Astro">
+        <span>Astro</span>
+      </a>
+
+      <a class="tech-item" aria-label="Python">
+        <img src="python.png" alt="Python">
+        <span>Python</span>
+      </a>
+    </div>
+
+    <div class="text-center mt-4 mt-lg-5">
+      <a class="tech-cta" href="/desarrollo-web-a-medida/">Ver cómo aplicamos este stack <span aria-hidden="true">→</span></a>
     </div>
   </div>
+
+  <div class="sc-aurora-divider" aria-hidden="true">
+  <svg viewBox="0 0 1440 180" preserveAspectRatio="none">
+    <defs>
+      <!-- ruido suave -->
+      <filter id="noise">
+        <feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="2" stitchTiles="stitch" />
+        <feColorMatrix type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 .18 0"/>
+      </filter>
+
+      <!-- glow -->
+      <filter id="glow" x="-30%" y="-60%" width="160%" height="220%">
+        <feGaussianBlur stdDeviation="8" result="blur"/>
+        <feColorMatrix in="blur" type="matrix"
+          values="1 0 0 0 0
+                  0 1 0 0 0
+                  0 0 1 0 0
+                  0 0 0 .65 0"/>
+        <feMerge>
+          <feMergeNode/>
+          <feMergeNode in="SourceGraphic"/>
+        </feMerge>
+      </filter>
+
+      <!-- gradiente aurora -->
+      <linearGradient id="aurora" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="rgba(56,189,248,.0)"/>
+        <stop offset="0.18" stop-color="rgba(56,189,248,.85)"/>
+        <stop offset="0.52" stop-color="rgba(139,92,246,.85)"/>
+        <stop offset="0.82" stop-color="rgba(37,99,235,.75)"/>
+        <stop offset="1" stop-color="rgba(56,189,248,.0)"/>
+      </linearGradient>
+
+      <!-- máscara para shimmer -->
+      <linearGradient id="shimmer" x1="0" y1="0" x2="1" y2="0">
+        <stop offset="0" stop-color="rgba(255,255,255,0)"/>
+        <stop offset="0.5" stop-color="rgba(255,255,255,.95)"/>
+        <stop offset="1" stop-color="rgba(255,255,255,0)"/>
+      </linearGradient>
+    </defs>
+
+    <!-- base oscura (corte) -->
+    <path class="sc-aurora-base"
+      d="M0,100 C220,140 430,60 720,98 C980,132 1180,70 1440,105 L1440,180 L0,180 Z" />
+
+    <!-- halo aurora -->
+    <path class="sc-aurora-glow"
+      d="M0,94 C220,134 430,54 720,92 C980,126 1180,64 1440,99"
+      fill="none" stroke="url(#aurora)" stroke-width="10" filter="url(#glow)" />
+
+    <!-- shimmer que se mueve -->
+    <path class="sc-aurora-shimmer"
+      d="M0,94 C220,134 430,54 720,92 C980,126 1180,64 1440,99"
+      fill="none" stroke="url(#shimmer)" stroke-width="3" opacity=".35" />
+
+    <!-- grano (ruido) -->
+    <rect class="sc-aurora-grain" x="0" y="0" width="1440" height="180" filter="url(#noise)" opacity=".35"/>
+  </svg>
+</div>
 </section>
+
 
 	
   <!--============================
@@ -1192,5 +1263,366 @@ body{
   padding-bottom: 120px;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.sc-tech{
+  position: relative;
+  overflow: hidden;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  /* separa del wave de servicios sin verse pegado */
+  padding-top: 110px;
+  padding-bottom: 90px;
+}
+
+/* overlay FINO, elegante, no mata el fondo */
+.sc-tech .tech-overlay{
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(1200px 520px at 15% 20%, rgba(110,168,255,.18), transparent 60%),
+    radial-gradient(1000px 520px at 85% 30%, rgba(139,92,246,.16), transparent 62%),
+    linear-gradient(to bottom, rgba(7,10,18,.55), rgba(7,10,18,.72));
+}
+
+/* “film grain” ultra sutil para look agencia */
+.sc-tech::before{
+  content:"";
+  position:absolute;
+  inset:0;
+  pointer-events:none;
+  opacity:.06;
+  background-image:
+    repeating-linear-gradient(0deg, rgba(255,255,255,.08) 0, rgba(255,255,255,.08) 1px, transparent 1px, transparent 3px);
+  mix-blend-mode: overlay;
+}
+
+/* Kicker / títulos */
+.tech-kicker{
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-weight: 900;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  font-size: .72rem;
+  color: rgba(255,255,255,.88);
+  border: 1px solid rgba(255,255,255,.14);
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(10px);
+}
+
+.tech-title{
+  color: rgba(255,255,255,.98);
+  font-weight: 900;
+  letter-spacing: -.03em;
+  text-shadow: 0 18px 60px rgba(0,0,0,.45);
+}
+
+.tech-subtitle{
+  color: rgba(255,255,255,.78);
+  max-width: 62ch;
+  margin-inline: auto;
+  line-height: 1.6;
+}
+
+/* GRID: más separación real, alineado, responsive */
+.tech-logos{
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 34px 44px; /* ← separación premium */
+  align-items: center;
+  justify-items: center;
+  margin-top: 34px;
+  padding: 18px 10px;
+}
+
+/* Item sin cajas, pero con “presencia” */
+.tech-item{
+  display: grid;
+  justify-items: center;
+  gap: 10px;
+  text-decoration: none;
+  user-select: none;
+
+  padding: 10px 8px;               /* área de hover sin caja visual */
+  border-radius: 16px;             /* para hover suave */
+  transition: transform .18s ease, background .18s ease, filter .18s ease;
+}
+
+.tech-item img{
+  width: 86px;                     /* tamaño base */
+  height: 56px;
+  object-fit: contain;
+
+  /* nitidez + profundidad sin “lavar” */
+  filter:
+    drop-shadow(0 12px 28px rgba(0,0,0,.45))
+    drop-shadow(0 0 18px rgba(110,168,255,.10));
+  transform: translateZ(0);
+  image-rendering: -webkit-optimize-contrast;
+}
+
+.tech-item span{
+  font-weight: 900;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .72rem;
+  color: rgba(255,255,255,.88);
+  text-shadow: 0 12px 30px rgba(0,0,0,.45);
+}
+
+/* “Hero” logo un poco más grande (Nuxt) */
+.tech-item--big img{
+  width: 140px;
+  height: 64px;
+}
+
+/* Hover premium, sin caja visible */
+.tech-item:hover{
+  transform: translateY(-2px);
+  background: rgba(255,255,255,.04);
+  backdrop-filter: blur(10px);
+}
+.tech-item:hover img{
+  filter:
+    drop-shadow(0 16px 34px rgba(0,0,0,.55))
+    drop-shadow(0 0 26px rgba(110,168,255,.18));
+}
+.tech-item:focus-visible{
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(110,168,255,.28);
+}
+
+/* CTA */
+.tech-cta{
+  display:inline-flex;
+  align-items:center;
+  gap: 10px;
+  padding: 10px 16px;
+  border-radius: 999px;
+  font-weight: 900;
+  color: rgba(255,255,255,.92);
+  text-decoration: none;
+  border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06);
+  backdrop-filter: blur(10px);
+  transition: transform .18s ease, background .18s ease, border-color .18s ease;
+}
+.tech-cta:hover{
+  transform: translateY(-1px);
+  background: rgba(255,255,255,.085);
+  border-color: rgba(110,168,255,.38);
+}
+
+/* Responsive */
+@media (max-width: 1199.98px){
+  .tech-logos{ grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 30px 34px; }
+}
+@media (max-width: 767.98px){
+  .sc-tech{ padding-top: 90px; padding-bottom: 70px; }
+  .tech-logos{ grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px 22px; }
+  .tech-item img{ width: 76px; height: 52px; }
+  .tech-item--big img{ width: 120px; height: 58px; }
+}
+@media (max-width: 420px){
+  .tech-logos{ grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+/* transición fina desde servicios (mega smooth) */
+#servicios.sc-services{
+  position: relative;
+}
+#servicios.sc-services::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:-1px;
+  height: 120px;
+  pointer-events:none;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0,0) 0%,
+    rgba(7,10,18,.45) 40%,
+    rgba(7,10,18,.85) 100%
+  );
+  z-index: 3;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* === TECH: NITIDEZ + LOOK AGENCIA === */
+.tech-item{
+  padding: 14px 12px;
+  border-radius: 18px;
+}
+
+.tech-item img{
+  /* En vez de “estirar”, damos un SLOT grande y el logo se ajusta */
+  width: auto !important;
+  height: auto !important;
+  max-width: 160px;     /* tamaño pro */
+  max-height: 78px;     /* altura constante (se ve uniforme) */
+  object-fit: contain;
+
+  /* nitidez real */
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+
+  /* sombras premium (menos agresivas = menos “mala calidad”) */
+  filter:
+    drop-shadow(0 14px 30px rgba(0,0,0,.48))
+    drop-shadow(0 0 18px rgba(110,168,255,.08));
+}
+
+.tech-item--big img{
+  max-width: 220px;     /* Nuxt más protagonista */
+  max-height: 86px;
+}
+
+/* Hover más fino (sin “lavar” el logo) */
+.tech-item:hover{
+  background: rgba(255,255,255,.035);
+}
+.tech-item:hover img{
+  filter:
+    drop-shadow(0 18px 38px rgba(0,0,0,.55))
+    drop-shadow(0 0 26px rgba(110,168,255,.14));
+}
+
+/* Separación premium */
+.tech-logos{
+  gap: 40px 64px; /* más aire */
+}
+
+/* Responsive */
+@media (max-width: 1199.98px){
+  .tech-logos{ gap: 32px 40px; }
+  .tech-item img{ max-width: 150px; max-height: 72px; }
+  .tech-item--big img{ max-width: 210px; max-height: 82px; }
+}
+@media (max-width: 767.98px){
+  .tech-logos{ gap: 22px 24px; }
+  .tech-item img{ max-width: 132px; max-height: 66px; }
+  .tech-item--big img{ max-width: 180px; max-height: 76px; }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* ================================
+   TRANSICIÓN AURORA (NO WAVE)
+   ================================ */
+.gradient-banner{
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 120px; /* deja espacio para la transición */
+}
+
+.sc-aurora-divider{
+  position: absolute;
+  left: 0; right: 0;
+  bottom: -1px;
+  height: 190px;
+  pointer-events: none;
+  z-index: 5;
+}
+
+.sc-aurora-divider svg{
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+/* base oscura del corte */
+.sc-aurora-base{
+  fill: rgba(7,10,18,.92);
+}
+
+/* shimmer animado (impacto premium) */
+.sc-aurora-shimmer{
+  stroke-dasharray: 140 1200;
+  stroke-dashoffset: 0;
+  animation: scShimmer 3.8s linear infinite;
+}
+
+@keyframes scShimmer{
+  0%   { stroke-dashoffset: 0;   opacity: .12; }
+  40%  { opacity: .38; }
+  100% { stroke-dashoffset: -1600; opacity: .12; }
+}
+
+/* micro movimiento de la aurora */
+.sc-aurora-glow{
+  animation: scAuroraFloat 6s ease-in-out infinite;
+  opacity: .9;
+}
+
+@keyframes scAuroraFloat{
+  0%,100% { transform: translateY(0); }
+  50%     { transform: translateY(6px); }
+}
+
+/* grano suave para look “agencia” */
+.sc-aurora-grain{
+  mix-blend-mode: overlay;
+}
+
+/* La sección siguiente “sube” un poco, como panel premium */
+#servicios.sc-services{
+  margin-top: -40px;
+  padding-top: 90px;
+  border-top-left-radius: 28px;
+  border-top-right-radius: 28px;
+  box-shadow: 0 -40px 90px rgba(0,0,0,.45);
+  position: relative;
+  z-index: 2;
+}
 
 </style>
