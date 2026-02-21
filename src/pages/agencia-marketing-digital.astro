@@ -8,7 +8,6 @@ const pageUrl = "https://www.softwarecode.cl/agencia-marketing-digital/";
 
 const heroImageSrc = "/images/agencia-seo-sc.png"; // puedes cambiarlo
 
-// WhatsApp: +56 9 8839 6128 -> sin +, sin espacios
 const waPhoneDigits = "56988396128";
 
 // Mensajes predefinidos por CTA (serios, B2B, listos para comprar)
@@ -30,9 +29,136 @@ const WA_TEMPLATES = {
   pricing:
     "Hola, vi sus rangos y quiero que recomienden el alcance ideal según mi objetivo y plazo. ¿Qué datos necesitan para cotizar con precisión?"
 };
+
+
+const SITE_URL = 'https://www.softwarecode.cl/';
+
+const schemaExtras = [
+  {
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": `${SITE_URL}#marketing-digital-service`,
+    "name": "Agencia de Marketing Digital B2B en Chile - SoftwareCode.cl",
+    "url": pageUrl,
+    "provider": { "@id": `${SITE_URL}#organization` },
+    "areaServed": { "@type": "Country", "name": "Chile" },
+    "inLanguage": "es-CL",
+    "telephone": "+56988396128",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "Paseo Estado 115",
+      "addressLocality": "Santiago",
+      "addressRegion": "RM",
+      "postalCode": "8320224",
+      "addressCountry": "CL"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": "-33.4414732",
+      "longitude": "-70.6517085"
+    },
+    "openingHoursSpecification": 
+    [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday","Tuesday","Wednesday","Thursday","Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    }],
+    "priceRange": "$$",
+    "serviceType": [
+      "Marketing Digital B2B",
+      "SEO Técnico",
+      "Performance Marketing",
+      "CRO",
+      "Automatización Comercial",
+      "Analítica (GA4/GTM)"
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Servicios de Marketing Digital B2B",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "name": "Performance Marketing (Google Ads / Meta Ads)",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Performance Marketing",
+            "serviceType": "Publicidad digital orientada a leads B2B"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "SEO para Empresas (SEO Técnico)",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "SEO Técnico para Empresas",
+            "serviceType": "Indexación, arquitectura, Core Web Vitals y contenido transaccional"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "CRO (Conversion Rate Optimization)",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "CRO",
+            "serviceType": "Optimización de conversión, formularios y fricción"
+          }
+        },
+        {
+          "@type": "Offer",
+          "name": "Automatización Comercial e Integraciones",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Automatización Comercial",
+            "serviceType": "Integraciones formularios/WhatsApp/CRM + trazabilidad de pipeline"
+          }
+        }
+      ]
+    }
+  },
+
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Trabajan “marketing digital” o también el sitio/SEO técnico?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Para vender en B2B no basta con anuncios: si el sitio es lento o no está bien instrumentado, el costo de adquisición se dispara. Integramos performance + CRO + SEO técnico + tracking y, si aplica, automatización."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Cómo reportan resultados?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Reporte ejecutivo orientado a negocio: leads calificados, costo por oportunidad, tasa de conversión, aprendizaje y acciones. No métricas vanidosas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Qué necesitan para empezar?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Objetivo, plazo, oferta, sitio, canales actuales, y cómo gestionan hoy el lead (CRM/pipeline). Con eso armamos diagnóstico y propuesta."
+        }
+      }
+    ]
+  }
+];
 ---
 
-<Layout title={pageTitle} description={pageDescription} canonical={pageUrl}>
+<Layout   
+  title={pageTitle}
+  description={pageDescription}
+  image={heroImageSrc}
+  url={pageUrl}
+  schemaExtras={schemaExtras}>
   <!-- CONFIG invisible para JS -->
   <div id="wa-config" data-wa-phone={waPhoneDigits} class="d-none"></div>
 
@@ -251,7 +377,7 @@ const WA_TEMPLATES = {
           </div>
           <div class="col-12 col-lg-4">
             <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
-              <a class="btn btn-sc-primary btn-lg px-4" href="#" data-wa-template="proposal">Cotizar por WhatsApp</a>
+              <a class="btn btn-sc-primary btn-lg px-4" href="#" data-wa-template="proposal">Cotizar</a>
               <a class="btn btn-sc-outline btn-lg px-4" href="#" data-wa-template="diagnostic">Pedir diagnóstico</a>
             </div>
           </div>
@@ -459,7 +585,7 @@ const WA_TEMPLATES = {
           <div class="sc-form-card sc-shadow">
             <div class="d-flex align-items-start justify-content-between gap-3">
               <div>
-                <h3 class="h4 fw-bold mb-1">Enviar solicitud por WhatsApp</h3>
+                <h3 class="h4 fw-bold mb-1">Enviar solicitud</h3>
                 <p class="text-secondary mb-0">
                   Completa los datos. Al enviar se abrirá WhatsApp con el mensaje listo.
                 </p>

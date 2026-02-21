@@ -20,9 +20,12 @@ export interface Props {
   type?: 'website' | 'article';
   publishedTime?: string; // para posts (ISO)
   modifiedTime?: string;  // para posts (ISO)
+  schemaExtras?: any[]; // opcional
 }
 
 const currentPath = Astro.url.pathname;
+
+
 
 // Base del sitio (una sola fuente de verdad)
 const SITE_URL = 'https://www.softwarecode.cl/';
@@ -38,18 +41,20 @@ const {
   modifiedTime,
 } = Astro.props;
 
-// URL real de la página
-const pageUrl = new URL(currentPath, SITE_URL).toString();
+
+const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
+const pageUrl = new URL(normalizedPath, SITE_URL).toString();
+
 
 // Normaliza imagen a absoluta
 const imageUrl = new URL(image.startsWith('http') ? image : image || DEFAULT_IMAGE, SITE_URL).toString();
 
 // Breadcrumbs (home + segmento(s))
-const segments = currentPath.split('/').filter(Boolean);
+const segments = normalizedPath.split('/').filter(Boolean);
 const breadcrumbItems = [
   { name: 'Inicio', item: SITE_URL },
   ...segments.map((seg, i) => {
-    const item = new URL('/' + segments.slice(0, i + 1).join('/'), SITE_URL).toString();
+    const item = new URL('/' + segments.slice(0, i + 1).join('/') + '/', SITE_URL).toString();
     const pretty =
       seg
         .replace(/-/g, ' ')
@@ -59,17 +64,23 @@ const breadcrumbItems = [
 ];
 
 // JSON-LD base (Organization + WebSite + WebPage + BreadcrumbList)
-const jsonLd: any[] =  [
+// JSON-LD base (Organization + WebSite + WebPage + BreadcrumbList)
+const jsonLd: any[] = [
   {
     "@context": "https://schema.org",
     "@type": "Organization",
     "@id": `${SITE_URL}#organization`,
     "name": SITE_NAME,
     "url": SITE_URL,
+    "description": "Desarrollo de software a medida y marketing digital B2B en Chile: SEO técnico, performance, CRO y automatización comercial para generar leads calificados y oportunidades medibles.",
     "logo": {
       "@type": "ImageObject",
+      "@id": `${SITE_URL}#logo`,
       "url": new URL("/logosc-original.png", SITE_URL).toString()
     },
+    "image": { "@id": `${SITE_URL}#logo` },
+    "telephone": "+56988396128",
+    "areaServed": { "@type": "Country", "name": "Chile" },
     "contactPoint": [
       {
         "@type": "ContactPoint",
@@ -78,7 +89,9 @@ const jsonLd: any[] =  [
         "areaServed": "CL",
         "availableLanguage": ["es"]
       }
-    ]
+    ],
+    "knowsLanguage": ["es-CL"],
+    "sameAs": ["https://www.linkedin.com/in/software-code-67b8543aa/", "https://www.instagram.com/softwarecode.cl/", "https://x.com/softwarecodeCL"]
   },
   {
     "@context": "https://schema.org",
@@ -106,9 +119,13 @@ const jsonLd: any[] =  [
     "inLanguage": "es-CL",
     "primaryImageOfPage": {
       "@type": "ImageObject",
+      "@id": `${pageUrl}#primaryimage`,
       "url": imageUrl
     },
-    "breadcrumb": { "@id": `${pageUrl}#breadcrumb` }
+    "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
+    "potentialAction": [
+      { "@type": "ContactAction", "target": "https://wa.me/56988396128" }
+    ]
   },
   {
     "@context": "https://schema.org",
@@ -122,6 +139,12 @@ const jsonLd: any[] =  [
     }))
   }
 ];
+
+// ✅ Extras opcionales por página (NO rompe nada si no vienen)
+const { schemaExtras = [] } = Astro.props;
+if (Array.isArray(schemaExtras) && schemaExtras.length) {
+  jsonLd.push(...schemaExtras);
+}
 
 // Si es un post (article), añade Article schema
 if (type === 'article' && publishedTime) {
@@ -140,7 +163,7 @@ if (type === 'article' && publishedTime) {
     publisher: { '@id': `${SITE_URL}#organization` },
     datePublished: publishedTime,
     dateModified: modifiedTime || publishedTime,
-    inLanguage: 'es-CL',
+    inLanguage: 'es-CL'
   });
 }
 ---
@@ -177,7 +200,13 @@ if (type === 'article' && publishedTime) {
     <meta name="twitter:image" content={imageUrl} />
 
     <!-- JSON-LD -->
-    <script type="application/ld+json" set:html={JSON.stringify(jsonLd)}></script>
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@graph": jsonLd.map(({ "@context": _ctx, ...rest }) => rest)
+      })}
+    />
 
     <link rel="icon" href="/favicon.svg" />
     <link rel="icon" type="image/png" href="/logosc-original.png" />

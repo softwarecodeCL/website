@@ -76,7 +76,9 @@ const jsonLdGraph = {
       "name": title,
       "description": description,
       "isPartOf": { "@id": `${siteUrl}#website` },
-      "about": { "@id": `${siteUrl}#service` },
+      "about": { "@id": `${siteUrl}#organization` },
+      "mainEntity": { "@id": `${siteUrl}#service` },
+      "breadcrumb": { "@id": `${pageUrl}#breadcrumbs` },
       "primaryImageOfPage": { "@type": "ImageObject", "@id": `${pageUrl}#primaryimage`, "url": primaryImageUrl },
       "inLanguage": "es-CL"
     },
@@ -107,9 +109,9 @@ const jsonLdGraph = {
       ],
       "offers": {
         "@type": "Offer",
-        "availability": "https://schema.org/InStock",
-        "priceCurrency": "CLP",
         "url": waUrl,
+        "availability": "https://schema.org/InStock",
+        "category": "B2B",
         "description": "Cotización a medida según alcance (diagnóstico + propuesta)."
       }
     },
