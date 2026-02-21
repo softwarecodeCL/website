@@ -851,6 +851,40 @@ const schemaExtras = [
       form.addEventListener("submit", (e) => {
         e.preventDefault();
 
+
+
+        const sitioInput = form.querySelector('input[name="sitio"]');
+
+        function normalizeUrl(raw) {
+          const v = String(raw || "").trim();
+          if (!v) return ""; // opcional
+
+          // Si ya trae esquema, valida con URL()
+          if (/^https?:\/\//i.test(v)) {
+            try { return new URL(v).toString(); } catch { return null; }
+          }
+
+          // Si no trae esquema, aceptamos dominios tipo empresa.cl / www.empresa.cl
+          // y le anteponemos https://
+          // (mínimo: que tenga un punto y no tenga espacios)
+          if (!/^[^\s]+\.[^\s]+$/.test(v)) return null;
+
+          try { return new URL(`https://${v}`).toString(); } catch { return null; }
+        }
+
+        // --- aplicar normalización/validación
+        if (sitioInput) {
+          const normalized = normalizeUrl(sitioInput.value);
+
+          if (sitioInput.value.trim() && !normalized) {
+            sitioInput.setCustomValidity("invalid");
+          } else {
+            sitioInput.setCustomValidity("");
+            // si es válido y venía sin https://, lo normalizamos
+            if (normalized) sitioInput.value = normalized;
+          }
+        }
+
         // Validación Bootstrap
         if (!form.checkValidity()) {
           form.classList.add("was-validated");
