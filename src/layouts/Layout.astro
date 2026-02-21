@@ -3,9 +3,14 @@
 const navItems = [
   { label: 'Inicio', href: '/' },
   { label: 'Software a medida', href: '/desarrollo-web-a-medida' },
+  { label: 'Marketing Digital', href: '/agencia-marketing-digital' },
   { label: 'Blog', href: '/blog' },
 ];
 
+const navServices = [
+  { label: 'Software a medida', href: '/desarrollo-web-a-medida', icon: 'bi-braces' },
+  { label: 'Marketing Digital', href: '/agencia-marketing-digital', icon: 'bi-graph-up-arrow' },
+];
 
 export interface Props {
   title?: string;
@@ -211,52 +216,90 @@ if (type === 'article' && publishedTime) {
   height="0" width="0" style="display:none;visibility:hidden"></iframe>
 </noscript>
 <!-- End GTM -->
-
-<!-- Navbar MODERNO (Bootstrap 5.3.x) -->
-<nav class="navbar navbar-expand-lg main-nav sticky-top">
+<nav class="navbar navbar-expand-lg sc-nav sticky-top" aria-label="Navegación principal">
   <div class="container">
-    <a class="navbar-brand d-flex align-items-center" href="/">
-      <img src="/logosc-original.png" alt="logo" class="nav-logo" loading="lazy" style="max-width: 40%;">
+    <!-- NO tocar logo -->
+    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
+      <img src="/logosc-original.png" alt="SoftwareCode" class="nav-logo" loading="lazy">
     </a>
 
-    <!-- Toggler moderno -->
-    <button class="navbar-toggler hamburger collapsed d-lg-none" type="button"
+    <button class="navbar-toggler sc-burger collapsed d-lg-none" type="button"
       data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
       <span></span><span></span><span></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
-  {navItems.map(item => {
-    const isActive =
-      item.href === '/'
-        ? currentPath === '/'
-        : currentPath.startsWith(item.href);
+      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 sc-nav-list">
 
-    return (
-      <li class="nav-item">
-        <a
-          href={item.href}
-          class={`nav-link nav-link-modern ${isActive ? 'active' : ''}`}
-        >
-          {item.label}
-        </a>
-      </li>
-    );
-  })}
+        <li class="nav-item">
+          <a href="/" class={`nav-link sc-link ${currentPath === '/' ? 'active' : ''}`}>Inicio</a>
+        </li>
 
-  <li class="nav-item ms-lg-2">
-    <a class="btn btn-cta" href="https://wa.me/56988396128" target="_blank">⚡Cotizar</a>
-  </li>
-</ul>
+        <!-- Servicios -->
+        <li class="nav-item dropdown sc-dd">
+          <button
+            type="button"
+            class={`nav-link sc-link dropdown-toggle ${currentPath.startsWith('/desarrollo-web-a-medida') || currentPath.startsWith('/agencia-marketing-digital') ? 'active' : ''}`}
+            data-bs-toggle="dropdown"
+            data-bs-auto-close="outside"
+            aria-expanded="false"
+          >
+            Servicios
+          </button>
 
+          <div class="dropdown-menu dropdown-menu-end sc-dd-menu">
+            <div class="sc-dd-head">
+              <div class="sc-dd-title">Servicios B2B</div>
+              <div class="sc-dd-sub">Estrategia + ejecución con medición</div>
+            </div>
+
+            <div class="sc-dd-grid">
+              {navServices.map(s => (
+                <a class={`sc-dd-card ${currentPath.startsWith(s.href) ? 'active' : ''}`} href={s.href}>
+                  <span class="sc-dd-ic">
+                    <i class={`bi ${s.icon}`}></i>
+                  </span>
+                  <span class="sc-dd-txt">
+                    <span class="sc-dd-label">{s.label}</span>
+                    <span class="sc-dd-meta">Implementación • Medición • B2B</span>
+                  </span>
+                  <span class="sc-dd-arrow"><i class="bi bi-arrow-right"></i></span>
+                </a>
+              ))}
+            </div>
+
+            <div class="sc-dd-foot">
+              <a class="sc-dd-brief"
+                 href="https://wa.me/56988396128?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20"
+                 target="_blank" rel="noopener noreferrer">
+                <i class="bi bi-chat-dots me-2"></i> Contacto / Brief
+              </a>
+            </div>
+          </div>
+        </li>
+
+        <li class="nav-item">
+          <a href="/blog" class={`nav-link sc-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}>Blog</a>
+        </li>
+
+        <li class="nav-item ms-lg-2 sc-cta">
+          <a class="btn sc-cta-btn d-none d-lg-inline-flex"
+             href="https://wa.me/56988396128?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20"
+             target="_blank" rel="noopener noreferrer">
+            Diagnóstico
+          </a>
+        </li>
+
+      </ul>
     </div>
   </div>
 </nav>
 
     <!-- Contenido principal -->
-    <slot />
+    <main class="page">
+      <slot />
+    </main>
 
 
     <div class="contacto" id="contacto">
@@ -307,132 +350,292 @@ if (type === 'article' && publishedTime) {
   </body>
 </html>
 <style>
-  :root{
-  --brand: #6f42c1;           /* morado */
-  --brand-soft: rgba(111,66,193,.12);
-  --text: #111;
+:root{
+  --sc-brand: #6f2cff;
+  --sc-accent: #4e0f33;
+  --sc-ink: rgba(95, 95, 95, 0.92);
+  --sc-muted: rgba(15,23,42,.70);
+  --sc-border: rgba(15,23,42,.10);
+  --sc-bg: rgba(255,255,255);
+  --sc-bg-solid: #fff;
 }
 
-/* Navbar look SaaS */
-.main-nav{
- 
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-bottom: 1px solid rgba(0,0,0,.06);
+/* NAV base (serio, limpio, enterprise) */
+.sc-nav{
+  background: var(--sc-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--sc-border);
 }
 
-/* Logo */
-.nav-logo{
-  max-width: 150px;
-  height: auto;
-}
+.nav-logo{ height: 80px; width:auto; } /* no tocamos el logo */
 
-/* Links modernos */
-.nav-link-modern{
+/* Links */
+.sc-link{
   display: inline-flex;
   align-items: center;
-  line-height: 1;
-  padding: .62rem .95rem !important;
+  gap: .45rem;
+  padding: .62rem .92rem !important;
   border-radius: 999px;
-  font-weight: 700;
+  font-weight: 800;
   font-size: .95rem;
-  color: var(--text) !important;
-  opacity: .85;
-  transition: all .18s ease;
+  color: var(--sc-ink) !important;
+  letter-spacing: .01em;
+  opacity: .9;
+  transition: background .18s ease, transform .18s ease, color .18s ease, opacity .18s ease;
 }
 
-.nav-link-modern:hover{
-  opacity: 1;
-  background: rgba(111,66,193,.10);
-  color: var(--brand) !important;
+.sc-link:hover{
+  background: rgba(111,44,255,.08);
+  color: var(--sc-brand) !important;
   transform: translateY(-1px);
 }
 
-/* Active (sin “subirse”) */
-.nav-link-modern.active{
+.sc-link.active{
+  background: rgba(111,44,255,.12);
+  color: var(--sc-brand) !important;
   opacity: 1;
-  background: var(--brand-soft);
-  color: var(--brand) !important;
 }
 
 /* CTA */
-.btn-cta{
+.sc-cta-btn{
   border-radius: 999px;
   padding: .62rem 1.05rem;
-  font-weight: 800;
-  border: 1px solid rgba(111,66,193,.35);
-  color: var(--brand);
-  background: #fff;
-  transition: all .18s ease;
+  font-weight: 900;
+  border: 1px solid rgba(111,44,255,.22);
+  background: rgba(255,255,255,.92);
+  color: var(--sc-brand);
+  transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
   white-space: nowrap;
 }
-
-.btn-cta:hover{
+.sc-cta-btn:hover{
   transform: translateY(-1px);
-  box-shadow: 0 12px 28px rgba(0,0,0,.10);
-  border-color: var(--brand);
+  border-color: rgba(111,44,255,.35);
+  background: rgba(111,44,255,.06);
+  box-shadow: 0 14px 35px rgba(15,23,42,.10);
 }
 
-/* Hamburguesa moderna */
-.hamburger{
-  width: 46px;
-  height: 42px;
-  border: 0;
-  padding: 0;
+/* Burger refinada */
+.sc-burger{
+  width: 46px; height: 42px;
+  border: 0; padding: 0;
   border-radius: 14px;
-  background: rgba(111,66,193,.10);
+  background: rgba(111,44,255,.10);
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 6px;
   flex-direction: column;
-  box-shadow: none !important;
 }
-
-.hamburger span{
-  width: 22px;
-  height: 2px;
-  background: var(--brand);
+.sc-burger span{
+  width: 22px; height: 2px;
+  background: var(--sc-brand);
   border-radius: 2px;
   transition: transform .18s ease, opacity .18s ease, width .18s ease;
 }
+.sc-burger:not(.collapsed) span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
+.sc-burger:not(.collapsed) span:nth-child(2){ opacity: 0; width: 16px; }
+.sc-burger:not(.collapsed) span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
 
-/* cuando está abierto, Bootstrap quita .collapsed */
-.hamburger:not(.collapsed) span:nth-child(1){
-  transform: translateY(8px) rotate(45deg);
-}
-.hamburger:not(.collapsed) span:nth-child(2){
-  opacity: 0;
-  width: 16px;
-}
-.hamburger:not(.collapsed) span:nth-child(3){
-  transform: translateY(-8px) rotate(-45deg);
+/* Dropdown: panel premium */
+.sc-dd{ position: relative; }
+
+/* MENÚ dropdown (estructura) */
+.sc-dd-menu{
+  border: 1px solid var(--sc-border);
+  background: rgba(255,255,255,.96);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-radius: 18px;
+  padding: .75rem;
+  min-width: 420px;
+  box-shadow: 0 30px 80px rgba(15,23,42,.14);
+  margin-top: .55rem;
 }
 
-/* Mobile dropdown más pro */
+/* Header */
+.sc-dd-head{
+  padding: .25rem .25rem .65rem .25rem;
+  border-bottom: 1px solid rgba(15,23,42,.08);
+  margin-bottom: .65rem;
+}
+.sc-dd-title{
+  font-weight: 950;
+  letter-spacing: .02em;
+  color: var(--sc-ink);
+}
+.sc-dd-sub{
+  font-size: .88rem;
+  color: var(--sc-muted);
+}
+
+/* Cards grid */
+.sc-dd-grid{
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: .55rem;
+}
+
+.sc-dd-card{
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  padding: .8rem .85rem;
+  border-radius: 14px;
+  text-decoration: none;
+  border: 1px solid rgba(15,23,42,.08);
+  background: rgba(248,250,252,.80);
+  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
+  color: var(--sc-ink);
+}
+
+.sc-dd-card:hover{
+  transform: translateY(-1px);
+  border-color: rgba(111,44,255,.22);
+  background: rgba(111,44,255,.05);
+  box-shadow: 0 18px 45px rgba(15,23,42,.10);
+}
+
+.sc-dd-card.active{
+  border-color: rgba(255,46,166,.25);
+  background: rgba(255,46,166,.06);
+}
+
+.sc-dd-ic{
+  width: 42px; height: 42px;
+  border-radius: 12px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(90deg, rgba(255,46,166,.14), rgba(111,44,255,.14));
+  border: 1px solid rgba(111,44,255,.16);
+  color: var(--sc-brand);
+  flex: 0 0 auto;
+}
+
+.sc-dd-txt{ display:flex; flex-direction:column; gap:.15rem; min-width: 0; }
+.sc-dd-label{ font-weight: 900; color: var(--sc-ink); }
+.sc-dd-meta{
+  font-size: .82rem;
+  color: var(--sc-muted);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sc-dd-arrow{
+  margin-left: auto;
+  opacity: .75;
+  color: var(--sc-ink);
+}
+
+/* Footer */
+.sc-dd-foot{
+  margin-top: .7rem;
+  padding-top: .7rem;
+  border-top: 1px solid rgba(15,23,42,.08);
+}
+.sc-dd-brief{
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  border-radius: 14px;
+  padding: .75rem 1rem;
+  font-weight: 900;
+  text-decoration: none;
+  color: #fff;
+  background: linear-gradient(90deg, var(--sc-accent), var(--sc-brand));
+  box-shadow: 0 16px 40px rgba(111,44,255,.18), 0 10px 24px rgba(255,46,166,.14);
+  transition: transform .18s ease, filter .18s ease;
+}
+.sc-dd-brief:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+
+/* ===== Desktop: hover estable, sin parpadeos ===== */
+@media (min-width: 992px){
+  /* evita que Bootstrap haga "click toggle" en desktop */
+  .sc-dd > button[data-bs-toggle="dropdown"]{ pointer-events: none; }
+  .sc-dd:focus-within > button[data-bs-toggle="dropdown"]{ pointer-events: auto; }
+
+  /* estado base: oculto (sin display:none para permitir transición) */
+  .sc-dd .dropdown-menu{
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    pointer-events: none;
+    transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
+  }
+
+  /* zona buffer invisible para que no se corte al mover el mouse */
+  .sc-dd::after{
+    content:"";
+    position:absolute;
+    left: 0;
+    right: 0;
+    top: 100%;
+    height: 14px; /* buffer */
+  }
+
+  /* abre con hover o focus */
+  .sc-dd:hover .dropdown-menu,
+  .sc-dd:focus-within .dropdown-menu{
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+/* ===== Mobile ===== */
 @media (max-width: 991.98px){
   .navbar-collapse{
     margin-top: .75rem;
-    padding: .75rem;
-    border: 1px solid rgba(0,0,0,.06);
-    border-radius: 16px;
-    background: rgba(255,255,255,.95);
+    padding: .8rem;
+    border: 1px solid var(--sc-border);
+    border-radius: 18px;
+    background: rgba(255,255,255,.96);
   }
-  .nav-link-modern{
+
+  .sc-link{
     width: 100%;
     justify-content: center;
     border-radius: 14px;
-    padding: .85rem 1rem !important;
+    padding: .92rem 1rem !important;
   }
-  .btn-cta{
-    width: 100%;
-    justify-content: center;
-    display: inline-flex;
+
+  /* dropdown integrado como panel */
+  .sc-dd-menu{
+    min-width: 100%;
+    margin-top: .5rem;
+    box-shadow: none;
   }
+
+  /* aquí SÍ debe ser clickeable */
+  .sc-dd > button[data-bs-toggle="dropdown"]{ pointer-events: auto; }
 }
 
-</style>
 
+.navbar {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  transition: all 0.3s ease;
+  background: transparent;
+}
+
+.navbar.scrolled {
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+
+</style>
+<style>
+  .page {
+    padding-top: 80px;
+  }
+</style>
 
 <script is:inline>
   document.addEventListener('DOMContentLoaded', () => {
@@ -450,4 +653,15 @@ if (type === 'article' && publishedTime) {
       }
     });
   });
+
+
+  window.addEventListener("scroll", function () {
+  const navbar = document.querySelector(".navbar");
+
+  if (window.scrollY > 50) {
+    navbar.classList.add("scrolled");
+  } else {
+    navbar.classList.remove("scrolled");
+  }
+});
 </script>

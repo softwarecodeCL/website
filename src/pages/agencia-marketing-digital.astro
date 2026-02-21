@@ -1,0 +1,1234 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+const pageTitle = "Agencia de Marketing Digital en Chile | SEO, Leads y Estrategias B2B - SoftwareCode.cl";
+const pageDescription =
+  "Somos una Agencia de Marketing Digital en Chile especializada en SEO, generación de leads B2B, estrategias de marketing digital y automatización comercial con resultados medibles (GA4/GTM + pipeline).";
+const pageUrl = "https://www.softwarecode.cl/agencia-marketing-digital/";
+
+const heroImageSrc = "/images/agencia-seo-sc.png"; // puedes cambiarlo
+
+// WhatsApp: +56 9 8839 6128 -> sin +, sin espacios
+const waPhoneDigits = "56988396128";
+
+// Mensajes predefinidos por CTA (serios, B2B, listos para comprar)
+const WA_TEMPLATES = {
+  diagnostic:
+    "Hola, quiero solicitar un diagnóstico de Marketing Digital B2B. Busco claridad en prioridades (Performance/SEO/CRO/Tracking) y próximos pasos. ¿Qué información necesitan para evaluar mi caso?",
+  proposal:
+    "Hola, estoy evaluando contratar una agencia de marketing digital B2B. Necesito una propuesta con foco en leads calificados/oportunidades y medición (GA4/GTM + pipeline).",
+  performance:
+    "Hola, me interesa Performance (Google/Meta) orientado a leads calificados. ¿Cómo trabajan la estrategia, configuración de conversiones, optimización y reporting?",
+  seo:
+    "Hola, me interesa SEO para empresas con SEO técnico real (indexación, arquitectura, Core Web Vitals). Quiero auditoría + plan por prioridades y ejecución.",
+  cro:
+    "Hola, quiero mejorar la conversión (CRO): landing, mensaje, formularios, fricción, velocidad y tracking. Busco un plan y backlog de mejoras.",
+  automation:
+    "Hola, necesito automatización comercial e integraciones (formularios/WhatsApp/CRM). Quiero trazabilidad, asignación automática y seguimiento del pipeline.",
+  web:
+    "Hola, necesito una web/landing orientada a resultados (velocidad, UX, copy, tracking y SEO). Quiero estimación de alcance, tiempos y próximos pasos.",
+  pricing:
+    "Hola, vi sus rangos y quiero que recomienden el alcance ideal según mi objetivo y plazo. ¿Qué datos necesitan para cotizar con precisión?"
+};
+---
+
+<Layout title={pageTitle} description={pageDescription} canonical={pageUrl}>
+  <!-- CONFIG invisible para JS -->
+  <div id="wa-config" data-wa-phone={waPhoneDigits} class="d-none"></div>
+
+  <!-- HERO -->
+  <section class="sc-hero position-relative overflow-hidden border-bottom">
+    <div class="sc-hero-bg"></div>
+    <div class="sc-hero-grid"></div>
+
+    <div class="container position-relative py-5">
+      <div class="row align-items-center g-4 g-lg-5">
+        <div class="col-12 col-lg-7" data-aos="fade" data-aos-duration="700">
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="sc-badge">Marketing Digital B2B</span>
+            <span class="sc-badge">Performance</span>
+            <span class="sc-badge">SEO Técnico</span>
+            <span class="sc-badge">CRO</span>
+            <span class="sc-badge">Automatización</span>
+            <span class="sc-badge">Integraciones</span>
+          </div>
+
+          <h1 class="display-5 fw-bold lh-sm mb-3">
+            Agencia de Marketing Digital para empresas que necesitan <span class="sc-gradient-text">ventas medibles</span>,
+            no “actividad”.
+          </h1>
+
+          <p class="lead text-secondary mb-4">
+            En SoftwareCode construimos un sistema completo para captar demanda, convertir y dar seguimiento real:
+            <strong>campañas</strong> + <strong>SEO técnico</strong> + <strong>CRO</strong> + <strong>tracking</strong> +
+            <strong>automatización comercial</strong>. Si tu empresa vende en B2B, necesitas pipeline, atribución y velocidad,
+            no solo anuncios o publicaciones.
+          </p>
+
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-start my-3">
+            <a class="btn btn-sc-primary btn-lg px-4"
+               href="#"
+               data-wa-template="diagnostic">
+              Solicitar diagnóstico
+            </a>
+
+            <a class="btn btn-sc-outline btn-lg px-4"
+               href="#"
+               data-wa-template="proposal">
+              Pedir propuesta
+            </a>
+
+            <a class="btn btn-sc-ghost btn-lg px-4"
+               href="#form">
+              Armar solicitud
+            </a>
+          </div>
+
+          <div class="row g-3 mt-3">
+            <div class="col-12 col-md-6">
+              <div class="sc-mini-card">
+                <div class="sc-mini-title">Enfoque ejecutivo</div>
+                <div class="sc-mini-text">
+                  KPI comerciales: leads calificados, costo por oportunidad, conversión, velocidad de respuesta y atribución.
+                </div>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="sc-mini-card">
+                <div class="sc-mini-title">Tecnología aplicada</div>
+                <div class="sc-mini-text">
+                  GA4 + GTM + eventos, integraciones a CRM y automatizaciones para que no se pierdan leads en el proceso.
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 sc-trustline text-secondary">
+            Enfoque: Chile (Santiago y regiones), servicios profesionales, industria, ecommerce con operación y ventas consultivas B2B.
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5" data-aos="fade-left" data-aos-duration="700">
+          <div class="sc-hero-card sc-shadow">
+            <div class="ratio ratio-4x3 rounded-4 overflow-hidden border bg-light">
+              <img
+                src={heroImageSrc}
+                alt="Agencia de marketing digital B2B en Chile - SoftwareCode.cl"
+                class="w-100 h-100"
+                style="object-fit: cover;"
+                loading="lazy"
+              />
+            </div>
+
+            <div class="pt-3">
+              <div class="d-flex align-items-start justify-content-between gap-3">
+                <div>
+                  <div class="fw-semibold mb-1">Lo que medimos y optimizamos</div>
+                  <div class="text-secondary small">
+                    Canal → lead → oportunidad. Costos, conversiones, fricción, indexación, CWV y pipeline comercial.
+                  </div>
+                </div>
+                <span class="sc-pill">B2B</span>
+              </div>
+
+              <div class="sc-divider my-3"></div>
+
+              <div class="d-flex flex-column gap-2">
+                <div class="sc-kpi-row"><span class="sc-kpi-dot"></span><span class="small text-secondary">Leads calificados por canal</span></div>
+                <div class="sc-kpi-row"><span class="sc-kpi-dot"></span><span class="small text-secondary">Conversión (CRO) y fricción</span></div>
+                <div class="sc-kpi-row"><span class="sc-kpi-dot"></span><span class="small text-secondary">Indexación + Core Web Vitals</span></div>
+                <div class="sc-kpi-row"><span class="sc-kpi-dot"></span><span class="small text-secondary">Atribución y pipeline</span></div>
+              </div>
+
+              <div class="mt-3 d-grid">
+                <a class="btn btn-sc-dark btn-lg"
+                   href="#"
+                   data-wa-template="proposal">
+                  Contacto
+                </a>
+              </div>
+
+              <div class="mt-2 small text-secondary">
+                Respuesta inicial en horario laboral. Si calificas, te enviamos plan y próximos pasos.
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-3 sc-proof sc-shadow" data-aos="fade" data-aos-duration="650" data-aos-delay="100">
+            <div class="small text-secondary mb-2">Validación (placeholders — reemplaza con logos reales)</div>
+            <div class="d-flex flex-wrap gap-2">
+              <span class="sc-badge sc-badge-proof">Directorio / Marketplace</span>
+              <span class="sc-badge sc-badge-proof">Ranking / Certificación</span>
+              <span class="sc-badge sc-badge-proof">Casos / Testimonios</span>
+              <span class="sc-badge sc-badge-proof">Partners</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </section>
+
+  <!-- DIFERENCIAL -->
+  <section class="py-5">
+    <div class="container py-3 py-lg-4">
+      <div class="row g-4">
+        <div class="col-12" data-aos="fade" data-aos-duration="650">
+          <h2 class="fw-bold mb-2">Por qué “agencia” + ingeniería gana en B2B</h2>
+          <p class="text-secondary mb-0">
+            En Chile hay mucha oferta de “agencia de marketing digital”, pero la mayoría se queda en campañas y contenido.
+            En B2B eso falla cuando no hay trazabilidad: leads sin calificación, sin seguimiento, sin atribución y con un sitio lento o mal instrumentado.
+            Nosotros cerramos el circuito completo: <strong>adquisición → conversión → seguimiento → medición → optimización</strong>.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="50">
+          <div class="sc-feature sc-shadow">
+            <div class="sc-feature-n">01</div>
+            <h3 class="h5 fw-bold mb-2">Demanda (Performance)</h3>
+            <p class="text-secondary mb-3">
+              Captamos intención con Google Ads y Meta Ads (cuando corresponde), remarketing y mensajes orientados a decisión.
+              El objetivo no es “clics”, es <strong>leads calificados</strong>.
+            </p>
+            <ul class="text-secondary mb-0">
+              <li>Arquitectura de campañas por intención</li>
+              <li>Eventos y conversiones bien definidos</li>
+              <li>Optimización por costo por oportunidad</li>
+            </ul>
+            <div class="mt-3">
+              <a class="btn btn-sc-outline btn-sm" href="#" data-wa-template="performance">Quiero Performance</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="100">
+          <div class="sc-feature sc-shadow">
+            <div class="sc-feature-n">02</div>
+            <h3 class="h5 fw-bold mb-2">Conversión (CRO)</h3>
+            <p class="text-secondary mb-3">
+              Si tu landing no convierte, el marketing se encarece. Mejoramos la conversión con estructura, copy, fricción,
+              velocidad y tracking.
+            </p>
+            <ul class="text-secondary mb-0">
+              <li>Optimización de formularios y CTA</li>
+              <li>Mensajes por etapa del embudo</li>
+              <li>Tests y backlog de mejoras</li>
+            </ul>
+            <div class="mt-3">
+              <a class="btn btn-sc-outline btn-sm" href="#" data-wa-template="cro">Quiero CRO</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="150">
+          <div class="sc-feature sc-shadow">
+            <div class="sc-feature-n">03</div>
+            <h3 class="h5 fw-bold mb-2">Sistema (SEO técnico + automatización)</h3>
+            <p class="text-secondary mb-3">
+              En B2B, ganar no es solo adquirir: es <strong>no perder</strong> leads. Implementamos SEO técnico,
+              instrumentación y automatizaciones para un pipeline real.
+            </p>
+            <ul class="text-secondary mb-0">
+              <li>SEO técnico (indexación, arquitectura, CWV)</li>
+              <li>GA4 + GTM + eventos y reporting</li>
+              <li>Integraciones a CRM y seguimiento</li>
+            </ul>
+            <div class="mt-3">
+              <a class="btn btn-sc-outline btn-sm" href="#" data-wa-template="automation">Quiero Automatización</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-5 sc-callout sc-shadow" data-aos="fade" data-aos-duration="650">
+        <div class="row g-3 align-items-center">
+          <div class="col-12 col-lg-8">
+            <h3 class="h4 fw-bold mb-2">Si hoy inviertes y no puedes explicar qué funciona, estás perdiendo margen.</h3>
+            <p class="text-secondary mb-0">
+              Te proponemos un plan de marketing digital para empresas con foco en revenue: canales, métricas, atribución y roadmap
+              (marketing + tecnología) para ejecutar sin humo.
+            </p>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+              <a class="btn btn-sc-primary btn-lg px-4" href="#" data-wa-template="proposal">Cotizar por WhatsApp</a>
+              <a class="btn btn-sc-outline btn-lg px-4" href="#" data-wa-template="diagnostic">Pedir diagnóstico</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICIOS -->
+  <section class="py-5 sc-section-soft border-top border-bottom">
+    <div class="container py-3 py-lg-4">
+      <div class="row g-4">
+        <div class="col-12" data-aos="fade" data-aos-duration="650">
+          <h2 class="fw-bold mb-2">Servicios de Marketing Digital B2B (con entregables y control)</h2>
+          <p class="text-secondary mb-0">
+            Esta landing está pensada para intención de compra: “agencia marketing digital”, “marketing digital para empresas”,
+            “posicionamiento web Chile”, “SEO técnico”, “generación de leads B2B”. Si buscas contratar, aquí está el alcance real.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade" data-aos-duration="650" data-aos-delay="50">
+          <div class="sc-service sc-shadow">
+            <div class="sc-service-head">
+              <div>
+                <h3 class="h5 fw-bold mb-1">Performance Marketing (Google/Meta) + Optimización</h3>
+                <div class="text-secondary small">Para capturar demanda existente y convertir en oportunidades reales.</div>
+              </div>
+              <span class="sc-pill sc-pill-soft">Alta intención</span>
+            </div>
+            <ul class="mt-3 text-secondary">
+              <li>Setup de conversiones y eventos (GA4/GTM)</li>
+              <li>Estructura por intención, audiencias y remarketing</li>
+              <li>Optimización semanal orientada a lead calificado</li>
+              <li>Reporte ejecutivo: resultados, aprendizaje y acciones</li>
+            </ul>
+            <div class="mt-3 d-grid d-sm-flex gap-2">
+              <a class="btn btn-sc-outline" href="#" data-wa-template="performance">Hablar Performance</a>
+              <a class="btn btn-sc-ghost" href="#" data-wa-template="pricing">Ver alcance recomendado</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade" data-aos-duration="650" data-aos-delay="100">
+          <div class="sc-service sc-shadow">
+            <div class="sc-service-head">
+              <div>
+                <h3 class="h5 fw-bold mb-1">SEO para Empresas (con SEO Técnico real)</h3>
+                <div class="text-secondary small">Indexación, rastreo, arquitectura, performance y contenido transaccional.</div>
+              </div>
+              <span class="sc-pill sc-pill-soft">Sostenible</span>
+            </div>
+            <ul class="mt-3 text-secondary">
+              <li>Auditoría SEO técnica + plan por prioridades</li>
+              <li>Core Web Vitals, estructura interna, canonicals</li>
+              <li>Keywords por intención (“cotizar”, “precio”, “agencia”, “a medida”)</li>
+              <li>Plan editorial para convertir: comparativas y guías de decisión</li>
+            </ul>
+            <div class="mt-3 d-grid d-sm-flex gap-2">
+              <a class="btn btn-sc-outline" href="#" data-wa-template="seo">Hablar SEO</a>
+              <a class="btn btn-sc-ghost" href="#" data-wa-template="diagnostic">Pedir diagnóstico</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade" data-aos-duration="650" data-aos-delay="150">
+          <div class="sc-service sc-shadow">
+            <div class="sc-service-head">
+              <div>
+                <h3 class="h5 fw-bold mb-1">CRO (Conversion Rate Optimization)</h3>
+                <div class="text-secondary small">Convertir más con el mismo tráfico: mensaje, UX, fricción y tracking.</div>
+              </div>
+              <span class="sc-pill sc-pill-soft">Rentabilidad</span>
+            </div>
+            <ul class="mt-3 text-secondary">
+              <li>Auditoría de fricción y conversión</li>
+              <li>Optimización de formularios y CTAs</li>
+              <li>Arquitectura de landing y propuesta de valor</li>
+              <li>Backlog de mejoras por impacto/esfuerzo</li>
+            </ul>
+            <div class="mt-3 d-grid d-sm-flex gap-2">
+              <a class="btn btn-sc-outline" href="#" data-wa-template="cro">Hablar CRO</a>
+              <a class="btn btn-sc-ghost" href="#form">Armar solicitud</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade" data-aos-duration="650" data-aos-delay="200">
+          <div class="sc-service sc-shadow">
+            <div class="sc-service-head">
+              <div>
+                <h3 class="h5 fw-bold mb-1">Automatización comercial + Integraciones</h3>
+                <div class="text-secondary small">Formularios/WhatsApp/CRM + asignación, SLA y seguimiento.</div>
+              </div>
+              <span class="sc-pill sc-pill-soft">Escala</span>
+            </div>
+            <ul class="mt-3 text-secondary">
+              <li>Lead routing (reglas por servicio/territorio/horario)</li>
+              <li>Notificaciones, seguimiento y recordatorios</li>
+              <li>Pipeline con etapas y trazabilidad</li>
+              <li>Dashboards para decisiones comerciales</li>
+            </ul>
+            <div class="mt-3 d-grid d-sm-flex gap-2">
+              <a class="btn btn-sc-outline" href="#" data-wa-template="automation">Hablar Automatización</a>
+              <a class="btn btn-sc-ghost" href="#" data-wa-template="proposal">Pedir propuesta</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" data-aos="fade" data-aos-duration="650">
+          <div class="sc-note sc-shadow">
+            <div class="fw-semibold mb-1">Nota</div>
+            <div class="text-secondary">
+              No vendemos manejo de redes “por posts”. Si aplica, se integra como soporte táctico, pero el foco es performance,
+              SEO técnico, CRO y automatización para resultados comerciales.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section id="form" class="py-5">
+    <div class="container py-3 py-lg-4">
+      <div class="row g-4 g-lg-5 align-items-start">
+        <div class="col-12 col-lg-6" data-aos="fade" data-aos-duration="650">
+          <h2 class="fw-bold mb-2">Arma tu solicitud (y envíala por WhatsApp)</h2>
+          <p class="text-secondary mb-4">
+            Este formulario crea un mensaje estructurado para evaluar rápido tu caso. Ideal si estás listo para contratar y quieres
+            avanzar sin reuniones innecesarias.
+          </p>
+
+          <div class="sc-steps sc-shadow">
+            <div class="sc-step">
+              <div class="sc-step-n">1</div>
+              <div>
+                <div class="fw-semibold">Contexto y objetivo</div>
+                <div class="text-secondary small">Qué vendes, a quién, qué necesitas y con qué plazo.</div>
+              </div>
+            </div>
+            <div class="sc-step">
+              <div class="sc-step-n">2</div>
+              <div>
+                <div class="fw-semibold">Medición y pipeline</div>
+                <div class="text-secondary small">Tracking, conversiones, CRM, seguimiento y atribución.</div>
+              </div>
+            </div>
+            <div class="sc-step">
+              <div class="sc-step-n">3</div>
+              <div>
+                <div class="fw-semibold">Respuesta clara</div>
+                <div class="text-secondary small">Te devolvemos plan, alcance y próximos pasos.</div>
+              </div>
+            </div>
+          </div>
+
+          <div class="mt-4 sc-faq sc-shadow">
+            <div class="fw-semibold mb-2">Preguntas típicas (B2B)</div>
+            <div class="accordion" id="faqAcc">
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1">
+                    ¿Trabajan “marketing digital” o también el sitio/SEO técnico?
+                  </button>
+                </h2>
+                <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAcc">
+                  <div class="accordion-body text-secondary">
+                    Sí. Para vender en B2B no basta con anuncios: si el sitio es lento o no está bien instrumentado, el costo de adquisición se dispara.
+                    Integramos performance + CRO + SEO técnico + tracking y, si aplica, automatización.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                    ¿Cómo reportan resultados?
+                  </button>
+                </h2>
+                <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                  <div class="accordion-body text-secondary">
+                    Reporte ejecutivo orientado a negocio: leads calificados, costo por oportunidad, tasa de conversión,
+                    aprendizaje y acciones. No “métricas vanidosas”.
+                  </div>
+                </div>
+              </div>
+
+              <div class="accordion-item">
+                <h2 class="accordion-header">
+                  <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                    ¿Qué necesitan para empezar?
+                  </button>
+                </h2>
+                <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAcc">
+                  <div class="accordion-body text-secondary">
+                    Objetivo, plazo, oferta, sitio, canales actuales, y cómo gestionan hoy el lead (CRM/pipeline). Con eso armamos diagnóstico y propuesta.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade-left" data-aos-duration="650">
+          <div class="sc-form-card sc-shadow">
+            <div class="d-flex align-items-start justify-content-between gap-3">
+              <div>
+                <h3 class="h4 fw-bold mb-1">Enviar solicitud por WhatsApp</h3>
+                <p class="text-secondary mb-0">
+                  Completa los datos. Al enviar se abrirá WhatsApp con el mensaje listo.
+                </p>
+              </div>
+              <span class="sc-pill">Chile</span>
+            </div>
+
+            <form id="waForm" class="mt-4 needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Nombre</label>
+                  <input class="form-control" name="nombre" type="text" placeholder="Tu nombre" required />
+                  <div class="invalid-feedback">Ingresa tu nombre.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Email corporativo</label>
+                  <input class="form-control" name="email" type="email" placeholder="nombre@empresa.cl" required />
+                  <div class="invalid-feedback">Ingresa un email válido.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Empresa</label>
+                  <input class="form-control" name="empresa" type="text" placeholder="Nombre de la empresa" required />
+                  <div class="invalid-feedback">Ingresa tu empresa.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Sitio web</label>
+                  <input class="form-control" name="sitio" type="url" placeholder="https://..." />
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Objetivo principal</label>
+                  <select class="form-select" name="objetivo" required>
+                    <option value="">Selecciona…</option>
+                    <option>Generar leads B2B</option>
+                    <option>Reducir costo de adquisición</option>
+                    <option>Mejorar SEO / posicionamiento</option>
+                    <option>Mejorar conversión (CRO)</option>
+                    <option>Automatizar proceso comercial</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona un objetivo.</div>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label fw-semibold">Plazo esperado</label>
+                  <select class="form-select" name="plazo" required>
+                    <option value="">Selecciona…</option>
+                    <option>Urgente (0–30 días)</option>
+                    <option>1–2 meses</option>
+                    <option>3–6 meses</option>
+                    <option>Sin urgencia (plan anual)</option>
+                  </select>
+                  <div class="invalid-feedback">Selecciona un plazo.</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Rango mensual de inversión</label>
+                  <select class="form-select" name="inversion" required>
+                    <option value="">Selecciona…</option>
+                    <option>Menos de $500.000 CLP</option>
+                    <option>$500.000 – $1.500.000 CLP</option>
+                    <option>$1.500.000 – $3.500.000 CLP</option>
+                    <option>$3.500.000+ CLP</option>
+                  </select>
+                  <div class="form-text">Sirve para proponer una estrategia coherente (sin planes genéricos).</div>
+                  <div class="invalid-feedback">Selecciona un rango.</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label fw-semibold">Dolor actual / contexto</label>
+                  <textarea class="form-control" name="dolor" rows="4"
+                    placeholder="Ej: recibimos leads pero no convierten / no medimos bien / la web es lenta / no hay seguimiento..."
+                    required></textarea>
+                  <div class="invalid-feedback">Cuéntanos tu contexto.</div>
+                </div>
+
+                <div class="col-12">
+                  <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-3">
+                    <button type="submit" class="btn btn-sc-primary btn-lg px-4">
+                      Enviar por WhatsApp
+                    </button>
+                  </div>
+
+                  <div class="small text-secondary">
+                    Si tu caso califica, respondemos con plan y siguientes pasos. Si no, te diremos qué falta para que tenga sentido.
+                  </div>
+                </div>
+                </div>
+            </form>
+
+            <div class="mt-4 sc-divider"></div>
+            
+            <div class="mt-3 small text-secondary">
+              ¿Quieres ir directo? Usa estos accesos:
+              <div class="d-flex flex-wrap gap-2 mt-2">
+                <a class="btn btn-sc-ghost btn-sm" href="#" data-wa-template="performance">Performance</a>
+                <a class="btn btn-sc-ghost btn-sm" href="#" data-wa-template="seo">SEO Técnico</a>
+                <a class="btn btn-sc-ghost btn-sm" href="#" data-wa-template="cro">CRO</a>
+                <a class="btn btn-sc-ghost btn-sm" href="#" data-wa-template="automation">Automatización</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>  
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="py-5 sc-section-soft border-top">
+    <div class="container py-3 py-lg-4">
+      <div class="row g-4">
+        <div class="col-12" data-aos="fade" data-aos-duration="650">
+          <h2 class="fw-bold mb-2">Rangos de servicio para calificar (B2B)</h2>
+          <p class="text-secondary mb-0">
+            No es “venta por catálogo”. Estos rangos existen para alinear expectativas y avanzar rápido. El valor final depende de
+            competencia, canales, estado del sitio, tracking e integraciones.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="50">
+          <div class="sc-price sc-shadow">
+            <div class="fw-bold">Starter (base y orden)</div>
+            <div class="text-secondary small mb-3">Instrumentación + quick wins + base de conversión.</div>
+            <ul class="text-secondary mb-0">
+              <li>GA4/GTM + conversiones</li>
+              <li>Mejoras rápidas de landing/CRO</li>
+              <li>SEO técnico inicial (prioridades)</li>
+              <li>Reporte ejecutivo</li>
+            </ul>
+            <div class="mt-3 d-grid">
+              <a class="btn btn-sc-outline btn-lg" href="#" data-wa-template="pricing">Quiero orientación</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="100">
+          <div class="sc-price sc-price-feature sc-shadow">
+            <div class="fw-bold">Growth (adquisición y mejora continua)</div>
+            <div class="text-secondary small mb-3">Leads, oportunidades y optimización sistemática.</div>
+            <ul class="text-secondary mb-0">
+              <li>Performance + optimización semanal</li>
+              <li>CRO continuo por backlog</li>
+              <li>SEO técnico por sprints</li>
+              <li>Reporting semanal/mensual</li>
+            </ul>
+            <div class="mt-3 d-grid">
+              <a class="btn btn-sc-primary btn-lg" href="#" data-wa-template="proposal">Cotizar Growth</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade" data-aos-duration="650" data-aos-delay="150">
+          <div class="sc-price sc-shadow">
+            <div class="fw-bold">Scale (automatización + pipeline)</div>
+            <div class="text-secondary small mb-3">Menos leads perdidos, más trazabilidad y eficiencia.</div>
+            <ul class="text-secondary mb-0">
+              <li>Automatización comercial</li>
+              <li>Integración CRM / formularios / WhatsApp</li>
+              <li>Dashboards y atribución</li>
+              <li>Backlog técnico continuo</li>
+            </ul>
+            <div class="mt-3 d-grid">
+              <a class="btn btn-sc-outline btn-lg" href="#" data-wa-template="automation">Cotizar Scale</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-12" data-aos="fade" data-aos-duration="650">
+          <div class="sc-final sc-shadow">
+            <div class="row g-3 align-items-center">
+              <div class="col-12 col-lg-8">
+                <h3 class="h4 fw-bold mb-2">Si estás listo para contratar, avancemos hoy</h3>
+                <p class="text-secondary mb-0">
+                  Envíanos tu caso por WhatsApp. Te respondemos con diagnóstico, alcance recomendado y próximos pasos.
+                </p>
+              </div>
+              <div class="col-12 col-lg-4">
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-2">
+                  <a class="btn btn-sc-primary btn-lg px-4" href="#" data-wa-template="proposal">Solicitar propuesta</a>
+                  <a class="btn btn-sc-outline btn-lg px-4" href="#" data-wa-template="diagnostic">Pedir diagnóstico</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Templates en JSON -->
+  <script type="application/json" id="wa-templates">
+    {JSON.stringify(WA_TEMPLATES)}
+  </script>
+
+  <script is:inline>
+    function isMobileDevice() {
+      return /Android|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent || "");
+    }
+
+    function getWaPhone() {
+      const el = document.getElementById("wa-config");
+      const digits = el ? (el.getAttribute("data-wa-phone") || "") : "";
+      // defensivo: solo números
+      return digits.replace(/[^\d]/g, "");
+    }
+
+    function readTemplates() {
+      const el = document.getElementById("wa-templates");
+      if (!el) return {};
+      try { return JSON.parse(el.textContent || "{}"); } catch { return {}; }
+    }
+
+    const WA_PHONE = getWaPhone();
+    const WA_TEMPLATES = readTemplates();
+
+    function buildWhatsAppUrl(phoneDigits, message) {
+      const encoded = encodeURIComponent(message);
+
+      // Desktop: abrir WhatsApp Web directo (evita “compartir”)
+      if (!isMobileDevice()) {
+        return `https://web.whatsapp.com/send?phone=${phoneDigits}&text=${encoded}`;
+      }
+
+      // Mobile: wa.me suele abrir app; si no, WhatsApp muestra el flujo correcto igual
+      return `https://wa.me/${phoneDigits}?text=${encoded}`;
+    }
+
+    function openWhatsApp(message) {
+      const url = buildWhatsAppUrl(WA_PHONE, message);
+      // location.href suele funcionar mejor que window.open para mobile
+      if (isMobileDevice()) {
+        window.location.href = url;
+      } else {
+        window.open(url, "_blank", "noopener,noreferrer");
+      }
+    }
+
+    function getTemplate(key) {
+      const fallback = "Hola, quiero cotizar servicios de marketing digital B2B.";
+      return (key && WA_TEMPLATES[key]) ? WA_TEMPLATES[key] : (WA_TEMPLATES.proposal || fallback);
+    }
+
+    // AOS init (si ya lo inicializas en Layout, puedes borrar esto)
+    if (typeof AOS !== "undefined") {
+      AOS.init({ once: true, duration: 650, offset: 80 });
+    }
+
+    // Botones de WhatsApp
+    document.addEventListener("click", (e) => {
+      const btn = e.target instanceof Element ? e.target.closest("[data-wa-template]") : null;
+      if (!btn) return;
+      e.preventDefault();
+      const key = btn.getAttribute("data-wa-template");
+      openWhatsApp(getTemplate(key));
+    });
+
+    // Form -> WhatsApp armado
+    const form = document.getElementById("waForm");
+    if (form) {
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        // Validación Bootstrap
+        if (!form.checkValidity()) {
+          form.classList.add("was-validated");
+          return;
+        }
+
+        const fd = new FormData(form);
+        const nombre = String(fd.get("nombre") || "").trim();
+        const email = String(fd.get("email") || "").trim();
+        const empresa = String(fd.get("empresa") || "").trim();
+        const sitio = String(fd.get("sitio") || "").trim();
+        const objetivo = String(fd.get("objetivo") || "").trim();
+        const plazo = String(fd.get("plazo") || "").trim();
+        const inversion = String(fd.get("inversion") || "").trim();
+        const dolor = String(fd.get("dolor") || "").trim();
+
+        const msg = [
+          "Hola, quiero solicitar diagnóstico y propuesta de Marketing Digital B2B.",
+          "",
+          "1) Datos",
+          `• Nombre: ${nombre}`,
+          `• Empresa: ${empresa}`,
+          `• Email: ${email}`,
+          `• Sitio: ${sitio ? sitio : "(sin sitio / por definir)"}`,
+          "",
+          "2) Objetivo y plazo",
+          `• Objetivo: ${objetivo}`,
+          `• Plazo: ${plazo}`,
+          "",
+          "3) Inversión",
+          `• Rango mensual: ${inversion}`,
+          "",
+          "4) Dolor / contexto",
+          dolor,
+          "",
+          "¿Qué información adicional necesitan para preparar el plan y próximos pasos?"
+        ].join("\n");
+
+        openWhatsApp(msg);
+      });
+    }
+  </script>
+
+  <style>
+    :root{
+      --sc-pink: #ff2ea6;
+      --sc-purple: #6f2cff;
+      --sc-violet: #8b5cf6;
+      --sc-ink: #0f172a;
+      --sc-border: rgba(15,23,42,.10);
+      --sc-glass: rgba(255,255,255,.86);
+    }
+
+    /* HERO */
+    .sc-hero{ position: relative; }
+    .sc-hero-bg{
+      position:absolute; inset:-2px; z-index:0;
+      background:
+        radial-gradient(900px 540px at 12% 10%, rgba(255,46,166,.18), transparent 58%),
+        radial-gradient(900px 540px at 90% 18%, rgba(111,44,255,.16), transparent 60%),
+        radial-gradient(700px 380px at 40% 92%, rgba(139,92,246,.10), transparent 58%),
+        linear-gradient(180deg, rgba(248,250,252,1) 0%, rgba(255,255,255,1) 55%);
+      filter: saturate(1.08);
+    }
+    .sc-hero-grid{
+      position:absolute; inset:0; z-index:0;
+      background-image: linear-gradient(rgba(15,23,42,.05) 1px, transparent 1px),
+                        linear-gradient(90deg, rgba(15,23,42,.05) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: radial-gradient(500px 260px at 20% 20%, black, transparent 70%);
+      opacity:.35;
+      pointer-events:none;
+    }
+
+    /* Shadow premium */
+    .sc-shadow{
+      box-shadow:
+        0 22px 55px rgba(15,23,42,.10),
+        0 5px 16px rgba(15,23,42,.08);
+    }
+
+    /* Gradient text */
+    .sc-gradient-text{
+      background: linear-gradient(90deg, var(--sc-pink), var(--sc-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    /* Badges */
+    .sc-badge{
+      background: rgba(255,255,255,.82);
+      border: 1px solid rgba(111,44,255,.14);
+      color: rgba(15,23,42,.86);
+      font-weight: 800;
+      border-radius: 999px;
+      padding: .45rem .72rem;
+      backdrop-filter: blur(12px);
+    }
+    .sc-badge-proof{
+      background: rgba(248,250,252,.96);
+    }
+
+    /* Cards glass */
+    .sc-hero-card,
+    .sc-mini-card,
+    .sc-proof,
+    .sc-feature,
+    .sc-service,
+    .sc-steps,
+    .sc-form-card,
+    .sc-price,
+    .sc-final,
+    .sc-note,
+    .sc-faq{
+      background: var(--sc-glass);
+      border: 1px solid var(--sc-border);
+      backdrop-filter: blur(14px);
+      border-radius: 1.25rem;
+    }
+
+    .sc-hero-card{ padding: 1rem; }
+    .sc-mini-card{ padding: 1rem; height:100%; }
+    .sc-mini-title{ font-weight: 900; margin-bottom: .25rem; }
+    .sc-mini-text{ color: rgba(15,23,42,.72); }
+
+    .sc-proof{ padding: 1rem; }
+    .sc-feature{ padding: 1.25rem; height:100%; transition: transform .18s ease, box-shadow .18s ease; }
+    .sc-feature:hover{ transform: translateY(-4px); box-shadow: 0 26px 60px rgba(15,23,42,.13); }
+    .sc-feature-n{ font-weight: 900; letter-spacing: .08em; color: var(--sc-purple); margin-bottom: .25rem; }
+
+    .sc-service{ padding: 1.25rem; height:100%; }
+    .sc-service-head{ display:flex; align-items:flex-start; justify-content:space-between; gap: 1rem; }
+
+    .sc-pill{
+      font-size: .75rem;
+      font-weight: 900;
+      padding: .35rem .6rem;
+      border-radius: 999px;
+      border: 1px solid var(--sc-border);
+      background: rgba(248,250,252,.92);
+      color: rgba(15,23,42,.76);
+      white-space: nowrap;
+    }
+    .sc-pill-soft{
+      background: rgba(255,46,166,.08);
+      border-color: rgba(255,46,166,.22);
+      color: rgba(255,46,166,.95);
+    }
+
+    .sc-divider{ height:1px; background: var(--sc-border); }
+
+    .sc-kpi-row{ display:flex; align-items:center; gap:.6rem; }
+    .sc-kpi-dot{
+      width: .55rem; height: .55rem; border-radius: 999px;
+      background: var(--sc-pink);
+      box-shadow: 0 0 0 4px rgba(255,46,166,.12);
+    }
+
+    .sc-callout{
+      border-radius: 1.5rem;
+      border: 1px solid var(--sc-border);
+      background: rgba(248,250,252,.78);
+      padding: 1.5rem;
+      backdrop-filter: blur(12px);
+    }
+
+    .sc-section-soft{ background: rgba(248,250,252,.65); }
+
+    /* Steps */
+    .sc-steps{ padding: 1.25rem; }
+    .sc-step{ display:flex; gap:.9rem; padding: .85rem 0; border-bottom: 1px solid var(--sc-border); }
+    .sc-step:last-child{ border-bottom:none; padding-bottom: 0; }
+    .sc-step:first-child{ padding-top: 0; }
+    .sc-step-n{
+      width: 34px; height: 34px;
+      border-radius: 999px;
+      display:flex; align-items:center; justify-content:center;
+      font-weight: 900;
+      background: rgba(111,44,255,.10);
+      color: var(--sc-purple);
+      border: 1px solid rgba(111,44,255,.20);
+      flex: 0 0 auto;
+    }
+
+    .sc-form-card{ padding: 1.5rem; border-radius: 1.5rem; }
+    .sc-price{ padding: 1.25rem; height:100%; position:relative; overflow:hidden; }
+    .sc-price-feature::before{
+      content:"";
+      position:absolute; inset:-2px;
+      background:
+        radial-gradient(520px 260px at 20% 0%, rgba(255,46,166,.16), transparent 60%),
+        radial-gradient(520px 260px at 70% 20%, rgba(111,44,255,.14), transparent 62%);
+      pointer-events:none;
+    }
+    .sc-final{ padding: 1.5rem; border-radius: 1.5rem; }
+    .sc-note{ padding: 1.25rem; }
+    .sc-faq{ padding: 1.25rem; border-radius: 1.25rem; }
+
+    /* Buttons (NO tocamos .btn-primary de Bootstrap) */
+    .btn-sc-primary{
+      color: #fff !important;
+      border: 0 !important;
+      background-image: linear-gradient(90deg, var(--sc-pink), var(--sc-purple));
+      box-shadow:
+        0 18px 40px rgba(111,44,255,.22),
+        0 12px 28px rgba(255,46,166,.18);
+      transform: translateZ(0);
+      transition: transform .18s ease, filter .18s ease, box-shadow .18s ease;
+    }
+    .btn-sc-primary:hover{
+      filter: brightness(1.02) saturate(1.05);
+      transform: translateY(-1px);
+      box-shadow:
+        0 24px 55px rgba(111,44,255,.26),
+        0 16px 32px rgba(255,46,166,.22);
+    }
+    .btn-sc-primary:active{ transform: translateY(0); }
+
+    .btn-sc-outline{
+      border: 1px solid rgba(111,44,255,.35) !important;
+      color: var(--sc-purple) !important;
+      background: rgba(255,255,255,.55) !important;
+      backdrop-filter: blur(10px);
+      transition: transform .18s ease, background .18s ease, border-color .18s ease;
+    }
+    .btn-sc-outline:hover{
+      transform: translateY(-1px);
+      background: rgba(111,44,255,.08) !important;
+      border-color: rgba(111,44,255,.55) !important;
+    }
+
+    .btn-sc-ghost{
+      border: 1px solid rgba(15,23,42,.12) !important;
+      background: rgba(255,255,255,.45) !important;
+      color: rgba(15,23,42,.86) !important;
+      backdrop-filter: blur(10px);
+      transition: transform .18s ease, background .18s ease;
+    }
+    .btn-sc-ghost:hover{ transform: translateY(-1px); background: rgba(255,255,255,.65) !important; }
+
+    .btn-sc-dark{
+      background: rgba(15,23,42,.92) !important;
+      border: 1px solid rgba(15,23,42,.92) !important;
+      color: #fff !important;
+      transition: transform .18s ease, filter .18s ease;
+    }
+    .btn-sc-dark:hover{ transform: translateY(-1px); filter: brightness(1.02); }
+
+    /* WhatsApp floating button */
+    .sc-wa-float{
+      position: fixed;
+      right: 18px;
+      bottom: 18px;
+      z-index: 50;
+      padding: .85rem 1rem;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--sc-pink), var(--sc-purple));
+      color: #fff;
+      text-decoration: none;
+      font-weight: 900;
+      letter-spacing: .02em;
+      border: 0;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      transition: transform .18s ease, filter .18s ease;
+    }
+    .sc-wa-float:hover{ transform: translateY(-2px); filter: brightness(1.03); }
+
+    @media (max-width: 576px){
+      .sc-form-card, .sc-final, .sc-callout{ padding: 1.1rem; }
+    }
+
+    
+
+
+
+:root{
+  --sc-ring: rgba(111,44,255,.18);
+  --sc-ring-2: rgba(255,46,166,.16);
+  --sc-card-bg: rgba(255,255,255,.86);
+  --sc-card-border: rgba(15,23,42,.10);
+  --sc-card-ink: rgba(15,23,42,.92);
+}
+
+/* Base mejorada para todas tus cajas */
+.sc-shadow{
+  box-shadow:
+    0 26px 70px rgba(15,23,42,.10),
+    0 10px 24px rgba(15,23,42,.08);
+}
+
+.sc-hero-card,
+.sc-mini-card,
+.sc-proof,
+.sc-feature,
+.sc-service,
+.sc-steps,
+.sc-form-card,
+.sc-price,
+.sc-final,
+.sc-note,
+.sc-faq{
+  position: relative;
+  overflow: hidden;
+  background: var(--sc-card-bg);
+  border: 1px solid var(--sc-card-border);
+  transform: translateZ(0);
+  transition:
+    transform .18s ease,
+    box-shadow .18s ease,
+    border-color .18s ease,
+    filter .18s ease;
+}
+
+/* Glow suave de fondo (premium) */
+.sc-hero-card::before,
+.sc-mini-card::before,
+.sc-proof::before,
+.sc-feature::before,
+.sc-service::before,
+.sc-steps::before,
+.sc-form-card::before,
+.sc-price::before,
+.sc-final::before,
+.sc-note::before,
+.sc-faq::before{
+  content:"";
+  position:absolute;
+  inset:-2px;
+  pointer-events:none;
+  background:
+    radial-gradient(700px 260px at 15% 0%, rgba(255,46,166,.12), transparent 60%),
+    radial-gradient(700px 260px at 85% 15%, rgba(111,44,255,.12), transparent 62%);
+  opacity: .55;
+  transition: opacity .18s ease;
+}
+
+/* Borde gradiente finito (se ve “caro”) */
+.sc-hero-card::after,
+.sc-mini-card::after,
+.sc-proof::after,
+.sc-feature::after,
+.sc-service::after,
+.sc-steps::after,
+.sc-form-card::after,
+.sc-price::after,
+.sc-final::after,
+.sc-note::after,
+.sc-faq::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  padding:1px;              /* grosor del borde */
+  border-radius: inherit;
+  background: linear-gradient(90deg,
+    rgba(255,46,166,.45),
+    rgba(111,44,255,.45),
+    rgba(139,92,246,.35)
+  );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: .0;
+  transition: opacity .18s ease;
+  pointer-events:none;
+}
+
+/* Hover: lift + glow + ring */
+.sc-hero-card:hover,
+.sc-mini-card:hover,
+.sc-proof:hover,
+.sc-feature:hover,
+.sc-service:hover,
+.sc-steps:hover,
+.sc-form-card:hover,
+.sc-price:hover,
+.sc-final:hover,
+.sc-note:hover,
+.sc-faq:hover{
+  transform: translateY(-6px);
+  border-color: rgba(111,44,255,.18);
+  box-shadow:
+    0 34px 90px rgba(15,23,42,.12),
+    0 14px 28px rgba(15,23,42,.10),
+    0 0 0 6px var(--sc-ring),
+    0 0 0 12px var(--sc-ring-2);
+}
+
+.sc-hero-card:hover::before,
+.sc-mini-card:hover::before,
+.sc-proof:hover::before,
+.sc-feature:hover::before,
+.sc-service:hover::before,
+.sc-steps:hover::before,
+.sc-form-card:hover::before,
+.sc-price:hover::before,
+.sc-final:hover::before,
+.sc-note:hover::before,
+.sc-faq:hover::before{
+  opacity: .9;
+}
+
+.sc-hero-card:hover::after,
+.sc-mini-card:hover::after,
+.sc-proof:hover::after,
+.sc-feature:hover::after,
+.sc-service:hover::after,
+.sc-steps:hover::after,
+.sc-form-card:hover::after,
+.sc-price:hover::after,
+.sc-final:hover::after,
+.sc-note:hover::after,
+.sc-faq:hover::after{
+  opacity: .85;
+}
+
+/* Shine animado (sutil) */
+.sc-feature .sc-feature-n,
+.sc-service h3,
+.sc-price .fw-bold{
+  position: relative;
+}
+
+.sc-hero-card:hover .sc-gradient-text,
+.sc-feature:hover h3,
+.sc-service:hover h3,
+.sc-price:hover .fw-bold{
+  filter: saturate(1.05);
+}
+
+.sc-feature::marker{ display:none; }
+
+/* Botones dentro de cajas: micro-interacción */
+.sc-feature .btn,
+.sc-service .btn,
+.sc-price .btn,
+.sc-final .btn{
+  transition: transform .18s ease, filter .18s ease;
+}
+
+.sc-feature:hover .btn,
+.sc-service:hover .btn,
+.sc-price:hover .btn,
+.sc-final:hover .btn{
+  transform: translateY(-1px);
+  filter: brightness(1.02);
+}
+
+/* Un toque de “tensión” al presionar */
+.sc-hero-card:active,
+.sc-mini-card:active,
+.sc-proof:active,
+.sc-feature:active,
+.sc-service:active,
+.sc-steps:active,
+.sc-form-card:active,
+.sc-price:active,
+.sc-final:active,
+.sc-note:active,
+.sc-faq:active{
+  transform: translateY(-2px);
+}
+
+/* Accesibilidad: reduce movimiento */
+@media (prefers-reduced-motion: reduce){
+  .sc-hero-card,
+  .sc-mini-card,
+  .sc-proof,
+  .sc-feature,
+  .sc-service,
+  .sc-steps,
+  .sc-form-card,
+  .sc-price,
+  .sc-final,
+  .sc-note,
+  .sc-faq,
+  .sc-hero-card::before,
+  .sc-mini-card::before,
+  .sc-proof::before,
+  .sc-feature::before,
+  .sc-service::before,
+  .sc-steps::before,
+  .sc-form-card::before,
+  .sc-price::before,
+  .sc-final::before,
+  .sc-note::before,
+  .sc-faq::before,
+  .sc-hero-card::after,
+  .sc-mini-card::after,
+  .sc-proof::after,
+  .sc-feature::after,
+  .sc-service::after,
+  .sc-steps::after,
+  .sc-form-card::after,
+  .sc-price::after,
+  .sc-final::after,
+  .sc-note::after,
+  .sc-faq::after{
+    transition: none !important;
+  }
+}
+  </style>
+</Layout>
