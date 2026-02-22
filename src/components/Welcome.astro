@@ -1,4 +1,6 @@
-
+---
+import ClientLogosMarquee from "../components/ClientLogosMarquee.astro";
+---
 
 <!-- Asegúrate de tener Bootstrap 4 o 5 cargado en tu proyecto -->
 
@@ -214,7 +216,7 @@
 
 
 </section>
-
+<ClientLogosMarquee/>
 
 <section class="sc-tech section-modern position-relative">
   <div class="tech-overlay" aria-hidden="true"></div>
@@ -364,10 +366,6 @@
   </svg>
 </div>
 </section>
-
-
-
-
 	
   <!--============================
   =            Footer            =
@@ -485,9 +483,7 @@
 </footer>
 
 </div>
-  <!--====  End of Footer  ====-->
-  <router-outlet />
-  
+
   <style>
    /* =========================================
    BASE / HELPERS
