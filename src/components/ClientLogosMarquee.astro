@@ -1,6 +1,4 @@
 ---
-import 'swiper/css';
-
 type Logo = { src: string; alt: string; href?: string };
 
 const logos: Logo[] = [
@@ -10,33 +8,24 @@ const logos: Logo[] = [
   { src: '/logos-clientes/servicioshyh.png', alt: 'Servicios HYH', href: 'https://www.servicioshyh.cl/' },
 ];
 
-// Duplicamos para que loop sea estable (con pocos logos Swiper avisa)
-const repeated = Array.from({ length: 5 }, () => logos).flat();
+// duplicamos 1 vez (marquee necesita 2 tracks iguales)
+const track = [...logos, ...logos];
 ---
 
 <section class="sc-client-logos py-4 py-lg-5" aria-label="Logos de clientes">
   <div class="container">
     <div class="sc-logos-header mb-4">
-        <span class="sc-logos-eyebrow">Empresas que confían en nosotros</span>
+      <span class="sc-logos-eyebrow">Empresas que confían en nosotros</span>
     </div>
 
-    <div class="logos-marquee">
-          <div class="sheen" aria-hidden="true"></div>
-  <div class="grain" aria-hidden="true"></div>
-      <swiper-container
-        class="swiper-logos"
-        init="false"
-        loop="true"
-        speed="10000"
-        slides-per-view="auto"
-        space-between="84"
-        free-mode="true"
-        autoplay-delay="0"
-        autoplay-disable-on-interaction="false"
-      >
-        {repeated.map((l) => (
-          <swiper-slide>
-            {l.href ? (
+    <div class="logos-marquee" style="--duration: 22s;">
+      <div class="sheen" aria-hidden="true"></div>
+      <div class="grain" aria-hidden="true"></div>
+
+      <div class="marquee" role="presentation">
+        <div class="marquee__track">
+          {track.map((l) => (
+            l.href ? (
               <a class="logo-item" href={l.href} target="_blank" rel="noopener noreferrer" aria-label={l.alt}>
                 <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
               </a>
@@ -44,80 +33,41 @@ const repeated = Array.from({ length: 5 }, () => logos).flat();
               <div class="logo-item" aria-label={l.alt}>
                 <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
               </div>
-            )}
-          </swiper-slide>
-        ))}
-      </swiper-container>
+            )
+          ))}
+        </div>
+
+        <div class="marquee__track" aria-hidden="true">
+          {track.map((l) => (
+            l.href ? (
+              <a class="logo-item" href={l.href} target="_blank" rel="noopener noreferrer" aria-label={l.alt}>
+                <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
+              </a>
+            ) : (
+              <div class="logo-item" aria-label={l.alt}>
+                <img src={l.src} alt={l.alt} loading="lazy" decoding="async" />
+              </div>
+            )
+          ))}
+        </div>
+      </div>
     </div>
   </div>
 </section>
 
-<script>
-  import { register } from 'swiper/element/bundle';
-  register();
-
-  const swiperEl = document.querySelector('.swiper-logos') as (HTMLElement & { initialize: () => void }) | null;
-  if (!swiperEl) {}
-
-  const isMobile = window.matchMedia('(max-width: 575.98px)').matches;
-
-  if (swiperEl) {
-    Object.assign(swiperEl, {
-        loopAdditionalSlides: 10,
-        loop: true,
-        speed: 20000,
-        slidesPerView: 'auto',
-        spaceBetween: isMobile ? 28 : 72,
-        allowTouchMove: false,   // 🔥 clave
-        grabCursor: false,
-
-        freeMode: {
-            enabled: true,
-            momentum: false,
-        },
-
-        autoplay: {
-            delay: 0,
-            disableOnInteraction: false,
-            pauseOnMouseEnter: false,
-        },
-    });
-
-    swiperEl.initialize();
-
-}
-
-
-  
-</script>
-
 <style>
-/* ============================
-   Client Logos — Premium Glow (sin bordes notorios)
-   ============================ */
-swiper-slide{
-  transition: opacity .3s ease;
-}
-.logos-marquee::before{
-  animation: scAmbient 12s ease-in-out infinite;
-}
-.sc-client-logos{
-  animation: scFadeIn 0.8s ease forwards;
-  opacity: 0;
+/* Header premium */
+.sc-logos-header{ max-width: 720px; }
+.sc-logos-eyebrow{
+  display:inline-block;
+  font-size:.75rem;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color: rgba(255,255,255,.55);
 }
 
-@keyframes scFadeIn{
-  to { opacity: 1; }
-}
-swiper-slide:not(.swiper-slide-active){
-  opacity: .85;
-}
-.logo-item img[src*="logo-negro"]{
-  filter: drop-shadow(0 0 18px rgba(255,255,255,.15));
-}
-.sc-client-logos{ position: relative; }
-
-/* Wrapper: sin fondo, con glow suave para logos oscuros */
+/* Wrapper */
 .logos-marquee{
   position: relative;
   overflow: hidden;
@@ -125,214 +75,155 @@ swiper-slide:not(.swiper-slide-active){
   padding: 14px 0;
   isolation: isolate;
 
-  /* Fade lateral elegante */
+  /* fade lateral */
   -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%);
           mask-image: linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%);
 }
 
-/* “Film glow” arriba/abajo MUY sutil (no parece borde) */
+/* Glow arriba/abajo (cinta iluminada pero sin “bordes”) */
 .logos-marquee::before{
   content:"";
   position:absolute;
   inset:0;
   pointer-events:none;
   z-index:1;
-
   background:
-    radial-gradient(1200px 80px at 50% 0%,
-      rgba(255,255,255,.05),
+    radial-gradient(1200px 70px at 50% 0%,
+      rgba(255,255,255,.045),
       rgba(255,255,255,0) 70%),
-    radial-gradient(1200px 80px at 50% 100%,
-      rgba(255,255,255,.04),
+    radial-gradient(1200px 70px at 50% 100%,
+      rgba(255,255,255,.038),
       rgba(255,255,255,0) 70%);
-
+  opacity:.9;
   animation: scAmbient 8s ease-in-out infinite;
-  opacity: .85;
 }
-
 @keyframes scAmbient{
-  0%   { transform: translateX(-1%); opacity: .75; }
-  50%  { transform: translateX(1%); opacity: .95; }
-  100% { transform: translateX(-1%); opacity: .75; }
+  0% { transform: translateX(-1%); opacity:.78; }
+  50%{ transform: translateX( 1%); opacity:.95; }
+  100%{transform: translateX(-1%); opacity:.78; }
 }
 
-
-
-/* Sheen animado (más fino, sin blend pesado) */
-.logos-marquee .sheen{
+/* Sheen */
+.sheen{
   position:absolute;
   inset:-40px -35%;
   pointer-events:none;
   z-index:1;
-
-  /* degradado suave, sin mix-blend-mode */
   background: linear-gradient(115deg,
     transparent 0%,
     rgba(110,168,255,.10) 42%,
     rgba(139,92,246,.08) 52%,
     transparent 72%
   );
-
   transform: translateX(-30%);
   animation: scSheen 10.5s ease-in-out infinite;
   opacity: .55;
-  filter: blur(0.2px); /* micro suavizado */
 }
-
 @keyframes scSheen{
   0%   { transform: translateX(-38%); opacity: .22; }
   45%  { opacity: .58; }
-  100% { transform: translateX(38%); opacity: .22; }
+  100% { transform: translateX(38%);  opacity: .22; }
 }
 
-/* Grain ultra suave (casi invisible) */
-.logos-marquee .grain{
+/* Grain liviano */
+.grain{
   position:absolute;
   inset:0;
   pointer-events:none;
   z-index:1;
   opacity:.06;
   background-image:
-    repeating-linear-gradient(
-      0deg,
+    repeating-linear-gradient(0deg,
       rgba(255,255,255,.10) 0px,
       rgba(255,255,255,.10) 1px,
       transparent 1px,
       transparent 4px
     );
-  /* sin blend-mode para rendimiento */
 }
 
-/* Swiper por encima de overlays */
-swiper-container{
-  width: 100%;
+/* Marquee */
+.marquee{
   position: relative;
   z-index: 2;
+  display:flex;
+  width: max-content;
+  will-change: transform;
+  transform: translateZ(0);
+  animation: marquee var(--duration, 22s) linear infinite;
+}
+@keyframes marquee{
+  from { transform: translate3d(0,0,0); }
+  to   { transform: translate3d(-50%,0,0); }
 }
 
-/* Evita filas */
-swiper-slide{
-  width: auto !important;
-  display: flex;
-  align-items: center;
+/* tracks */
+.marquee__track{
+  display:flex;
+  align-items:center;
+  gap: 72px;               /* 👈 separación pro desktop */
+  padding-right: 72px;     /* evita “pegado” entre loops */
 }
 
 /* Item */
 .logo-item{
   height: 84px;
-  display: grid;
-  place-items: center;
-  padding: 0 10px;
-  text-decoration: none;
+  display:grid;
+  place-items:center;
+  text-decoration:none;
   border-radius: 12px;
-  transition: transform .2s ease, background .2s ease, opacity .2s ease;
+  transition: transform .2s ease, background .2s ease;
+  position: relative;
 }
 
-/* ✅ Glow detrás del logo (ayuda a logos oscuros) */
+/* Glow detrás del logo (ayuda a logos oscuros) */
 .logo-item::before{
   content:"";
   position:absolute;
-  inset: 14px 10px;
+  inset: 14px -10px;
   border-radius: 999px;
-  pointer-events:none;
-  z-index: -1;
-
   background: radial-gradient(circle at 50% 55%,
     rgba(255,255,255,.10),
     rgba(255,255,255,0) 70%);
   opacity: .9;
   filter: blur(10px);
+  z-index:-1;
+  pointer-events:none;
 }
 
-/* Logo: premium y nítido, sin filtros caros */
 .logo-item img{
   max-height: 84px;
   max-width: 180px;
+  width:auto;
+  height:auto;
   object-fit: contain;
   opacity: .96;
-
   transform: translateZ(0);
-  will-change: transform;
   transition: transform .2s ease, opacity .2s ease;
 }
 
 /* Hover sutil */
-.logo-item:hover{
-  transform: translateY(-1px);
-  background: rgba(255,255,255,.02);
-}
-.logo-item:hover img{
-  transform: scale(1.03);
-  opacity: 1;
-}
+.logos-marquee:hover .marquee{ animation-play-state: paused; } /* opcional */
+.logo-item:hover{ transform: translateY(-1px); background: rgba(255,255,255,.02); }
+.logo-item:hover img{ transform: scale(1.03); opacity: 1; }
 
-/* Mobile refinado (sin agrandar) */
+/* Mobile */
 @media (max-width: 575.98px){
   .logos-marquee{
     padding: 8px 0;
     -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
             mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
   }
-
-  .logo-item{
-    height: 84px;
-    padding: 0 6px;
+  .marquee__track{
+    gap: 28px;            /* 👈 separación mobile */
+    padding-right: 28px;
   }
-  .logo-item img{
-    max-height: 84px;
-    max-width: 140px;
-  }
+  .logo-item img{ max-width: 140px; }
+  .logos-marquee{ --duration: 18s; } /* un poco más rápido en mobile */
 }
 
 /* Reduce motion */
 @media (prefers-reduced-motion: reduce){
-  .logos-marquee .sheen{ animation: none; opacity: .18; }
-}
-</style>
-
-
-<style>
-    /* Header logos premium */
-.sc-logos-header{
-  max-width: 720px;
-}
-
-.sc-logos-eyebrow{
-  display: inline-block;
-  font-size: .75rem;
-  font-weight: 700;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.55);
-  margin-bottom: .6rem;
-}
-
-.sc-logos-title{
-  font-size: clamp(1.4rem, 2vw, 1.9rem);
-  font-weight: 700;
-  line-height: 1.2;
-  color: rgba(255,255,255,.92);
-  margin: 0;
-}
-
-.sc-logos-title span{
-  position: relative;
-  color: #fff;
-}
-
-.sc-logos-title span::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-6px;
-  width:100%;
-  height:8px;
-  background: linear-gradient(90deg,
-    rgba(110,168,255,.4),
-    rgba(139,92,246,.4)
-  );
-  filter: blur(6px);
-  opacity:.6;
-  z-index:-1;
+  .marquee{ animation: none; }
+  .sheen{ animation: none; opacity: .18; }
 }
 </style>
