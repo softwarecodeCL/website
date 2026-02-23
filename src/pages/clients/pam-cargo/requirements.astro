@@ -713,7 +713,6 @@ const MOBILE_REQS = [
     </div>
   </section>
 </Layout>
-
 <script is:inline>
   (function () {
     const FORM_ID = "scope-form-portal-v3";
@@ -789,7 +788,7 @@ const MOBILE_REQS = [
         const contactName = val("contactName") || "—";
         const clientsCount = val("clientsCount") || "—";
         const ordersCountValue =
-          (ordersUnknown && ordersUnknown.checked) ? "Desconocido" : (val("ordersCount") || "No informado");
+          ordersUnknown && ordersUnknown.checked ? "Desconocido" : (val("ordersCount") || "No informado");
         const goal = val("goal") || "(No informado)";
 
         const mysqlHost = val("mysqlHost") || "No informado";
@@ -802,19 +801,40 @@ const MOBILE_REQS = [
         const extraNotes = val("extraNotes");
 
         const dataChecks = listChecked([
-          "hasPriceAtPurchase","hasOrderTotal","hasCurrency","hasFxRate","hasSubtotal","hasDiscounts","hasReturns"
+          "hasPriceAtPurchase",
+          "hasOrderTotal",
+          "hasCurrency",
+          "hasFxRate",
+          "hasSubtotal",
+          "hasDiscounts",
+          "hasReturns",
         ]);
         const appsheetChecks = listChecked([
-          "appsheetVirtualCols","appsheetBots","appsheetSecurity","appsheetMultipleSources"
+          "appsheetVirtualCols",
+          "appsheetBots",
+          "appsheetSecurity",
+          "appsheetMultipleSources",
         ]);
         const clientFeatures = listChecked([
-          "fTotalInvested","fOrdersTable","fOrderDetail","fMonthlyChart","fExports","fInvoices"
+          "fTotalInvested",
+          "fOrdersTable",
+          "fOrderDetail",
+          "fMonthlyChart",
+          "fExports",
+          "fInvoices",
         ]);
         const adminFeatures = listChecked([
-          "fAdminAllOrders","fAdminMetrics","fAdminUserMgmt","fAdminPriceMgmt"
+          "fAdminAllOrders",
+          "fAdminMetrics",
+          "fAdminUserMgmt",
+          "fAdminPriceMgmt",
         ]);
         const mobileReqs = listChecked([
-          "mInstallablePWA","mStoresRequired","mNativePush","mOffline","mCameraHardware"
+          "mInstallablePWA",
+          "mStoresRequired",
+          "mNativePush",
+          "mOffline",
+          "mCameraHardware",
         ]);
 
         const mobileDecision = decideMobile();
@@ -836,29 +856,33 @@ const MOBILE_REQS = [
         lines.push(`- Acceso para revisión: ${mysqlAccess}`);
         lines.push(`- Muestra exportable: ${sampleExport}`);
         lines.push("- Histórico guardado en BD:");
-        lines.push(dataChecks.length ? dataChecks.map((x) => `  • ${x}`).join("\\n") : "  • (No informado)");
+        lines.push(dataChecks.length ? dataChecks.map((x) => `  • ${x}`).join("\n") : "  • (No informado)");
+
         lines.push("");
         lines.push("🧩 AppSheet (posible lógica interna):");
-        lines.push(appsheetChecks.length ? appsheetChecks.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+        lines.push(appsheetChecks.length ? appsheetChecks.map((x) => `- ${x}`).join("\n") : "- (No informado)");
+
         if (appsheetNotes) {
           lines.push("");
           lines.push("Notas AppSheet:");
           lines.push(`- ${appsheetNotes}`);
         }
+
         lines.push("");
         lines.push("🖥️ Funcionalidades — Cliente:");
-        lines.push(clientFeatures.length ? clientFeatures.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+        lines.push(clientFeatures.length ? clientFeatures.map((x) => `- ${x}`).join("\n") : "- (No informado)");
 
         if (adminFeatures.length) {
           lines.push("");
           lines.push("🛠️ Funcionalidades — Admin (opcional):");
-          lines.push(adminFeatures.map((x) => `- ${x}`).join("\\n"));
+          lines.push(adminFeatures.map((x) => `- ${x}`).join("\n"));
         }
 
         lines.push("");
         lines.push("📱 Mobile:");
-        lines.push(mobileReqs.length ? mobileReqs.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+        lines.push(mobileReqs.length ? mobileReqs.map((x) => `- ${x}`).join("\n") : "- (No informado)");
         lines.push(`✅ Decisión sugerida: ${mobileDecision}`);
+
         if (mobileNotes) {
           lines.push("");
           lines.push("Notas Mobile:");
@@ -873,10 +897,12 @@ const MOBILE_REQS = [
 
         lines.push("");
         lines.push("✅ Próximo paso:");
-        lines.push("- Si falta precio histórico/total/moneda o no hay acceso/muestra: Fase 0 (diagnóstico) antes de cerrar precio/plazo.");
+        lines.push(
+          "- Si falta precio histórico/total/moneda o no hay acceso/muestra: Fase 0 (diagnóstico) antes de cerrar precio/plazo."
+        );
         lines.push("- Si está OK: MVP (portal + PWA) por fases, con alcance cerrado.");
 
-        return lines.join("\\n");
+        return lines.join("\n");
       }
 
       function openWhatsApp(text) {
