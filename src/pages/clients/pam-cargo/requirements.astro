@@ -1,0 +1,715 @@
+---
+import Layout from "../../../layouts/Layout.astro";
+
+const FORM_ID = "scope-form-portal-v3";
+const WA_PHONE = "56988396128";
+
+const DATA_HISTORY = [
+  { id: "hasPriceAtPurchase", label: "Precio unitario histórico (al momento de compra)", hint: "Clave para mostrar compras antiguas sin recalcular precios." },
+  { id: "hasOrderTotal", label: "Total final del pedido guardado", hint: "Permite total invertido real por cliente." },
+  { id: "hasCurrency", label: "Moneda por pedido (USD/CLP)", hint: "Evita confusiones si vendes desde Miami a Chile." },
+  { id: "hasFxRate", label: "Tipo de cambio guardado (si aplica)", hint: "Si conviertes USD→CLP, ideal que quede registrado." },
+  { id: "hasSubtotal", label: "Subtotal guardado (ítems y/o pedido)", hint: "Útil para reportes, descuentos y auditoría." },
+  { id: "hasDiscounts", label: "Descuentos/promos guardados", hint: "Importante si hay reglas comerciales." },
+  { id: "hasReturns", label: "Devoluciones / notas de crédito", hint: "Para que el histórico sea real." },
+];
+
+const APPSHEET_RISKS = [
+  { id: "appsheetVirtualCols", label: "Usa columnas virtuales / fórmulas", hint: "Puede haber lógica que no está en MySQL." },
+  { id: "appsheetBots", label: "Usa Bots/automatizaciones", hint: "Estados y registros pueden crearse fuera de la BD." },
+  { id: "appsheetSecurity", label: "Hay seguridad por usuario/cliente", hint: "Hay que replicar reglas para no filtrar datos." },
+  { id: "appsheetMultipleSources", label: "Usa otras fuentes además de MySQL", hint: "Sheets/APIs = riesgo de verdad única." },
+];
+
+const CLIENT_FEATURES = [
+  { id: "fTotalInvested", label: "Total invertido histórico por cliente" },
+  { id: "fOrdersTable", label: "Tabla de pedidos con filtros (fecha/estado)" },
+  { id: "fOrderDetail", label: "Detalle del pedido (items, cantidades, precios históricos)" },
+  { id: "fMonthlyChart", label: "Gráfico de compras por mes" },
+  { id: "fExports", label: "Exportar (CSV/Excel/PDF)" },
+  { id: "fInvoices", label: "Descargar documentos (boleta/factura/guía)" },
+];
+
+const ADMIN_FEATURES = [
+  { id: "fAdminAllOrders", label: "Backoffice: ver todos los pedidos/clientes" },
+  { id: "fAdminMetrics", label: "Métricas globales (ventas, top clientes, productos)" },
+  { id: "fAdminUserMgmt", label: "Gestión de usuarios (crear/resetear accesos)" },
+  { id: "fAdminPriceMgmt", label: "Gestión catálogo/precios (si aplica)" },
+];
+
+const MOBILE_REQS = [
+  { id: "mInstallablePWA", label: "Solo instalable desde navegador (PWA)", hint: "Salida más rápida." },
+  { id: "mStoresRequired", label: "Debe estar en App Store / Google Play", hint: "Puede requerir app nativa/híbrida." },
+  { id: "mNativePush", label: "Push notifications críticas", hint: "Si es operación diaria, sube complejidad." },
+  { id: "mOffline", label: "Uso offline real (sin internet)", hint: "Suele empujar a nativo/híbrido." },
+  { id: "mCameraHardware", label: "Uso de cámara/escáner/hardware", hint: "Ej: escanear códigos, fotos." },
+];
+---
+
+<Layout>
+  <section class="container my-4 my-lg-5">
+    <div class="row justify-content-center">
+      <div class="col-12 col-lg-10 col-xl-9">
+
+        <!-- Header -->
+        <div class="scope-hero rounded-5 p-3 p-lg-4 mb-3 mb-lg-4">
+          <div class="d-flex align-items-center gap-3">
+            <div class="brand-box rounded-4 p-3">
+              <img src="/file.jpg" style="max-height: 76px; width: auto;" alt="Logo" />
+            </div>
+            <div class="flex-grow-1">
+              <h1 class="h3 mb-1">Formulario de Levantamiento — Portal para Clientes</h1>
+              <p class="text-secondary mb-0">
+                Completa esto para definir <strong>alcance</strong>, <strong>riesgos</strong> y si conviene <strong>PWA</strong> o <strong>App Nativa</strong>.
+                Al presionar <strong>Enviar</strong>, se genera el resumen y se abre WhatsApp automáticamente.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <form id={FORM_ID} class="card scope-card border-0 rounded-5 overflow-hidden">
+          <div class="card-body p-3 p-lg-4">
+
+            <div id="formAlert" class="alert alert-warning rounded-4 d-none" role="alert"></div>
+
+            <!-- 1) Contexto -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">1</span>
+                  <div>
+                    <h2 class="h5 mb-0">Contexto de negocio</h2>
+                    <div class="text-secondary small">Tamaño, volumen y objetivo</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="companyName">Empresa / Marca</label>
+                  <input class="form-control form-control-lg" id="companyName" name="companyName" placeholder="Ej: Importadora XYZ" />
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="contactName">Contacto (nombre + cargo)</label>
+                  <input class="form-control form-control-lg" id="contactName" name="contactName" placeholder="Ej: Juan Pérez, Gerente" />
+                </div>
+
+                <div class="col-12 col-md-4">
+                  <label class="form-label" for="clientsCount">N° de clientes (aprox.)</label>
+                  <input class="form-control form-control-lg" id="clientsCount" name="clientsCount" type="number" min="1" value="200" />
+                </div>
+
+                <div class="col-12 col-md-8">
+                  <label class="form-label" for="ordersCount">N° de pedidos históricos</label>
+                  <div class="input-group input-group-lg">
+                    <input class="form-control" id="ordersCount" name="ordersCount" type="number" min="0" placeholder="Ej: 10000" />
+                    <span class="input-group-text bg-body">
+                      <div class="form-check m-0 d-flex align-items-center gap-2">
+                        <input class="form-check-input mt-0" type="checkbox" id="ordersUnknown" name="ordersUnknown" />
+                        <label class="form-check-label small" for="ordersUnknown">No sé</label>
+                      </div>
+                    </span>
+                  </div>
+                  <div class="form-text">Si “No sé”, se recomienda pedir una exportación de muestra.</div>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="goal">Objetivo principal del portal</label>
+                  <textarea class="form-control" id="goal" name="goal" rows="3" placeholder="Ej: historial completo, dinero invertido, detalle de pedidos, precios históricos, exportación."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 2) MySQL -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">2</span>
+                  <div>
+                    <h2 class="h5 mb-0">Datos (MySQL) y calidad del histórico</h2>
+                    <div class="text-secondary small">Esto define el riesgo real del proyecto</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="mysqlHost">¿Dónde está MySQL?</label>
+                  <select class="form-select form-select-lg" id="mysqlHost" name="mysqlHost">
+                    <option value="" selected>Selecciona…</option>
+                    <option value="servidor-propio">Servidor propio</option>
+                    <option value="cloud-managed">Cloud (RDS/CloudSQL/otro)</option>
+                    <option value="hosting-compartido">Hosting compartido</option>
+                    <option value="no-se">No sé</option>
+                  </select>
+                </div>
+
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="mysqlAccess">Acceso para revisión (solo lectura)</label>
+                  <select class="form-select form-select-lg" id="mysqlAccess" name="mysqlAccess">
+                    <option value="" selected>Selecciona…</option>
+                    <option value="si-readonly">Sí, user read-only</option>
+                    <option value="si-backup">Sí, vía backup/SQL dump</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="sampleExport">¿Pueden entregar una muestra exportada (CSV/Excel)?</label>
+                  <select class="form-select form-select-lg" id="sampleExport" name="sampleExport">
+                    <option value="" selected>Selecciona…</option>
+                    <option value="si-20">Sí (20 pedidos + items)</option>
+                    <option value="si-50">Sí (50 pedidos + items)</option>
+                    <option value="si-100">Sí (100 pedidos + items)</option>
+                    <option value="no">No</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="rounded-4 p-3 p-lg-4 bg-soft">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                  <div class="fw-semibold">¿Qué datos del histórico existen guardados en la BD?</div>
+                  <span class="text-secondary small">Marca lo que esté realmente persistido</span>
+                </div>
+
+                <div class="row g-3">
+                  {DATA_HISTORY.map((it) => (
+                    <div class="col-12 col-md-6" key={it.id}>
+                      <label class="check-card rounded-4 p-3 h-100 d-flex gap-3 align-items-start">
+                        <input class="form-check-input mt-1" type="checkbox" id={it.id} name={it.id} />
+                        <span class="d-block">
+                          <span class="d-block fw-semibold lh-sm">{it.label}</span>
+                          {it.hint ? <span class="d-block text-secondary small mt-1 lh-sm">{it.hint}</span> : null}
+                        </span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="alert alert-info border-0 rounded-4 mt-3 mb-0">
+                  <div class="d-flex gap-2">
+                    <svg width="18" height="18" aria-hidden="true" class="mt-1 flex-shrink-0">
+                      <use href="/node_modules/lucide-static/icons/info.svg#info"></use>
+                    </svg>
+                    <div class="small">
+                      Si <strong>NO</strong> existe <strong>precio histórico</strong> y/o <strong>total guardado</strong>, el portal puede mostrar números incorrectos.
+                      Esto suele requerir <strong>reconstrucción</strong> o <strong>ajuste del modelo</strong>.
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- 3) AppSheet -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">3</span>
+                  <div>
+                    <h2 class="h5 mb-0">AppSheet (posibles “magias”)</h2>
+                    <div class="text-secondary small">Riesgos típicos cuando AppSheet tiene lógica interna</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="rounded-4 p-3 p-lg-4 bg-soft">
+                <div class="row g-3">
+                  {APPSHEET_RISKS.map((it) => (
+                    <div class="col-12 col-md-6" key={it.id}>
+                      <label class="check-card rounded-4 p-3 h-100 d-flex gap-3 align-items-start">
+                        <input class="form-check-input mt-1" type="checkbox" id={it.id} name={it.id} />
+                        <span class="d-block">
+                          <span class="d-block fw-semibold lh-sm">{it.label}</span>
+                          {it.hint ? <span class="d-block text-secondary small mt-1 lh-sm">{it.hint}</span> : null}
+                        </span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label" for="appsheetNotes">Notas / links / pantallazos relevantes</label>
+                  <textarea class="form-control" id="appsheetNotes" name="appsheetNotes" rows="3" placeholder="Pega links o describe pantallas clave."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 4) Funcionalidades -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">4</span>
+                  <div>
+                    <h2 class="h5 mb-0">Funcionalidades del portal</h2>
+                    <div class="text-secondary small">Define MVP vs extras</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="rounded-4 p-3 p-lg-4 bg-soft mb-3">
+                <div class="fw-semibold mb-2">Cliente (dashboard)</div>
+                <div class="row g-3">
+                  {CLIENT_FEATURES.map((it) => (
+                    <div class="col-12 col-md-6" key={it.id}>
+                      <label class="check-card rounded-4 p-3 h-100 d-flex gap-3 align-items-start">
+                        <input class="form-check-input mt-1" type="checkbox" id={it.id} name={it.id} />
+                        <span class="d-block fw-semibold lh-sm">{it.label}</span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div class="rounded-4 p-3 p-lg-4 bg-soft">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2 mb-2">
+                  <div class="fw-semibold">Admin (opcional)</div>
+                  <span class="text-secondary small">Ideal sacarlo del MVP si quieres ir rápido</span>
+                </div>
+                <div class="row g-3">
+                  {ADMIN_FEATURES.map((it) => (
+                    <div class="col-12 col-md-6" key={it.id}>
+                      <label class="check-card rounded-4 p-3 h-100 d-flex gap-3 align-items-start">
+                        <input class="form-check-input mt-1" type="checkbox" id={it.id} name={it.id} />
+                        <span class="d-block fw-semibold lh-sm">{it.label}</span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            <!-- 5) Mobile -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">5</span>
+                  <div>
+                    <h2 class="h5 mb-0">Mobile — decidir PWA o App Nativa</h2>
+                    <div class="text-secondary small">Checklist objetivo</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="rounded-4 p-3 p-lg-4 bg-soft">
+                <div class="row g-3">
+                  {MOBILE_REQS.map((it) => (
+                    <div class="col-12 col-md-6" key={it.id}>
+                      <label class="check-card rounded-4 p-3 h-100 d-flex gap-3 align-items-start">
+                        <input class="form-check-input mt-1" type="checkbox" id={it.id} name={it.id} />
+                        <span class="d-block">
+                          <span class="d-block fw-semibold lh-sm">{it.label}</span>
+                          {it.hint ? <span class="d-block text-secondary small mt-1 lh-sm">{it.hint}</span> : null}
+                        </span>
+                      </label>
+                    </div>
+                  ))}
+                </div>
+
+                <div class="alert alert-info border-0 rounded-4 mt-3 mb-0">
+                  <div class="d-flex gap-2">
+                    <svg width="18" height="18" aria-hidden="true" class="mt-1 flex-shrink-0">
+                      <use href="/node_modules/lucide-static/icons/info.svg#info"></use>
+                    </svg>
+                    <div class="small">
+                      Regla rápida: si marcan <strong>App Store/Play</strong> o <strong>offline</strong> o <strong>hardware</strong> como crítico,
+                      se evalúa <strong>App nativa/híbrida</strong>. Si no, <strong>PWA</strong>.
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mt-3">
+                  <label class="form-label" for="mobileNotes">Notas mobile</label>
+                  <textarea class="form-control" id="mobileNotes" name="mobileNotes" rows="3" placeholder="Ej: solo Android, políticas internas, etc."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- 6) Plazo -->
+            <div class="section-block mb-4">
+              <div class="d-flex align-items-start justify-content-between flex-wrap gap-2 mb-2">
+                <div class="d-flex align-items-center gap-2">
+                  <span class="badge text-bg-primary rounded-pill px-3 py-2">6</span>
+                  <div>
+                    <h2 class="h5 mb-0">Plazos</h2>
+                    <div class="text-secondary small">Aterriza expectativas</div>
+                  </div>
+                </div>
+              </div>
+              <div class="divider my-3"></div>
+
+              <div class="row g-3">
+                <div class="col-12 col-md-6">
+                  <label class="form-label" for="deadline">¿Para cuándo lo necesitan?</label>
+                  <select class="form-select form-select-lg" id="deadline" name="deadline">
+                    <option value="" selected>Selecciona…</option>
+                    <option value="2-3w">2–3 semanas (MVP)</option>
+                    <option value="4-6w">4–6 semanas</option>
+                    <option value="8w+">8+ semanas</option>
+                  </select>
+                </div>
+
+                <div class="col-12">
+                  <label class="form-label" for="extraNotes">Notas finales / restricciones</label>
+                  <textarea class="form-control" id="extraNotes" name="extraNotes" rows="3" placeholder="Ej: multi-idioma, reglas comerciales, etc."></textarea>
+                </div>
+              </div>
+            </div>
+
+            <!-- Acciones (solo Enviar + Limpiar) -->
+            <div class="sticky-actions rounded-5 p-3">
+              <div class="d-grid gap-2 d-sm-flex justify-content-sm-between align-items-center">
+                <div class="text-secondary small d-none d-lg-block">
+                  Si no hay claridad de datos/volumen, ofrece <strong>Fase 0 (diagnóstico)</strong> pagada para revisar BD y AppSheet.
+                </div>
+                <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+                  <button type="button" class="btn btn-success px-4 shadow-sm" id="btnWhatsApp">
+                    
+                    Enviar
+                  </button>
+
+                  <button type="reset" class="btn btn-outline-secondary btn-lg px-4" id="btnReset">
+                    Limpiar
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Salida -->
+            <div id="resultWrap" class="mt-4 d-none">
+              <div class="rounded-5 p-3 p-lg-4 bg-soft">
+                <div class="d-flex align-items-center justify-content-between flex-wrap gap-2">
+                  <h3 class="h6 mb-0">Resumen generado</h3>
+                  <button type="button" class="btn btn-dark btn-sm" id="btnCopy">
+                    <svg class="me-2" width="16" height="16" aria-hidden="true">
+                      <use href="/node_modules/lucide-static/icons/copy.svg#copy"></use>
+                    </svg>
+                    Copiar
+                  </button>
+                </div>
+
+                <textarea id="resultText" class="form-control mt-2" rows="14" readonly></textarea>
+                <div id="riskBox" class="alert mt-3 mb-0 rounded-4 d-none" role="alert"></div>
+              </div>
+            </div>
+
+          </div>
+        </form>
+
+        <style is:inline>
+          :root { --soft-border: rgba(0,0,0,.08); }
+
+          .scope-hero{
+            background:
+              radial-gradient(1200px 220px at 10% 0%, rgba(13,110,253,.16), transparent 60%),
+              radial-gradient(900px 260px at 90% 10%, rgba(102,16,242,.14), transparent 60%),
+              linear-gradient(180deg, rgba(255,255,255,.7), rgba(255,255,255,.85));
+            border: 1px solid var(--soft-border);
+            box-shadow: 0 .8rem 2rem rgba(0,0,0,.06);
+          }
+
+          .brand-box{
+            background: rgba(255,255,255,.8);
+            border: 1px solid var(--soft-border);
+          }
+
+          .scope-card{
+            border: 1px solid var(--soft-border);
+            box-shadow: 0 .9rem 2.4rem rgba(0,0,0,.07);
+          }
+
+          .divider{ height: 1px; background: rgba(0,0,0,.06); }
+
+          .bg-soft{
+            background: rgba(248,249,250,.85);
+            border: 1px solid rgba(0,0,0,.06);
+          }
+
+          .form-control, .form-select{ border-color: var(--soft-border); }
+          .form-control:focus, .form-select:focus{ box-shadow: 0 0 0 .2rem rgba(13,110,253,.15); }
+
+          .check-card{
+            cursor: pointer;
+            user-select: none;
+            background: rgba(255,255,255,.92);
+            border: 1px solid var(--soft-border);
+            transition: transform .12s ease, box-shadow .12s ease, border-color .12s ease;
+          }
+          .check-card:hover{
+            transform: translateY(-1px);
+            box-shadow: 0 .65rem 1.35rem rgba(0,0,0,.07);
+          }
+          .check-card:has(input:checked){
+            border-color: rgba(13,110,253,.35);
+            box-shadow: 0 .75rem 1.55rem rgba(13,110,253,.12);
+          }
+          .check-card input{ cursor: pointer; }
+
+          .sticky-actions{
+            position: sticky;
+            bottom: .75rem;
+            background: rgba(255,255,255,.92);
+            border: 1px solid rgba(0,0,0,.08);
+            box-shadow: 0 .9rem 2.2rem rgba(0,0,0,.12);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+          }
+        </style>
+
+        <script is:inline>
+          (function () {
+            const FORM_ID = "scope-form-portal-v3";
+            const WA_PHONE = "56988396128";
+
+            function init() {
+              const form = document.getElementById(FORM_ID);
+              if (!form) return;
+
+              const btnWhatsApp = form.querySelector("#btnWhatsApp");
+              const btnReset = form.querySelector("#btnReset");
+              const btnCopy = form.querySelector("#btnCopy");
+              const resultWrap = form.querySelector("#resultWrap");
+              const resultText = form.querySelector("#resultText");
+              const riskBox = form.querySelector("#riskBox");
+              const formAlert = document.getElementById("formAlert");
+
+              const ordersUnknown = form.querySelector("#ordersUnknown");
+              const ordersCount = form.querySelector("#ordersCount");
+
+              const val = (name) => {
+                const el = form.elements.namedItem(name);
+                return el ? el.value : "";
+              };
+
+              const checked = (name) => {
+                const el = form.elements.namedItem(name);
+                return !!(el && el.checked);
+              };
+
+              const showAlert = (msg) => {
+                if (!formAlert) return;
+                formAlert.classList.remove("d-none");
+                formAlert.innerHTML = msg;
+                formAlert.scrollIntoView({ behavior: "smooth", block: "start" });
+              };
+
+              const hideAlert = () => {
+                if (!formAlert) return;
+                formAlert.classList.add("d-none");
+                formAlert.innerHTML = "";
+              };
+
+              if (ordersUnknown && ordersCount) {
+                ordersUnknown.addEventListener("change", () => {
+                  ordersCount.disabled = ordersUnknown.checked;
+                  if (ordersUnknown.checked) ordersCount.value = "";
+                });
+              }
+
+              function listChecked(ids) {
+                return ids
+                  .filter((id) => checked(id))
+                  .map((id) => {
+                    const node = form.querySelector("#" + id);
+                    const parent = node ? node.closest("label") : null;
+                    if (parent) return parent.textContent.replace(/\s+/g, " ").trim();
+                    const label = form.querySelector('label[for="' + id + '"]');
+                    return label ? label.textContent.trim() : id;
+                  });
+              }
+
+              function decideMobile() {
+                const mustStores = checked("mStoresRequired");
+                const offline = checked("mOffline");
+                const hardware = checked("mCameraHardware");
+                const push = checked("mNativePush");
+
+                if (mustStores || offline || hardware || push) return "APP NATIVA/HÍBRIDA (evaluar Capacitor/React Native/Flutter)";
+                return "PWA (recomendada)";
+              }
+
+              function riskScore() {
+                let score = 0;
+
+                const hasPrice = checked("hasPriceAtPurchase");
+                const hasTotal = checked("hasOrderTotal");
+                const hasCurrency = checked("hasCurrency");
+
+                const access = val("mysqlAccess");
+                const exportSample = val("sampleExport");
+
+                if (!hasPrice) score += 3;
+                if (!hasTotal) score += 2;
+                if (!hasCurrency) score += 1;
+
+                if (access === "no" || access === "") score += 2;
+                if (exportSample === "no" || exportSample === "") score += 2;
+
+                if (checked("appsheetVirtualCols")) score += 1;
+                if (checked("appsheetBots")) score += 1;
+                if (checked("appsheetMultipleSources")) score += 2;
+
+                return score;
+              }
+
+              function riskLabel(score) {
+                if (score >= 8) return { level: "ALTO", cls: "alert-danger", msg: "Riesgo alto: falta info/estructura. Recomiendo Fase 0 (diagnóstico) antes de cerrar precio/plazo." };
+                if (score >= 5) return { level: "MEDIO", cls: "alert-warning", msg: "Riesgo medio: avanzar por fases, pero validar datos/lógica para evitar inconsistencias." };
+                return { level: "BAJO", cls: "alert-success", msg: "Riesgo bajo: con accesos/muestra y datos históricos OK, se puede cerrar MVP rápido." };
+              }
+
+              function buildSummary() {
+                const companyName = val("companyName") || "—";
+                const contactName = val("contactName") || "—";
+                const clientsCount = val("clientsCount") || "—";
+                const ordersCountValue = (ordersUnknown && ordersUnknown.checked) ? "Desconocido" : (val("ordersCount") || "No informado");
+                const goal = val("goal") || "(No informado)";
+
+                const mysqlHost = val("mysqlHost") || "No informado";
+                const mysqlAccess = val("mysqlAccess") || "No informado";
+                const sampleExport = val("sampleExport") || "No informado";
+                const deadline = val("deadline") || "No informado";
+
+                const appsheetNotes = val("appsheetNotes");
+                const mobileNotes = val("mobileNotes");
+                const extraNotes = val("extraNotes");
+
+                const dataChecks = listChecked(["hasPriceAtPurchase","hasOrderTotal","hasCurrency","hasFxRate","hasSubtotal","hasDiscounts","hasReturns"]);
+                const appsheetChecks = listChecked(["appsheetVirtualCols","appsheetBots","appsheetSecurity","appsheetMultipleSources"]);
+                const clientFeatures = listChecked(["fTotalInvested","fOrdersTable","fOrderDetail","fMonthlyChart","fExports","fInvoices"]);
+                const adminFeatures = listChecked(["fAdminAllOrders","fAdminMetrics","fAdminUserMgmt","fAdminPriceMgmt"]);
+                const mobileReqs = listChecked(["mInstallablePWA","mStoresRequired","mNativePush","mOffline","mCameraHardware"]);
+
+                const mobileDecision = decideMobile();
+
+                const lines = [];
+                lines.push("📌 LEVANTAMIENTO — PORTAL CLIENTES (PEDIDOS + HISTÓRICO)");
+                lines.push("");
+                lines.push(`Empresa: ${companyName}`);
+                lines.push(`Contacto: ${contactName}`);
+                lines.push(`Clientes aprox.: ${clientsCount}`);
+                lines.push(`Pedidos históricos: ${ordersCountValue}`);
+                lines.push(`Plazo deseado: ${deadline}`);
+                lines.push("");
+                lines.push("🎯 Objetivo del portal:");
+                lines.push(`- ${goal}`);
+                lines.push("");
+                lines.push("🗄️ MySQL / Datos:");
+                lines.push(`- Ubicación MySQL: ${mysqlHost}`);
+                lines.push(`- Acceso para revisión: ${mysqlAccess}`);
+                lines.push(`- Muestra exportable: ${sampleExport}`);
+                lines.push("- Histórico guardado en BD:");
+                lines.push(dataChecks.length ? dataChecks.map((x) => `  • ${x}`).join("\\n") : "  • (No informado)");
+
+                lines.push("");
+                lines.push("🧩 AppSheet (posible lógica interna):");
+                lines.push(appsheetChecks.length ? appsheetChecks.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+                if (appsheetNotes) {
+                  lines.push("");
+                  lines.push("Notas AppSheet:");
+                  lines.push(`- ${appsheetNotes}`);
+                }
+
+                lines.push("");
+                lines.push("🖥️ Funcionalidades — Cliente:");
+                lines.push(clientFeatures.length ? clientFeatures.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+
+                if (adminFeatures.length) {
+                  lines.push("");
+                  lines.push("🛠️ Funcionalidades — Admin (opcional):");
+                  lines.push(adminFeatures.map((x) => `- ${x}`).join("\\n"));
+                }
+
+                lines.push("");
+                lines.push("📱 Mobile:");
+                lines.push(mobileReqs.length ? mobileReqs.map((x) => `- ${x}`).join("\\n") : "- (No informado)");
+                lines.push(`✅ Decisión sugerida: ${mobileDecision}`);
+                if (mobileNotes) {
+                  lines.push("");
+                  lines.push("Notas Mobile:");
+                  lines.push(`- ${mobileNotes}`);
+                }
+
+                if (extraNotes) {
+                  lines.push("");
+                  lines.push("Notas finales:");
+                  lines.push(`- ${extraNotes}`);
+                }
+
+                lines.push("");
+                lines.push("✅ Próximo paso:");
+                lines.push("- Si falta precio histórico/total/moneda o no hay acceso/muestra: Fase 0 (diagnóstico) antes de cerrar precio/plazo.");
+                lines.push("- Si está OK: MVP (portal + PWA) por fases, con alcance cerrado.");
+
+                return lines.join("\\n");
+              }
+
+              function openWhatsApp(text) {
+                const url = "https://wa.me/" + WA_PHONE + "?text=" + encodeURIComponent(text);
+                window.open(url, "_blank", "noopener,noreferrer");
+              }
+
+              function validateMinimum() {
+                const company = (val("companyName") || "").trim();
+                const contact = (val("contactName") || "").trim();
+                if (!company && !contact) {
+                  showAlert('Completa al menos <strong>Empresa</strong> o <strong>Contacto</strong> antes de enviar.');
+                  return false;
+                }
+                hideAlert();
+                return true;
+              }
+
+              btnWhatsApp.addEventListener("click", () => {
+                if (!validateMinimum()) return;
+
+                const summary = buildSummary();
+                resultText.value = summary;
+                resultWrap.classList.remove("d-none");
+
+                const score = riskScore();
+                const risk = riskLabel(score);
+                riskBox.className = "alert mt-3 mb-0 rounded-4 " + risk.cls;
+                riskBox.innerHTML = "<strong>Riesgo: " + risk.level + " (score " + score + ")</strong><br/>" + risk.msg;
+                riskBox.classList.remove("d-none");
+
+                openWhatsApp(summary);
+              });
+
+              btnCopy.addEventListener("click", async () => {
+                try {
+                  await navigator.clipboard.writeText(resultText.value);
+                  btnCopy.textContent = "Copiado ✓";
+                  setTimeout(() => (btnCopy.textContent = "Copiar"), 1200);
+                } catch (e) {
+                  resultText.focus();
+                  resultText.select();
+                  document.execCommand("copy");
+                  btnCopy.textContent = "Copiado ✓";
+                  setTimeout(() => (btnCopy.textContent = "Copiar"), 1200);
+                }
+              });
+
+              btnReset.addEventListener("click", () => {
+                hideAlert();
+                resultWrap.classList.add("d-none");
+                riskBox.classList.add("d-none");
+                resultText.value = "";
+                if (ordersCount) ordersCount.disabled = false;
+              });
+            }
+
+            if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", init);
+            else init();
+          })();
+        </script>
+
+      </div>
+    </div>
+  </section>
+</Layout>
