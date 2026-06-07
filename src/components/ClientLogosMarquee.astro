@@ -2,8 +2,8 @@
 type Logo = { src: string; alt: string; href?: string };
 
 const logos: Logo[] = [
-  { src: '/logos-clientes/apartha.png', alt: 'Apartha', href: 'https://www.apartha.cl/' },
-  { src: '/logos-clientes/elementalStudios.png', alt: 'Elemental Studios', href: '#' },
+  { src: '/logos-clientes/apartha.png', alt: 'Apartha', href: 'https://www.apartha.com/' },
+  { src: '/logos-clientes/elementalStudios.png', alt: 'Elemental Studios', href: 'https://www.elementalstudios.cl/' },
   { src: '/logos-clientes/logo-negro.png', alt: 'Licores Premium', href: 'https://www.licorespremium.cl/' },
   { src: '/logos-clientes/servicioshyh.png', alt: 'Servicios HYH', href: 'https://www.servicioshyh.cl/' },
 ];
@@ -11,14 +11,25 @@ const logos: Logo[] = [
 // duplicamos 1 vez (marquee necesita 2 tracks iguales)
 const track = [...logos, ...logos];
 ---
+<section class="sc-client-logos" aria-label="Logos de clientes">
+  <div class="sc-client-logos__bg" aria-hidden="true"></div>
 
-<section class="sc-client-logos py-4 py-lg-5" aria-label="Logos de clientes">
   <div class="container">
-    <div class="sc-logos-header mb-4">
+    <div class="sc-logos-header">
       <span class="sc-logos-eyebrow">Empresas que confían en nosotros</span>
+
+      <h2 class="sc-logos-title">
+        Proyectos reales, marcas reales y soluciones digitales con impacto
+      </h2>
+
+      <p class="sc-logos-text">
+        Hemos trabajado en desarrollo web, SEO, automatización e integración de plataformas
+        para negocios que necesitan resultados medibles.
+      </p>
     </div>
 
-    <div class="logos-marquee" style="--duration: 22s;">
+    <div class="logos-marquee" style="--duration: 26s;">
+      <div class="logos-marquee__glow" aria-hidden="true"></div>
       <div class="sheen" aria-hidden="true"></div>
       <div class="grain" aria-hidden="true"></div>
 
@@ -54,86 +65,166 @@ const track = [...logos, ...logos];
     </div>
   </div>
 </section>
-
 <style>
-/* Header premium */
-.sc-logos-header{ max-width: 720px; }
-.sc-logos-eyebrow{
-  display:inline-block;
-  font-size:.75rem;
-  font-weight:700;
-  letter-spacing:.18em;
-  text-transform:uppercase;
-  color: rgba(255,255,255,.55);
+.sc-client-logos {
+  position: relative;
+  overflow: hidden;
+  padding: 86px 0 92px;
+  color: rgba(255,255,255,.94);
+  background:
+    radial-gradient(760px 340px at 16% 0%, rgba(168,85,247,.18), transparent 64%),
+    radial-gradient(760px 360px at 86% 12%, rgba(109,143,255,.13), transparent 62%),
+    linear-gradient(180deg, #070a12 0%, #090d1a 50%, #070a12 100%);
 }
 
-/* Wrapper */
-.logos-marquee{
+.sc-client-logos__bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .14;
+  background-image:
+    linear-gradient(to right, rgba(255,255,255,.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255,255,255,.055) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(circle at 50% 0%, #000 0%, transparent 72%);
+}
+
+.sc-client-logos::before {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: -220px;
+  width: min(960px, 90vw);
+  height: 420px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(168,85,247,.22), transparent 70%);
+  filter: blur(18px);
+  pointer-events: none;
+}
+
+.sc-client-logos .container {
+  position: relative;
+  z-index: 2;
+}
+
+.sc-logos-header {
+  max-width: 860px;
+  margin-bottom: 34px;
+}
+
+.sc-logos-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 14px;
+  font-size: .74rem;
+  font-weight: 900;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(216,180,254,.86);
+}
+
+.sc-logos-eyebrow::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #a855f7;
+  box-shadow: 0 0 18px rgba(168,85,247,.9);
+}
+
+.sc-logos-title {
+  max-width: 760px;
+  margin: 0;
+  color: rgba(255,255,255,.98);
+  font-size: clamp(2rem, 3vw, 3.05rem);
+  line-height: 1.04;
+  font-weight: 950;
+  letter-spacing: -.045em;
+  text-shadow: 0 18px 58px rgba(0,0,0,.44);
+}
+
+.sc-logos-text {
+  max-width: 680px;
+  margin: 16px 0 0;
+  color: rgba(255,255,255,.66);
+  font-size: 1rem;
+  line-height: 1.72;
+}
+
+/* Wrapper principal */
+.logos-marquee {
   position: relative;
   overflow: hidden;
   width: 100%;
-  padding: 14px 0;
+  padding: 22px 0;
   isolation: isolate;
-
-  /* fade lateral */
-  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%);
-          mask-image: linear-gradient(to right, transparent 0%, #000 9%, #000 91%, transparent 100%);
-}
-
-/* Glow arriba/abajo (cinta iluminada pero sin “bordes”) */
-.logos-marquee::before{
-  content:"";
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
+  border-radius: 28px;
   background:
-    radial-gradient(1200px 70px at 50% 0%,
-      rgba(255,255,255,.045),
-      rgba(255,255,255,0) 70%),
-    radial-gradient(1200px 70px at 50% 100%,
-      rgba(255,255,255,.038),
-      rgba(255,255,255,0) 70%);
-  opacity:.9;
-  animation: scAmbient 8s ease-in-out infinite;
+    linear-gradient(135deg, rgba(255,255,255,.075), rgba(255,255,255,.025)),
+    radial-gradient(720px 160px at 20% 0%, rgba(168,85,247,.15), transparent 66%),
+    radial-gradient(680px 160px at 80% 100%, rgba(109,143,255,.10), transparent 64%);
+  border: 1px solid rgba(255,255,255,.11);
+  box-shadow:
+    0 28px 72px rgba(0,0,0,.32),
+    inset 0 0 0 1px rgba(255,255,255,.035);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
+          mask-image: linear-gradient(to right, transparent 0%, #000 8%, #000 92%, transparent 100%);
 }
-@keyframes scAmbient{
-  0% { transform: translateX(-1%); opacity:.78; }
-  50%{ transform: translateX( 1%); opacity:.95; }
-  100%{transform: translateX(-1%); opacity:.78; }
+
+.logos-marquee__glow {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: min(920px, 88vw);
+  height: 160px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  border-radius: 999px;
+  background: radial-gradient(circle, rgba(168,85,247,.16), transparent 70%);
+  filter: blur(18px);
+  z-index: 1;
 }
 
 /* Sheen */
-.sheen{
-  position:absolute;
-  inset:-40px -35%;
-  pointer-events:none;
-  z-index:1;
-  background: linear-gradient(115deg,
+.sheen {
+  position: absolute;
+  inset: -60px -35%;
+  pointer-events: none;
+  z-index: 2;
+  background: linear-gradient(
+    115deg,
     transparent 0%,
-    rgba(110,168,255,.10) 42%,
-    rgba(139,92,246,.08) 52%,
+    rgba(255,255,255,.00) 35%,
+    rgba(216,180,254,.12) 47%,
+    rgba(109,143,255,.09) 55%,
     transparent 72%
   );
-  transform: translateX(-30%);
-  animation: scSheen 10.5s ease-in-out infinite;
-  opacity: .55;
-}
-@keyframes scSheen{
-  0%   { transform: translateX(-38%); opacity: .22; }
-  45%  { opacity: .58; }
-  100% { transform: translateX(38%);  opacity: .22; }
+  transform: translateX(-34%);
+  animation: scSheen 9.5s ease-in-out infinite;
+  opacity: .65;
 }
 
-/* Grain liviano */
-.grain{
-  position:absolute;
-  inset:0;
-  pointer-events:none;
-  z-index:1;
-  opacity:.06;
+@keyframes scSheen {
+  0%   { transform: translateX(-40%); opacity: .22; }
+  45%  { opacity: .68; }
+  100% { transform: translateX(40%);  opacity: .22; }
+}
+
+/* Grain */
+.grain {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: .055;
   background-image:
-    repeating-linear-gradient(0deg,
+    repeating-linear-gradient(
+      0deg,
       rgba(255,255,255,.10) 0px,
       rgba(255,255,255,.10) 1px,
       transparent 1px,
@@ -142,88 +233,155 @@ const track = [...logos, ...logos];
 }
 
 /* Marquee */
-.marquee{
+.marquee {
   position: relative;
-  z-index: 2;
-  display:flex;
+  z-index: 3;
+  display: flex;
   width: max-content;
   will-change: transform;
   transform: translateZ(0);
-  animation: marquee var(--duration, 22s) linear infinite;
+  animation: marquee var(--duration, 26s) linear infinite;
 }
-@keyframes marquee{
+
+@keyframes marquee {
   from { transform: translate3d(0,0,0); }
   to   { transform: translate3d(-50%,0,0); }
 }
 
-/* tracks */
-.marquee__track{
-  display:flex;
-  align-items:center;
-  gap: 72px;               /* 👈 separación pro desktop */
-  padding-right: 72px;     /* evita “pegado” entre loops */
+.marquee__track {
+  display: flex;
+  align-items: center;
+  gap: 42px;
+  padding-right: 42px;
 }
 
 /* Item */
-.logo-item{
-  height: 84px;
-  display:grid;
-  place-items:center;
-  text-decoration:none;
-  border-radius: 12px;
-  transition: transform .2s ease, background .2s ease;
+.logo-item {
+  width: 210px;
+  height: 104px;
+  display: grid;
+  place-items: center;
   position: relative;
+  text-decoration: none;
+  border-radius: 22px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.075), rgba(255,255,255,.035));
+  border: 1px solid rgba(255,255,255,.10);
+  box-shadow:
+    0 18px 44px rgba(0,0,0,.24),
+    inset 0 0 0 1px rgba(255,255,255,.025);
+  transition:
+    transform .2s ease,
+    background .2s ease,
+    border-color .2s ease,
+    box-shadow .2s ease;
 }
 
-/* Glow detrás del logo (ayuda a logos oscuros) */
-.logo-item::before{
-  content:"";
-  position:absolute;
-  inset: 14px -10px;
+.logo-item::before {
+  content: "";
+  position: absolute;
+  inset: 18px 18px;
   border-radius: 999px;
-  background: radial-gradient(circle at 50% 55%,
-    rgba(255,255,255,.10),
-    rgba(255,255,255,0) 70%);
+  background: radial-gradient(circle at 50% 55%, rgba(216,180,254,.14), transparent 70%);
   opacity: .9;
-  filter: blur(10px);
-  z-index:-1;
-  pointer-events:none;
+  filter: blur(12px);
+  z-index: -1;
+  pointer-events: none;
 }
 
-.logo-item img{
-  max-height: 84px;
-  max-width: 180px;
-  width:auto;
-  height:auto;
+.logo-item img {
+  max-height: 72px;
+  max-width: 155px;
+  width: auto;
+  height: auto;
   object-fit: contain;
-  opacity: .96;
+  opacity: .92;
   transform: translateZ(0);
-  transition: transform .2s ease, opacity .2s ease;
+  filter:
+    brightness(1.06)
+    contrast(1.04)
+    drop-shadow(0 12px 22px rgba(0,0,0,.34));
+  transition: transform .2s ease, opacity .2s ease, filter .2s ease;
 }
 
-/* Hover sutil */
-.logos-marquee:hover .marquee{ animation-play-state: paused; } /* opcional */
-.logo-item:hover{ transform: translateY(-1px); background: rgba(255,255,255,.02); }
-.logo-item:hover img{ transform: scale(1.03); opacity: 1; }
+.logos-marquee:hover .marquee {
+  animation-play-state: paused;
+}
+
+.logo-item:hover {
+  transform: translateY(-3px);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.105), rgba(255,255,255,.045));
+  border-color: rgba(216,180,254,.24);
+  box-shadow:
+    0 24px 58px rgba(0,0,0,.34),
+    0 0 28px rgba(168,85,247,.12);
+}
+
+.logo-item:hover img {
+  transform: scale(1.045);
+  opacity: 1;
+  filter:
+    brightness(1.12)
+    contrast(1.08)
+    drop-shadow(0 16px 28px rgba(0,0,0,.42));
+}
 
 /* Mobile */
-@media (max-width: 575.98px){
-  .logos-marquee{
-    padding: 8px 0;
-    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
-            mask-image: linear-gradient(to right, transparent 0%, #000 14%, #000 86%, transparent 100%);
+@media (max-width: 767.98px) {
+  .sc-client-logos {
+    padding: 70px 0 76px;
   }
-  .marquee__track{
-    gap: 28px;            /* 👈 separación mobile */
-    padding-right: 28px;
+
+  .sc-logos-header {
+    margin-bottom: 26px;
   }
-  .logo-item img{ max-width: 140px; }
-  .logos-marquee{ --duration: 18s; } /* un poco más rápido en mobile */
+
+  .sc-logos-title {
+    font-size: clamp(2rem, 9vw, 2.65rem);
+  }
+
+  .sc-logos-text {
+    font-size: .96rem;
+  }
+
+  .logos-marquee {
+    padding: 16px 0;
+    border-radius: 22px;
+    -webkit-mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+            mask-image: linear-gradient(to right, transparent 0%, #000 13%, #000 87%, transparent 100%);
+  }
+
+  .marquee__track {
+    gap: 18px;
+    padding-right: 18px;
+  }
+
+  .logo-item {
+    width: 164px;
+    height: 86px;
+    border-radius: 18px;
+  }
+
+  .logo-item img {
+    max-width: 124px;
+    max-height: 58px;
+  }
+
+  .logos-marquee {
+    --duration: 20s;
+  }
 }
 
 /* Reduce motion */
-@media (prefers-reduced-motion: reduce){
-  .marquee{ animation: none; }
-  .sheen{ animation: none; opacity: .18; }
+@media (prefers-reduced-motion: reduce) {
+  .marquee {
+    animation: none;
+  }
+
+  .sheen {
+    animation: none;
+    opacity: .18;
+  }
 }
 </style>

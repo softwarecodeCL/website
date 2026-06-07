@@ -1,0 +1,481 @@
+---
+title: "SEO técnico desde el inicio: la base que define si tu web posiciona o no"
+description: "Guía completa de SEO técnico para empresas, pymes y startups: qué es, por qué importa y cómo mejorar indexación, Core Web Vitals, arquitectura web, mobile-first y SEO en WordPress sin caer en parches."
+date: 2026-02-01
+category: "SEO y Desarrollo Web"
+tags:
+  - "seo técnico"
+  - "qué es seo técnico"
+  - "core web vitals"
+  - "seo wordpress"
+  - "desarrollo web a medida"
+  - "arquitectura web"
+  - "indexación"
+  - "rastreo"
+  - "mobile first"
+  - "headless cms"
+image: "/img/blog/seo.png"
+draft: false
+---
+
+<div
+  style="--sc-ink:#0f172a; --sc-muted:#5b6474; --sc-soft:#f8fafc; --sc-line:rgba(15,23,42,.10); --sc-purple:#6f42c1; --sc-blue:#2563eb; --sc-green:#10b981; --sc-pink:#ec4899; --sc-shadow:0 22px 60px rgba(15,23,42,.08), 0 8px 24px rgba(15,23,42,.06); color:var(--sc-ink);"
+>
+  <section
+    class="p-4 p-lg-5 mb-4"
+    style="border:1px solid var(--sc-line); border-radius:1.5rem; background: radial-gradient(900px 320px at 12% 10%, rgba(111,66,193,.14), transparent 55%), radial-gradient(800px 280px at 88% 15%, rgba(37,99,235,.12), transparent 55%), linear-gradient(180deg, #ffffff 0%, #fbfbff 100%); box-shadow:var(--sc-shadow);"
+  >
+    <div class="d-flex flex-wrap gap-2 mb-3">
+      <span class="badge rounded-pill border text-dark bg-white">SEO técnico</span>
+      <span class="badge rounded-pill border text-dark bg-white">Core Web Vitals</span>
+      <span class="badge rounded-pill border text-dark bg-white">Indexación</span>
+      <span class="badge rounded-pill border text-dark bg-white">WordPress</span>
+      <span class="badge rounded-pill border text-dark bg-white">Desarrollo web a medida</span>
+    </div>
+
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-8">
+        <h1 class="display-5 fw-bold lh-sm mb-3" style="letter-spacing:-.03em; color:var(--sc-ink);">
+          SEO técnico desde el inicio:
+          <span style="background:linear-gradient(90deg, var(--sc-pink), var(--sc-purple), var(--sc-blue)); -webkit-background-clip:text; background-clip:text; color:transparent;">
+            la base que define si tu web posiciona o no
+          </span>
+        </h1>
+
+        <p class="lead mb-3" style="color:var(--sc-muted);">
+          Muchas empresas invierten en contenido, campañas o rediseños y aun así su web no despega en Google.
+          El problema suele ser menos visible: <strong>la base técnica no está preparada para que el sitio se rastree, se indexe, cargue rápido y convierta bien</strong>.
+        </p>
+
+        <p class="mb-0" style="color:var(--sc-muted);">
+          Esta guía explica qué es el SEO técnico, qué elementos lo componen, por qué suele fallar en WordPress cuando el proyecto crece y cómo diseñar una base sólida desde el primer sprint. Si buscas
+          <strong>posicionamiento web</strong>, <strong>rendimiento real</strong> y una web preparada para vender, aquí está el mapa completo.
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-4">
+        <div
+          class="p-4 h-100"
+          style="border:1px solid var(--sc-line); border-radius:1.25rem; background:rgba(255,255,255,.82); box-shadow:0 10px 30px rgba(15,23,42,.06);"
+        >
+          <div class="small text-uppercase fw-bold mb-2" style="letter-spacing:.08em; color:var(--sc-purple);">
+            Qué vas a aprender
+          </div>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>Qué es el SEO técnico y por qué importa</li>
+            <li>Cómo influye en rastreo, indexación y Core Web Vitals</li>
+            <li>Errores típicos en WordPress y webs parcheadas</li>
+            <li>Cómo estructurar una web preparada para posicionar</li>
+            <li>Una checklist real para revisar tu base técnica</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="alert mb-4"
+    role="note"
+    style="border:1px solid rgba(16,185,129,.18); border-left:6px solid rgba(16,185,129,.85); border-radius:1rem; background:rgba(16,185,129,.10); color:#14532d;"
+  >
+    <strong>Idea clave:</strong> el SEO técnico no es un ajuste final ni un plugin.
+    Es la capa de arquitectura, rendimiento, semántica e indexación que define si todo lo demás —contenido, enlaces, campañas y CRO— puede funcionar de verdad.
+  </section>
+
+  <section class="card border-0 mb-4" style="border-radius:1.25rem; box-shadow:var(--sc-shadow);">
+    <div class="card-body p-4 p-lg-5">
+      <div class="row g-4 align-items-center">
+        <div class="col-12 col-lg-8">
+          <h2 class="h4 fw-bold mb-3" style="color:var(--sc-ink);">Resumen rápido</h2>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>El SEO técnico permite que Google <strong>encuentre, entienda e indexe</strong> tu web sin fricción.</li>
+            <li>No se “repara al final”: se define en <strong>arquitectura, render, URLs, enlazado, rendimiento y mobile-first</strong>.</li>
+            <li>Una web con buena base técnica suele posicionar mejor y también <strong>convertir mejor</strong>.</li>
+            <li>Muchos proyectos en WordPress empiezan bien, pero se degradan con plugins, themes pesados y soluciones parcheadas.</li>
+            <li>El desarrollo web a medida permite trabajar SEO técnico, analítica y escalabilidad de forma más limpia.</li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="card border-0" style="border-radius:1.25rem; box-shadow:var(--sc-shadow);">
+      <div class="card-body p-4">
+        <h2 class="h6 fw-bold text-uppercase mb-3" style="letter-spacing:.08em; color:var(--sc-purple);">Contenido</h2>
+        <div class="row g-2">
+          <div class="col-12 col-md-6">
+            <ul class="mb-0 ps-3">
+              <li><a href="#que-es" class="link-primary">Qué es el SEO técnico</a></li>
+              <li><a href="#por-que-importa" class="link-primary">Por qué define el techo de tu web</a></li>
+              <li><a href="#componentes" class="link-primary">Componentes clave</a></li>
+            </ul>
+          </div>
+          <div class="col-12 col-md-6">
+            <ul class="mb-0 ps-3">
+              <li><a href="#errores" class="link-primary">Errores caros y WordPress</a></li>
+              <li><a href="#checklist" class="link-primary">Checklist técnica</a></li>
+              <li><a href="#faq" class="link-primary">Preguntas frecuentes</a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="que-es" class="mb-5">
+    <div class="row g-4 align-items-stretch">
+      <div class="col-12 col-lg-7">
+        <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Qué es realmente el SEO técnico</h2>
+        <p style="color:var(--sc-muted);">
+          El <strong>SEO técnico</strong> es el conjunto de decisiones de desarrollo, arquitectura y publicación que hacen que un sitio pueda ser rastreado, indexado, renderizado y evaluado correctamente por Google.
+          No se limita a “poner metadatos” ni a instalar un plugin de SEO. Incluye cosas tan concretas como la estructura de URLs, la jerarquía de páginas, el enlazado interno, la velocidad de carga, el control de indexación,
+          los datos estructurados, la semántica HTML, el comportamiento móvil y la forma en que JavaScript afecta al render de la página.
+        </p>
+        <p class="mb-0" style="color:var(--sc-muted);">
+          En términos de negocio, el SEO técnico es lo que evita que una web pierda visibilidad por culpa de errores invisibles: páginas que Google no descubre, contenidos duplicados, plantillas lentas, CLS alto, enlaces internos pobres,
+          cadenas de redirecciones, filtros que generan ruido o landings que se ven bien en escritorio pero fallan en móvil.
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1.25rem; background:var(--sc-soft); box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-3" style="color:var(--sc-ink);">Traducido a simple</h3>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>Que Google pueda <strong>entrar y entender</strong> la web</li>
+            <li>Que la web <strong>cargue rápido</strong> y sea estable</li>
+            <li>Que las páginas importantes sean las que <strong>reciben autoridad</strong></li>
+            <li>Que no se indexe basura ni duplicados</li>
+            <li>Que el sitio sea usable en <strong>mobile-first</strong></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="por-que-importa" class="mb-5">
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Por qué el SEO técnico define el techo de tu web</h2>
+    <p style="color:var(--sc-muted);">
+      Puedes publicar el mejor contenido del sector, pero si tu base técnica está mal resuelta, ese contenido compite con desventaja desde el principio.
+      Una web lenta, difícil de rastrear, mal estructurada o confusa para Google tiene un límite operativo que suele notarse en tres frentes: visibilidad orgánica, conversión y escalabilidad.
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+      <div class="col">
+        <div class="card border-0 h-100" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <div class="small text-uppercase fw-bold mb-2" style="letter-spacing:.08em; color:var(--sc-blue);">Visibilidad</div>
+            <h3 class="h5 fw-bold">Menos rastreo e indexación</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">Si Google no descubre bien tus URLs o encuentra demasiadas páginas sin valor, tu contenido importante recibe menos atención y menos frecuencia de rastreo.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-0 h-100" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <div class="small text-uppercase fw-bold mb-2" style="letter-spacing:.08em; color:var(--sc-green);">Conversión</div>
+            <h3 class="h5 fw-bold">Más fricción y peor experiencia</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">Cuando la landing tarda, salta o se siente pesada, la conversión baja. El problema ya no es solo SEO: también se encarece adquirir tráfico.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card border-0 h-100" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <div class="small text-uppercase fw-bold mb-2" style="letter-spacing:.08em; color:var(--sc-purple);">Escala</div>
+            <h3 class="h5 fw-bold">Cada cambio cuesta más</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">Sin estructura ni reglas claras, cada nueva landing, sección o migración obliga a rehacer URLs, contenidos, redirecciones y tracking.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="componentes" class="mb-5">
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Componentes clave del SEO técnico</h2>
+    <p class="mb-4" style="color:var(--sc-muted);">
+      Cuando una empresa habla de <strong>SEO técnico</strong>, en realidad está hablando de una combinación de arquitectura, rendimiento, control editorial y calidad de implementación.
+      Estos son los pilares que más impacto tienen en proyectos corporativos, pymes, startups y webs de servicios.
+    </p>
+
+    <div class="row row-cols-1 row-cols-md-2 row-cols-xl-3 g-3">
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">Arquitectura del sitio</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            Define qué páginas son prioritarias, cómo se conectan entre sí y qué entiende Google como núcleo del negocio. Una arquitectura clara mejora jerarquía, enlazado y distribución de autoridad.
+          </p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">URLs semánticas</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            Una URL como <code>/desarrollo-web-a-medida/</code> comunica intención, es más limpia para enlazar y reduce caos frente a URLs con parámetros, IDs o estructuras cambiantes.
+          </p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">Core Web Vitals</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            LCP, INP y CLS miden carga, interactividad y estabilidad visual. No son “métricas de laboratorio bonitas”: afectan experiencia real y priorización de mejoras.
+          </p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">Indexación y rastreo</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            Hay que decidir qué páginas sí merecen indexarse y cuáles no. Aquí entran robots, sitemaps, canonicals, redirecciones, paginaciones, filtros y duplicados.
+          </p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">Mobile-first</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            Google toma como referencia la versión móvil. Si el contenido se corta, la navegación estorba o los botones son incómodos, el problema ya existe aunque en escritorio “se vea bien”.
+          </p>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="p-4 h-100" style="border:1px solid var(--sc-line); border-radius:1rem; background:#fff; box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-2">Semántica y enlazado interno</h3>
+          <p class="mb-0" style="color:var(--sc-muted);">
+            H1, H2, listas, enlaces descriptivos, breadcrumbs y bloques bien estructurados ayudan tanto al usuario como al buscador a entender la intención de cada página.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div
+      class="p-4 p-lg-5"
+      style="border:1px solid rgba(245,158,11,.20); border-left:6px solid rgba(245,158,11,.85); border-radius:1.25rem; background:rgba(245,158,11,.08); box-shadow:0 8px 24px rgba(15,23,42,.04);"
+    >
+      <h2 class="h4 fw-bold mb-3" style="color:var(--sc-ink);">El error más caro: “primero lanzamos y luego vemos el SEO”</h2>
+      <p class="mb-3" style="color:var(--sc-muted);">
+        Dejar el SEO técnico para el final parece rápido, pero casi siempre sale más caro. Cuando la base no se pensó bien desde el principio, luego aparecen reestructuras, redirecciones urgentes, contenidos duplicados,
+        problemas de indexación, métricas de rendimiento pobres y un coste técnico adicional que se acumula sprint tras sprint.
+      </p>
+      <div class="row g-3">
+        <div class="col-12 col-md-6">
+          <div class="p-3 rounded-4 bg-white border h-100">
+            <div class="fw-bold mb-2">Lo que suele pasar después</div>
+            <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+              <li>Se rompen URLs o slugs importantes</li>
+              <li>Se crean cadenas de redirecciones</li>
+              <li>La landings comerciales compiten entre sí</li>
+              <li>Se corrigen Core Web Vitals con parches</li>
+              <li>El tracking deja de ser fiable</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="col-12 col-md-6">
+          <div class="p-3 rounded-4 bg-white border h-100">
+            <div class="fw-bold mb-2">Lo correcto desde el inicio</div>
+            <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+              <li>Mapa de URLs y jerarquía antes del build</li>
+              <li>Definición de plantillas y contenido comercial</li>
+              <li>Medición y eventos planificados</li>
+              <li>Optimización móvil y de rendimiento base</li>
+              <li>Reglas claras de indexación y enlazado</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="errores" class="mb-5">
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">WordPress y SEO técnico: cuándo funciona y cuándo se vuelve un límite</h2>
+    <p style="color:var(--sc-muted);">
+      WordPress no es “malo” por definición. Puede resolver muy bien proyectos simples, blogs y webs corporativas contenidas. El problema aparece cuando la web crece, se multiplica el número de plugins,
+      el theme incorpora demasiada lógica, el constructor visual añade DOM innecesario y cada necesidad nueva se resuelve con otra capa de parche.
+    </p>
+    <p class="mb-4" style="color:var(--sc-muted);">
+      En ese punto, una parte del esfuerzo de SEO técnico deja de ser estratégica y pasa a ser correctiva: limpiar scripts, arreglar conflictos, reducir weight, controlar total blocking time,
+      cerrar duplicados, arreglar paginaciones, estabilizar CLS y pelear contra una base que ya no nació para escalar.
+    </p>
+
+    <div class="row g-3">
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 h-100" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-3">Señales de que WordPress te quedó chico</h3>
+            <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+              <li>Cada cambio requiere varios plugins o ajustes manuales</li>
+              <li>El sitio es lento incluso con caché y optimizadores</li>
+              <li>Necesitas integraciones reales con CRM, APIs o automatizaciones</li>
+              <li>Tienes problemas recurrentes con duplicados, indexación o redirecciones</li>
+              <li>El blog y las páginas de servicio comparten una base difícil de mantener</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12 col-lg-6">
+        <div class="card border-0 h-100" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-3">Cuándo conviene pensar en desarrollo web a medida</h3>
+            <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+              <li>Necesitas una arquitectura limpia y escalable</li>
+              <li>Quieres controlar render, rendimiento y estructura desde la base</li>
+              <li>Debes combinar contenido, SEO técnico, CRO y analítica sin parches</li>
+              <li>La web es parte real del pipeline comercial, no un folleto</li>
+              <li>Quieres crecer sin rehacer todo cada seis meses</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="row g-4 align-items-center">
+      <div class="col-12 col-lg-7">
+        <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">SEO técnico + contenido: por qué juntos sí generan posicionamiento real</h2>
+        <p style="color:var(--sc-muted);">
+          El SEO técnico no reemplaza el contenido. Lo habilita. Una arquitectura clara, buen rendimiento y un control correcto de indexación hacen que cada pieza editorial y cada página comercial tenga más capacidad de posicionar.
+        </p>
+        <p class="mb-0" style="color:var(--sc-muted);">
+          Cuando la base está bien resuelta, Google entiende mejor cómo se relacionan tus servicios, tus guías, tus comparativas y tus páginas transaccionales.
+          El resultado suele traducirse en un tráfico más alineado con intención, mejor enlazado interno y más oportunidades de negocio.
+        </p>
+      </div>
+
+      <div class="col-12 col-lg-5">
+        <div class="p-4 rounded-4 border bg-light h-100" style="border-color:var(--sc-line);">
+          <div class="fw-bold mb-3">Ejemplos de temas que sí tienen sentido en esta página</div>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>Qué es el SEO técnico y cómo aplicarlo</li>
+            <li>Core Web Vitals para empresas</li>
+            <li>SEO técnico en WordPress vs web a medida</li>
+            <li>Cómo mejorar indexación y arquitectura web</li>
+            <li>Checklist SEO técnico antes de lanzar una web</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="checklist" class="mb-5">
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Checklist rápida para saber si tu web tiene una base SEO sólida</h2>
+    <p class="mb-4" style="color:var(--sc-muted);">
+      Si marcas muchas dudas aquí, probablemente la base técnica necesita revisión antes de seguir produciendo contenido o invirtiendo más en adquisición de tráfico.
+    </p>
+
+    <div class="row g-3">
+      <div class="col-12 col-md-6">
+        <div class="p-4 rounded-4 border bg-white h-100" style="box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-3">Arquitectura e indexación</h3>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>Las URLs importantes son claras, estables y semánticas</li>
+            <li>Existe una jerarquía lógica por servicio, categoría o intención</li>
+            <li>Tu sitemap.xml refleja lo que realmente quieres posicionar</li>
+            <li>No hay páginas duplicadas ni variantes innecesarias indexadas</li>
+            <li>Los enlaces internos ayudan a descubrir y reforzar páginas clave</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="col-12 col-md-6">
+        <div class="p-4 rounded-4 border bg-white h-100" style="box-shadow:0 8px 24px rgba(15,23,42,.05);">
+          <h3 class="h5 fw-bold mb-3">Rendimiento y experiencia</h3>
+          <ul class="mb-0 ps-3" style="color:var(--sc-muted);">
+            <li>La landing principal carga bien en móvil real, no solo en desktop</li>
+            <li>El LCP no depende de un hero enorme o scripts pesados</li>
+            <li>La interfaz no salta mientras carga el contenido</li>
+            <li>El sitio soporta formularios, tracking y terceros sin degradarse</li>
+            <li>La navegación móvil es clara y no añade fricción</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-light border mt-3 mb-0" style="border-radius:1rem;">
+      <strong>Conclusión práctica:</strong> si tu web no posiciona, no convierte o se rompe con cada cambio, no siempre faltan artículos. Muchas veces falta una base técnica mejor diseñada.
+    </div>
+  </section>
+
+  <section id="faq" class="mb-5">
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Preguntas frecuentes sobre SEO técnico</h2>
+
+    <div class="row g-3">
+      <div class="col-12">
+        <div class="card border-0" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-2">¿El SEO técnico reemplaza al contenido?</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">
+              No. El contenido responde a la intención de búsqueda y construye relevancia; el SEO técnico hace posible que ese contenido se rastree, se indexe, cargue bien y se entienda mejor.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card border-0" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-2">¿Cuándo conviene hacer SEO técnico?</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">
+              Antes de lanzar un sitio, durante una migración o en cuanto una web empieza a crecer. Cuanto antes se resuelva, menos coste acumulado tendrás en redirecciones, rehacer plantillas o limpiar errores.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card border-0" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-2">¿Qué debería revisar primero si mi web no posiciona?</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">
+              Empieza por indexación, arquitectura, rendimiento móvil y enlazado interno. Si esas cuatro piezas están débiles, publicar más contenido rara vez soluciona el problema de fondo.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-12">
+        <div class="card border-0" style="border-radius:1rem; box-shadow:var(--sc-shadow);">
+          <div class="card-body p-4">
+            <h3 class="h5 fw-bold mb-2">¿WordPress sirve para SEO técnico?</h3>
+            <p class="mb-0" style="color:var(--sc-muted);">
+              Sí, pero su rendimiento depende mucho del theme, los plugins, el hosting y la disciplina técnica del proyecto. Para webs sencillas puede ir bien; para proyectos complejos, el margen de parcheo aumenta muy rápido.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    class="p-4 p-lg-5 text-center"
+    style="border:1px solid var(--sc-line); border-radius:1.5rem; background: radial-gradient(800px 260px at 15% 0%, rgba(111,66,193,.12), transparent 55%), radial-gradient(700px 240px at 90% 10%, rgba(37,99,235,.10), transparent 55%), linear-gradient(180deg, #ffffff 0%, #fbfbff 100%); box-shadow:var(--sc-shadow);"
+  >
+    <h2 class="fw-bold mb-3" style="color:var(--sc-ink);">Conclusión</h2>
+    <p class="mx-auto mb-4" style="max-width:760px; color:var(--sc-muted);">
+      El SEO técnico no es un detalle de cierre ni una auditoría cosmética. Es la base que define si una web puede competir, crecer y convertir. Si tu sitio hoy no posiciona, no rinde o no escala,
+      es muy probable que la solución no sea publicar más por publicar, sino construir mejor desde la arquitectura.
+    </p>
+
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center">
+      <a class="btn btn-primary btn-lg px-4" href="/desarrollo-web-a-medida/" style="border-radius:.9rem;">Ver cómo lo trabajamos</a>
+      <a class="btn btn-outline-secondary btn-lg px-4" href="https://wa.me/56988396128" target="_blank" rel="noopener noreferrer" style="border-radius:.9rem;">Hablar por WhatsApp</a>
+    </div>
+
+    <div class="small mt-3" style="color:var(--sc-muted);">
+      SEO técnico · Core Web Vitals · Desarrollo web a medida · WordPress · Chile · Latinoamérica
+    </div>
+  </section>
+</div>
