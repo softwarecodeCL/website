@@ -1,20 +1,36 @@
-  // @ts-check
-  import { defineConfig } from 'astro/config';
+// @ts-check
+import { defineConfig } from 'astro/config';
 
-  import mdx from '@astrojs/mdx'
-  import node from '@astrojs/node';
-  import sitemap from '@astrojs/sitemap';
+import mdx from '@astrojs/mdx';
+import sitemap from '@astrojs/sitemap';
+import cloudflare from '@astrojs/cloudflare';
 
-  // https://astro.build/config
-  export default defineConfig({
-      site: 'https://www.softwarecode.cl',  
-      output: 'server', // Habilitar SSR
-      adapter: node({
-        mode: 'standalone', // Genera un servidor independiente listo para producción
-      }),
-      root: './',         // Raíz del proyecto (opcional si ya es la raíz)
-      srcDir: './src',    // Define que los archivos fuente están en `src/`
-      publicDir: './public', // Define que los archivos estáticos están en `public/`
-      outDir: './dist',   // Carpeta de salida tras el build
-      integrations: [mdx(), sitemap()],
-  }); 
+export default defineConfig({
+  site: 'https://www.softwarecode.cl',
+
+  // SSR habilitado globalmente.
+  // Las rutas que declares con prerender=true quedan estáticas.
+  output: 'server',
+
+  adapter: cloudflare({
+    imageService: 'compile',
+  }),
+
+  root: './',
+  srcDir: './src',
+  publicDir: './public',
+  outDir: './dist',
+
+  integrations: [
+    mdx(),
+    sitemap({
+      filter: (page) => !page.includes('/tag/') && !page.includes('/category/'),
+    }),
+  ],
+
+  vite: {
+    build: {
+      sourcemap: false,
+    },
+  },
+});
