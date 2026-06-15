@@ -1,0 +1,1108 @@
+---
+title: "Auditoría SEO técnica en Chile: qué revisar si tu web no aparece en Google"
+description: "Guía completa de auditoría SEO técnica en Chile: rastreo, indexación, robots.txt, sitemap, velocidad, Core Web Vitals, canonicals, redirecciones, arquitectura, contenido duplicado y checklist para mejorar el posicionamiento en Google."
+date: 2026-06-15
+category: "SEO Técnico"
+tags: [
+  "auditoria seo tecnica chile",
+  "seo tecnico chile",
+  "por que mi web no aparece en google",
+  "errores seo tecnicos",
+  "auditoria seo chile",
+  "indexacion google",
+  "robots txt",
+  "sitemap xml",
+  "core web vitals",
+  "posicionamiento web chile"
+]
+image: "/img/blog/auditoria-seo.png"
+draft: false
+---
+
+# Auditoría SEO técnica en Chile: qué revisar si tu web no aparece en Google
+
+<div class="alert alert-light shadow-sm" style="border-left:6px solid rgba(99,102,241,.9); border-radius:14px;">
+  <p class="mb-0 text-muted">
+    Una web puede estar publicada, verse profesional y aun así no aparecer en Google para búsquedas importantes. En muchos casos, el problema no está en el diseño, sino en la base técnica: rastreo, indexación, velocidad, estructura, contenido duplicado, sitemap, robots.txt o señales contradictorias para los motores de búsqueda.
+  </p>
+</div>
+
+---
+
+## Resumen rápido
+
+<div class="card border-0 shadow-sm mb-4" style="border-radius:16px;">
+  <div class="card-body">
+    <ul class="mb-0">
+      <li>Una <strong>auditoría SEO técnica</strong> revisa si Google puede rastrear, renderizar, indexar y entender correctamente una web.</li>
+      <li>Los errores más comunes están en <strong>robots.txt, sitemap, canonicals, redirecciones, velocidad, arquitectura y contenido duplicado</strong>.</li>
+      <li>Si una web no aparece en Google, primero hay que descartar bloqueos técnicos antes de invertir en contenidos o anuncios.</li>
+      <li>El SEO técnico no reemplaza el contenido, pero permite que el contenido tenga una base sólida para competir.</li>
+      <li>Una buena auditoría no solo entrega errores: prioriza qué corregir primero según impacto, urgencia y dificultad.</li>
+    </ul>
+  </div>
+</div>
+
+---
+
+## Índice de contenidos
+
+<div class="card border-0 shadow-sm mb-5" style="border-radius:16px;">
+  <div class="card-body">
+    <ol class="mb-0">
+      <li><a href="#que-es-una-auditoria-seo-tecnica">Qué es una auditoría SEO técnica</a></li>
+      <li><a href="#por-que-una-web-no-aparece-en-google">Por qué una web no aparece en Google</a></li>
+      <li><a href="#rastreo-indexacion-y-posicionamiento-no-son-lo-mismo">Rastreo, indexación y posicionamiento</a></li>
+      <li><a href="#robots-txt-el-primer-archivo-que-hay-que-revisar">Robots.txt</a></li>
+      <li><a href="#sitemap-xml-el-mapa-que-google-deberia-recibir">Sitemap XML</a></li>
+      <li><a href="#google-search-console-la-fuente-mas-importante-del-diagnostico">Google Search Console</a></li>
+      <li><a href="#velocidad-core-web-vitals-y-rendimiento-mobile">Velocidad y Core Web Vitals</a></li>
+      <li><a href="#arquitectura-seo-una-home-no-puede-posicionar-por-todo">Arquitectura SEO</a></li>
+      <li><a href="#contenido-duplicado-canonicals-y-parametros">Contenido duplicado y canonicals</a></li>
+      <li><a href="#checklist-completo-de-auditoria-seo-tecnica">Checklist completo</a></li>
+      <li><a href="#cuanto-cuesta-una-auditoria-seo-tecnica-en-chile">Precios referenciales en Chile</a></li>
+      <li><a href="#preguntas-frecuentes-sobre-auditoria-seo-tecnica">Preguntas frecuentes</a></li>
+    </ol>
+  </div>
+</div>
+
+---
+
+## Qué es una auditoría SEO técnica
+
+Una **auditoría SEO técnica** es una revisión estructurada de los factores que pueden afectar el rastreo, la indexación, el rendimiento y la comprensión de una web por parte de Google.
+
+No se trata solo de revisar si una página tiene palabras clave. Tampoco se trata únicamente de mirar si el sitio se ve moderno. Una auditoría técnica responde preguntas más profundas:
+
+- ¿Google puede rastrear las páginas importantes?
+- ¿El sitio está bloqueando recursos necesarios para renderizar?
+- ¿El sitemap incluye las URLs correctas?
+- ¿Existen páginas importantes con etiqueta `noindex`?
+- ¿Hay contenido duplicado por versiones con y sin `www`?
+- ¿Las redirecciones están bien configuradas?
+- ¿La web carga rápido en mobile?
+- ¿El contenido principal está disponible en el HTML inicial?
+- ¿La estructura de enlaces internos indica qué páginas son prioritarias?
+- ¿Los títulos, headings y descripciones explican correctamente el tema de cada URL?
+
+Una auditoría SEO técnica útil no solo enumera errores. También define prioridades. No todos los problemas tienen el mismo impacto: bloquear una página comercial importante es más grave que tener una meta description un poco larga. Una cadena de redirecciones en una URL con tráfico puede ser más urgente que optimizar una imagen secundaria.
+
+<div class="alert alert-warning shadow-sm" style="border-left:6px solid rgba(245,158,11,.9); border-radius:14px;">
+  <strong>Idea clave:</strong> la auditoría SEO técnica sirve para separar problemas críticos de mejoras menores. Sin esa priorización, es fácil perder tiempo corrigiendo detalles que no mueven la aguja.
+</div>
+
+---
+
+## Por qué una web no aparece en Google
+
+Cuando una web no aparece en Google, muchas personas piensan de inmediato en pagar anuncios, publicar más contenido o rediseñar el sitio. Esas acciones pueden tener sentido, pero antes conviene revisar si existe una base técnica correcta.
+
+Las causas más frecuentes son:
+
+1. Google todavía no ha descubierto el sitio.
+2. El dominio no está configurado en Google Search Console.
+3. No existe sitemap XML o está mal generado.
+4. El archivo `robots.txt` bloquea rutas importantes.
+5. Las páginas tienen etiqueta `noindex` por error.
+6. Existen canonicals mal configurados.
+7. Hay redirecciones incorrectas, loops o cadenas innecesarias.
+8. Las páginas importantes devuelven errores 404 o 5xx.
+9. El contenido principal depende demasiado de JavaScript.
+10. La web carga lento en mobile.
+11. Existen múltiples versiones de la misma URL.
+12. Las páginas importantes no tienen enlaces internos.
+13. El contenido es demasiado genérico o delgado.
+14. La arquitectura del sitio no separa servicios, categorías o intenciones.
+15. La competencia tiene páginas más completas, rápidas y mejor estructuradas.
+
+Una auditoría SEO técnica permite ordenar estas causas y detectar qué está afectando realmente la visibilidad.
+
+---
+
+## Rastreo, indexación y posicionamiento no son lo mismo
+
+Uno de los errores más comunes es usar estos conceptos como si fueran iguales. No lo son.
+
+<div class="table-responsive shadow-sm" style="border-radius:14px; overflow:hidden;">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Concepto</th>
+        <th>Qué significa</th>
+        <th>Ejemplo</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>Rastreo</strong></td>
+        <td>Google descubre y visita una URL.</td>
+        <td>Googlebot accede a una página.</td>
+      </tr>
+      <tr>
+        <td><strong>Indexación</strong></td>
+        <td>Google guarda una URL en su índice.</td>
+        <td>La página puede aparecer en resultados.</td>
+      </tr>
+      <tr>
+        <td><strong>Posicionamiento</strong></td>
+        <td>Google decide en qué lugar mostrar la página.</td>
+        <td>La URL aparece en posición 3, 12 o 40.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Una página puede ser rastreada, pero no indexada. También puede estar indexada, pero no posicionar bien. Incluso puede posicionar, pero para búsquedas que no generan clientes.
+
+Por eso una auditoría técnica no debería quedarse en “la página existe en Google”. Debe revisar también:
+
+- impresiones
+- clics
+- CTR
+- posición promedio
+- consultas reales
+- páginas con tráfico
+- páginas excluidas
+- URLs rastreadas pero no indexadas
+- URLs descubiertas pero no rastreadas
+
+---
+
+## Cómo saber si una web está indexada
+
+Una comprobación inicial es buscar en Google:
+
+```txt
+site:ejemplo.cl
+```
+
+Esto permite ver una muestra de páginas que Google tiene asociadas al dominio. No es una medición perfecta, pero sirve como primera señal.
+
+Si aparecen pocas páginas, URLs antiguas, rutas irrelevantes o nada, puede existir un problema de indexación.
+
+También conviene revisar:
+
+- Google Search Console.
+- Inspección de URL.
+- Sitemap enviado.
+- Estado de páginas indexadas.
+- Páginas excluidas.
+- Errores de rastreo.
+- URLs con redirección.
+- URLs bloqueadas por robots.txt.
+- URLs con `noindex`.
+
+La búsqueda `site:` ayuda, pero Search Console es la fuente más importante para entender cómo Google procesa un sitio.
+
+---
+
+## Robots.txt: el primer archivo que hay que revisar
+
+El archivo `robots.txt` indica a los rastreadores qué rutas pueden visitar y cuáles no.
+
+Un archivo bien configurado evita que Google pierda tiempo en rutas privadas, endpoints internos o páginas sin valor SEO. Un archivo mal configurado puede bloquear secciones importantes o recursos necesarios para renderizar la página.
+
+### Qué suele tener sentido bloquear
+
+En muchos sitios, tiene sentido bloquear rutas como:
+
+```txt
+User-agent: *
+Disallow: /api/
+Disallow: /admin/
+Disallow: /login/
+Disallow: /auth/
+Disallow: /private/
+```
+
+Estas rutas normalmente no deberían aparecer en resultados de búsqueda.
+
+### Qué no conviene bloquear sin revisar
+
+No conviene bloquear automáticamente carpetas de assets, scripts o archivos generados por frameworks si son necesarias para renderizar el sitio.
+
+Ejemplos que requieren revisión antes de bloquear:
+
+```txt
+Disallow: /assets/
+Disallow: /static/
+Disallow: /_next/
+Disallow: /_astro/
+Disallow: /dist/
+```
+
+Dependiendo del framework, esas rutas pueden contener CSS, JavaScript, imágenes o recursos que Google necesita para comprender la página como la vería un usuario.
+
+### Robots.txt no es seguridad
+
+`robots.txt` no protege información privada. Solo entrega instrucciones a rastreadores.
+
+Si una URL contiene información sensible, debe estar protegida con autenticación, permisos, backend seguro o simplemente no estar publicada. Bloquearla en `robots.txt` no impide que alguien acceda si conoce la URL.
+
+---
+
+## Sitemap XML: el mapa que Google debería recibir
+
+El sitemap XML lista las URLs importantes de una web. No garantiza indexación, pero ayuda a Google a descubrir páginas relevantes.
+
+Un sitemap limpio debería incluir:
+
+- URLs canónicas.
+- Páginas públicas importantes.
+- Páginas de servicios.
+- Artículos relevantes.
+- Categorías útiles.
+- URLs con HTTPS.
+- La versión correcta del dominio.
+- Fechas de actualización si se generan correctamente.
+
+### Errores comunes en sitemap
+
+<div class="table-responsive shadow-sm" style="border-radius:14px; overflow:hidden;">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Error</th>
+        <th>Impacto SEO</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Incluir URLs 404</td>
+        <td>Google pierde tiempo rastreando páginas rotas.</td>
+      </tr>
+      <tr>
+        <td>Incluir URLs redirigidas</td>
+        <td>El sitemap deja de representar la versión final del sitio.</td>
+      </tr>
+      <tr>
+        <td>Usar dominio antiguo</td>
+        <td>Se envían señales inconsistentes.</td>
+      </tr>
+      <tr>
+        <td>Incluir páginas noindex</td>
+        <td>El sitemap dice “indexa”, pero la página dice “no indexes”.</td>
+      </tr>
+      <tr>
+        <td>Omitir páginas comerciales</td>
+        <td>Las páginas más importantes reciben menos señales.</td>
+      </tr>
+      <tr>
+        <td>Incluir parámetros innecesarios</td>
+        <td>Puede generar duplicidad y URLs de baja utilidad.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+Un sitemap debe ser preciso. Si incluye basura, redirecciones o páginas irrelevantes, pierde valor como señal de estructura.
+
+---
+
+## Google Search Console: la fuente más importante del diagnóstico
+
+Google Search Console permite revisar cómo Google ve una web.
+
+Una auditoría SEO técnica debería revisar al menos:
+
+- páginas indexadas
+- páginas excluidas
+- sitemap enviado
+- inspección de URLs principales
+- errores de rastreo
+- páginas con redirección
+- URLs bloqueadas por robots.txt
+- URLs con `noindex`
+- páginas rastreadas pero no indexadas
+- páginas descubiertas pero no indexadas
+- consultas que generan impresiones
+- CTR orgánico
+- posición promedio
+- problemas de experiencia de página
+
+### Estados comunes en Search Console
+
+#### Descubierta: actualmente sin indexar
+
+Google conoce la URL, pero aún no la ha rastreado o no le ha dado prioridad.
+
+Puede ocurrir por baja autoridad, muchas URLs, poco enlazado interno o contenido que Google no considera prioritario.
+
+#### Rastreada: actualmente sin indexar
+
+Google visitó la URL, pero decidió no indexarla.
+
+Puede deberse a contenido débil, duplicidad, baja calidad, señales insuficientes o problemas de relevancia.
+
+#### Página con redirección
+
+La URL redirige a otra.
+
+No siempre es malo. Es normal cuando se consolida el dominio con `www`, HTTPS o una estructura nueva. Pero si el sitemap contiene muchas URLs redirigidas, conviene corregirlo.
+
+#### Bloqueada por robots.txt
+
+Google no puede rastrear la URL por una regla del archivo `robots.txt`.
+
+Si afecta una página importante, es un problema crítico.
+
+#### Excluida por etiqueta noindex
+
+La página indica que no debe indexarse.
+
+Esto es correcto para rutas privadas o páginas de baja utilidad, pero grave si afecta servicios, artículos o páginas comerciales.
+
+---
+
+## Velocidad, Core Web Vitals y rendimiento mobile
+
+La velocidad no es solo un número en una herramienta. Afecta experiencia de usuario, conversión y eficiencia de rastreo.
+
+Una web lenta puede generar:
+
+- mayor abandono
+- menor conversión
+- peor experiencia móvil
+- menor eficiencia de rastreo
+- peor percepción de calidad
+- menor rendimiento en campañas
+
+### Core Web Vitals principales
+
+<div class="table-responsive shadow-sm" style="border-radius:14px; overflow:hidden;">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Métrica</th>
+        <th>Qué evalúa</th>
+        <th>Problema típico</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>LCP</strong></td>
+        <td>Carga del contenido principal.</td>
+        <td>Imagen hero pesada, servidor lento, CSS bloqueante.</td>
+      </tr>
+      <tr>
+        <td><strong>INP</strong></td>
+        <td>Respuesta de la página a interacciones.</td>
+        <td>JavaScript excesivo, scripts de terceros, render pesado.</td>
+      </tr>
+      <tr>
+        <td><strong>CLS</strong></td>
+        <td>Estabilidad visual.</td>
+        <td>Imágenes sin dimensiones, banners que empujan contenido.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+### Imágenes pesadas
+
+Uno de los errores más repetidos es cargar imágenes demasiado grandes.
+
+Problemas comunes:
+
+- imágenes de 3000 px mostradas a 600 px
+- PNG pesados usados como fotografías
+- hero de varios MB
+- imágenes sin compresión
+- galerías cargadas completas al inicio
+- falta de lazy loading
+- no usar formatos modernos
+
+Buenas prácticas:
+
+- usar WebP o AVIF cuando sea posible
+- definir ancho y alto para evitar saltos visuales
+- cargar eager solo la imagen principal
+- usar lazy loading en imágenes secundarias
+- evitar imágenes gigantes en mobile
+- comprimir sin destruir la calidad visual
+
+---
+
+## JavaScript excesivo y renderizado
+
+En sitios modernos, el contenido importante no debería depender de scripts pesados para existir.
+
+JavaScript no es malo. El problema aparece cuando el HTML inicial llega vacío o con contenido insuficiente, y toda la información importante depende de ejecución posterior.
+
+Conviene revisar:
+
+- si el contenido principal está en el HTML inicial
+- si los títulos y textos clave se renderizan en servidor o estático
+- si existen errores de hidratación
+- si scripts de terceros bloquean la carga
+- si se carga JavaScript innecesario en páginas simples
+- si el menú y los enlaces internos son accesibles
+
+### SSR, SSG y SEO técnico
+
+<div class="table-responsive shadow-sm" style="border-radius:14px; overflow:hidden;">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Enfoque</th>
+        <th>Qué significa</th>
+        <th>Riesgo si se usa mal</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><strong>SSR</strong></td>
+        <td>Renderizado en servidor por request.</td>
+        <td>Respuesta lenta si la lógica es pesada.</td>
+      </tr>
+      <tr>
+        <td><strong>SSG</strong></td>
+        <td>Páginas generadas estáticamente.</td>
+        <td>Contenido desactualizado si no se regenera.</td>
+      </tr>
+      <tr>
+        <td><strong>CSR</strong></td>
+        <td>Renderizado en cliente.</td>
+        <td>Contenido principal dependiente de JavaScript.</td>
+      </tr>
+      <tr>
+        <td><strong>Hybrid</strong></td>
+        <td>Mezcla de páginas estáticas y dinámicas.</td>
+        <td>Mala decisión por tipo de página.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+SSR no garantiza posicionamiento. Una página con SSR puede tener mal SEO si el contenido es pobre, el sitemap está mal o la arquitectura es débil.
+
+SSG tampoco garantiza posicionamiento, pero suele ser excelente para blogs, páginas de servicio y landings cuyo contenido no cambia por usuario.
+
+---
+
+## Arquitectura SEO: una home no puede posicionar por todo
+
+Una de las debilidades más comunes es intentar que una sola página posicione por todos los servicios.
+
+Una web competitiva separa intenciones.
+
+Ejemplo débil:
+
+```txt
+/
+/servicios/
+/blog/
+/contacto/
+```
+
+Ejemplo más fuerte:
+
+```txt
+/
+/auditoria-seo-tecnica/
+/seo-tecnico/
+/consultoria-seo/
+/posicionamiento-web/
+/blog/auditoria-seo-tecnica-chile/
+/blog/por-que-mi-web-no-aparece-en-google/
+/blog/errores-seo-tecnicos/
+```
+
+La segunda estructura permite cubrir búsquedas informativas, comparativas y comerciales.
+
+### Enlazado interno
+
+El enlazado interno ayuda a Google a entender relaciones y prioridades.
+
+Una estrategia útil agrupa contenidos por tema:
+
+```txt
+Página principal: /auditoria-seo-tecnica/
+Artículo: /blog/auditoria-seo-tecnica-chile/
+Artículo: /blog/por-que-mi-web-no-aparece-en-google/
+Artículo: /blog/errores-seo-tecnicos/
+Artículo: /blog/robots-txt-seo/
+Artículo: /blog/sitemap-xml-seo/
+```
+
+Cada pieza refuerza el tema central.
+
+---
+
+## Jerarquía de headings: H1, H2 y H3
+
+La jerarquía de títulos ayuda a ordenar el contenido para usuarios y buscadores.
+
+Una página importante debería tener:
+
+- un solo H1
+- H2 para secciones principales
+- H3 para subtemas
+- títulos claros
+- keywords naturales
+- estructura lógica
+
+Ejemplo débil:
+
+```txt
+H1: Bienvenido
+H2: Soluciones
+H2: Más información
+H2: Contáctanos
+```
+
+Ejemplo optimizado:
+
+```txt
+H1: Auditoría SEO técnica en Chile para mejorar indexación y posicionamiento
+H2: Qué revisa una auditoría SEO técnica
+H2: Errores que impiden aparecer en Google
+H3: Robots.txt mal configurado
+H3: Sitemap incorrecto
+H3: Páginas no indexadas
+H3: Velocidad mobile deficiente
+```
+
+La segunda estructura comunica claramente el tema principal y facilita la lectura.
+
+---
+
+## Titles, meta descriptions y CTR orgánico
+
+El title y la meta description influyen en la comprensión de la página y en la decisión del usuario de hacer clic.
+
+Un buen title debería:
+
+- incluir la keyword principal
+- ser claro
+- describir el beneficio
+- evitar relleno innecesario
+- diferenciarse de resultados genéricos
+
+Ejemplo débil:
+
+```txt
+SEO técnico | Inicio
+```
+
+Ejemplo mejor:
+
+```txt
+Auditoría SEO técnica en Chile: indexación, velocidad y errores críticos
+```
+
+Una buena meta description resume el valor de la página y motiva el clic.
+
+Ejemplo:
+
+```txt
+Revisa los principales errores técnicos que impiden que una web aparezca en Google: robots.txt, sitemap, indexación, velocidad, canonicals, Core Web Vitals y arquitectura SEO.
+```
+
+---
+
+## Contenido duplicado, canonicals y parámetros
+
+El contenido duplicado no siempre significa copiar textos de otra web. También puede generarse dentro del mismo sitio.
+
+Casos comunes:
+
+- URLs con y sin slash
+- HTTP y HTTPS
+- dominio con `www` y sin `www`
+- parámetros UTM
+- filtros
+- categorías similares
+- tags sin contenido único
+- páginas generadas automáticamente
+- versiones imprimibles
+- paginaciones mal manejadas
+
+La etiqueta canonical indica cuál es la versión principal.
+
+```html
+<link rel="canonical" href="https://www.ejemplo.cl/blog/auditoria-seo-tecnica-chile/" />
+```
+
+Una auditoría debe revisar si las canonicals apuntan a URLs indexables y coherentes.
+
+---
+
+## Redirecciones 301 y migraciones
+
+Las redirecciones son críticas cuando se cambia de dominio, hosting, CMS, framework o estructura de URLs.
+
+Una redirección correcta conserva contexto.
+
+Ejemplo correcto:
+
+```txt
+https://ejemplo.cl/blog/guia-seo
+→
+https://www.ejemplo.cl/blog/guia-seo
+```
+
+Ejemplo débil:
+
+```txt
+https://ejemplo.cl/blog/guia-seo
+→
+https://www.ejemplo.cl/
+```
+
+Enviar todo a la home no es una buena estrategia cuando existen equivalencias claras.
+
+Una auditoría debe revisar:
+
+- redirecciones 301
+- redirecciones 302 usadas por error
+- cadenas de redirección
+- loops
+- URLs antiguas con enlaces
+- páginas eliminadas sin reemplazo
+- cambios de estructura no mapeados
+
+---
+
+## Errores 404 y páginas rotas
+
+No todo 404 es grave. Es normal que algunas URLs desaparezcan.
+
+El problema aparece cuando:
+
+- la URL rota tenía tráfico
+- la URL rota tenía backlinks
+- estaba en el sitemap
+- estaba enlazada internamente
+- correspondía a un servicio importante
+- muchas páginas relevantes terminan en error
+
+En esos casos conviene crear una redirección hacia una página equivalente o reconstruir la URL si sigue teniendo valor.
+
+---
+
+## Páginas huérfanas
+
+Una página huérfana es una URL que existe, pero no recibe enlaces internos desde otras páginas del sitio.
+
+Google puede descubrirla por sitemap, pero si no tiene enlaces internos, recibe señales débiles de importancia.
+
+Soluciones:
+
+- enlazarla desde páginas principales
+- agregarla a contenidos relacionados
+- incluirla en bloques editoriales
+- usar breadcrumbs si corresponde
+- crear clusters temáticos
+
+---
+
+## SEO técnico local en Chile
+
+Para búsquedas como **auditoría SEO técnica Chile**, **SEO técnico Chile** o **auditoría SEO Chile**, conviene trabajar señales locales de forma natural.
+
+No se trata de repetir “Chile” en cada párrafo. Se trata de dar contexto real.
+
+Señales útiles:
+
+- title y H1 con enfoque local
+- precios referenciales en CLP si aplica
+- ejemplos adaptados al mercado local
+- lenguaje claro para empresas chilenas
+- datos de contacto consistentes
+- Google Business Profile cuando corresponda
+- menciones geográficas naturales
+- contenido orientado a problemas reales de pymes y empresas locales
+
+La relevancia local debe sentirse natural, no forzada.
+
+---
+
+## Herramientas útiles para una auditoría SEO técnica
+
+Las herramientas ayudan a encontrar señales, pero el criterio técnico define qué hacer con ellas.
+
+Herramientas comunes:
+
+- Google Search Console
+- PageSpeed Insights
+- Lighthouse
+- Screaming Frog
+- Sitebulb
+- Ahrefs
+- Semrush
+- Google Analytics
+- Rich Results Test
+- validadores de schema
+- DevTools del navegador
+- logs del servidor si están disponibles
+
+Una herramienta puede decir que existen 300 warnings. Una auditoría profesional debe explicar cuáles importan, cuáles son secundarios y cuáles se pueden ignorar.
+
+---
+
+## Checklist completo de auditoría SEO técnica
+
+Este checklist sirve como base para revisar una web que no aparece en Google o que no está posicionando como debería.
+
+### Rastreo
+
+<ul>
+  <li>Revisar archivo <strong>robots.txt</strong>.</li>
+  <li>Confirmar que no se bloqueen páginas importantes.</li>
+  <li>Confirmar que no se bloqueen assets críticos.</li>
+  <li>Revisar códigos HTTP de páginas principales.</li>
+  <li>Detectar errores 4xx.</li>
+  <li>Detectar errores 5xx.</li>
+  <li>Revisar cadenas de redirecciones.</li>
+  <li>Comprobar dominio canónico.</li>
+  <li>Revisar versiones con y sin www.</li>
+  <li>Revisar HTTP vs HTTPS.</li>
+</ul>
+
+### Indexación
+
+<ul>
+  <li>Verificar propiedad en Google Search Console.</li>
+  <li>Enviar sitemap XML.</li>
+  <li>Inspeccionar URLs principales.</li>
+  <li>Revisar páginas indexadas.</li>
+  <li>Revisar páginas excluidas.</li>
+  <li>Detectar <strong>noindex</strong> accidental.</li>
+  <li>Revisar canonicals.</li>
+  <li>Revisar duplicados.</li>
+  <li>Revisar páginas rastreadas pero no indexadas.</li>
+  <li>Revisar páginas descubiertas pero no indexadas.</li>
+</ul>
+
+### Performance
+
+<ul>
+  <li>Medir carga mobile.</li>
+  <li>Revisar LCP.</li>
+  <li>Revisar INP.</li>
+  <li>Revisar CLS.</li>
+  <li>Optimizar imagen principal.</li>
+  <li>Reducir JavaScript innecesario.</li>
+  <li>Revisar CSS bloqueante.</li>
+  <li>Configurar caché.</li>
+  <li>Optimizar fuentes.</li>
+  <li>Eliminar scripts de terceros innecesarios.</li>
+  <li>Usar lazy loading en imágenes secundarias.</li>
+</ul>
+
+### Arquitectura
+
+<ul>
+  <li>Revisar estructura de URLs.</li>
+  <li>Revisar páginas de servicios o categorías.</li>
+  <li>Revisar profundidad de clics.</li>
+  <li>Detectar páginas huérfanas.</li>
+  <li>Revisar enlaces internos.</li>
+  <li>Agrupar contenidos por temas.</li>
+  <li>Evitar categorías vacías.</li>
+  <li>Evitar tags sin contenido útil.</li>
+  <li>Revisar navegación mobile.</li>
+</ul>
+
+### Contenido y metadata
+
+<ul>
+  <li>Un H1 por página.</li>
+  <li>H2 y H3 ordenados.</li>
+  <li>Titles únicos.</li>
+  <li>Meta descriptions únicas.</li>
+  <li>Alt text descriptivo.</li>
+  <li>Contenido suficiente.</li>
+  <li>Intención de búsqueda clara.</li>
+  <li>CTAs visibles.</li>
+  <li>FAQs útiles.</li>
+  <li>Enlaces hacia páginas relacionadas.</li>
+</ul>
+
+---
+
+## Cuánto cuesta una auditoría SEO técnica en Chile
+
+El valor depende del tamaño del sitio, la cantidad de URLs, la complejidad técnica y si se incluye implementación.
+
+<div class="table-responsive shadow-sm" style="border-radius:14px; overflow:hidden;">
+  <table class="table mb-0">
+    <thead class="thead-light">
+      <tr>
+        <th>Tipo de auditoría</th>
+        <th>Ideal para</th>
+        <th>Rango referencial</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Revisión básica</td>
+        <td>Landing, sitio pequeño o web corporativa simple.</td>
+        <td>$150.000 – $350.000 CLP</td>
+      </tr>
+      <tr>
+        <td>Auditoría técnica completa</td>
+        <td>Sitios de servicios, blogs o ecommerce pequeños.</td>
+        <td>$350.000 – $900.000 CLP</td>
+      </tr>
+      <tr>
+        <td>Auditoría avanzada</td>
+        <td>Sitios grandes, ecommerce, migraciones, SSR o múltiples templates.</td>
+        <td>$900.000 – $2.500.000+ CLP</td>
+      </tr>
+      <tr>
+        <td>Auditoría + implementación</td>
+        <td>Empresas que necesitan diagnóstico y corrección técnica.</td>
+        <td>Variable según alcance.</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+> Estos valores son referenciales. Una revisión de pocas páginas no cuesta lo mismo que auditar un ecommerce con cientos de URLs, filtros, categorías y problemas de indexación.
+
+---
+
+## Qué debería incluir el entregable final
+
+Una auditoría SEO técnica profesional debería entregar algo más útil que una lista automática de errores.
+
+Debería incluir:
+
+- resumen ejecutivo
+- problemas críticos
+- evidencia técnica
+- URLs afectadas
+- impacto estimado
+- prioridad
+- recomendación específica
+- responsable sugerido
+- complejidad de implementación
+- orden de trabajo
+- checklist de validación posterior
+
+Un buen entregable responde tres preguntas:
+
+1. Qué está mal.
+2. Por qué importa.
+3. Qué hay que hacer ahora.
+
+---
+
+## Qué corregir primero
+
+No todos los problemas tienen la misma prioridad.
+
+### Prioridad alta
+
+Corregir primero:
+
+- páginas importantes bloqueadas
+- sitemap incorrecto
+- canonicals mal configurados
+- páginas comerciales no indexadas
+- errores 404 en URLs con tráfico
+- redirecciones rotas
+- dominio duplicado sin consolidar
+- carga mobile extremadamente lenta
+- contenido principal no visible para Google
+
+### Prioridad media
+
+Corregir después:
+
+- meta titles duplicados
+- meta descriptions débiles
+- imágenes pesadas en páginas secundarias
+- enlazado interno pobre
+- páginas huérfanas
+- contenido delgado
+- URLs poco descriptivas
+
+### Prioridad baja
+
+Dejar para el final:
+
+- microajustes visuales
+- cambios menores de copy
+- optimizaciones que no afectan páginas importantes
+- detalles sin impacto en rastreo, indexación o conversión
+
+---
+
+## Auditoría SEO técnica antes de una migración
+
+Si se cambia de hosting, dominio, CMS, framework o estructura de URLs, una auditoría técnica es todavía más importante.
+
+Antes de migrar conviene revisar:
+
+- URLs actuales
+- URLs nuevas
+- mapa de redirecciones
+- sitemap nuevo
+- metadata
+- canonicals
+- robots.txt
+- rendimiento
+- páginas con tráfico
+- páginas con backlinks
+- páginas que no deben perderse
+- configuración de dominio
+- Search Console
+- Analytics
+
+Después de migrar conviene monitorear:
+
+- errores 404
+- redirecciones
+- páginas indexadas
+- caídas de impresiones
+- cambios de posición
+- velocidad
+- sitemap
+- logs si están disponibles
+
+Una migración mal ejecutada puede afectar tráfico orgánico durante semanas o meses.
+
+---
+
+## Errores comunes al contratar una auditoría SEO
+
+Antes de contratar una auditoría, conviene evitar estos errores:
+
+- pedir solo un reporte automático
+- contratar sin saber si incluye revisión técnica real
+- no preguntar si incluye priorización
+- no aclarar si incluye implementación
+- no revisar si entiende frameworks modernos
+- no conectar Search Console
+- no entregar contexto del negocio
+- no definir páginas importantes
+- no hacer seguimiento después del diagnóstico
+
+La auditoría no debe ser un documento que queda guardado. Debe convertirse en una lista de mejoras implementables.
+
+---
+
+## Preguntas frecuentes sobre auditoría SEO técnica
+
+### ¿Una auditoría SEO técnica garantiza aparecer primero en Google?
+
+No. Una auditoría seria no promete la primera posición.
+
+Lo que hace es detectar bloqueos y oportunidades técnicas para que la web pueda competir en mejores condiciones. El posicionamiento también depende de contenido, autoridad, intención de búsqueda, competencia y experiencia del usuario.
+
+### ¿Cuánto demora una auditoría SEO técnica?
+
+Depende del tamaño del sitio.
+
+Una revisión básica puede tomar algunos días. Una auditoría completa puede tomar una o dos semanas. Sitios grandes, ecommerce o migraciones complejas pueden requerir más tiempo.
+
+### ¿Qué diferencia hay entre auditoría SEO técnica y auditoría de contenidos?
+
+La auditoría técnica revisa rastreo, indexación, velocidad, estructura, canonicals, redirecciones y rendimiento.
+
+La auditoría de contenidos revisa intención de búsqueda, profundidad, keywords, calidad, diferenciación, enlaces internos y oportunidades editoriales.
+
+Ambas se complementan.
+
+### ¿Qué pasa si una web está hecha en WordPress?
+
+Se puede auditar igual.
+
+En WordPress se revisan plugins, theme, velocidad, sitemap, indexación, URLs, metadata, seguridad básica, contenido duplicado, imágenes y estructura.
+
+### ¿Qué pasa si una web está hecha con Astro, Next, Nuxt, Vue o React?
+
+También se puede auditar.
+
+En esos casos es clave revisar renderizado, metadata, rutas dinámicas, assets, SSR, SSG, hidratación, sitemap, caché y performance.
+
+### ¿Conviene hacer auditoría antes de rediseñar una web?
+
+Sí.
+
+Antes de rediseñar conviene saber qué URLs tienen tráfico, qué páginas están posicionando, qué errores existen y qué estructura debe conservarse. Rediseñar sin auditoría puede eliminar páginas valiosas o romper URLs importantes.
+
+### ¿Qué pasa si Search Console muestra páginas rastreadas pero no indexadas?
+
+Puede ser señal de contenido débil, duplicado, poca autoridad, baja prioridad o problemas técnicos.
+
+No siempre es grave, pero si afecta páginas comerciales importantes, debe revisarse.
+
+### ¿Qué pasa si una web aparece en Google, pero no recibe clics?
+
+Puede tener bajo CTR, títulos poco atractivos, posiciones bajas, intención de búsqueda mal resuelta o competir contra resultados más completos.
+
+En ese caso no basta con indexar. Hay que mejorar title, descripción, contenido, estructura y propuesta de valor.
+
+### ¿Cada cuánto conviene hacer una auditoría SEO técnica?
+
+Para sitios pequeños, cada 6 a 12 meses puede ser suficiente.
+
+Para ecommerce, sitios con blog activo, migraciones frecuentes o cambios constantes, conviene revisar con mayor frecuencia.
+
+---
+
+## Conclusión: si una web no aparece en Google, primero hay que revisar la base técnica
+
+Cuando una web no aparece en Google, no conviene partir cambiando colores, publicando artículos al azar o pagando campañas sin diagnóstico.
+
+Primero hay que revisar si la base técnica está funcionando.
+
+Una auditoría SEO técnica permite detectar errores de rastreo, indexación, sitemap, robots.txt, redirecciones, rendimiento, contenido duplicado, arquitectura y experiencia mobile.
+
+El objetivo no es tener un sitio perfecto en herramientas automáticas. El objetivo es tener una web que Google pueda rastrear, entender, indexar y mostrar para búsquedas relevantes.
+
+Si la base técnica está bien, cada nuevo contenido, página de servicio, mejora de autoridad o campaña tendrá más posibilidades de generar resultados.
+
+Si la base técnica está mal, todo lo demás trabaja cuesta arriba.
+
+---
+
+## Checklist final
+
+Antes de cerrar una auditoría SEO técnica, revisa:
+
+<ul>
+  <li>¿Google puede rastrear las páginas importantes?</li>
+  <li>¿El sitemap está limpio y actualizado?</li>
+  <li>¿El robots.txt no bloquea recursos críticos?</li>
+  <li>¿Las páginas principales están indexadas?</li>
+  <li>¿Los titles son únicos y claros?</li>
+  <li>¿Las meta descriptions ayudan al clic?</li>
+  <li>¿Hay un solo H1 por página?</li>
+  <li>¿Las URLs son limpias?</li>
+  <li>¿La web carga rápido en mobile?</li>
+  <li>¿Las imágenes están optimizadas?</li>
+  <li>¿Existen errores 404 relevantes?</li>
+  <li>¿Las redirecciones son correctas?</li>
+  <li>¿Hay canonicals coherentes?</li>
+  <li>¿Existe contenido duplicado?</li>
+  <li>¿Las páginas importantes reciben enlaces internos?</li>
+  <li>¿El contenido responde una intención real de búsqueda?</li>
+  <li>¿Search Console está configurado?</li>
+  <li>¿El dominio principal está correctamente consolidado?</li>
+</ul>
+
+Una auditoría SEO técnica bien hecha no solo encuentra errores. Ordena prioridades y convierte el diagnóstico en un plan de crecimiento orgánico.
+
+---
+
+## CTA final
+
+<div class="card border-0 shadow-sm mt-4" style="border-radius:18px;">
+  <div class="card-body text-center">
+    <h2 class="h4 font-weight-bold mb-2">¿Necesitas revisar por qué una web no aparece en Google?</h2>
+    <p class="text-muted mb-3">
+      Una auditoría SEO técnica permite detectar bloqueos de rastreo, indexación, velocidad, estructura y contenido antes de invertir más tiempo o presupuesto en acciones que quizás no están atacando el problema real.
+    </p>
+    <div class="d-grid gap-2 d-sm-flex justify-content-sm-center my-3">
+      <a class="btn btn-primary btn-lg" href="/contacto/">Solicitar auditoría SEO →</a>
+    </div>
+    <small class="text-muted d-block">
+      SEO técnico · Indexación · Core Web Vitals · Arquitectura web · Chile
+    </small>
+  </div>
+</div>

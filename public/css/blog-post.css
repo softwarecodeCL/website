@@ -1,0 +1,439 @@
+/* =====================================================
+   SoftwareCode Blog Post — MDX definitivo
+   Scope seguro: solo afecta .sc-blog-post
+   ===================================================== */
+
+.sc-post-section {
+  position: relative;
+  padding: 72px 18px 110px;
+  background:
+    radial-gradient(circle at 14% 0%, rgba(111, 44, 255, 0.14), transparent 34rem),
+    radial-gradient(circle at 86% 18%, rgba(255, 46, 166, 0.10), transparent 32rem),
+    linear-gradient(180deg, #050816 0%, #070a12 55%, #050816 100%);
+}
+
+.sc-post-section::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: .18;
+  background-image:
+    linear-gradient(rgba(255,255,255,.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.045) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: linear-gradient(to bottom, black, transparent 75%);
+}
+
+.sc-blog-post {
+  position: relative;
+  z-index: 1;
+  width: min(900px, 100%);
+  margin: 0 auto;
+  padding: clamp(28px, 5vw, 62px);
+  border: 1px solid rgba(255, 255, 255, .14);
+  border-radius: 34px;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.98), rgba(248,250,252,.96)),
+    #ffffff;
+  color: #0f172a;
+  box-shadow:
+    0 34px 120px rgba(0, 0, 0, .42),
+    0 0 0 1px rgba(255,255,255,.08);
+  overflow: hidden;
+}
+
+.sc-blog-post::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 8px;
+  background: linear-gradient(90deg, #ec4899, #7c3aed, #38bdf8);
+}
+
+.sc-blog-post > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Si el MDX trae otro H1, lo ocultamos para no duplicar el hero */
+.sc-blog-post > h1:first-child {
+  display: none;
+}
+
+/* Texto base */
+.sc-blog-post p {
+  margin: 0 0 1.45rem;
+  color: #334155;
+  font-size: clamp(1.02rem, 1.2vw, 1.12rem);
+  line-height: 1.88;
+  text-wrap: pretty;
+}
+
+.sc-blog-post strong {
+  color: #0f172a;
+  font-weight: 850;
+}
+
+.sc-blog-post em {
+  color: #475569;
+}
+
+/* Links */
+.sc-blog-post a {
+  color: #6d28d9;
+  font-weight: 800;
+  text-decoration: none;
+  background:
+    linear-gradient(90deg, rgba(124,58,237,.28), rgba(236,72,153,.24))
+    0 100% / 100% 2px no-repeat;
+  transition: color .18s ease, background-size .18s ease;
+}
+
+.sc-blog-post a:hover {
+  color: #4c1d95;
+  background-size: 100% 100%;
+}
+
+/* Jerarquía editorial */
+.sc-blog-post h2 {
+  position: relative;
+  margin: 4.2rem 0 1.25rem;
+  padding-top: 1.25rem;
+  color: #08111f;
+  font-size: clamp(1.85rem, 4vw, 3rem);
+  line-height: 1.08;
+  letter-spacing: -0.055em;
+  font-weight: 950;
+  text-wrap: balance;
+}
+
+.sc-blog-post h2::before {
+  content: "";
+  display: block;
+  width: 78px;
+  height: 5px;
+  margin-bottom: 18px;
+  border-radius: 999px;
+  background: linear-gradient(90deg, #ec4899, #7c3aed, #38bdf8);
+  box-shadow: 0 12px 30px rgba(124, 58, 237, .22);
+}
+
+.sc-blog-post h3 {
+  margin: 2.8rem 0 1rem;
+  color: #111827;
+  font-size: clamp(1.32rem, 2.5vw, 1.82rem);
+  line-height: 1.22;
+  letter-spacing: -0.035em;
+  font-weight: 920;
+}
+
+.sc-blog-post h4 {
+  margin: 2rem 0 .85rem;
+  color: #1e293b;
+  font-size: 1.14rem;
+  line-height: 1.35;
+  font-weight: 900;
+}
+
+/* Separadores */
+.sc-blog-post hr {
+  margin: 3.5rem 0;
+  border: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(15,23,42,.16), transparent);
+  opacity: 1;
+}
+
+/* Listas */
+.sc-blog-post ul,
+.sc-blog-post ol {
+  margin: 0 0 1.8rem;
+  padding: 0;
+  list-style: none;
+}
+
+.sc-blog-post li {
+  position: relative;
+  margin-bottom: .8rem;
+  padding-left: 2rem;
+  color: #334155;
+  font-size: 1.04rem;
+  line-height: 1.75;
+}
+
+.sc-blog-post ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .72em;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #ec4899, #7c3aed, #38bdf8);
+  box-shadow: 0 0 0 5px rgba(124,58,237,.10);
+}
+
+.sc-blog-post ol {
+  counter-reset: sc-counter;
+}
+
+.sc-blog-post ol li {
+  counter-increment: sc-counter;
+}
+
+.sc-blog-post ol li::before {
+  content: counter(sc-counter);
+  position: absolute;
+  left: 0;
+  top: .2em;
+  width: 24px;
+  height: 24px;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  background: linear-gradient(135deg, #7c3aed, #ec4899);
+  font-size: .78rem;
+  font-weight: 950;
+}
+
+/* Blockquote */
+.sc-blog-post blockquote {
+  margin: 2.6rem 0;
+  padding: 1.6rem 1.7rem;
+  border-left: 6px solid #7c3aed;
+  border-radius: 22px;
+  color: #1e293b;
+  background:
+    linear-gradient(135deg, rgba(124,58,237,.09), rgba(236,72,153,.06)),
+    #ffffff;
+  box-shadow:
+    0 20px 50px rgba(15,23,42,.08),
+    inset 0 0 0 1px rgba(124,58,237,.10);
+}
+
+.sc-blog-post blockquote p {
+  margin-bottom: 0;
+  color: #1e293b;
+  font-size: 1.1rem;
+  line-height: 1.75;
+}
+
+/* Código */
+.sc-blog-post code {
+  padding: .2rem .42rem;
+  border-radius: 8px;
+  color: #7e22ce;
+  background: rgba(124,58,237,.08);
+  font-size: .92em;
+  font-weight: 700;
+}
+
+.sc-blog-post pre {
+  margin: 2rem 0;
+  padding: 1.35rem;
+  border-radius: 22px;
+  color: #e2e8f0;
+  background:
+    linear-gradient(135deg, #0f172a, #020617);
+  box-shadow: 0 22px 60px rgba(15,23,42,.26);
+  overflow-x: auto;
+}
+
+.sc-blog-post pre code {
+  padding: 0;
+  color: inherit;
+  background: transparent;
+  font-weight: 500;
+}
+
+/* Tablas Markdown */
+.sc-blog-post table {
+  width: 100%;
+  margin: 2.4rem 0;
+  border-collapse: separate;
+  border-spacing: 0;
+  overflow: hidden;
+  border: 1px solid rgba(15,23,42,.10);
+  border-radius: 22px;
+  background: #ffffff;
+  box-shadow: 0 22px 60px rgba(15,23,42,.08);
+}
+
+.sc-blog-post thead {
+  background:
+    linear-gradient(135deg, rgba(124,58,237,.13), rgba(236,72,153,.08)),
+    #f8fafc;
+}
+
+.sc-blog-post th {
+  color: #0f172a;
+  font-weight: 950;
+}
+
+.sc-blog-post th,
+.sc-blog-post td {
+  padding: 1rem 1.1rem;
+  border-bottom: 1px solid rgba(15,23,42,.08);
+  vertical-align: top;
+  text-align: left;
+}
+
+.sc-blog-post tr:last-child td {
+  border-bottom: 0;
+}
+
+.sc-blog-post td {
+  color: #334155;
+}
+
+/* Compatibilidad Bootstrap si el MDX tiene alert/card/table-responsive */
+.sc-blog-post .alert,
+.sc-blog-post .card {
+  margin: 2rem 0;
+  border: 1px solid rgba(15,23,42,.10) !important;
+  border-radius: 24px !important;
+  color: #1e293b !important;
+  background: #ffffff !important;
+  box-shadow: 0 22px 60px rgba(15,23,42,.08) !important;
+  overflow: hidden;
+}
+
+.sc-blog-post .alert {
+  padding: 1.35rem 1.45rem;
+}
+
+.sc-blog-post .alert-light {
+  border-left: 6px solid #7c3aed !important;
+}
+
+.sc-blog-post .alert-warning {
+  border-left: 6px solid #f59e0b !important;
+}
+
+.sc-blog-post .alert-danger {
+  border-left: 6px solid #ef4444 !important;
+}
+
+.sc-blog-post .card-body {
+  padding: clamp(1.35rem, 4vw, 2.4rem);
+}
+
+.sc-blog-post .text-muted {
+  color: #475569 !important;
+}
+
+.sc-blog-post .mb-0 {
+  margin-bottom: 0 !important;
+}
+
+.sc-blog-post .table-responsive {
+  margin: 2.4rem 0;
+  border-radius: 22px;
+  overflow-x: auto;
+  box-shadow: 0 22px 60px rgba(15,23,42,.08);
+}
+
+.sc-blog-post .table {
+  margin: 0;
+  --bs-table-bg: #fff;
+  --bs-table-color: #334155;
+  --bs-table-border-color: rgba(15,23,42,.08);
+}
+
+/* Imágenes dentro del post */
+.sc-blog-post img {
+  max-width: 100%;
+  height: auto;
+}
+
+.sc-blog-post p > img {
+  display: block;
+  width: 100%;
+  margin: 2.4rem auto;
+  border-radius: 26px;
+  border: 1px solid rgba(15,23,42,.10);
+  box-shadow: 0 26px 80px rgba(15,23,42,.16);
+}
+
+/* CTA / botones */
+.sc-blog-post .btn,
+.sc-blog-post .btn-primary,
+.sc-blog-post a.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: .45rem;
+  border: 0 !important;
+  border-radius: 999px !important;
+  padding: .9rem 1.35rem !important;
+  color: #fff !important;
+  background:
+    linear-gradient(135deg, #7c3aed, #db2777, #2563eb) !important;
+  box-shadow:
+    0 18px 46px rgba(124,58,237,.26),
+    inset 0 1px 0 rgba(255,255,255,.18);
+  font-weight: 950;
+  text-decoration: none !important;
+}
+
+.sc-blog-post .btn:hover,
+.sc-blog-post a.btn:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+}
+
+/* FAQ visual: headings dentro de sección final */
+.sc-blog-post h2[id*="preguntas"] ~ h2,
+.sc-blog-post h2[id*="preguntas"] ~ h3 {
+  scroll-margin-top: 120px;
+}
+
+/* Utilidad de scroll */
+.sc-blog-post [id] {
+  scroll-margin-top: 120px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .sc-post-section {
+    padding: 46px 14px 76px;
+  }
+
+  .sc-blog-post {
+    padding: 26px 20px;
+    border-radius: 26px;
+  }
+
+  .sc-blog-post h2 {
+    margin-top: 3.2rem;
+    letter-spacing: -0.045em;
+  }
+
+  .sc-blog-post h3 {
+    margin-top: 2.2rem;
+  }
+
+  .sc-blog-post p,
+  .sc-blog-post li {
+    font-size: 1rem;
+    line-height: 1.75;
+  }
+
+  .sc-blog-post li {
+    padding-left: 1.75rem;
+  }
+
+  .sc-blog-post th,
+  .sc-blog-post td {
+    padding: .85rem;
+    font-size: .92rem;
+  }
+
+  .sc-blog-post pre {
+    border-radius: 18px;
+    padding: 1rem;
+  }
+}
