@@ -1,0 +1,384 @@
+---
+import Layout from "../../layouts/Layout.astro";
+
+export const prerender = true;
+
+const SITE_URL = "https://www.softwarecode.cl/";
+const pageUrl = `${SITE_URL}proyectos/`;
+const pageTitle = "Proyectos de Desarrollo Web, SEO y Automatización en Chile";
+const pageDescription =
+  "Conoce proyectos reales de SoftwareCode en desarrollo web, SEO técnico, catálogos B2B, integraciones y automatización para empresas en Chile.";
+const socialImage = "/logosc-original.png";
+
+const projects = [
+  {
+    sector: "Equipamiento médico y servicio técnico",
+    title: "Plataforma web y catálogo B2B para Servicios HYH",
+    description:
+      "Desarrollo de catálogo, fichas técnicas, filtros, cotización múltiple y optimización SEO para una empresa de equipos oftalmológicos y de laboratorio.",
+    href: "/proyectos/plataforma-catalogo-equipos-medicos/",
+    tags: ["Desarrollo web", "SEO técnico", "Catálogo B2B", "Cotizaciones"],
+    icon: "bi-hospital",
+    image: "/proyectos/hyh2.jpeg"
+  },
+  {
+    sector: "Educación, OTEC y capacitación empresarial",
+    title: "Plataforma Moodle para Elemental Studios",
+    description:
+      "Implementación de una plataforma Moodle para gestionar cursos, alumnos, evaluaciones y seguimiento académico, apoyando a Elemental Studios en su proceso de certificación y operación como OTEC en Chile.",
+    href: "/proyectos/plataforma-moodle-otec-elemental-studios/",
+    tags: ["Moodle", "Plataforma LMS", "OTEC", "E-learning"],
+    icon: "bi-mortarboard",
+    image: "/proyectos/elemental.png"
+  },
+  {
+    sector: "Finanzas, automatización e integración de sistemas",
+    title: "Automatización de montos multimoneda para operaciones B2B",
+    description:
+      "Diseño de una solución empresarial para recibir, validar y consolidar montos provenientes de distintos sistemas y monedas, incorporando control de duplicados, trazabilidad, reintentos y procesos preparados para escalar.",
+    href: "/proyectos/automatizacion-consolidacion-montos-multimoneda/",
+    tags: [
+      "Automatización financiera",
+      "Multimoneda",
+      "Integración de sistemas",
+      "Golang"
+    ],
+    icon: "bi-currency-exchange",
+    image: "/proyectos/consolidacion-multimoneda.jpg"
+  }
+];
+
+const schemaExtras = [
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "@id": `${pageUrl}#collectionpage`,
+    "url": pageUrl,
+    "name": pageTitle,
+    "description": pageDescription,
+    "isPartOf": { "@id": `${SITE_URL}#website` },
+    "about": { "@id": `${SITE_URL}#organization` },
+    "mainEntity": {
+      "@type": "ItemList",
+      "name": "Proyectos de SoftwareCode",
+      "itemListElement": projects.map((project, index) => ({
+        "@type": "ListItem",
+        "position": index + 1,
+        "url": new URL(project.href, SITE_URL).toString(),
+        "name": project.title
+      }))
+    },
+    "inLanguage": "es-CL",
+    "dateModified": "2026-06-23"
+  }
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={socialImage}
+  url={pageUrl}
+  schemaExtras={schemaExtras}
+>
+  <section class="projects-hero position-relative overflow-hidden">
+    <div class="projects-hero__glow projects-hero__glow--one"></div>
+    <div class="projects-hero__glow projects-hero__glow--two"></div>
+    <div class="projects-hero__grid"></div>
+
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-8" data-aos="fade-up" data-aos-duration="650">
+          <nav aria-label="Breadcrumb" class="projects-breadcrumb mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Proyectos</li>
+            </ol>
+          </nav>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="projects-badge">Casos reales</span>
+            <span class="projects-badge">Empresas B2B</span>
+            <span class="projects-badge">Chile</span>
+          </div>
+
+          <h1 class="display-4 fw-bold lh-sm mb-4">
+            Proyectos de desarrollo, SEO y automatización para
+            <span class="projects-gradient-text">empresas</span>
+          </h1>
+
+          <p class="lead text-secondary mb-4">
+            Casos documentados con el problema inicial, las decisiones técnicas,
+            la solución implementada y los resultados obtenidos. No mostramos solo
+            diseños: explicamos cómo la tecnología ayudó a resolver una necesidad real.
+          </p>
+
+          <div class="d-grid gap-2 d-sm-flex">
+            <a href="#casos" class="btn projects-btn-primary btn-lg px-4">Ver proyectos</a>
+            <a href="/nosotros/" class="btn projects-btn-outline btn-lg px-4">Conocer SoftwareCode</a>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-4" data-aos="fade-left" data-aos-duration="650">
+          <div class="projects-summary-card">
+            <span class="projects-summary-card__icon"><i class="bi bi-diagram-3"></i></span>
+            <h2 class="h4 fw-bold">Qué documentamos</h2>
+            <ul class="list-unstyled mb-0">
+              <li><i class="bi bi-check2"></i> Contexto y desafío</li>
+              <li><i class="bi bi-check2"></i> Arquitectura y funcionalidades</li>
+              <li><i class="bi bi-check2"></i> Decisiones según el negocio</li>
+              <li><i class="bi bi-check2"></i> SEO, medición y resultados</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="casos" class="py-5 projects-section">
+    <div class="container py-lg-4">
+      <div class="row mb-4 align-items-end g-3">
+        <div class="col-12 col-lg-8">
+          <span class="projects-kicker">Trabajo aplicado</span>
+          <h2 class="projects-title mt-2 mb-2">Proyectos seleccionados de SoftwareCode</h2>
+          <p class="text-secondary mb-0">
+            Cada caso conecta desarrollo, experiencia de usuario, posicionamiento y procesos comerciales.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        {projects.map((project) => (
+          <div class="col-12">
+            <article class="project-card" data-aos="fade-up" data-aos-duration="650">
+              <div class="row g-0 align-items-stretch">
+                <div class="col-12 col-lg-5">
+                  <div class="project-card__visual">
+                      <img
+                        src={project.image}
+                        alt={project.title}
+                        width="900"
+                        height="680"
+                        loading="lazy"
+                        decoding="async"
+                        class="project-card__image"
+                      />
+                  </div>
+                </div>
+
+                <div class="col-12 col-lg-7">
+                  <div class="project-card__body">
+                    <span class="project-card__sector">{project.sector}</span>
+                    <h3 class="h2 fw-bold mt-2 mb-3">{project.title}</h3>
+                    <p class="text-secondary mb-4">{project.description}</p>
+
+                    <div class="d-flex flex-wrap gap-2 mb-4">
+                      {project.tags.map((tag) => <span class="project-tag">{tag}</span>)}
+                    </div>
+
+                    <a href={project.href} class="project-link">
+                      Ver proyecto completo <i class="bi bi-arrow-right"></i>
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </article>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 projects-method border-top border-bottom">
+    <div class="container py-lg-4">
+      <div class="row g-4 align-items-center">
+        <div class="col-12 col-lg-5">
+          <span class="projects-kicker">Experiencia verificable</span>
+          <h2 class="projects-title mt-2 mb-3">Por qué mostramos el proceso y no solo el resultado visual</h2>
+          <p class="text-secondary mb-0">
+            Una plataforma útil no se define únicamente por su apariencia. Debe responder al negocio,
+            facilitar tareas, ser rastreable por Google y permitir medir las acciones importantes.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-7">
+          <div class="row g-3">
+            <div class="col-12 col-md-6">
+              <div class="method-card">
+                <i class="bi bi-bullseye"></i>
+                <h3 class="h5 fw-bold">Problema real</h3>
+                <p>Partimos por el proceso comercial, operativo o técnico que necesita mejorar.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="method-card">
+                <i class="bi bi-code-square"></i>
+                <h3 class="h5 fw-bold">Implementación</h3>
+                <p>Documentamos las funcionalidades y decisiones relevantes del desarrollo.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="method-card">
+                <i class="bi bi-search"></i>
+                <h3 class="h5 fw-bold">Visibilidad</h3>
+                <p>Consideramos arquitectura, contenido, rendimiento y medición SEO.</p>
+              </div>
+            </div>
+            <div class="col-12 col-md-6">
+              <div class="method-card">
+                <i class="bi bi-graph-up-arrow"></i>
+                <h3 class="h5 fw-bold">Evolución</h3>
+                <p>La solución queda preparada para iterar según datos y necesidades del negocio.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-5 projects-cta-section">
+    <div class="container py-lg-4">
+      <div class="projects-cta">
+        <div>
+          <span class="projects-kicker">Nuevo proyecto</span>
+          <h2 class="h2 fw-bold mt-2 mb-2">¿Necesitas una solución similar para tu empresa?</h2>
+          <p class="text-secondary mb-0">
+            Conversemos sobre el problema, la arquitectura necesaria y una implementación por etapas.
+          </p>
+        </div>
+        <div class="d-grid d-sm-flex gap-2">
+          <a
+            href="https://wa.me/56988396128?text=Hola%2C%20vi%20los%20proyectos%20de%20SoftwareCode%20y%20quiero%20conversar%20sobre%20una%20soluci%C3%B3n%20para%20mi%20empresa."
+            class="btn projects-btn-primary btn-lg px-4"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Hablar sobre mi proyecto
+          </a>
+          <a href="/desarrollo-web-a-medida/" class="btn projects-btn-outline btn-lg px-4">Ver servicios</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <style>
+    :root {
+      --projects-ink: #111827;
+      --projects-muted: #64748b;
+      --projects-border: rgba(15, 23, 42, .1);
+      --projects-purple: #6f2cff;
+      --projects-pink: #ff2ea6;
+      --projects-soft: #f8fafc;
+    }
+
+    .projects-hero {
+      padding: 8.5rem 0 6rem;
+      color: var(--projects-ink);
+      background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+    }
+
+    .projects-hero__grid {
+      position: absolute;
+      inset: 0;
+      background-image: linear-gradient(rgba(15,23,42,.045) 1px, transparent 1px), linear-gradient(90deg, rgba(15,23,42,.045) 1px, transparent 1px);
+      background-size: 44px 44px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+      pointer-events: none;
+    }
+
+    .projects-hero__glow { position: absolute; border-radius: 50%; filter: blur(25px); opacity: .55; pointer-events: none; }
+    .projects-hero__glow--one { width: 460px; height: 460px; top: -220px; left: -170px; background: rgba(255,46,166,.19); }
+    .projects-hero__glow--two { width: 520px; height: 520px; right: -230px; top: -100px; background: rgba(111,44,255,.17); }
+
+    .projects-breadcrumb a { color: var(--projects-purple); text-decoration: none; }
+    .projects-badge, .project-tag {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(111,44,255,.18);
+      background: rgba(111,44,255,.06);
+      color: #5b21b6;
+      border-radius: 999px;
+      padding: .45rem .8rem;
+      font-size: .82rem;
+      font-weight: 800;
+    }
+
+    .projects-gradient-text {
+      background: linear-gradient(90deg, var(--projects-pink), var(--projects-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .projects-btn-primary {
+      color: #fff;
+      border: 0;
+      border-radius: 999px;
+      font-weight: 900;
+      background: linear-gradient(90deg, var(--projects-pink), var(--projects-purple));
+      box-shadow: 0 18px 45px rgba(111,44,255,.2);
+    }
+    .projects-btn-primary:hover { color: #fff; transform: translateY(-1px); }
+    .projects-btn-outline {
+      border: 1px solid rgba(111,44,255,.28);
+      color: var(--projects-purple);
+      background: #fff;
+      border-radius: 999px;
+      font-weight: 900;
+    }
+    .projects-btn-outline:hover { color: var(--projects-purple); background: rgba(111,44,255,.06); }
+
+    .projects-summary-card, .project-card, .method-card, .projects-cta {
+      border: 1px solid var(--projects-border);
+      background: rgba(255,255,255,.92);
+      box-shadow: 0 24px 70px rgba(15,23,42,.09);
+    }
+
+    .projects-summary-card { border-radius: 26px; padding: 2rem; }
+    .projects-summary-card__icon {
+      width: 54px; height: 54px; display: grid; place-items: center; border-radius: 16px;
+      color: var(--projects-purple); background: rgba(111,44,255,.09); font-size: 1.5rem; margin-bottom: 1.2rem;
+    }
+    .projects-summary-card li { display: flex; gap: .65rem; margin-top: .8rem; color: var(--projects-muted); }
+    .projects-summary-card li i { color: var(--projects-purple); }
+
+    .projects-section { background: #fff; }
+    .projects-kicker { color: var(--projects-purple); text-transform: uppercase; letter-spacing: .12em; font-size: .78rem; font-weight: 950; }
+    .projects-title { color: var(--projects-ink); font-weight: 900; }
+
+    .project-card { border-radius: 28px; overflow: hidden; }
+    .project-card__visual { height: 100%; min-height: 390px; background: linear-gradient(145deg, #101423, #24163f); padding: 1.25rem; }
+    .project-card__placeholder {
+      height: 100%; min-height: 365px; display: flex; flex-direction: column; align-items: center; justify-content: center;
+      text-align: center; color: #fff; border: 1px dashed rgba(255,255,255,.3); border-radius: 22px;
+      background: radial-gradient(circle at 25% 25%, rgba(255,46,166,.25), transparent 40%), radial-gradient(circle at 80% 70%, rgba(111,44,255,.35), transparent 42%);
+    }
+    .project-card__placeholder i { font-size: 3rem; margin-bottom: 1rem; }
+    .project-card__placeholder span { opacity: .65; margin-top: .35rem; font-size: .85rem; }
+    .project-card__image { width: 100%; height: 100%; object-fit: cover; border-radius: 22px; }
+    .project-card__body { padding: clamp(2rem, 4vw, 4rem); }
+    .project-card__sector { color: var(--projects-purple); font-weight: 900; text-transform: uppercase; letter-spacing: .08em; font-size: .76rem; }
+    .project-link { display: inline-flex; gap: .6rem; align-items: center; color: var(--projects-purple); text-decoration: none; font-weight: 950; }
+    .project-link:hover { gap: .85rem; color: #5b21b6; }
+
+    .projects-method { background: var(--projects-soft); }
+    .method-card { height: 100%; border-radius: 20px; padding: 1.5rem; }
+    .method-card i { display: inline-grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: rgba(111,44,255,.08); color: var(--projects-purple); font-size: 1.2rem; margin-bottom: 1rem; }
+    .method-card p { color: var(--projects-muted); margin: 0; }
+
+    .projects-cta-section { background: #fff; }
+    .projects-cta { border-radius: 28px; padding: clamp(2rem, 5vw, 4rem); display: flex; align-items: center; justify-content: space-between; gap: 2rem; }
+
+    @media (max-width: 991.98px) {
+      .projects-hero { padding: 7rem 0 4.5rem; }
+      .projects-cta { align-items: stretch; flex-direction: column; }
+    }
+
+    @media (max-width: 575.98px) {
+      .projects-hero h1 { font-size: 2.25rem; }
+      .project-card__visual { min-height: 290px; }
+      .project-card__placeholder { min-height: 265px; }
+    }
+  </style>
+</Layout>

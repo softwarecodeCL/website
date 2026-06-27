@@ -31,6 +31,17 @@ const updatedTime = post.data.updatedAt || post.data.date
 const category = post.data.category
 const tags = post.data.tags || []
 
+
+const slugifyTag = (value: any) =>
+  value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .trim()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+
+
 // Canonical robusto (sin romper si Astro.site viene vacío)
 const siteOrigin = Astro.site?.origin || 'https://www.softwarecode.cl'
 const canonical = `${siteOrigin}/blog/${post.slug}`
@@ -164,7 +175,10 @@ const jsonLdGraph = {
             <div class="d-flex flex-wrap">
               {tags.map(t => (
                 // BS4 -> BS5: mr-2 => me-2
-                <a class="article-tag me-2 mb-2" href={`/tag/${encodeURIComponent(t)}`}>
+                <a
+                  class="article-tag me-2 mb-2"
+                  href={`/tag/${slugifyTag(t)}/`}
+                >
                   #{t}
                 </a>
               ))}

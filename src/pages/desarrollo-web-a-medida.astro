@@ -1,10 +1,9 @@
 ---
 import Layout from '../layouts/Layout.astro'
 export const prerender = true;
-const title = 'Desarrollo web a medida en Chile y Latinoamérica — Nuxt, NestJS, Headless CMS y SEO técnico'
+const title = 'Empresa de Desarrollo de Software y Páginas Web a Medida'
 const description =
-  'Desarrollo web a medida para pymes, startups y empresas medianas. Migración desde WordPress, webs que venden, integraciones con pagos/APIs/sistemas, performance y SEO técnico con Nuxt + NestJS + Headless CMS.'
-
+  'SoftwareCode es una empresa de desarrollo de software en Chile y LatAm. Creamos aplicaciones web a medida, sistemas escalables e integraciones de APIs con rendimiento óptimo y SEO técnico nativo.'
 // ===== SEO: JSON-LD enriquecido (Service + WebPage + Breadcrumb + FAQ + Organization) =====
 const siteUrl = 'https://www.softwarecode.cl';
 const pageUrl = `${siteUrl}/desarrollo-web-a-medida/`;
@@ -16,8 +15,8 @@ const primaryImageUrl = `${siteUrl}/logosc-original.png`;
 
 const faq = [
   {
-    q: '¿Cuándo conviene pasar de WordPress a una web a medida?',
-    a: 'Cuando tu sitio se vuelve lento, dependes de demasiados plugins, necesitas integraciones reales (pagos, CRM, APIs) o quieres posicionarte con SEO técnico serio. Si cada cambio implica “parches”, normalmente ya es momento de una base moderna.'
+    q: '¿Cuándo conviene pasar de WordPress a una plataforma a medida?',
+    a: 'Conviene cuando tu sitio se vuelve lento, dependes de demasiados plugins o necesitas integraciones reales. Puedes revisar nuestro análisis detallado sobre <a href="/blog/web-a-medida-vs-wordpress/" style="color:#a855f7; text-decoration:underline;">Web a Medida vs WordPress</a> para evaluar si tu infraestructura actual está limitando el crecimiento y el SEO técnico de tu negocio.'
   },
   {
     q: '¿Qué significa “SEO técnico desde el inicio”?',
@@ -52,7 +51,12 @@ const jsonLdGraph = {
           "telephone": phone,
           "contactType": "sales",
           "availableLanguage": ["es"],
-          "areaServed": ["CL", "LATAM"]
+          "areaServed": [
+            { "@type": "Country", "name": "Chile" },
+            { "@type": "Country", "name": "Perú" },
+            { "@type": "Country", "name": "Colombia" },
+            { "@type": "Country", "name": "México" }
+          ]
         }
       ]
     },
@@ -87,14 +91,14 @@ const jsonLdGraph = {
       "@id": `${pageUrl}#breadcrumbs`,
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": "Inicio", "item": siteUrl },
-        { "@type": "ListItem", "position": 2, "name": "Software a medida", "item": pageUrl }
+        { "@type": "ListItem", "position": 2, "name": "Desarrollo web a medida", "item": pageUrl }
       ]
     },
-    {
+{
       "@type": "Service",
       "@id": `${siteUrl}#service`,
-      "name": "Desarrollo web a medida",
-      "serviceType": ["Web Development", "Custom Software Development", "SEO Technical Consulting"],
+      "name": "Desarrollo de Software y Páginas Web a Medida",
+      "serviceType": ["Custom Software Development", "Web Development", "SEO Technical Consulting"],
       "description": description,
       "url": pageUrl,
       "provider": { "@id": `${siteUrl}#organization` },
@@ -128,7 +132,7 @@ const jsonLdGraph = {
   ]
 };
 ---
-<Layout title={title} description={description}>
+<Layout title={title} description={description} schemaExtras={[jsonLdGraph]}>
   <style>
     :root{
   --mk-bg:#070a12;
@@ -735,7 +739,11 @@ section.container.py-5 > .row{
     max-width: 94%;
     text-align: center !important;
   }
-} 
+} @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto !important;
+  }
+}
   </style>
 
   <!-- HERO -->
@@ -745,12 +753,10 @@ section.container.py-5 > .row{
         <div class="col-lg-10 text-center">
           <div class="mk-kicker mb-2">Chile · Latinoamérica · Remoto</div>
           <h1 class="mk-title display-4 mb-3">
-            Desarrollo web a medida<br/>para empresas que necesitan crecer
+            Empresa de desarrollo de software y aplicaciones web a medida
           </h1>
           <p class="mk-subtitle mb-4">
-            Si tu web actual <strong>no vende</strong>, es <strong>lenta</strong>, quedó chica con <strong>WordPress</strong>
-            o necesitas <strong>integraciones con pagos / APIs / sistemas</strong>, construimos una solución moderna y escalable
-            con <strong>Vue/Nuxt</strong>, <strong>NestJS</strong>, arquitectura <strong>Headless</strong> y <strong>SEO técnico</strong> desde el inicio.
+            Como <strong>empresa de desarrollo de software en Chile</strong>, transformamos plataformas obsoletas o limitadas por <strong>WordPress</strong> en sistemas de alta velocidad. Construimos soluciones robustas con <strong>Vue/Nuxt</strong> y <strong>NestJS</strong>, integrando pasarelas de pago y APIs con un enfoque estricto en <strong>SEO técnico</strong> y rendimiento empresarial.
           </p>
 
           <div class="mk-badges mb-4">
@@ -839,7 +845,7 @@ section.container.py-5 > .row{
       <div class="col-lg-10">
         <div class="text-center mb-4">
           <div class="mk-kicker">Para pymes · startups tech · empresas medianas</div>
-          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Qué hacemos en desarrollo web a medida</h2>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Servicios de desarrollo de software y plataformas web</h2>
           <p class="mk-lead mb-0">
             No construimos “páginas”. Construimos <strong>plataformas web</strong> que pueden crecer:
             rápidas, seguras, mantenibles y listas para posicionar en Google.
@@ -943,7 +949,7 @@ section.container.py-5 > .row{
       <div class="col-lg-10">
         <div class="text-center mb-4">
           <div class="mk-kicker">SEO orientado a negocio</div>
-          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">SEO técnico desde el inicio</h2>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Consultoría y SEO técnico para desarrollo de webs</h2>
           <p class="mk-lead mb-0">
             “Escribir artículos” no basta si la base técnica está mal. Para posicionar en Chile y Latinoamérica,
             necesitas estructura, performance y una arquitectura que Google entienda.
@@ -956,10 +962,10 @@ section.container.py-5 > .row{
               <div class="d-flex align-items-start">
                 <span class="mk-icon me-3">📍</span>
                 <div>
-                  <h3 class="h5 font-weight-bold mb-2">SEO local Chile + LatAm</h3>
-                  <p class="mk-lead mb-2">
-                    Optimizamos páginas comerciales para búsquedas con intención de compra: “desarrollo web a medida”, “empresa de desarrollo web”, “migración WordPress”, etc.
-                  </p>
+                <h3 class="h5 font-weight-bold mb-2">SEO Local y Corporativo en Chile</h3>
+                <p class="mk-lead mb-2">
+                  Optimizamos plataformas para capturar búsquedas de alto valor comercial en Santiago y regiones: “empresa de desarrollo de software”, “desarrollo de sistemas web a medida” y consultorías tecnológicas corporativas.
+                </p>
                   <ul class="mb-0">
                     <li>Arquitectura de URLs y enlazado interno</li>
                     <li>Landing pages por servicio/industria</li>
@@ -1249,7 +1255,7 @@ section.container.py-5 > .row{
       <div class="col-lg-10">
         <div class="text-center mb-4">
           <div class="mk-kicker">Preguntas frecuentes</div>
-          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">FAQ sobre desarrollo web a medida</h2>
+          <h2 class="mk-section-title display-4" style="font-size:2.2rem;">Preguntas frecuentes sobre desarrollo de software y web</h2>
           <p class="mk-lead mb-0">
             Respuestas directas para quienes están evaluando dejar atrás WordPress, mejorar performance, integrar pagos/APIs o posicionar en Google.
           </p>
@@ -1348,12 +1354,6 @@ section.container.py-5 > .row{
           </div>
 
         </div>
-
-        <div class="alert alert-light mt-4" style="border:1px solid rgba(0,0,0,0.08);">
-          <strong>📌 Nota:</strong> esta página está pensada para atraer búsquedas comerciales como
-          “desarrollo web a medida”, “empresa desarrollo web”, “migración WordPress”, “web profesional Chile”, “desarrollo web con Nuxt y NestJS”.
-        </div>
-
       </div>
     </div>
   </section>
@@ -1383,11 +1383,5 @@ section.container.py-5 > .row{
     </div>
   </section>
 
-  <!-- JSON-LD (SEO) -->
-<!-- JSON-LD (SEO) -->
-<script
-  type="application/ld+json"
-  set:html={JSON.stringify(jsonLdGraph)}
-/>
 
 </Layout>

@@ -1,0 +1,97 @@
+---
+export const prerender = true;
+
+import Layout from '../../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+
+
+export async function getStaticPaths() {
+
+        
+    const slugify = (value) =>
+    value
+        .normalize('NFD')
+        .replace(/[\u0300-\u036f]/g, '')
+        .toLowerCase()
+        .trim()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/(^-|-$)/g, '');
+
+        
+  const posts = (await getCollection('blog')).filter(
+    (post) => !post.data.draft
+  );
+
+  const tags = [
+    ...new Set(
+      posts.flatMap((post) => post.data.tags || [])
+    ),
+  ];
+
+  return tags.map((tag) => ({
+    params: {
+      tag: slugify(tag),
+    },
+    props: {
+      tag,
+      posts: posts.filter((post) =>
+        (post.data.tags || []).includes(tag)
+      ),
+    },
+  }));
+}
+
+const { tag, posts } = Astro.props;
+
+const title = `Artículos sobre ${tag}`;
+const description =
+  `Selección de artículos de SoftwareCode relacionados con ${tag}.`;
+---
+
+<Layout
+  title={title}
+  description={description}
+  robots="noindex,follow"
+>
+  <main class="container py-5">
+    <nav aria-label="breadcrumb" class="mb-4">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="/">Inicio</a>
+        </li>
+
+        <li class="breadcrumb-item">
+          <a href="/blog/">Blog</a>
+        </li>
+
+        <li
+          class="breadcrumb-item active"
+          aria-current="page"
+        >
+          {tag}
+        </li>
+      </ol>
+    </nav>
+
+    <h1>{title}</h1>
+    <p class="lead">{description}</p>
+
+    <div class="row g-4 mt-2">
+      {posts.map((post) => (
+        <div class="col-12 col-md-6">
+          <article class="card h-100 border-0 shadow-sm">
+            <div class="card-body">
+              <h2 class="h4">
+                <a href={`/blog/${post.slug}/`}>
+                  {post.data.title}
+                </a>
+              </h2>
+
+              <p>{post.data.description}</p>
+            </div>
+          </article>
+        </div>
+      ))}
+    </div>
+  </main>
+</Layout>

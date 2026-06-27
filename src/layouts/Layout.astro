@@ -1,875 +1,1422 @@
----
-
-const navItems = [
-  { label: 'Inicio', href: '/' },
-  { label: 'Software a medida', href: '/desarrollo-web-a-medida' },
-  { label: 'Marketing Digital', href: '/agencia-marketing-digital' },
-  { label: 'Blog', href: '/blog' },
-];
-
-const navServices = [
-  { label: 'Software a medida', href: '/desarrollo-web-a-medida', icon: 'bi-braces' },
-  { label: 'Marketing Digital', href: '/agencia-marketing-digital', icon: 'bi-graph-up-arrow' },
-];
+  ---
+  const navServices = [
+    {
+      label: 'Desarrollo web',
+      href: '/desarrollo-web-a-medida',
+      icon: 'bi-braces',
+      description: 'Software, plataformas e integraciones a medida',
+    },
+    {
+      label: 'Marketing Digital',
+      href: '/agencia-marketing-digital',
+      icon: 'bi-graph-up-arrow',
+      description: 'SEO técnico, rendimiento y conversión',
+    },
+  ];
 
 export interface Props {
   title?: string;
   description?: string;
-  image?: string; // puede venir relativo (/img.png) o absoluto
-  url?: string;   // opcional, pero lo calculamos igual
+  image?: string;
   type?: 'website' | 'article';
-  publishedTime?: string; // para posts (ISO)
-  modifiedTime?: string;  // para posts (ISO)
-  schemaExtras?: any[]; // opcional
+  publishedTime?: string;
+  modifiedTime?: string;
+  schemaExtras?: any[];
+  url?: string;
+  robots?: string;
 }
 
-const currentPath = Astro.url.pathname;
+  const currentPath = Astro.url.pathname;
+
+  const SITE_URL = 'https://www.softwarecode.cl/';
+  const SITE_NAME = 'SoftwareCode';
+  const DEFAULT_IMAGE = '/logosc-original.png';
+
+  const {
+    title = `Empresa de Desarrollo de Software en Chile | ${SITE_NAME}`,
+    description = 'Empresa de desarrollo de software a medida y aplicaciones web en Chile. Creamos sistemas escalables, integraciones de APIs y SEO técnico B2B.',
+    image = DEFAULT_IMAGE,
+    type = 'website',
+    publishedTime,
+    modifiedTime,
+    url,
+    robots = 'index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1',
+  } = Astro.props;
+
+  const normalizedPath = currentPath.endsWith('/')
+    ? currentPath
+    : `${currentPath}/`;
+
+  const inferredPageUrl = new URL(normalizedPath, SITE_URL).toString();
+
+  const pageUrl = url
+    ? new URL(url, SITE_URL).toString()
+    : inferredPageUrl;
 
 
+  // Normaliza imagen a absoluta
+  const imageUrl = new URL(image.startsWith('http') ? image : image || DEFAULT_IMAGE, SITE_URL).toString();
 
-// Base del sitio (una sola fuente de verdad)
-const SITE_URL = 'https://www.softwarecode.cl/';
-const SITE_NAME = 'SoftwareCode.cl';
-const DEFAULT_IMAGE = '/logosc-original.png';
+  // Breadcrumbs (home + segmento(s))
+  const segments = normalizedPath.split('/').filter(Boolean);
+  const breadcrumbItems = [
+    { name: 'Inicio', item: SITE_URL },
+    ...segments.map((seg, i) => {
+      const item = new URL('/' + segments.slice(0, i + 1).join('/') + '/', SITE_URL).toString();
+      const pretty =
+        seg
+          .replace(/-/g, ' ')
+          .replace(/\b\w/g, (c) => c.toUpperCase());
+      return { name: pretty, item };
+    }),
+  ];
 
-const {
-  title = `${SITE_NAME} - Desarrollo de Software a Medida`,
-  description = 'Soluciones digitales: desarrollo de software, CRM, ERP, apps móviles, SEO y marketing digital.',
-  image = DEFAULT_IMAGE,
-  type = 'website',
-  publishedTime,
-  modifiedTime,
-} = Astro.props;
-
-
-const normalizedPath = currentPath.endsWith('/') ? currentPath : `${currentPath}/`;
-const pageUrl = new URL(normalizedPath, SITE_URL).toString();
-
-
-// Normaliza imagen a absoluta
-const imageUrl = new URL(image.startsWith('http') ? image : image || DEFAULT_IMAGE, SITE_URL).toString();
-
-// Breadcrumbs (home + segmento(s))
-const segments = normalizedPath.split('/').filter(Boolean);
-const breadcrumbItems = [
-  { name: 'Inicio', item: SITE_URL },
-  ...segments.map((seg, i) => {
-    const item = new URL('/' + segments.slice(0, i + 1).join('/') + '/', SITE_URL).toString();
-    const pretty =
-      seg
-        .replace(/-/g, ' ')
-        .replace(/\b\w/g, (c) => c.toUpperCase());
-    return { name: pretty, item };
-  }),
-];
-
-// JSON-LD base (Organization + WebSite + WebPage + BreadcrumbList)
-// JSON-LD base (Organization + WebSite + WebPage + BreadcrumbList)
-const jsonLd: any[] = [
+  // JSON-LD base
+  const jsonLd: any[] = [
   {
-    "@context": "https://schema.org",
-    "@type": "Organization",
-    "@id": `${SITE_URL}#organization`,
-    "name": SITE_NAME,
-    "url": SITE_URL,
-    "description": "Desarrollo de software a medida y marketing digital B2B en Chile: SEO técnico, performance, CRO y automatización comercial para generar leads calificados y oportunidades medibles.",
-    "logo": {
-      "@type": "ImageObject",
-      "@id": `${SITE_URL}#logo`,
-      "url": new URL("/logosc-original.png", SITE_URL).toString()
+      "@context": "https://schema.org",
+      "@type": "LocalBusiness",
+      "@id": `${SITE_URL}#organization`,
+      "name": "SoftwareCode",
+      "url": SITE_URL,
+      "logo": {
+        "@type": "ImageObject",
+        "@id": `${SITE_URL}#logo`,
+        "url": new URL("/logosc-original.png", SITE_URL).toString()
+      },
+      "image": { "@id": `${SITE_URL}#logo` },
+      "description": "Empresa de desarrollo de software a medida, sistemas web escalables y consultoría SEO técnico en Santiago, Chile.",
+      "telephone": "+56988396128",
+      "priceRange": "$$$",
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Santiago",
+        "addressRegion": "Región Metropolitana",
+        "addressCountry": "CL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "-33.5111", // Coordenadas aproximadas de tu zona central de operación
+        "longitude": "-70.7523"
+      },
+      "areaServed": [
+        { "@type": "Country", "name": "Chile" },
+        { "@type": "AdministrativeArea", "name": "Región Metropolitana" }
+      ],
+      "contactPoint": [
+        {
+          "@type": "ContactPoint",
+          "contactType": "sales",
+          "telephone": "+56988396128",
+          "areaServed": "CL",
+          "availableLanguage": ["es"]
+        }
+      ],
+      "knowsLanguage": ["es-CL"],
+      "sameAs": [
+        "https://www.linkedin.com/in/software-code-67b8543aa/",
+        "https://www.instagram.com/softwarecode.cl/",
+        "https://x.com/softwarecodeCL"
+      ]
     },
-    "image": { "@id": `${SITE_URL}#logo` },
-    "telephone": "+56988396128",
-    "areaServed": { "@type": "Country", "name": "Chile" },
-    "contactPoint": [
-      {
-        "@type": "ContactPoint",
-        "contactType": "sales",
-        "telephone": "+56988396128",
-        "areaServed": "CL",
-        "availableLanguage": ["es"]
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "@id": `${SITE_URL}#website`,
+      "url": SITE_URL,
+      "name": SITE_NAME,
+      "publisher": { "@id": `${SITE_URL}#organization` },
+      "inLanguage": "es-CL",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": `${SITE_URL}blog?search={search_term_string}`,
+        "query-input": "required name=search_term_string"
       }
-    ],
-    "knowsLanguage": ["es-CL"],
-    "sameAs": ["https://www.linkedin.com/in/software-code-67b8543aa/", "https://www.instagram.com/softwarecode.cl/", "https://x.com/softwarecodeCL"]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "@id": `${SITE_URL}#website`,
-    "url": SITE_URL,
-    "name": SITE_NAME,
-    "publisher": { "@id": `${SITE_URL}#organization` },
-    "inLanguage": "es-CL",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": `${SITE_URL}blog?search={search_term_string}`,
-      "query-input": "required name=search_term_string"
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "@id": `${pageUrl}#webpage`,
+      "url": pageUrl,
+      "name": title,
+      "description": description,
+      "isPartOf": { "@id": `${SITE_URL}#website` },
+      "about": { "@id": `${SITE_URL}#organization` },
+      "inLanguage": "es-CL",
+      "primaryImageOfPage": {
+        "@type": "ImageObject",
+        "@id": `${pageUrl}#primaryimage`,
+        "url": imageUrl
+      },
+      "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
+      "potentialAction": [
+        { "@type": "ContactAction", "target": "https://wa.me/56988396128" }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@type": "BreadcrumbList",
+      "@id": `${pageUrl}#breadcrumb`,
+      "itemListElement": breadcrumbItems.map((b, idx) => ({
+        "@type": "ListItem",
+        "position": idx + 1,
+        "name": b.name,
+        "item": b.item
+      }))
     }
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "WebPage",
-    "@id": `${pageUrl}#webpage`,
-    "url": pageUrl,
-    "name": title,
-    "description": description,
-    "isPartOf": { "@id": `${SITE_URL}#website` },
-    "about": { "@id": `${SITE_URL}#organization` },
-    "inLanguage": "es-CL",
-    "primaryImageOfPage": {
-      "@type": "ImageObject",
-      "@id": `${pageUrl}#primaryimage`,
-      "url": imageUrl
-    },
-    "breadcrumb": { "@id": `${pageUrl}#breadcrumb` },
-    "potentialAction": [
-      { "@type": "ContactAction", "target": "https://wa.me/56988396128" }
-    ]
-  },
-  {
-    "@context": "https://schema.org",
-    "@type": "BreadcrumbList",
-    "@id": `${pageUrl}#breadcrumb`,
-    "itemListElement": breadcrumbItems.map((b, idx) => ({
-      "@type": "ListItem",
-      "position": idx + 1,
-      "name": b.name,
-      "item": b.item
-    }))
+  ];
+
+  // ✅ Extras opcionales por página (NO rompe nada si no vienen)
+  const { schemaExtras = [] } = Astro.props;
+  if (Array.isArray(schemaExtras) && schemaExtras.length) {
+    jsonLd.push(...schemaExtras);
   }
-];
 
-// ✅ Extras opcionales por página (NO rompe nada si no vienen)
-const { schemaExtras = [] } = Astro.props;
-if (Array.isArray(schemaExtras) && schemaExtras.length) {
-  jsonLd.push(...schemaExtras);
-}
+  // Si es un post (article), añade Article schema
+  if (type === 'article' && publishedTime) {
+    jsonLd.push({
+      '@context': 'https://schema.org',
+      '@type': 'Article',
+      "mainEntityOfPage": { '@type': 'WebPage', '@id': `${pageUrl}#webpage` },
+      "headline": title,
+      "description": description,
+      "image": [imageUrl],
+      "author": {
+        '@id': `${SITE_URL}#organization` // Corregido: Ahora vincula directamente tu autoridad
+      },
+      "publisher": { '@id': `${SITE_URL}#organization` },
+      "datePublished": publishedTime,
+      "dateModified": modifiedTime || publishedTime,
+      "inLanguage": 'es-CL'
+    });
+  }
+  ---
 
-// Si es un post (article), añade Article schema
-if (type === 'article' && publishedTime) {
-  jsonLd.push({
-    '@context': 'https://schema.org',
-    '@type': 'Article',
-    mainEntityOfPage: { '@type': 'WebPage', '@id': `${pageUrl}#webpage` },
-    headline: title,
-    description,
-    image: [imageUrl],
-    author: {
-      '@type': 'Organization',
-      name: SITE_NAME,
-      url: SITE_URL,
-    },
-    publisher: { '@id': `${SITE_URL}#organization` },
-    datePublished: publishedTime,
-    dateModified: modifiedTime || publishedTime,
-    inLanguage: 'es-CL'
-  });
-}
----
+  <html lang="es-CL">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-<html lang="es">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>{Astro.url.pathname === '/' ? title : `${title} | ${SITE_NAME}`}</title>
+      <meta name="description" content={description} />
 
-    <title>{title}</title>
-    <meta name="description" content={description} />
+      <link rel="canonical" href={pageUrl} />
 
-    <link rel="canonical" href={pageUrl} />
+      <meta name="robots" content={robots} />
+      <meta name="google-site-verification" content="Kgk8BM0ZZ_WuBak7aBk3N6Egj4ZqfPHt7e5TqXKjhho" />
 
-    <meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
-    <meta name="google-site-verification" content="Kgk8BM0ZZ_WuBak7aBk3N6Egj4ZqfPHt7e5TqXKjhho" />
+      <meta name="theme-color" content="#6f42c1" />
 
-    <meta name="theme-color" content="#6f42c1" />
+      <!-- Open Graph -->
+      <meta property="og:locale" content="es_CL" />
+      <meta property="og:type" content={type} />
+      <meta property="og:site_name" content={SITE_NAME} />
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:url" content={pageUrl} />
+      <meta property="og:image" content={imageUrl} />
+      <meta property="og:image:alt" content={title} />
 
-    <!-- Open Graph -->
-    <meta property="og:locale" content="es_CL" />
-    <meta property="og:type" content={type} />
-    <meta property="og:site_name" content={SITE_NAME} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:url" content={pageUrl} />
-    <meta property="og:image" content={imageUrl} />
-    <meta property="og:image:alt" content={title} />
+      <!-- Twitter -->
+      <meta name="twitter:card" content="summary_large_image" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={imageUrl} />
 
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content={title} />
-    <meta name="twitter:description" content={description} />
-    <meta name="twitter:image" content={imageUrl} />
+      <!-- JSON-LD -->
+      <script
+        type="application/ld+json"
+        set:html={JSON.stringify({
+          "@context": "https://schema.org",
+          "@graph": jsonLd.map(({ "@context": _ctx, ...rest }) => rest)
+        })}
+      />
 
-    <!-- JSON-LD -->
-    <script
-      type="application/ld+json"
-      set:html={JSON.stringify({
-        "@context": "https://schema.org",
-        "@graph": jsonLd.map(({ "@context": _ctx, ...rest }) => rest)
-      })}
-    />
+      <link rel="icon" href="/favicon.svg" />
+      <link rel="icon" type="image/png" href="/sc-logo-p.png" />
 
-    <link rel="icon" href="/favicon.svg" />
-    <link rel="icon" type="image/png" href="/logosc-original.png" />
+      <!-- Estilos -->
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
+      <link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
+      <link rel="stylesheet" href="/plugins/slick/slick.css">
+      <link rel="stylesheet" href="/plugins/slick/slick-theme.css">
+      <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
+      <link rel="stylesheet" href="/plugins/aos/aos.css">
+      <link rel="stylesheet" href="/css/style.css">
+      
+      <!-- Google Tag Manager (ojo: elimina tu </script> suelto antes de esto) -->
+      <script>
+        (function(w,d,s,l,i){w[l]=w[l]||[];
+        w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
+        var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
+        j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
+        f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-KCK6Z8MQ');
+      </script>
+    </head>
 
-    <!-- Estilos -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="/plugins/themify-icons/themify-icons.css">
-    <link rel="stylesheet" href="/plugins/slick/slick.css">
-    <link rel="stylesheet" href="/plugins/slick/slick-theme.css">
-    <link rel="stylesheet" href="/plugins/fancybox/jquery.fancybox.min.css">
-    <link rel="stylesheet" href="/plugins/aos/aos.css">
-    <link rel="stylesheet" href="/css/style.css">
-    <style>
-      html, body { margin:0; padding:0; max-width:100vw; overflow-x:hidden; }
-    </style>
+    <body>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript>
+    <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCK6Z8MQ"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe>
+  </noscript>
+  <!-- End GTM -->
+<nav class="navbar navbar-expand-lg sc-nav" aria-label="Navegación principal">
+    <div class="container">
+      <a
+        class="navbar-brand sc-brand-logo"
+        href="/"
+        aria-label="SoftwareCode - Inicio"
+      >
+        <img
+          src="/sc-logo-b.png"
+          alt="SoftwareCode"
+          class="nav-logo"
+          width="290"
+          height="70"
+        >
+      </a>
 
-    
-    <!-- Google Tag Manager (ojo: elimina tu </script> suelto antes de esto) -->
-    <script>
-      (function(w,d,s,l,i){w[l]=w[l]||[];
-      w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});
-      var f=d.getElementsByTagName(s)[0],
-      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';
-      j.async=true;j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
-      f.parentNode.insertBefore(j,f);
-      })(window,document,'script','dataLayer','GTM-KCK6Z8MQ');
-    </script>
-  </head>
+      <button
+        id="scMenuToggle"
+        class="sc-menu-toggle d-lg-none"
+        type="button"
+        aria-label="Abrir menú"
+        aria-controls="scMobileMenu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
 
-  <body>
-<!-- Google Tag Manager (noscript) -->
-<noscript>
-  <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-KCK6Z8MQ"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe>
-</noscript>
-<!-- End GTM -->
-<nav class="navbar navbar-expand-lg sc-nav sticky-top" aria-label="Navegación principal">
-  <div class="container">
-    <!-- NO tocar logo -->
-    <a class="navbar-brand d-flex align-items-center gap-2" href="/">
-      <img src="/logosc-original.png" alt="SoftwareCode" class="nav-logo" loading="lazy">
-    </a>
+      <div class="sc-desktop-nav d-none d-lg-flex ms-auto">
+        <ul class="navbar-nav align-items-center gap-1">
+          <li class="nav-item">
+            <a href="/" class={`nav-link sc-link ${currentPath === '/' ? 'active' : ''}`}>
+              Inicio
+            </a>
+          </li>
 
-    <button class="navbar-toggler sc-burger collapsed d-lg-none" type="button"
-      data-bs-toggle="collapse" data-bs-target="#navbarNav"
-      aria-controls="navbarNav" aria-expanded="false" aria-label="Abrir menú">
-      <span></span><span></span><span></span>
-    </button>
+          <li class="nav-item">
+            <a
+              href="/nosotros"
+              class={`nav-link sc-link ${currentPath.startsWith('/nosotros') ? 'active' : ''}`}
+            >
+              Nosotros
+            </a>
+          </li>
 
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-1 sc-nav-list">
+          <li class="nav-item">
+            <a
+              href="/proyectos"
+              class={`nav-link sc-link ${currentPath.startsWith('/proyectos') ? 'active' : ''}`}
+            >
+              Proyectos
+            </a>
+          </li>
 
-        <li class="nav-item">
-          <a href="/" class={`nav-link sc-link ${currentPath === '/' ? 'active' : ''}`}>Inicio</a>
-        </li>
+          <li id="scServicesItem" class="nav-item sc-dd">
+            <button
+              id="scServicesToggle"
+              type="button"
+              class={`nav-link sc-link sc-dd-trigger ${
+                currentPath.startsWith('/desarrollo-web-a-medida') ||
+                currentPath.startsWith('/agencia-marketing-digital')
+                  ? 'active'
+                  : ''
+              }`}
+              aria-haspopup="true"
+              aria-controls="scServicesMenu"
+              aria-expanded="false"
+            >
+              Servicios
+              <i class="bi bi-chevron-down" aria-hidden="true"></i>
+            </button>
 
-        <!-- Servicios -->
-        <li class="nav-item dropdown sc-dd">
-          <button
-            type="button"
-            class={`nav-link sc-link dropdown-toggle ${currentPath.startsWith('/desarrollo-web-a-medida') || currentPath.startsWith('/agencia-marketing-digital') ? 'active' : ''}`}
-            data-bs-toggle="dropdown"
-            data-bs-auto-close="outside"
-            aria-expanded="false"
-          >
-            Servicios
-          </button>
+            <div id="scServicesMenu" class="sc-dd-menu" role="menu">
+              <div class="sc-dd-head">
+                <div>
+                  <span class="sc-dd-kicker">Capacidades</span>
+                  <div class="sc-dd-title">Servicios digitales</div>
+                </div>
+                <span class="sc-dd-badge">B2B</span>
+              </div>
 
-          <div class="dropdown-menu dropdown-menu-end sc-dd-menu">
-            <div class="sc-dd-head">
-              <div class="sc-dd-title">Servicios B2B</div>
-              <div class="sc-dd-sub">Estrategia + ejecución con medición</div>
-            </div>
+              <div class="sc-dd-grid">
+                {navServices.map((service) => (
+                  <a
+                    class={`sc-dd-card ${currentPath.startsWith(service.href) ? 'active' : ''}`}
+                    href={service.href}
+                    role="menuitem"
+                  >
+                    <span class="sc-dd-ic">
+                      <i class={`bi ${service.icon}`}></i>
+                    </span>
 
-            <div class="sc-dd-grid">
-              {navServices.map(s => (
-                <a class={`sc-dd-card ${currentPath.startsWith(s.href) ? 'active' : ''}`} href={s.href}>
-                  <span class="sc-dd-ic">
-                    <i class={`bi ${s.icon}`}></i>
-                  </span>
-                  <span class="sc-dd-txt">
-                    <span class="sc-dd-label">{s.label}</span>
-                    <span class="sc-dd-meta">Implementación • Medición • B2B</span>
-                  </span>
-                  <span class="sc-dd-arrow"><i class="bi bi-arrow-right"></i></span>
-                </a>
-              ))}
-            </div>
+                    <span class="sc-dd-txt">
+                      <span class="sc-dd-label">{service.label}</span>
+                      <span class="sc-dd-meta">{service.description}</span>
+                    </span>
 
-            <div class="sc-dd-foot">
-              <a class="sc-dd-brief"
-                 href="https://wa.me/56988396128?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20"
-                 target="_blank" rel="noopener noreferrer">
-                <i class="bi bi-chat-dots me-2"></i> Contacto / Brief
+                    <span class="sc-dd-arrow">
+                      <i class="bi bi-arrow-up-right"></i>
+                    </span>
+                  </a>
+                ))}
+              </div>
+
+              <a
+                class="sc-dd-brief"
+                href="https://wa.me/56988396128?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>
+                  <small>¿Tienes un proyecto?</small>
+                  <strong>Solicitar diagnóstico</strong>
+                </span>
+                <i class="bi bi-arrow-right"></i>
               </a>
             </div>
-          </div>
-        </li>
+          </li>
 
-        <li class="nav-item">
-          <a href="/blog" class={`nav-link sc-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}>Blog</a>
-        </li>
+          <li class="nav-item">
+            <a
+              href="/blog"
+              class={`nav-link sc-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}
+            >
+              Blog
+            </a>
+          </li>
 
-        <li class="nav-item ms-lg-2 sc-cta">
-          <a class="btn sc-cta-btn d-none d-lg-inline-flex"
-             href="https://wa.me/56988396128?text=Hola%2C%20quiero%20solicitar%20un%20diagn%C3%B3stico%20"
-             target="_blank" rel="noopener noreferrer">
-            Diagnóstico
-          </a>
-        </li>
-
-      </ul>
+          <li class="nav-item ms-2">
+            <a
+              class="btn sc-cta-btn"
+              href="https://wa.me/56988396128?text=Hola%2C%20quiero%20evaluar%20un%20proyecto"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              Evaluar proyecto
+              <i class="bi bi-arrow-up-right ms-2"></i>
+            </a>
+          </li>
+        </ul>
+      </div>
     </div>
+  </nav>
+
+  <!-- Menú mobile independiente -->
+  <div
+    id="scMobileLayer"
+    class="sc-mobile-layer d-lg-none"
+    aria-hidden="true"
+    inert
+  >
+    <button
+      id="scMobileBackdrop"
+      class="sc-mobile-backdrop"
+      type="button"
+      aria-label="Cerrar menú"
+    ></button>
+
+    <aside
+      id="scMobileMenu"
+      class="sc-mobile-drawer"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menú principal"
+    >
+      <div class="sc-mobile-head">
+        <div>
+          <span class="sc-mobile-kicker">SoftwareCode</span>
+          <strong>Navegación</strong>
+        </div>
+
+        <button
+          id="scMobileClose"
+          class="sc-mobile-close"
+          type="button"
+          aria-label="Cerrar menú"
+        >
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <div class="sc-mobile-content">
+        <nav class="sc-mobile-nav" aria-label="Navegación móvil">
+
+          <a
+            href="/"
+            class={`sc-mobile-link ${currentPath === '/' ? 'active' : ''}`}
+          >
+            <span class="sc-mobile-number">01</span>
+            <span>Inicio</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+
+          <a
+            href="/nosotros"
+            class={`sc-mobile-link ${
+              currentPath.startsWith('/nosotros') ? 'active' : ''
+            }`}
+          >
+            <span class="sc-mobile-number">02</span>
+            <span>Nosotros</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+
+          <a
+            href="/proyectos"
+            class={`sc-mobile-link ${
+              currentPath.startsWith('/proyectos') ? 'active' : ''
+            }`}
+          >
+            <span class="sc-mobile-number">03</span>
+            <span>Proyectos</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+
+          <a
+            href="/blog"
+            class={`sc-mobile-link ${
+              currentPath.startsWith('/blog') ? 'active' : ''
+            }`}
+          >
+            <span class="sc-mobile-number">04</span>
+            <span>Blog</span>
+            <i class="bi bi-arrow-right"></i>
+          </a>
+
+        </nav>
+
+        <section class="sc-mobile-services" aria-labelledby="mobile-services-title">
+          <div class="sc-mobile-section-head">
+            <span id="mobile-services-title">Servicios</span>
+            <small>Lo que hacemos</small>
+          </div>
+
+          <div class="sc-mobile-service-grid">
+            <a
+              href="/desarrollo-web-a-medida"
+              class={`sc-mobile-service ${
+                currentPath.startsWith('/desarrollo-web-a-medida')
+                  ? 'active'
+                  : ''
+              }`}
+            >
+              <span class="sc-mobile-service-icon">
+                <i class="bi bi-braces"></i>
+              </span>
+
+              <span>
+                <strong>Desarrollo web</strong>
+                <small>Software y plataformas a medida</small>
+              </span>
+
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+
+            <a
+              href="/agencia-marketing-digital"
+              class={`sc-mobile-service ${
+                currentPath.startsWith('/agencia-marketing-digital')
+                  ? 'active'
+                  : ''
+              }`}
+            >
+              <span class="sc-mobile-service-icon">
+                <i class="bi bi-graph-up-arrow"></i>
+              </span>
+
+              <span>
+                <strong>Marketing digital</strong>
+                <small>SEO, rendimiento y conversión</small>
+              </span>
+
+              <i class="bi bi-arrow-up-right"></i>
+            </a>
+          </div>
+        </section>
+      </div>
+
+      <div class="sc-mobile-footer">
+        <a
+          class="sc-mobile-cta"
+          href="https://wa.me/56988396128?text=Hola%2C%20quiero%20evaluar%20un%20proyecto"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <span>
+            <small>¿Tienes una idea?</small>
+            <strong>Evaluar mi proyecto</strong>
+          </span>
+
+          <i class="bi bi-arrow-up-right"></i>
+        </a>
+      </div>
+    </aside>
   </div>
-</nav>
 
-    <!-- Contenido principal -->
-    <main class="page">
-      <slot />
-    </main>
+      <!-- Contenido principal -->
+      <main class="page">
+        <slot />
+      </main>
 
 
-    <div class="contacto" id="contacto">
-	<a href="https://wa.me/56988396128?text=¡Hola!%20Quiero%20más%20información." 
-	 class="whatsapp-float" 
-   id="whatsapp-boton"
-   rel="noopener noreferrer"
-	 target="_blank">
-	<img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
-  </a>
-
-  <script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const btn = document.getElementById('whatsapp-boton');
-    if (!btn) return;
-
-    btn.addEventListener('click', () => {
-      window.dataLayer = window.dataLayer || [];
-        window.dataLayer.push({
-          event: 'whatsapp_click',
-          event_category: 'contact',
-          event_label: 'floating_whatsapp',
-          page_path: window.location.pathname,
-          value: 1,
-          currency: 'CLP'
-        });
-    });
-  });
-</script>
-
-    <!-- Scripts -->
-    <script src="/plugins/jquery/jquery.min.js" is:inline></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="/plugins/slick/slick.min.js" is:inline></script>
-    <script src="/plugins/syotimer/jquery.syotimer.min.js" is:inline></script>
-    <script src="/plugins/fancybox/jquery.fancybox.min.js" is:inline></script>
-    <script src="/plugins/aos/aos.js" is:inline></script>
-    <script src="/js/script.js" is:inline></script>
-    <script src="/plugins/google-map/gmap.js" is:inline></script>
-    <script src="https://cdn.lordicon.com/lordicon.js"></script>
+      <div class="contacto" id="contacto">
+    <a href="https://wa.me/56988396128?text=¡Hola!%20Quiero%20más%20información." 
+    class="whatsapp-float" 
+    id="whatsapp-boton"
+    rel="noopener noreferrer"
+    target="_blank">
+    <img src="https://img.icons8.com/color/48/000000/whatsapp.png" alt="WhatsApp">
+    </a>
+  </div>
 
     <script is:inline>
-      document.addEventListener('DOMContentLoaded', () => {
-        AOS.init({ once: true, duration: 1000, offset: 80 });
-        if (window.lucide) window.lucide.createIcons();
+    document.addEventListener('DOMContentLoaded', () => {
+      const btn = document.getElementById('whatsapp-boton');
+      if (!btn) return;
+
+      btn.addEventListener('click', () => {
+        window.dataLayer = window.dataLayer || [];
+          window.dataLayer.push({
+            event: 'whatsapp_click',
+            event_category: 'contact',
+            event_label: 'floating_whatsapp',
+            page_path: window.location.pathname,
+            value: 1,
+            currency: 'CLP'
+          });
       });
-    </script>
-  </body>
-</html>
-<style>
-:root{
-  --sc-brand: #6f2cff;
-  --sc-accent: #4e0f33;
-  --sc-ink: rgba(95, 95, 95, 0.92);
-  --sc-muted: rgba(15,23,42,.70);
-  --sc-border: rgba(15,23,42,.10);
-  --sc-bg: rgba(255,255,255);
-  --sc-bg-solid: #fff;
-}
-
-/* NAV base (serio, limpio, enterprise) */
-.sc-nav{
-  background: var(--sc-bg);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border-bottom: 1px solid var(--sc-border);
-}
-
-.nav-logo{ height: 60px; width:auto; } /* no tocamos el logo */
-
-/* Links */
-.sc-link{
-  display: inline-flex;
-  align-items: center;
-  gap: .45rem;
-  padding: .62rem .92rem !important;
-  border-radius: 999px;
-  font-weight: 800;
-  font-size: .95rem;
-  color: var(--sc-ink) !important;
-  letter-spacing: .01em;
-  opacity: .9;
-  transition: background .18s ease, transform .18s ease, color .18s ease, opacity .18s ease;
-}
-
-.sc-link:hover{
-  background: rgba(111,44,255,.08);
-  color: var(--sc-brand) !important;
-  transform: translateY(-1px);
-}
-
-.sc-link.active{
-  background: rgba(111,44,255,.12);
-  color: var(--sc-brand) !important;
-  opacity: 1;
-}
-
-/* CTA */
-.sc-cta-btn{
-  border-radius: 999px;
-  padding: .62rem 1.05rem;
-  font-weight: 900;
-  border: 1px solid rgba(111,44,255,.22);
-  background: rgba(255,255,255,.92);
-  color: var(--sc-brand);
-  transition: transform .18s ease, background .18s ease, box-shadow .18s ease, border-color .18s ease;
-  white-space: nowrap;
-}
-.sc-cta-btn:hover{
-  transform: translateY(-1px);
-  border-color: rgba(111,44,255,.35);
-  background: rgba(111,44,255,.06);
-  box-shadow: 0 14px 35px rgba(15,23,42,.10);
-}
-
-/* Burger refinada */
-.sc-burger{
-  width: 46px; height: 42px;
-  border: 0; padding: 0;
-  border-radius: 14px;
-  background: rgba(111,44,255,.10);
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  flex-direction: column;
-}
-.sc-burger span{
-  width: 22px; height: 2px;
-  background: var(--sc-brand);
-  border-radius: 2px;
-  transition: transform .18s ease, opacity .18s ease, width .18s ease;
-}
-.sc-burger:not(.collapsed) span:nth-child(1){ transform: translateY(8px) rotate(45deg); }
-.sc-burger:not(.collapsed) span:nth-child(2){ opacity: 0; width: 16px; }
-.sc-burger:not(.collapsed) span:nth-child(3){ transform: translateY(-8px) rotate(-45deg); }
-
-/* Dropdown: panel premium */
-.sc-dd{ position: relative; }
-
-/* MENÚ dropdown (estructura) */
-.sc-dd-menu{
-  border: 1px solid var(--sc-border);
-  background: rgba(255,255,255,.96);
-  backdrop-filter: blur(18px);
-  -webkit-backdrop-filter: blur(18px);
-  border-radius: 18px;
-  padding: .75rem;
-  min-width: 420px;
-  box-shadow: 0 30px 80px rgba(15,23,42,.14);
-  margin-top: .55rem;
-}
-
-/* Header */
-.sc-dd-head{
-  padding: .25rem .25rem .65rem .25rem;
-  border-bottom: 1px solid rgba(15,23,42,.08);
-  margin-bottom: .65rem;
-}
-.sc-dd-title{
-  font-weight: 950;
-  letter-spacing: .02em;
-  color: var(--sc-ink);
-}
-.sc-dd-sub{
-  font-size: .88rem;
-  color: var(--sc-muted);
-}
-
-/* Cards grid */
-.sc-dd-grid{
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: .55rem;
-}
-
-.sc-dd-card{
-  display: flex;
-  align-items: center;
-  gap: .8rem;
-  padding: .8rem .85rem;
-  border-radius: 14px;
-  text-decoration: none;
-  border: 1px solid rgba(15,23,42,.08);
-  background: rgba(248,250,252,.80);
-  transition: transform .16s ease, box-shadow .16s ease, border-color .16s ease, background .16s ease;
-  color: var(--sc-ink);
-}
-
-.sc-dd-card:hover{
-  transform: translateY(-1px);
-  border-color: rgba(111,44,255,.22);
-  background: rgba(111,44,255,.05);
-  box-shadow: 0 18px 45px rgba(15,23,42,.10);
-}
-
-.sc-dd-card.active{
-  border-color: rgba(255,46,166,.25);
-  background: rgba(255,46,166,.06);
-}
-
-.sc-dd-ic{
-  width: 42px; height: 42px;
-  border-radius: 12px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(90deg, rgba(255,46,166,.14), rgba(111,44,255,.14));
-  border: 1px solid rgba(111,44,255,.16);
-  color: var(--sc-brand);
-  flex: 0 0 auto;
-}
-
-.sc-dd-txt{ display:flex; flex-direction:column; gap:.15rem; min-width: 0; }
-.sc-dd-label{ font-weight: 900; color: var(--sc-ink); }
-.sc-dd-meta{
-  font-size: .82rem;
-  color: var(--sc-muted);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.sc-dd-arrow{
-  margin-left: auto;
-  opacity: .75;
-  color: var(--sc-ink);
-}
-
-/* Footer */
-.sc-dd-foot{
-  margin-top: .7rem;
-  padding-top: .7rem;
-  border-top: 1px solid rgba(15,23,42,.08);
-}
-.sc-dd-brief{
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  border-radius: 14px;
-  padding: .75rem 1rem;
-  font-weight: 900;
-  text-decoration: none;
-  color: #fff;
-  background: linear-gradient(90deg, var(--sc-accent), var(--sc-brand));
-  box-shadow: 0 16px 40px rgba(111,44,255,.18), 0 10px 24px rgba(255,46,166,.14);
-  transition: transform .18s ease, filter .18s ease;
-}
-.sc-dd-brief:hover{ transform: translateY(-1px); filter: brightness(1.02); }
-
-/* ===== Desktop: hover estable, sin parpadeos ===== */
-@media (min-width: 992px){
-  /* evita que Bootstrap haga "click toggle" en desktop */
-  .sc-dd > button[data-bs-toggle="dropdown"]{ pointer-events: none; }
-  .sc-dd:focus-within > button[data-bs-toggle="dropdown"]{ pointer-events: auto; }
-
-  /* estado base: oculto (sin display:none para permitir transición) */
-  .sc-dd .dropdown-menu{
-    display: block;
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(8px);
-    pointer-events: none;
-    transition: opacity .16s ease, transform .16s ease, visibility .16s ease;
-  }
-
-  /* zona buffer invisible para que no se corte al mover el mouse */
-  .sc-dd::after{
-    content:"";
-    position:absolute;
-    left: 0;
-    right: 0;
-    top: 100%;
-    height: 14px; /* buffer */
-  }
-
-  /* abre con hover o focus */
-  .sc-dd:hover .dropdown-menu,
-  .sc-dd:focus-within .dropdown-menu{
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-    pointer-events: auto;
-  }
-}
-
-/* ===== Mobile ===== */
-@media (max-width: 991.98px){
-  .navbar-collapse{
-    margin-top: .75rem;
-    padding: .8rem;
-    border: 1px solid var(--sc-border);
-    border-radius: 18px;
-    background: rgba(255,255,255,.96);
-  }
-
-  .sc-link{
-    width: 100%;
-    justify-content: center;
-    border-radius: 14px;
-    padding: .92rem 1rem !important;
-  }
-
-  /* dropdown integrado como panel */
-  .sc-dd-menu{
-    min-width: 100%;
-    margin-top: .5rem;
-    box-shadow: none;
-  }
-
-  /* aquí SÍ debe ser clickeable */
-  .sc-dd > button[data-bs-toggle="dropdown"]{ pointer-events: auto; }
-}
-
-
-/* =====================================================
-   NAV SCROLL EFFECT — oscuro glass
-   ===================================================== */
-
-.sc-nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1050;
-
-  background: rgba(7, 10, 18, 0.88) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.28),
-    inset 0 -1px 0 rgba(255,255,255,.035);
-
-  transition:
-    background .25s ease,
-    box-shadow .25s ease,
-    border-color .25s ease,
-    backdrop-filter .25s ease;
-}
-
-/* cuando haces scroll: un poco más transparente */
-/* =====================================================
-   NAV SCROLL EFFECT — glass oscuro premium
-   ===================================================== */
-
-.sc-nav {
-  position: fixed;
-  width: 100%;
-  top: 0;
-  z-index: 1050;
-
-  background: rgba(7, 10, 18, 0.88) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
-
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-
-  box-shadow:
-    0 14px 40px rgba(0, 0, 0, 0.28),
-    inset 0 -1px 0 rgba(255,255,255,.035);
-
-  transition:
-    background .28s ease,
-    box-shadow .28s ease,
-    border-color .28s ease,
-    backdrop-filter .28s ease,
-    min-height .28s ease;
-}
-
-/* línea luminosa inferior */
-.sc-nav::after {
-  content: "";
-  position: absolute;
-  left: 50%;
-  bottom: -1px;
-  width: 0;
-  height: 1px;
-  transform: translateX(-50%);
-  pointer-events: none;
-  opacity: 0;
-  background: linear-gradient(
-    90deg,
-    transparent,
-    rgba(255, 97, 210, .75),
-    rgba(216, 180, 254, .95),
-    rgba(109, 143, 255, .75),
-    transparent
-  );
-  box-shadow:
-    0 0 18px rgba(168, 85, 247, .55),
-    0 0 42px rgba(109, 143, 255, .22);
-  transition: width .35s ease, opacity .35s ease;
-}
-
-/* cuando haces scroll */
-.sc-nav.scrolled {
-  background: rgba(7, 10, 18, 0.56) !important;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.13) !important;
-
-  backdrop-filter: blur(26px) saturate(170%);
-  -webkit-backdrop-filter: blur(26px) saturate(170%);
-
-  box-shadow:
-    0 18px 55px rgba(0, 0, 0, 0.24),
-    inset 0 -1px 0 rgba(255,255,255,.045);
-}
-
-.sc-nav.scrolled::after {
-  width: min(760px, 78vw);
-  opacity: 1;
-}
-
-/* logo con transición suave */
-.nav-logo {
-  transition:
-    height .28s ease,
-    transform .28s ease,
-    filter .28s ease,
-    opacity .28s ease;
-}
-
-.sc-nav.scrolled .nav-logo {
-  height: 64px;
-  transform: translateY(-1px);
-  filter:
-    drop-shadow(0 10px 22px rgba(0,0,0,.35))
-    drop-shadow(0 0 18px rgba(168,85,247,.16));
-}
-
-/* links se ven un poco más finos al hacer scroll */
-.sc-nav.scrolled .sc-link {
-  color: rgba(255,255,255,.82) !important;
-}
-
-.sc-nav.scrolled .sc-link:hover {
-  background: rgba(255,255,255,.085) !important;
-  color: #fff !important;
-}
-
-/* CTA con brillo suave */
-.sc-nav.scrolled .sc-cta-btn {
-  background: rgba(255,255,255,.075) !important;
-  border-color: rgba(216,180,254,.28) !important;
-  box-shadow:
-    0 14px 36px rgba(0,0,0,.24),
-    0 0 24px rgba(168,85,247,.12),
-    inset 0 0 0 1px rgba(255,255,255,.04);
-}
-
-/* Links sobre navbar oscuro */
-.sc-nav .sc-link {
-  color: rgba(255,255,255,.78) !important;
-}
-
-.sc-nav .sc-link:hover {
-  background: rgba(255,255,255,.08) !important;
-  color: #ffffff !important;
-}
-
-.sc-nav .sc-link.active {
-  background: rgba(139,92,246,.20) !important;
-  color: #ffffff !important;
-}
-
-/* Botón diagnóstico */
-.sc-nav .sc-cta-btn {
-  color: #ffffff !important;
-  background: rgba(255,255,255,.065) !important;
-  border: 1px solid rgba(216,180,254,.24) !important;
-  box-shadow:
-    0 14px 34px rgba(0,0,0,.24),
-    inset 0 0 0 1px rgba(255,255,255,.035);
-}
-
-.sc-nav .sc-cta-btn:hover {
-  background: linear-gradient(135deg, #5b21b6, #a21caf) !important;
-  color: #ffffff !important;
-} 
-
-
-@media (max-width: 991.98px) {
-  .sc-nav {
-    background: rgba(7, 10, 18, 0.94) !important;
-  }
-
-  .sc-nav.scrolled {
-    background: rgba(7, 10, 18, 0.84) !important;
-  }
-
-  .sc-nav.scrolled .nav-logo {
-    height: 56px;
-  }
-
-  .sc-nav.scrolled::after {
-    width: 82vw;
-  }
-
-  .navbar-collapse {
-    background: rgba(7, 10, 18, 0.96) !important;
-    border-color: rgba(255,255,255,.12) !important;
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-  }
-}
-
-
-</style>
-<style>
-  .page {
-    padding-top: 80px;
-  }
-</style>
-
-<script is:inline>
-  document.addEventListener('DOMContentLoaded', () => {
-    const nav = document.getElementById('navbarNav');
-    if (!nav) return;
-
-    nav.addEventListener('click', (e) => {
-      const link = e.target.closest('a');
-      if (!link) return;
-
-      const collapseEl = document.getElementById('navbarNav');
-      const isShown = collapseEl.classList.contains('show');
-      if (isShown && window.bootstrap) {
-        window.bootstrap.Collapse.getOrCreateInstance(collapseEl).hide();
+    });
+  </script>
+
+      <!-- Scripts -->
+      <script src="/plugins/jquery/jquery.min.js" is:inline></script>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.6/dist/js/bootstrap.bundle.min.js" defer></script>
+      <script src="/plugins/slick/slick.min.js" defer></script>
+      <script src="/plugins/syotimer/jquery.syotimer.min.js" is:inline></script>
+      <script src="/plugins/fancybox/jquery.fancybox.min.js" defer></script>
+      <script src="/plugins/aos/aos.js" defer></script>
+      <script src="/js/script.js" defer></script>
+      <script src="/plugins/google-map/gmap.js" is:inline></script>
+      <script src="https://cdn.lordicon.com/lordicon.js"></script>
+
+      <script is:inline>
+        document.addEventListener('DOMContentLoaded', () => {
+          AOS.init({ once: true, duration: 1000, offset: 80 });
+          if (window.lucide) window.lucide.createIcons();
+        });
+      </script>
+    </body>
+  </html>
+  <style>
+    :root {
+      --sc-brand: #7c3aed;
+      --sc-pink: #db2777;
+      --sc-nav-height: 82px;
+      --sc-mobile-nav-height: 76px;
+    }
+
+    html,
+    body {
+      margin: 0;
+      padding: 0;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .page {
+      padding-top: var(--sc-nav-height);
+    }
+
+    /* Navbar */
+    .sc-nav {
+      position: fixed;
+      inset: 0 0 auto;
+      z-index: 1050;
+      height: var(--sc-nav-height);
+      padding: 0;
+      overflow: visible;
+      background: rgba(7, 10, 18, 0.9) !important;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: background 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+    }
+
+    .sc-nav.scrolled {
+      background: rgba(7, 10, 18, 0.72) !important;
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.24);
+      backdrop-filter: blur(24px) saturate(155%);
+      -webkit-backdrop-filter: blur(24px) saturate(155%);
+    }
+
+    .sc-nav::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      bottom: -1px;
+      width: 0;
+      height: 1px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, #ec4899, #a78bfa, #6366f1, transparent);
+      box-shadow: 0 0 22px rgba(168, 85, 247, 0.48);
+      transition: width 280ms ease, opacity 280ms ease;
+    }
+
+    .sc-nav.scrolled::after {
+      width: min(760px, 78vw);
+      opacity: 1;
+    }
+
+    .sc-nav > .container {
+      height: 100%;
+      flex-wrap: nowrap;
+    }
+
+    .sc-brand-logo {
+      display: inline-flex;
+      align-items: center;
+      margin: 0;
+      padding: 0;
+    }
+
+    .nav-logo {
+      width: auto;
+      height: 42px;
+      transition: filter 220ms ease;
+    }
+
+    .sc-nav.scrolled .nav-logo {
+      filter: drop-shadow(0 0 18px rgba(168, 85, 247, 0.15));
+    }
+
+    /* Desktop navigation */
+    .sc-desktop-nav,
+    .sc-desktop-nav .navbar-nav {
+      height: 100%;
+      align-items: center;
+    }
+
+    .sc-desktop-nav .navbar-nav {
+      flex-direction: row;
+      flex-wrap: nowrap;
+    }
+
+    .sc-desktop-nav .nav-item {
+      display: flex;
+      align-items: center;
+    }
+
+    .sc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.42rem;
+      padding: 0.62rem 0.9rem !important;
+      border: 0;
+      border-radius: 999px;
+      color: rgba(255, 255, 255, 0.76) !important;
+      background: transparent;
+      font-size: 0.94rem;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      white-space: nowrap;
+      transition: color 160ms ease, background 160ms ease, transform 160ms ease;
+    }
+
+    .sc-link:hover,
+    .sc-link:focus-visible {
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.08);
+      transform: translateY(-1px);
+    }
+
+    .sc-link.active {
+      color: #fff !important;
+      background: rgba(139, 92, 246, 0.2);
+    }
+
+    .sc-link:focus-visible,
+    .sc-cta-btn:focus-visible,
+    .sc-menu-toggle:focus-visible,
+    .sc-mobile-close:focus-visible {
+      outline: 2px solid #c4b5fd;
+      outline-offset: 3px;
+    }
+
+    .sc-cta-btn {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.64rem 1.08rem;
+      border: 1px solid rgba(216, 180, 254, 0.25);
+      border-radius: 999px;
+      color: #fff !important;
+      background: rgba(255, 255, 255, 0.065);
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      font-weight: 900;
+      white-space: nowrap;
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .sc-cta-btn:hover {
+      color: #fff;
+      border-color: rgba(216, 180, 254, 0.38);
+      background: linear-gradient(135deg, #5b21b6, #a21caf);
+      transform: translateY(-1px);
+    }
+
+    /* Desktop services dropdown: custom positioning, no Bootstrap Popper */
+    .sc-dd {
+      position: relative;
+      height: 100%;
+    }
+
+    .sc-dd-trigger {
+      height: auto;
+    }
+
+    .sc-dd-trigger .bi {
+      font-size: 0.72rem;
+      transition: transform 180ms ease;
+    }
+
+    .sc-dd-menu {
+      position: absolute;
+      top: calc(100% - 1px);
+      right: 0;
+      z-index: 1100;
+      width: min(560px, calc(100vw - 32px));
+      padding: 16px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(124, 58, 237, 0.18), transparent 34%),
+        rgba(9, 12, 23, 0.985);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 20px;
+      box-shadow: 0 28px 80px rgba(0, 0, 0, 0.48);
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
+      transform: translate3d(0, 10px, 0) scale(0.985);
+      transform-origin: top right;
+      transition: opacity 150ms ease, transform 180ms ease, visibility 150ms ease;
+    }
+
+    .sc-dd-menu::before {
+      content: "";
+      position: absolute;
+      top: -6px;
+      right: 42px;
+      width: 12px;
+      height: 12px;
+      background: #101326;
+      border-top: 1px solid rgba(255, 255, 255, 0.12);
+      border-left: 1px solid rgba(255, 255, 255, 0.12);
+      transform: rotate(45deg);
+    }
+
+    .sc-dd:hover .sc-dd-menu,
+    .sc-dd:focus-within .sc-dd-menu,
+    .sc-dd.is-open .sc-dd-menu {
+      opacity: 1;
+      visibility: visible;
+      pointer-events: auto;
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+
+    .sc-dd:hover .sc-dd-trigger .bi,
+    .sc-dd:focus-within .sc-dd-trigger .bi,
+    .sc-dd.is-open .sc-dd-trigger .bi {
+      transform: rotate(180deg);
+    }
+
+    .sc-dd-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 3px 3px 14px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sc-dd-kicker {
+      display: block;
+      margin-bottom: 2px;
+      color: #c4b5fd;
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .sc-dd-title {
+      color: #fff;
+      font-size: 1rem;
+      font-weight: 900;
+    }
+
+    .sc-dd-badge {
+      padding: 0.35rem 0.55rem;
+      border: 1px solid rgba(196, 181, 253, 0.18);
+      border-radius: 999px;
+      color: #ddd6fe;
+      background: rgba(124, 58, 237, 0.12);
+      font-size: 0.68rem;
+      font-weight: 900;
+      letter-spacing: 0.08em;
+    }
+
+    .sc-dd-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 12px 0;
+    }
+
+    .sc-dd-card {
+      min-width: 0;
+      min-height: 102px;
+      display: grid;
+      grid-template-columns: 43px minmax(0, 1fr) 20px;
+      align-items: center;
+      gap: 11px;
+      padding: 13px;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.035);
+      transition: transform 160ms ease, background 160ms ease, border-color 160ms ease;
+    }
+
+    .sc-dd-card:hover,
+    .sc-dd-card:focus-visible {
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.28);
+      background: rgba(124, 58, 237, 0.11);
+      transform: translateY(-2px);
+    }
+
+    .sc-dd-card.active {
+      border-color: rgba(236, 72, 153, 0.28);
+      background: rgba(124, 58, 237, 0.1);
+    }
+
+    .sc-dd-ic {
+      width: 43px;
+      height: 43px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(167, 139, 250, 0.2);
+      border-radius: 13px;
+      color: #c4b5fd;
+      background: linear-gradient(145deg, rgba(124, 58, 237, 0.2), rgba(219, 39, 119, 0.08));
+    }
+
+    .sc-dd-txt {
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+    }
+
+    .sc-dd-label {
+      font-size: 0.88rem;
+      font-weight: 900;
+    }
+
+    .sc-dd-meta {
+      color: rgba(255, 255, 255, 0.5);
+      font-size: 0.72rem;
+      line-height: 1.35;
+    }
+
+    .sc-dd-arrow {
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.82rem;
+    }
+
+    .sc-dd-brief {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      min-height: 62px;
+      padding: 11px 15px;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      border-radius: 15px;
+      background: linear-gradient(110deg, rgba(91, 33, 182, 0.88), rgba(162, 28, 175, 0.88));
+    }
+
+    .sc-dd-brief span {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sc-dd-brief small {
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.68rem;
+    }
+
+    .sc-dd-brief strong {
+      font-size: 0.86rem;
+      font-weight: 900;
+    }
+
+    .sc-dd-brief > .bi {
+      transition: transform 160ms ease;
+    }
+
+    .sc-dd-brief:hover {
+      color: #fff;
+    }
+
+    .sc-dd-brief:hover > .bi {
+      transform: translateX(3px);
+    }
+
+    /* Mobile menu button */
+    .sc-menu-toggle {
+      position: relative;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      border: 1px solid rgba(167, 139, 250, 0.24);
+      border-radius: 15px;
+      background: linear-gradient(145deg, rgba(139, 92, 246, 0.17), rgba(217, 70, 239, 0.08));
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+      cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .sc-menu-toggle span {
+      width: 21px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #a78bfa, #f43fbb);
+      transition: transform 180ms ease, opacity 150ms ease, width 180ms ease;
+    }
+
+    .sc-menu-toggle.is-open span:nth-child(1) {
+      transform: translateY(7px) rotate(45deg);
+    }
+
+    .sc-menu-toggle.is-open span:nth-child(2) {
+      width: 0;
+      opacity: 0;
+    }
+
+    .sc-menu-toggle.is-open span:nth-child(3) {
+      transform: translateY(-7px) rotate(-45deg);
+    }
+
+    /* Mobile drawer */
+    .sc-mobile-layer {
+      position: fixed;
+      inset: 0;
+      z-index: 1200;
+      pointer-events: none;
+    }
+
+    .sc-mobile-backdrop {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      background: rgba(2, 4, 12, 0.72);
+      opacity: 0;
+      transition: opacity 220ms ease;
+    }
+
+    .sc-mobile-drawer {
+      position: absolute;
+      top: 0;
+      right: 0;
+      width: min(90vw, 390px);
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      color: #fff;
+      background:
+        radial-gradient(circle at 100% 0%, rgba(139, 92, 246, 0.18), transparent 34%),
+        radial-gradient(circle at 0% 100%, rgba(236, 72, 153, 0.1), transparent 35%),
+        #070a12;
+      border-left: 1px solid rgba(255, 255, 255, 0.1);
+      box-shadow: -28px 0 80px rgba(0, 0, 0, 0.48);
+      transform: translate3d(100%, 0, 0);
+      transition: transform 240ms cubic-bezier(0.22, 0.8, 0.22, 1);
+      will-change: transform;
+    }
+
+    .sc-mobile-layer.is-open {
+      pointer-events: auto;
+    }
+
+    .sc-mobile-layer.is-open .sc-mobile-backdrop {
+      opacity: 1;
+    }
+
+    .sc-mobile-layer.is-open .sc-mobile-drawer {
+      transform: translate3d(0, 0, 0);
+    }
+
+    .sc-mobile-head {
+      min-height: 86px;
+      padding: 18px 18px 16px 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .sc-mobile-head > div,
+    .sc-mobile-service > span:nth-child(2),
+    .sc-mobile-cta span {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .sc-mobile-head strong {
+      font-size: 1.05rem;
+      font-weight: 900;
+    }
+
+    .sc-mobile-kicker {
+      color: #c4b5fd;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .sc-mobile-close {
+      position: relative;
+      width: 44px;
+      height: 44px;
+      padding: 0;
+      border: 1px solid rgba(167, 139, 250, 0.22);
+      border-radius: 14px;
+      background: rgba(139, 92, 246, 0.1);
+      cursor: pointer;
+    }
+
+    .sc-mobile-close span {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 2px;
+      border-radius: 999px;
+      background: linear-gradient(90deg, #a78bfa, #f43fbb);
+    }
+
+    .sc-mobile-close span:first-child {
+      transform: translate(-50%, -50%) rotate(45deg);
+    }
+
+    .sc-mobile-close span:last-child {
+      transform: translate(-50%, -50%) rotate(-45deg);
+    }
+
+    .sc-mobile-content {
+      flex: 1;
+      padding: 18px;
+      overflow-y: auto;
+      overscroll-behavior: contain;
+    }
+
+    .sc-mobile-nav,
+    .sc-mobile-service-grid {
+      display: grid;
+      gap: 8px;
+    }
+
+    .sc-mobile-link {
+      min-height: 57px;
+      padding: 0 16px;
+      display: grid;
+      grid-template-columns: 30px 1fr 22px;
+      align-items: center;
+      gap: 10px;
+      color: rgba(255, 255, 255, 0.76);
+      text-decoration: none;
+      border: 1px solid transparent;
+      border-radius: 15px;
+      font-size: 0.98rem;
+      font-weight: 800;
+    }
+
+    .sc-mobile-link.active {
+      color: #fff;
+      border-color: rgba(167, 139, 250, 0.28);
+      background: linear-gradient(90deg, rgba(124, 58, 237, 0.25), rgba(217, 70, 239, 0.09));
+      box-shadow: inset 3px 0 0 #a855f7;
+    }
+
+    .sc-mobile-number {
+      color: rgba(196, 181, 253, 0.58);
+      font-size: 0.65rem;
+      font-weight: 900;
+    }
+
+    .sc-mobile-services {
+      margin-top: 25px;
+    }
+
+    .sc-mobile-section-head {
+      margin-bottom: 11px;
+      padding: 0 4px;
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+    }
+
+    .sc-mobile-section-head span {
+      color: #fff;
+      font-size: 0.78rem;
+      font-weight: 900;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .sc-mobile-section-head small,
+    .sc-mobile-service small {
+      color: rgba(255, 255, 255, 0.48);
+      font-size: 0.72rem;
+    }
+
+    .sc-mobile-service {
+      min-height: 76px;
+      padding: 12px;
+      display: grid;
+      grid-template-columns: 45px 1fr 20px;
+      align-items: center;
+      gap: 12px;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.09);
+      border-radius: 17px;
+      background: rgba(255, 255, 255, 0.035);
+    }
+
+    .sc-mobile-service.active {
+      border-color: rgba(217, 70, 239, 0.28);
+      background: rgba(139, 92, 246, 0.1);
+    }
+
+    .sc-mobile-service-icon {
+      width: 45px;
+      height: 45px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid rgba(167, 139, 250, 0.18);
+      border-radius: 13px;
+      color: #c4b5fd;
+      background: linear-gradient(145deg, rgba(139, 92, 246, 0.2), rgba(236, 72, 153, 0.08));
+    }
+
+    .sc-mobile-service strong {
+      font-size: 0.87rem;
+      font-weight: 900;
+    }
+
+    .sc-mobile-footer {
+      padding: 14px 18px calc(16px + env(safe-area-inset-bottom));
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(7, 10, 18, 0.98);
+    }
+
+    .sc-mobile-cta {
+      min-height: 66px;
+      padding: 12px 17px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      color: #fff;
+      text-decoration: none;
+      border: 1px solid rgba(255, 255, 255, 0.13);
+      border-radius: 17px;
+      background: linear-gradient(110deg, #6d28d9, #9333ea 52%, #c026d3);
+      box-shadow: 0 18px 38px rgba(109, 40, 217, 0.28);
+    }
+
+    .sc-mobile-cta small {
+      color: rgba(255, 255, 255, 0.68);
+      font-size: 0.69rem;
+    }
+
+    .sc-mobile-cta strong {
+      font-size: 0.93rem;
+      font-weight: 900;
+    }
+
+    html.sc-menu-open,
+    html.sc-menu-open body {
+      overflow: hidden;
+      overscroll-behavior: none;
+    }
+
+    @media (max-width: 991.98px) {
+      .sc-nav {
+        height: var(--sc-mobile-nav-height);
+        background: rgba(7, 10, 18, 0.96) !important;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+      }
+
+      .sc-nav > .container {
+        padding-inline: 14px;
+      }
+
+      .nav-logo {
+        height: 32px;
+      }
+
+      .page {
+        padding-top: var(--sc-mobile-nav-height);
+      }
+    }
+
+    @media (max-width: 380px) {
+      .sc-mobile-drawer {
+        width: 94vw;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .sc-nav,
+      .sc-nav::after,
+      .sc-dd-menu,
+      .sc-mobile-drawer,
+      .sc-mobile-backdrop,
+      .sc-menu-toggle span {
+        transition: none;
+      }
+    }
+  </style>
+
+  <script is:inline>
+    document.addEventListener('DOMContentLoaded', () => {
+      const navbar = document.querySelector('.sc-nav');
+      const servicesItem = document.getElementById('scServicesItem');
+      const servicesToggle = document.getElementById('scServicesToggle');
+
+      const setServicesOpen = (open) => {
+        if (!servicesItem || !servicesToggle) return;
+        servicesItem.classList.toggle('is-open', open);
+        servicesToggle.setAttribute('aria-expanded', String(open));
+      };
+
+      servicesToggle?.addEventListener('click', (event) => {
+        event.stopPropagation();
+        setServicesOpen(!servicesItem?.classList.contains('is-open'));
+      });
+
+      servicesItem?.addEventListener('mouseenter', () => {
+        servicesToggle?.setAttribute('aria-expanded', 'true');
+      });
+
+      servicesItem?.addEventListener('mouseleave', () => {
+        if (!servicesItem.classList.contains('is-open')) {
+          servicesToggle?.setAttribute('aria-expanded', 'false');
+        }
+      });
+
+      document.addEventListener('click', (event) => {
+        if (servicesItem && !servicesItem.contains(event.target)) {
+          setServicesOpen(false);
+        }
+      });
+
+      const mobileToggle = document.getElementById('scMenuToggle');
+      const mobileLayer = document.getElementById('scMobileLayer');
+      const mobileClose = document.getElementById('scMobileClose');
+      const mobileBackdrop = document.getElementById('scMobileBackdrop');
+      let lastFocusedElement = null;
+
+      const openMobileMenu = () => {
+        if (!mobileToggle || !mobileLayer) return;
+        lastFocusedElement = document.activeElement;
+        mobileLayer.removeAttribute('inert');
+        mobileLayer.setAttribute('aria-hidden', 'false');
+        mobileLayer.classList.add('is-open');
+        mobileToggle.classList.add('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'true');
+        document.documentElement.classList.add('sc-menu-open');
+        window.setTimeout(() => mobileClose?.focus(), 60);
+      };
+
+      const closeMobileMenu = () => {
+        if (!mobileToggle || !mobileLayer) return;
+        mobileLayer.classList.remove('is-open');
+        mobileLayer.setAttribute('aria-hidden', 'true');
+        mobileToggle.classList.remove('is-open');
+        mobileToggle.setAttribute('aria-expanded', 'false');
+        document.documentElement.classList.remove('sc-menu-open');
+
+        window.setTimeout(() => {
+          mobileLayer.setAttribute('inert', '');
+          if (lastFocusedElement instanceof HTMLElement) lastFocusedElement.focus();
+        }, 240);
+      };
+
+      mobileToggle?.addEventListener('click', () => {
+        mobileLayer?.classList.contains('is-open') ? closeMobileMenu() : openMobileMenu();
+      });
+
+      mobileClose?.addEventListener('click', closeMobileMenu);
+      mobileBackdrop?.addEventListener('click', closeMobileMenu);
+      mobileLayer?.querySelectorAll('a').forEach((link) => link.addEventListener('click', closeMobileMenu));
+
+      document.addEventListener('keydown', (event) => {
+        if (event.key !== 'Escape') return;
+        setServicesOpen(false);
+        closeMobileMenu();
+      });
+
+      window.matchMedia('(min-width: 992px)').addEventListener('change', (event) => {
+        if (event.matches) closeMobileMenu();
+        else setServicesOpen(false);
+      });
+
+      if (navbar) {
+        let ticking = false;
+
+        const updateNavbar = () => {
+          navbar.classList.toggle('scrolled', window.scrollY > 40);
+          ticking = false;
+        };
+
+        window.addEventListener('scroll', () => {
+          if (ticking) return;
+          window.requestAnimationFrame(updateNavbar);
+          ticking = true;
+        }, { passive: true });
+
+        updateNavbar();
       }
     });
-  });
-
-
-window.addEventListener("scroll", function () {
-  const navbar = document.querySelector(".sc-nav");
-  if (!navbar) return;
-
-  if (window.scrollY > 50) {
-    navbar.classList.add("scrolled");
-  } else {
-    navbar.classList.remove("scrolled");
-  }
-});
-</script>
+  </script>

@@ -1,0 +1,1356 @@
+---
+import Layout from "../layouts/Layout.astro";
+
+export const prerender = true;
+
+const SITE_URL = "https://www.softwarecode.cl/";
+const pageUrl = `${SITE_URL}nosotros/`;
+
+const pageTitle = "Quiénes Somos: Software y SEO en Chile";
+const pageDescription =
+  "Conoce a SoftwareCode, empresa chilena especializada en desarrollo de software, SEO técnico, automatización e integraciones para negocios B2B.";
+
+// Reemplaza esta imagen cuando tengas una fotografía real del equipo o fundador.
+const socialImage = "/logosc-original.png";
+const whatsappUrl =
+  "https://wa.me/56988396128?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20digital%20para%20mi%20empresa.";
+
+const expertise = [
+  "Desarrollo de software y plataformas web a medida",
+  "Integración de APIs, sistemas y servicios externos",
+  "SEO técnico, rendimiento y arquitectura web",
+  "Automatización de procesos comerciales",
+  "Analítica, medición de conversiones y optimización",
+  "Infraestructura cloud, despliegue y mantenimiento"
+];
+
+const technologies = [
+  "Golang",
+  "Node.js",
+  "NestJS",
+  "PHP",
+  "Java",
+  "Vue",
+  "Nuxt",
+  "React",
+  "Astro",
+  "PostgreSQL",
+  "MySQL",
+  "Docker",
+  "AWS",
+  "Cloudflare"
+];
+
+const schemaExtras = [
+  {
+    "@context": "https://schema.org",
+    "@type": "AboutPage",
+    "@id": `${pageUrl}#aboutpage`,
+    "url": pageUrl,
+    "name": pageTitle,
+    "description": pageDescription,
+    "isPartOf": { "@id": `${SITE_URL}#website` },
+    "mainEntity": { "@id": `${SITE_URL}#organization` },
+    "about": [
+      { "@id": `${SITE_URL}#organization` },
+      { "@id": `${pageUrl}#marco-estay` }
+    ],
+    "inLanguage": "es-CL",
+    "dateModified": "2026-06-23"
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "@id": `${pageUrl}#marco-estay`,
+    "name": "Marco Estay",
+    "jobTitle": "Ingeniero de software y responsable de SoftwareCode",
+    "url": pageUrl,
+    "worksFor": { "@id": `${SITE_URL}#organization` },
+    "knowsAbout": expertise,
+    "sameAs": [
+      "https://www.linkedin.com/in/software-code-67b8543aa/"
+    ]
+  },
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "@id": `${pageUrl}#faq`,
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "¿Qué es SoftwareCode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SoftwareCode es una empresa chilena de servicios digitales especializada en desarrollo de software, sitios web, SEO técnico, integraciones y automatización para empresas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Quién está detrás de SoftwareCode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia en desarrollo backend, frontend, integraciones, bases de datos, nube y soluciones digitales para empresas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Con qué tipo de empresas trabaja SoftwareCode?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "SoftwareCode trabaja principalmente con empresas B2B, servicios profesionales, comercio especializado, industria y organizaciones que necesitan desarrollar, integrar u optimizar sus canales digitales."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿Atienden empresas fuera de Santiago?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. SoftwareCode trabaja de manera remota con empresas de Santiago y otras regiones de Chile, organizando cada proyecto mediante etapas, entregables y seguimiento."
+        }
+      }
+    ]
+  }
+];
+---
+
+<Layout
+  title={pageTitle}
+  description={pageDescription}
+  image={socialImage}
+  url={pageUrl}
+  schemaExtras={schemaExtras}
+>
+  <!-- HERO -->
+  <section class="about-hero position-relative overflow-hidden">
+    <div class="about-hero__glow about-hero__glow--one"></div>
+    <div class="about-hero__glow about-hero__glow--two"></div>
+    <div class="about-hero__grid"></div>
+
+    <div class="container position-relative">
+      <div class="row align-items-center g-5">
+        <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-duration="650">
+          <nav aria-label="Breadcrumb" class="about-breadcrumb mb-4">
+            <ol class="breadcrumb mb-0">
+              <li class="breadcrumb-item"><a href="/">Inicio</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Nosotros</li>
+            </ol>
+          </nav>
+
+          <div class="d-flex flex-wrap gap-2 mb-3">
+            <span class="about-badge">SoftwareCode</span>
+            <span class="about-badge">Santiago, Chile</span>
+            <span class="about-badge">Más de 10 años de experiencia</span>
+          </div>
+
+          <h1 class="display-4 fw-bold lh-sm mb-4">
+            Desarrollo de software, SEO técnico y automatización con
+            <span class="about-gradient-text">experiencia real</span>
+          </h1>
+
+          <p class="lead text-secondary mb-4">
+            SoftwareCode es una empresa chilena que combina ingeniería de software,
+            optimización web y estrategia digital para ayudar a empresas a construir
+            plataformas más rápidas, conectadas y preparadas para generar oportunidades.
+          </p>
+
+          <p class="text-secondary about-hero__support mb-4">
+            Trabajamos directamente con cada cliente, desde el diagnóstico y la arquitectura
+            hasta la implementación, medición y mejora continua del proyecto.
+          </p>
+
+          <div class="d-grid gap-2 d-sm-flex">
+            <a
+              href={whatsappUrl}
+              class="btn about-btn-primary btn-lg px-4"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-about-cta="hero-contact"
+            >
+              Conversar sobre un proyecto
+            </a>
+            <a href="/desarrollo-web-a-medida/" class="btn about-btn-outline btn-lg px-4">
+              Ver servicios
+            </a>
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5" data-aos="fade-left" data-aos-duration="650">
+          <div class="about-visual-card">
+              <img
+                src="/yo2.png"
+                alt="Equipo de SoftwareCode desarrollando soluciones digitales en Chile"
+                width="720"
+                height="820"
+                loading="eager"
+                fetchpriority="high"
+                decoding="async"
+                class="about-main-image"
+              />
+            <div class="about-floating-proof">
+              <span class="about-floating-proof__icon"><i class="bi bi-code-slash"></i></span>
+              <div>
+                <strong>Ingeniería + estrategia</strong>
+                <span>Una sola mirada para negocio y tecnología</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PRUEBAS RÁPIDAS -->
+  <section class="about-proof-strip border-top border-bottom">
+    <div class="container">
+      <div class="row g-0">
+        <div class="col-12 col-md-4">
+          <div class="about-proof-item">
+            <i class="bi bi-calendar-check"></i>
+            <div>
+              <strong>Más de 10 años</strong>
+              <span>desarrollando soluciones digitales</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="about-proof-item">
+            <i class="bi bi-diagram-3"></i>
+            <div>
+              <strong>Experiencia integral</strong>
+              <span>software, integraciones, SEO y nube</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-12 col-md-4">
+          <div class="about-proof-item">
+            <i class="bi bi-chat-square-text"></i>
+            <div>
+              <strong>Atención directa</strong>
+              <span>sin intermediarios innecesarios</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORIA Y POSICIONAMIENTO -->
+  <section class="py-5 about-section">
+    <div class="container py-lg-4">
+      <div class="row g-5 align-items-center">
+        <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-duration="650">
+          <span class="about-kicker">Quiénes somos</span>
+          <h2 class="about-title mt-2 mb-3">
+            Una empresa de desarrollo de software en Chile con enfoque técnico y comercial
+          </h2>
+          <p class="text-secondary">
+            SoftwareCode nace para resolver un problema frecuente: muchas empresas contratan
+            desarrollo, marketing, analítica y automatización por separado, pero nadie conecta
+            todas las piezas del proceso.
+          </p>
+          <p class="text-secondary">
+            Nuestra forma de trabajo une arquitectura, experiencia de usuario, velocidad,
+            posicionamiento en buscadores, medición e integración de sistemas. El objetivo no es
+            entregar una página aislada, sino una solución digital que pueda operar, crecer y
+            mejorar con datos reales.
+          </p>
+          <p class="text-secondary mb-0">
+            Tenemos experiencia en marketplaces B2B, plataformas empresariales, biometría,
+            servicios financieros, comercio especializado, integraciones de APIs y sistemas
+            orientados a procesos críticos.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-6" data-aos="fade-left" data-aos-duration="650">
+          <div class="about-principles-card">
+            <div class="about-principle">
+              <span>01</span>
+              <div>
+                <h3>Primero entendemos el negocio</h3>
+                <p>Antes de recomendar tecnología, identificamos el objetivo, el proceso y las restricciones reales.</p>
+              </div>
+            </div>
+            <div class="about-principle">
+              <span>02</span>
+              <div>
+                <h3>Diseñamos una solución mantenible</h3>
+                <p>Priorizamos arquitectura clara, seguridad, rendimiento y capacidad de evolución.</p>
+              </div>
+            </div>
+            <div class="about-principle">
+              <span>03</span>
+              <div>
+                <h3>Medimos después de implementar</h3>
+                <p>Configuramos datos y conversiones para saber qué funciona y qué se debe mejorar.</p>
+              </div>
+            </div>
+            <div class="about-principle">
+              <span>04</span>
+              <div>
+                <h3>Acompañamos el crecimiento</h3>
+                <p>El proyecto no termina con el despliegue: puede continuar con soporte, optimización y nuevas etapas.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- RESPONSABLE -->
+  <section class="py-5 about-section-soft border-top border-bottom">
+    <div class="container py-lg-4">
+      <div class="row g-5 align-items-center">
+        <div class="col-12 col-lg-5" data-aos="fade-right" data-aos-duration="650">
+          <div class="about-founder-media">
+              <img
+                src="/yo.png"
+                alt="Marco Estay, ingeniero de software responsable de SoftwareCode"
+                width="680"
+                height="760"
+                loading="lazy"
+                decoding="async"
+                class="about-founder-image"
+              />
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-duration="650">
+          <span class="about-kicker">Responsable de SoftwareCode</span>
+          <h2 class="about-title mt-2 mb-3">Marco Estay, ingeniero de software</h2>
+          <p class="text-secondary">
+            Soy ingeniero de software con más de diez años de experiencia construyendo y
+            manteniendo sistemas web, APIs, integraciones, procesos backend y productos digitales
+            para empresas.
+          </p>
+          <p class="text-secondary">
+            He trabajado con tecnologías como Golang, Node.js, Java, PHP, Vue, React, Nuxt,
+            PostgreSQL, MySQL, Docker y AWS. Esta experiencia permite evaluar un proyecto desde
+            una mirada completa: negocio, arquitectura, implementación, rendimiento, seguridad,
+            posicionamiento y operación.
+          </p>
+          <p class="text-secondary">
+            En SoftwareCode participo directamente en el diagnóstico, diseño y seguimiento de cada
+            solución. Cuando un proyecto requiere otras especialidades, se organiza un equipo según
+            el alcance, manteniendo un punto de contacto claro para el cliente.
+          </p>
+
+          <div class="row g-3 mt-1">
+            <div class="col-12 col-sm-6">
+              <div class="about-founder-point">
+                <i class="bi bi-check2-circle"></i>
+                <span>Experiencia backend y frontend</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="about-founder-point">
+                <i class="bi bi-check2-circle"></i>
+                <span>Arquitectura e integraciones</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="about-founder-point">
+                <i class="bi bi-check2-circle"></i>
+                <span>SEO técnico y rendimiento</span>
+              </div>
+            </div>
+            <div class="col-12 col-sm-6">
+              <div class="about-founder-point">
+                <i class="bi bi-check2-circle"></i>
+                <span>Infraestructura y despliegue</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a
+              href="https://www.linkedin.com/in/software-code-67b8543aa/"
+              class="btn about-btn-outline"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <i class="bi bi-linkedin me-2"></i>Ver LinkedIn
+            </a>
+            <a href="/blog/" class="btn about-btn-ghost">
+              Ver artículos y experiencia
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ESPECIALIDADES -->
+  <section class="py-5 about-section">
+    <div class="container py-lg-4">
+      <div class="row justify-content-between align-items-end g-4 mb-4 mb-lg-5">
+        <div class="col-12 col-lg-8" data-aos="fade-up" data-aos-duration="650">
+          <span class="about-kicker">Especialidades</span>
+          <h2 class="about-title mt-2 mb-3">
+            Capacidades para construir y mejorar ecosistemas digitales completos
+          </h2>
+          <p class="text-secondary mb-0">
+            Cada servicio puede contratarse de forma independiente o combinarse dentro de un proyecto por etapas.
+          </p>
+        </div>
+      </div>
+
+      <div class="row g-4">
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-window-stack"></i></span>
+            <h3>Desarrollo de software y plataformas web</h3>
+            <p>Aplicaciones, portales, sistemas internos y soluciones web diseñadas según procesos reales de negocio.</p>
+            <a href="/desarrollo-web-a-medida/">Conocer desarrollo web <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-diagram-2"></i></span>
+            <h3>Integración de APIs y sistemas</h3>
+            <p>Conexión entre plataformas, servicios externos, bases de datos, formularios, CRM y procesos empresariales.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Consultar una integración <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-search"></i></span>
+            <h3>SEO técnico y rendimiento web</h3>
+            <p>Auditoría, indexación, estructura, velocidad y contenido orientado a mejorar visibilidad y captación orgánica.</p>
+            <a href="/agencia-marketing-digital/">Ver marketing y SEO <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-gear-wide-connected"></i></span>
+            <h3>Automatización de procesos</h3>
+            <p>Flujos para reducir tareas manuales, ordenar contactos, activar seguimientos y mejorar la trazabilidad.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Evaluar automatización <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-bar-chart-line"></i></span>
+            <h3>Medición y optimización</h3>
+            <p>Configuración de eventos, conversiones y paneles para comprender el comportamiento y priorizar mejoras.</p>
+            <a href="/blog/">Revisar guías técnicas <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+
+        <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
+          <article class="about-service-card h-100">
+            <span class="about-service-icon"><i class="bi bi-cloud-check"></i></span>
+            <h3>Infraestructura y soporte</h3>
+            <p>Despliegue, nube, contenedores, monitoreo, mantenimiento y evolución técnica de soluciones digitales.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Consultar soporte <i class="bi bi-arrow-right"></i></a>
+          </article>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FORMA DE TRABAJO -->
+  <section class="py-5 about-process-section border-top border-bottom">
+    <div class="container py-lg-4">
+      <div class="text-center mx-auto about-section-heading" data-aos="fade-up" data-aos-duration="650">
+        <span class="about-kicker">Metodología</span>
+        <h2 class="about-title mt-2 mb-3">Cómo trabajamos un proyecto digital</h2>
+        <p class="text-secondary mb-0">
+          Un proceso simple, con decisiones visibles y entregables claros desde el inicio.
+        </p>
+      </div>
+
+      <div class="row g-4 mt-4">
+        <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650">
+          <div class="about-step h-100">
+            <span class="about-step__number">01</span>
+            <h3>Diagnóstico</h3>
+            <p>Revisamos objetivos, usuarios, procesos, tecnología existente y principales restricciones.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
+          <div class="about-step h-100">
+            <span class="about-step__number">02</span>
+            <h3>Propuesta y arquitectura</h3>
+            <p>Definimos alcance, prioridades, solución técnica, etapas, costos y criterios de éxito.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
+          <div class="about-step h-100">
+            <span class="about-step__number">03</span>
+            <h3>Implementación</h3>
+            <p>Desarrollamos por avances verificables, validando funcionalidad, rendimiento y experiencia.</p>
+          </div>
+        </div>
+        <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="180">
+          <div class="about-step h-100">
+            <span class="about-step__number">04</span>
+            <h3>Medición y evolución</h3>
+            <p>Publicamos, medimos resultados y organizamos mejoras según impacto y nuevas necesidades.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TECNOLOGÍAS Y SECTORES -->
+  <section class="py-5 about-section">
+    <div class="container py-lg-4">
+      <div class="row g-5">
+        <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-duration="650">
+          <span class="about-kicker">Tecnologías</span>
+          <h2 class="about-title mt-2 mb-3">Herramientas elegidas según cada solución</h2>
+          <p class="text-secondary">
+            No forzamos todos los proyectos a utilizar la misma tecnología. Evaluamos mantenimiento,
+            rendimiento, equipo, presupuesto e integración con la operación existente.
+          </p>
+          <div class="about-tech-list mt-4">
+            {technologies.map((technology) => (
+              <span>{technology}</span>
+            ))}
+          </div>
+        </div>
+
+        <div class="col-12 col-lg-5" data-aos="fade-left" data-aos-duration="650">
+          <div class="about-sector-card">
+            <span class="about-kicker">Sectores y desafíos</span>
+            <h2 class="h3 fw-bold mt-2 mb-3">Experiencia aplicable a distintos negocios</h2>
+            <ul class="about-check-list mb-0">
+              <li><i class="bi bi-check2"></i> Servicios profesionales y empresas B2B</li>
+              <li><i class="bi bi-check2"></i> Marketplaces y plataformas de operación</li>
+              <li><i class="bi bi-check2"></i> Comercio especializado y catálogos técnicos</li>
+              <li><i class="bi bi-check2"></i> Servicios financieros e integraciones críticas</li>
+              <li><i class="bi bi-check2"></i> Procesos internos y automatización comercial</li>
+              <li><i class="bi bi-check2"></i> Sitios con problemas de SEO y rendimiento</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-5 about-section-soft border-top">
+    <div class="container py-lg-4">
+      <div class="row g-5">
+        <div class="col-12 col-lg-5" data-aos="fade-up" data-aos-duration="650">
+          <span class="about-kicker">Preguntas frecuentes</span>
+          <h2 class="about-title mt-2 mb-3">Conoce mejor a SoftwareCode</h2>
+          <p class="text-secondary mb-0">
+            Estas respuestas aclaran cómo se organiza el trabajo y qué tipo de proyectos podemos evaluar.
+          </p>
+        </div>
+
+        <div class="col-12 col-lg-7" data-aos="fade-left" data-aos-duration="650">
+          <div class="accordion about-accordion" id="aboutFaq">
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq1" aria-expanded="true" aria-controls="aboutFaq1">
+                  ¿Qué es SoftwareCode?
+                </button>
+              </h3>
+              <div id="aboutFaq1" class="accordion-collapse collapse show" data-bs-parent="#aboutFaq">
+                <div class="accordion-body">
+                  SoftwareCode es una empresa chilena de servicios digitales especializada en desarrollo de software,
+                  sitios web, SEO técnico, integraciones y automatización para empresas.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq2" aria-expanded="false" aria-controls="aboutFaq2">
+                  ¿Quién está detrás de SoftwareCode?
+                </button>
+              </h3>
+              <div id="aboutFaq2" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
+                <div class="accordion-body">
+                  SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia
+                  en backend, frontend, integraciones, bases de datos, nube y soluciones digitales para empresas.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq3" aria-expanded="false" aria-controls="aboutFaq3">
+                  ¿Con qué tipo de empresas trabajan?
+                </button>
+              </h3>
+              <div id="aboutFaq3" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
+                <div class="accordion-body">
+                  Trabajamos principalmente con empresas B2B, servicios profesionales, comercio especializado,
+                  industria y organizaciones que necesitan desarrollar, integrar u optimizar sus canales digitales.
+                </div>
+              </div>
+            </div>
+
+            <div class="accordion-item">
+              <h3 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq4" aria-expanded="false" aria-controls="aboutFaq4">
+                  ¿Atienden empresas fuera de Santiago?
+                </button>
+              </h3>
+              <div id="aboutFaq4" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
+                <div class="accordion-body">
+                  Sí. Trabajamos de manera remota con empresas de Santiago y otras regiones de Chile,
+                  organizando cada proyecto mediante etapas, entregables y seguimiento.
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA FINAL -->
+  <section class="about-final-cta position-relative overflow-hidden">
+    <div class="about-final-cta__glow"></div>
+    <div class="container position-relative">
+      <div class="about-final-cta__card" data-aos="fade-up" data-aos-duration="650">
+        <div class="row align-items-center g-4">
+          <div class="col-12 col-lg-8">
+            <span class="about-kicker about-kicker--light">Conversemos</span>
+            <h2 class="fw-bold text-white mt-2 mb-3">
+              ¿Necesitas desarrollar, integrar u optimizar una solución digital?
+            </h2>
+            <p class="mb-0 text-white-50">
+              Cuéntanos tu situación actual y te orientaremos sobre el alcance, prioridades y próximos pasos.
+            </p>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="d-grid gap-2">
+              <a
+                href={whatsappUrl}
+                class="btn about-btn-light btn-lg"
+                target="_blank"
+                rel="noopener noreferrer"
+                data-about-cta="final-contact"
+              >
+                Solicitar diagnóstico
+              </a>
+              <a href="/desarrollo-web-a-medida/" class="btn about-btn-dark-outline btn-lg">
+                Revisar servicios
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <script is:inline>
+    document.addEventListener("click", (event) => {
+      const target = event.target instanceof Element
+        ? event.target.closest("[data-about-cta]")
+        : null;
+
+      if (!target) return;
+
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        event: "about_cta_click",
+        cta_location: target.getAttribute("data-about-cta"),
+        page_path: window.location.pathname
+      });
+    });
+  </script>
+
+  <style>
+    :root {
+      --about-pink: #ff2ea6;
+      --about-purple: #6f2cff;
+      --about-violet: #8b5cf6;
+      --about-dark: #070a12;
+      --about-ink: #111827;
+      --about-muted: #667085;
+      --about-border: rgba(15, 23, 42, 0.10);
+      --about-soft: #f8f9fc;
+    }
+
+    .about-hero {
+      min-height: 760px;
+      padding: 10rem 0 6rem;
+      background:
+        radial-gradient(circle at 10% 5%, rgba(255, 46, 166, 0.13), transparent 30%),
+        radial-gradient(circle at 88% 18%, rgba(111, 44, 255, 0.15), transparent 32%),
+        linear-gradient(180deg, #fbfbff 0%, #ffffff 74%);
+      isolation: isolate;
+    }
+
+    .about-hero__grid {
+      position: absolute;
+      inset: 0;
+      z-index: -3;
+      opacity: 0.42;
+      background-image:
+        linear-gradient(rgba(111, 44, 255, 0.055) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(111, 44, 255, 0.055) 1px, transparent 1px);
+      background-size: 46px 46px;
+      mask-image: linear-gradient(to bottom, black, transparent 88%);
+    }
+
+    .about-hero__glow {
+      position: absolute;
+      border-radius: 999px;
+      filter: blur(10px);
+      z-index: -2;
+      pointer-events: none;
+    }
+
+    .about-hero__glow--one {
+      width: 360px;
+      height: 360px;
+      top: 7rem;
+      left: -14rem;
+      background: rgba(255, 46, 166, 0.10);
+    }
+
+    .about-hero__glow--two {
+      width: 440px;
+      height: 440px;
+      right: -13rem;
+      top: 11rem;
+      background: rgba(111, 44, 255, 0.11);
+    }
+
+    .about-breadcrumb .breadcrumb-item,
+    .about-breadcrumb .breadcrumb-item a {
+      color: rgba(15, 23, 42, 0.62);
+      font-size: 0.9rem;
+      text-decoration: none;
+    }
+
+    .about-badge {
+      display: inline-flex;
+      align-items: center;
+      border: 1px solid rgba(111, 44, 255, 0.14);
+      background: rgba(255, 255, 255, 0.82);
+      color: #5b21b6;
+      padding: 0.48rem 0.78rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      box-shadow: 0 10px 30px rgba(15, 23, 42, 0.04);
+    }
+
+    .about-gradient-text {
+      background: linear-gradient(90deg, var(--about-pink), var(--about-purple));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .about-hero h1 {
+      color: var(--about-ink);
+      letter-spacing: -0.045em;
+      max-width: 900px;
+    }
+
+    .about-hero .lead {
+      max-width: 790px;
+      font-size: clamp(1.08rem, 2vw, 1.26rem);
+      line-height: 1.7;
+    }
+
+    .about-hero__support {
+      max-width: 720px;
+      line-height: 1.75;
+    }
+
+    .about-btn-primary,
+    .about-btn-light,
+    .about-btn-outline,
+    .about-btn-ghost,
+    .about-btn-dark-outline {
+      border-radius: 14px;
+      font-weight: 850;
+      transition: transform 0.18s ease, box-shadow 0.18s ease, background 0.18s ease, border-color 0.18s ease;
+    }
+
+    .about-btn-primary {
+      color: #fff;
+      border: 0;
+      background: linear-gradient(90deg, var(--about-pink), var(--about-purple));
+      box-shadow: 0 16px 34px rgba(111, 44, 255, 0.22);
+    }
+
+    .about-btn-primary:hover,
+    .about-btn-light:hover,
+    .about-btn-outline:hover,
+    .about-btn-ghost:hover,
+    .about-btn-dark-outline:hover {
+      transform: translateY(-2px);
+    }
+
+    .about-btn-primary:hover {
+      color: #fff;
+      box-shadow: 0 20px 40px rgba(111, 44, 255, 0.28);
+    }
+
+    .about-btn-outline {
+      color: var(--about-purple);
+      border: 1px solid rgba(111, 44, 255, 0.25);
+      background: rgba(255, 255, 255, 0.82);
+    }
+
+    .about-btn-outline:hover {
+      color: var(--about-purple);
+      background: rgba(111, 44, 255, 0.07);
+      border-color: rgba(111, 44, 255, 0.42);
+    }
+
+    .about-btn-ghost {
+      color: var(--about-ink);
+      border: 1px solid var(--about-border);
+      background: rgba(248, 250, 252, 0.9);
+    }
+
+    .about-visual-card {
+      position: relative;
+      border: 1px solid rgba(111, 44, 255, 0.13);
+      border-radius: 30px;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.82);
+      box-shadow: 0 40px 90px rgba(15, 23, 42, 0.14);
+      backdrop-filter: blur(16px);
+    }
+
+    .about-main-image,
+    .about-founder-image {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+      border-radius: 22px;
+    }
+
+    .about-image-placeholder {
+      min-height: 540px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 0.5rem;
+      border-radius: 22px;
+      border: 1px dashed rgba(111, 44, 255, 0.34);
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 46, 166, 0.10), transparent 34%),
+        radial-gradient(circle at 80% 80%, rgba(111, 44, 255, 0.13), transparent 40%),
+        #f7f5ff;
+      color: #4c1d95;
+    }
+
+    .about-image-placeholder span,
+    .about-image-placeholder small {
+      color: rgba(76, 29, 149, 0.66);
+    }
+
+    .about-image-placeholder__icon {
+      width: 72px;
+      height: 72px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 22px;
+      margin-bottom: 0.5rem;
+      font-size: 2rem;
+      background: linear-gradient(135deg, rgba(255, 46, 166, 0.15), rgba(111, 44, 255, 0.17));
+      border: 1px solid rgba(111, 44, 255, 0.14);
+    }
+
+    .about-floating-proof {
+      position: absolute;
+      left: -2.2rem;
+      bottom: 0.4rem;
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      max-width: 310px;
+      padding: 1rem 1.1rem;
+      border: 1px solid rgba(255, 255, 255, 0.85);
+      border-radius: 18px;
+      background: rgba(7, 10, 18, 0.94);
+      color: #fff;
+      box-shadow: 0 24px 55px rgba(15, 23, 42, 0.28);
+    }
+
+    .about-floating-proof__icon {
+      width: 46px;
+      height: 46px;
+      flex: 0 0 auto;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: linear-gradient(135deg, var(--about-pink), var(--about-purple));
+    }
+
+    .about-floating-proof div {
+      display: flex;
+      flex-direction: column;
+      gap: 0.15rem;
+    }
+
+    .about-floating-proof span:last-child {
+      color: rgba(255, 255, 255, 0.62);
+      font-size: 0.82rem;
+    }
+
+    .about-proof-strip {
+      background: #fff;
+    }
+
+    .about-proof-item {
+      min-height: 126px;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1.7rem;
+      border-right: 1px solid var(--about-border);
+    }
+
+    .about-proof-item i {
+      width: 52px;
+      height: 52px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+      border-radius: 16px;
+      color: var(--about-purple);
+      background: rgba(111, 44, 255, 0.08);
+      font-size: 1.35rem;
+    }
+
+    .about-proof-item div {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .about-proof-item strong {
+      color: var(--about-ink);
+      font-size: 1rem;
+    }
+
+    .about-proof-item span {
+      color: var(--about-muted);
+      font-size: 0.9rem;
+    }
+
+    .about-section {
+      background: #fff;
+    }
+
+    .about-section-soft {
+      background: var(--about-soft);
+    }
+
+    .about-kicker {
+      display: inline-flex;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 0.76rem;
+      font-weight: 900;
+      color: var(--about-purple);
+    }
+
+    .about-kicker--light {
+      color: #d8b4fe;
+    }
+
+    .about-title {
+      color: var(--about-ink);
+      font-size: clamp(2rem, 4vw, 3.15rem);
+      line-height: 1.1;
+      letter-spacing: -0.035em;
+      font-weight: 900;
+    }
+
+    .about-section p,
+    .about-principle p,
+    .about-service-card p,
+    .about-step p,
+    .about-accordion .accordion-body {
+      line-height: 1.75;
+    }
+
+    .about-principles-card {
+      padding: 1.1rem;
+      border-radius: 26px;
+      border: 1px solid var(--about-border);
+      background: linear-gradient(180deg, #ffffff, #faf9ff);
+      box-shadow: 0 28px 70px rgba(15, 23, 42, 0.08);
+    }
+
+    .about-principle {
+      display: grid;
+      grid-template-columns: 48px 1fr;
+      gap: 1rem;
+      padding: 1.25rem;
+      border-radius: 18px;
+    }
+
+    .about-principle + .about-principle {
+      border-top: 1px solid rgba(15, 23, 42, 0.07);
+    }
+
+    .about-principle > span {
+      width: 44px;
+      height: 44px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 14px;
+      background: rgba(111, 44, 255, 0.09);
+      color: var(--about-purple);
+      font-weight: 900;
+      font-size: 0.82rem;
+    }
+
+    .about-principle h3 {
+      margin: 0 0 0.35rem;
+      color: var(--about-ink);
+      font-size: 1.05rem;
+      font-weight: 850;
+    }
+
+    .about-principle p {
+      margin: 0;
+      color: var(--about-muted);
+      font-size: 0.93rem;
+    }
+
+    .about-founder-media {
+      border-radius: 28px;
+      padding: 1rem;
+      border: 1px solid var(--about-border);
+      background: #fff;
+      box-shadow: 0 28px 70px rgba(15, 23, 42, 0.09);
+    }
+
+    .about-image-placeholder--founder {
+      min-height: 560px;
+      background:
+        radial-gradient(circle at 80% 16%, rgba(111, 44, 255, 0.13), transparent 34%),
+        radial-gradient(circle at 18% 86%, rgba(255, 46, 166, 0.09), transparent 38%),
+        #f5f6fb;
+    }
+
+    .about-founder-point {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      padding: 0.9rem 1rem;
+      border: 1px solid var(--about-border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.84);
+      color: var(--about-ink);
+      font-weight: 750;
+    }
+
+    .about-founder-point i {
+      color: var(--about-purple);
+    }
+
+    .about-service-card {
+      display: flex;
+      flex-direction: column;
+      padding: 1.6rem;
+      border: 1px solid var(--about-border);
+      border-radius: 22px;
+      background: #fff;
+      box-shadow: 0 18px 50px rgba(15, 23, 42, 0.06);
+      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .about-service-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(111, 44, 255, 0.22);
+      box-shadow: 0 24px 58px rgba(15, 23, 42, 0.10);
+    }
+
+    .about-service-icon {
+      width: 54px;
+      height: 54px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 17px;
+      margin-bottom: 1.2rem;
+      color: var(--about-purple);
+      background: linear-gradient(135deg, rgba(255, 46, 166, 0.10), rgba(111, 44, 255, 0.12));
+      border: 1px solid rgba(111, 44, 255, 0.10);
+      font-size: 1.35rem;
+    }
+
+    .about-service-card h3 {
+      color: var(--about-ink);
+      font-size: 1.15rem;
+      font-weight: 900;
+    }
+
+    .about-service-card p {
+      color: var(--about-muted);
+      flex: 1;
+    }
+
+    .about-service-card a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--about-purple);
+      font-weight: 850;
+      text-decoration: none;
+    }
+
+    .about-process-section {
+      background:
+        linear-gradient(rgba(255, 255, 255, 0.91), rgba(255, 255, 255, 0.91)),
+        radial-gradient(circle at 14% 18%, rgba(255, 46, 166, 0.13), transparent 28%),
+        radial-gradient(circle at 86% 82%, rgba(111, 44, 255, 0.14), transparent 30%);
+    }
+
+    .about-section-heading {
+      max-width: 780px;
+    }
+
+    .about-step {
+      position: relative;
+      overflow: hidden;
+      padding: 1.6rem;
+      border: 1px solid var(--about-border);
+      border-radius: 22px;
+      background: rgba(255, 255, 255, 0.90);
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.06);
+    }
+
+    .about-step::after {
+      content: "";
+      position: absolute;
+      width: 110px;
+      height: 110px;
+      right: -45px;
+      bottom: -45px;
+      border-radius: 999px;
+      background: rgba(111, 44, 255, 0.06);
+    }
+
+    .about-step__number {
+      display: inline-flex;
+      margin-bottom: 1.1rem;
+      color: var(--about-purple);
+      font-weight: 950;
+      font-size: 0.82rem;
+      letter-spacing: 0.08em;
+    }
+
+    .about-step h3 {
+      color: var(--about-ink);
+      font-size: 1.1rem;
+      font-weight: 900;
+    }
+
+    .about-step p {
+      color: var(--about-muted);
+      margin-bottom: 0;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-tech-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.7rem;
+    }
+
+    .about-tech-list span {
+      display: inline-flex;
+      align-items: center;
+      padding: 0.65rem 0.9rem;
+      border: 1px solid var(--about-border);
+      border-radius: 999px;
+      background: #fff;
+      color: var(--about-ink);
+      font-weight: 800;
+      font-size: 0.88rem;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.04);
+    }
+
+    .about-sector-card {
+      height: 100%;
+      padding: 1.8rem;
+      border-radius: 24px;
+      background: var(--about-dark);
+      color: #fff;
+      box-shadow: 0 28px 70px rgba(7, 10, 18, 0.22);
+    }
+
+    .about-check-list {
+      list-style: none;
+      padding: 0;
+      display: grid;
+      gap: 0.9rem;
+    }
+
+    .about-check-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.75rem;
+      color: rgba(255, 255, 255, 0.72);
+    }
+
+    .about-check-list i {
+      color: #d8b4fe;
+      margin-top: 0.15rem;
+    }
+
+    .about-accordion .accordion-item {
+      border: 1px solid var(--about-border);
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 0.8rem;
+      background: #fff;
+    }
+
+    .about-accordion .accordion-button {
+      padding: 1.15rem 1.25rem;
+      color: var(--about-ink);
+      background: #fff;
+      font-weight: 850;
+      box-shadow: none;
+    }
+
+    .about-accordion .accordion-button:not(.collapsed) {
+      color: var(--about-purple);
+      background: rgba(111, 44, 255, 0.045);
+    }
+
+    .about-accordion .accordion-body {
+      color: var(--about-muted);
+      padding: 0 1.25rem 1.25rem;
+    }
+
+    .about-final-cta {
+      padding: 5rem 0;
+      background: #f8f9fc;
+      isolation: isolate;
+    }
+
+    .about-final-cta__glow {
+      position: absolute;
+      width: 420px;
+      height: 420px;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%, -50%);
+      border-radius: 999px;
+      background: rgba(111, 44, 255, 0.13);
+      filter: blur(70px);
+      z-index: -1;
+    }
+
+    .about-final-cta__card {
+      padding: clamp(2rem, 5vw, 4rem);
+      border-radius: 30px;
+      background:
+        radial-gradient(circle at 15% 15%, rgba(255, 46, 166, 0.18), transparent 32%),
+        radial-gradient(circle at 90% 90%, rgba(111, 44, 255, 0.26), transparent 34%),
+        var(--about-dark);
+      box-shadow: 0 34px 80px rgba(7, 10, 18, 0.26);
+    }
+
+    .about-btn-light {
+      color: var(--about-dark);
+      background: #fff;
+      border: 1px solid #fff;
+    }
+
+    .about-btn-light:hover {
+      color: var(--about-dark);
+      box-shadow: 0 15px 35px rgba(255, 255, 255, 0.13);
+    }
+
+    .about-btn-dark-outline {
+      color: #fff;
+      border: 1px solid rgba(255, 255, 255, 0.23);
+      background: rgba(255, 255, 255, 0.055);
+    }
+
+    .about-btn-dark-outline:hover {
+      color: #fff;
+      background: rgba(255, 255, 255, 0.10);
+      border-color: rgba(255, 255, 255, 0.42);
+    }
+
+    @media (max-width: 991.98px) {
+      .about-hero {
+        min-height: auto;
+        padding: 8rem 0 4.5rem;
+      }
+
+      .about-floating-proof {
+        position: relative;
+        left: auto;
+        bottom: auto;
+        margin: -1.5rem 1rem 0;
+      }
+
+      .about-proof-item {
+        border-right: 0;
+        border-bottom: 1px solid var(--about-border);
+      }
+
+      .about-proof-strip .col-12:last-child .about-proof-item {
+        border-bottom: 0;
+      }
+    }
+
+    @media (max-width: 575.98px) {
+      .about-hero {
+        padding-top: 7rem;
+      }
+
+      .about-hero h1 {
+        font-size: clamp(2.3rem, 12vw, 3.35rem);
+      }
+
+      .about-image-placeholder,
+      .about-image-placeholder--founder {
+        min-height: 410px;
+      }
+
+      .about-visual-card,
+      .about-founder-media {
+        border-radius: 22px;
+      }
+
+      .about-floating-proof {
+        max-width: none;
+      }
+
+      .about-proof-item {
+        padding: 1.3rem 0.5rem;
+      }
+
+      .about-principle {
+        grid-template-columns: 42px 1fr;
+        padding: 1rem 0.4rem;
+      }
+
+      .about-final-cta {
+        padding: 3rem 0;
+      }
+
+      .about-final-cta__card {
+        border-radius: 22px;
+      }
+    }
+  </style>
+</Layout>
