@@ -1,0 +1,21 @@
+# Portada antigua
+/index.html / 301
+
+# Páginas principales sin barra final
+/agencia-marketing-digital /agencia-marketing-digital/ 301
+/blog /blog/ 301
+/desarrollo-web-a-medida /desarrollo-web-a-medida/ 301
+/nosotros /nosotros/ 301
+/proyectos /proyectos/ 301
+
+# Artículos sin barra final
+/blog/auditoria-seo-tecnica-chile /blog/auditoria-seo-tecnica-chile/ 301
+/blog/cuanto-cuesta-una-web-a-medida-en-chile /blog/cuanto-cuesta-una-web-a-medida-en-chile/ 301
+/blog/por-que-tu-web-no-vende /blog/por-que-tu-web-no-vende/ 301
+/blog/seo-tecnico-desde-el-inicio /blog/seo-tecnico-desde-el-inicio/ 301
+/blog/web-a-medida-vs-wordpress /blog/web-a-medida-vs-wordpress/ 301
+
+# Proyectos sin barra final
+/proyectos/automatizacion-consolidacion-montos-multimoneda /proyectos/automatizacion-consolidacion-montos-multimoneda/ 301
+/proyectos/plataforma-catalogo-equipos-medicos /proyectos/plataforma-catalogo-equipos-medicos/ 301
+/proyectos/plataforma-moodle-otec-elemental-studios /proyectos/plataforma-moodle-otec-elemental-studios/ 301

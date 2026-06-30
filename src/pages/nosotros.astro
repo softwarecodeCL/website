@@ -6,39 +6,30 @@ export const prerender = true;
 const SITE_URL = "https://www.softwarecode.cl/";
 const pageUrl = `${SITE_URL}nosotros/`;
 
-const pageTitle = "Quiénes Somos: Software y SEO en Chile";
+const pageTitle = "Quiénes Somos | Soluciones Digitales B2B en Chile";
 const pageDescription =
-  "Conoce a SoftwareCode, empresa chilena especializada en desarrollo de software, SEO técnico, automatización e integraciones para negocios B2B.";
+  "SoftwareCode ayuda a empresas B2B a conectar sistemas, automatizar procesos y mejorar sus canales digitales con soluciones diseñadas para crecer.";
 
-// Reemplaza esta imagen cuando tengas una fotografía real del equipo o fundador.
 const socialImage = "/logosc-original.png";
 const whatsappUrl =
-  "https://wa.me/56988396128?text=Hola%2C%20quiero%20conversar%20sobre%20un%20proyecto%20digital%20para%20mi%20empresa.";
+  "https://wa.me/56988396128?text=Hola%2C%20quiero%20evaluar%20c%C3%B3mo%20mejorar%20un%20proceso%20digital%20de%20mi%20empresa.";
 
 const expertise = [
-  "Desarrollo de software y plataformas web a medida",
-  "Integración de APIs, sistemas y servicios externos",
-  "SEO técnico, rendimiento y arquitectura web",
-  "Automatización de procesos comerciales",
-  "Analítica, medición de conversiones y optimización",
-  "Infraestructura cloud, despliegue y mantenimiento"
+  "Diagnóstico de procesos digitales",
+  "Integración de sistemas empresariales",
+  "Automatización y trazabilidad operativa",
+  "Desarrollo de plataformas B2B",
+  "Visibilidad digital y SEO técnico",
+  "Optimización y evolución de soluciones"
 ];
 
-const technologies = [
-  "Golang",
-  "Node.js",
-  "NestJS",
-  "PHP",
-  "Java",
-  "Vue",
-  "Nuxt",
-  "React",
-  "Astro",
-  "PostgreSQL",
-  "MySQL",
-  "Docker",
-  "AWS",
-  "Cloudflare"
+const businessOutcomes = [
+  "Menos tareas manuales",
+  "Procesos trazables",
+  "Sistemas conectados",
+  "Canales digitales más rápidos",
+  "Datos para tomar decisiones",
+  "Soluciones preparadas para crecer"
 ];
 
 const schemaExtras = [
@@ -56,14 +47,14 @@ const schemaExtras = [
       { "@id": `${pageUrl}#marco-estay` }
     ],
     "inLanguage": "es-CL",
-    "dateModified": "2026-06-23"
+    "dateModified": "2026-06-28"
   },
   {
     "@context": "https://schema.org",
     "@type": "Person",
     "@id": `${pageUrl}#marco-estay`,
     "name": "Marco Estay",
-    "jobTitle": "Ingeniero de software y responsable de SoftwareCode",
+    "jobTitle": "Fundador y consultor de soluciones digitales en SoftwareCode",
     "url": pageUrl,
     "worksFor": { "@id": `${SITE_URL}#organization` },
     "knowsAbout": expertise,
@@ -78,18 +69,26 @@ const schemaExtras = [
     "mainEntity": [
       {
         "@type": "Question",
-        "name": "¿Qué es SoftwareCode?",
+        "name": "¿Qué hace SoftwareCode?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SoftwareCode es una empresa chilena de servicios digitales especializada en desarrollo de software, sitios web, SEO técnico, integraciones y automatización para empresas."
+          "text": "SoftwareCode ayuda a empresas B2B a conectar sistemas, automatizar procesos, desarrollar plataformas y mejorar sus canales digitales para operar con mayor eficiencia y trazabilidad."
         }
       },
       {
         "@type": "Question",
-        "name": "¿Quién está detrás de SoftwareCode?",
+        "name": "¿Quién lidera SoftwareCode?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia en desarrollo backend, frontend, integraciones, bases de datos, nube y soluciones digitales para empresas."
+          "text": "SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia en sistemas empresariales, integraciones, plataformas digitales y procesos críticos."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "¿SoftwareCode puede integrarse con los sistemas que ya utiliza mi empresa?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Sí. Cada proyecto comienza revisando la operación y la tecnología existente para determinar qué se puede integrar, mejorar o automatizar sin reemplazar innecesariamente sistemas que ya cumplen una función."
         }
       },
       {
@@ -97,15 +96,7 @@ const schemaExtras = [
         "name": "¿Con qué tipo de empresas trabaja SoftwareCode?",
         "acceptedAnswer": {
           "@type": "Answer",
-          "text": "SoftwareCode trabaja principalmente con empresas B2B, servicios profesionales, comercio especializado, industria y organizaciones que necesitan desarrollar, integrar u optimizar sus canales digitales."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "¿Atienden empresas fuera de Santiago?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Sí. SoftwareCode trabaja de manera remota con empresas de Santiago y otras regiones de Chile, organizando cada proyecto mediante etapas, entregables y seguimiento."
+          "text": "SoftwareCode trabaja principalmente con empresas B2B, servicios profesionales, comercio especializado y organizaciones que necesitan ordenar procesos, conectar plataformas o fortalecer su canal digital."
         }
       }
     ]
@@ -137,25 +128,22 @@ const schemaExtras = [
           </nav>
 
           <div class="d-flex flex-wrap gap-2 mb-3">
-            <span class="about-badge">SoftwareCode</span>
+            <span class="about-badge">Soluciones digitales B2B</span>
+            <span class="about-badge">Integración y automatización</span>
             <span class="about-badge">Santiago, Chile</span>
-            <span class="about-badge">Más de 10 años de experiencia</span>
           </div>
 
           <h1 class="display-4 fw-bold lh-sm mb-4">
-            Desarrollo de software, SEO técnico y automatización con
-            <span class="about-gradient-text">experiencia real</span>
+            Conectamos sistemas y automatizamos procesos para que tu empresa pueda
+            <span class="about-gradient-text">escalar con control</span>
           </h1>
 
           <p class="lead text-secondary mb-4">
-            SoftwareCode es una empresa chilena que combina ingeniería de software,
-            optimización web y estrategia digital para ayudar a empresas a construir
-            plataformas más rápidas, conectadas y preparadas para generar oportunidades.
+            Ayudamos a empresas B2B a conectar sus sistemas y automatizar sus procesos para que puedan escalar sin multiplicar tareas manuales.
           </p>
 
           <p class="text-secondary about-hero__support mb-4">
-            Trabajamos directamente con cada cliente, desde el diagnóstico y la arquitectura
-            hasta la implementación, medición y mejora continua del proyecto.
+            Diseñamos soluciones digitales que reducen fricción, mejoran la trazabilidad y convierten la tecnología en una ventaja operativa y comercial.
           </p>
 
           <div class="d-grid gap-2 d-sm-flex">
@@ -166,31 +154,31 @@ const schemaExtras = [
               rel="noopener noreferrer"
               data-about-cta="hero-contact"
             >
-              Conversar sobre un proyecto
+              Evaluar un proceso de mi empresa
             </a>
-            <a href="/desarrollo-web-a-medida/" class="btn about-btn-outline btn-lg px-4">
-              Ver servicios
+            <a href="/proyectos/" class="btn about-btn-outline btn-lg px-4">
+              Ver proyectos
             </a>
           </div>
         </div>
 
         <div class="col-12 col-lg-5" data-aos="fade-left" data-aos-duration="650">
           <div class="about-visual-card">
-              <img
-                src="/yo2.png"
-                alt="Equipo de SoftwareCode desarrollando soluciones digitales en Chile"
-                width="720"
-                height="820"
-                loading="eager"
-                fetchpriority="high"
-                decoding="async"
-                class="about-main-image"
-              />
+            <img
+              src="/yo-image.png"
+              alt="Marco Estay, fundador de SoftwareCode"
+              width="720"
+              height="820"
+              loading="eager"
+              fetchpriority="high"
+              decoding="async"
+              class="about-main-image"
+            />
             <div class="about-floating-proof">
-              <span class="about-floating-proof__icon"><i class="bi bi-code-slash"></i></span>
+              <span class="about-floating-proof__icon"><i class="bi bi-diagram-3"></i></span>
               <div>
-                <strong>Ingeniería + estrategia</strong>
-                <span>Una sola mirada para negocio y tecnología</span>
+                <strong>Negocio y tecnología conectados</strong>
+                <span>Soluciones diseñadas alrededor del proceso real</span>
               </div>
             </div>
           </div>
@@ -208,16 +196,16 @@ const schemaExtras = [
             <i class="bi bi-calendar-check"></i>
             <div>
               <strong>Más de 10 años</strong>
-              <span>desarrollando soluciones digitales</span>
+              <span>resolviendo sistemas y procesos digitales</span>
             </div>
           </div>
         </div>
         <div class="col-12 col-md-4">
           <div class="about-proof-item">
-            <i class="bi bi-diagram-3"></i>
+            <i class="bi bi-bezier2"></i>
             <div>
-              <strong>Experiencia integral</strong>
-              <span>software, integraciones, SEO y nube</span>
+              <strong>Procesos conectados</strong>
+              <span>menos duplicación y mayor trazabilidad</span>
             </div>
           </div>
         </div>
@@ -226,7 +214,7 @@ const schemaExtras = [
             <i class="bi bi-chat-square-text"></i>
             <div>
               <strong>Atención directa</strong>
-              <span>sin intermediarios innecesarios</span>
+              <span>diagnóstico y seguimiento sin intermediarios</span>
             </div>
           </div>
         </div>
@@ -234,30 +222,23 @@ const schemaExtras = [
     </div>
   </section>
 
-  <!-- HISTORIA Y POSICIONAMIENTO -->
+  <!-- VISIÓN Y POSICIONAMIENTO -->
   <section class="py-5 about-section">
     <div class="container py-lg-4">
       <div class="row g-5 align-items-center">
         <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-duration="650">
-          <span class="about-kicker">Quiénes somos</span>
+          <span class="about-kicker">Nuestra visión</span>
           <h2 class="about-title mt-2 mb-3">
-            Una empresa de desarrollo de software en Chile con enfoque técnico y comercial
+            La tecnología debe resolver el proceso, no agregar complejidad
           </h2>
           <p class="text-secondary">
-            SoftwareCode nace para resolver un problema frecuente: muchas empresas contratan
-            desarrollo, marketing, analítica y automatización por separado, pero nadie conecta
-            todas las piezas del proceso.
+            SoftwareCode nace al detectar un problema frecuente: empresas que acumulan sitios, planillas, formularios, sistemas y proveedores, pero continúan dependiendo de tareas manuales para que la operación funcione.
           </p>
           <p class="text-secondary">
-            Nuestra forma de trabajo une arquitectura, experiencia de usuario, velocidad,
-            posicionamiento en buscadores, medición e integración de sistemas. El objetivo no es
-            entregar una página aislada, sino una solución digital que pueda operar, crecer y
-            mejorar con datos reales.
+            No comenzamos recomendando una tecnología. Primero entendemos dónde se pierde tiempo, qué información se duplica, qué sistemas no conversan y qué parte del proceso limita el crecimiento.
           </p>
           <p class="text-secondary mb-0">
-            Tenemos experiencia en marketplaces B2B, plataformas empresariales, biometría,
-            servicios financieros, comercio especializado, integraciones de APIs y sistemas
-            orientados a procesos críticos.
+            A partir de ese diagnóstico diseñamos una solución realista: integrar lo que ya existe, automatizar lo repetitivo, construir lo que falta y medir el resultado para que la inversión tenga un propósito claro.
           </p>
         </div>
 
@@ -266,29 +247,29 @@ const schemaExtras = [
             <div class="about-principle">
               <span>01</span>
               <div>
-                <h3>Primero entendemos el negocio</h3>
-                <p>Antes de recomendar tecnología, identificamos el objetivo, el proceso y las restricciones reales.</p>
+                <h3>Entendemos la operación</h3>
+                <p>Identificamos el objetivo, los responsables, los datos y los puntos donde el proceso pierde eficiencia.</p>
               </div>
             </div>
             <div class="about-principle">
               <span>02</span>
               <div>
-                <h3>Diseñamos una solución mantenible</h3>
-                <p>Priorizamos arquitectura clara, seguridad, rendimiento y capacidad de evolución.</p>
+                <h3>Priorizamos el impacto</h3>
+                <p>Ordenamos las mejoras según valor para el negocio, riesgo, esfuerzo y capacidad de implementación.</p>
               </div>
             </div>
             <div class="about-principle">
               <span>03</span>
               <div>
-                <h3>Medimos después de implementar</h3>
-                <p>Configuramos datos y conversiones para saber qué funciona y qué se debe mejorar.</p>
+                <h3>Integramos antes de reemplazar</h3>
+                <p>Aprovechamos los sistemas existentes cuando siguen siendo útiles y evitamos cambios costosos sin justificación.</p>
               </div>
             </div>
             <div class="about-principle">
               <span>04</span>
               <div>
-                <h3>Acompañamos el crecimiento</h3>
-                <p>El proyecto no termina con el despliegue: puede continuar con soporte, optimización y nuevas etapas.</p>
+                <h3>Medimos y evolucionamos</h3>
+                <p>Definimos señales concretas para comprobar avances y decidir las siguientes etapas con información real.</p>
               </div>
             </div>
           </div>
@@ -297,67 +278,60 @@ const schemaExtras = [
     </div>
   </section>
 
-  <!-- RESPONSABLE -->
+  <!-- DIRECCIÓN -->
   <section class="py-5 about-section-soft border-top border-bottom">
     <div class="container py-lg-4">
       <div class="row g-5 align-items-center">
         <div class="col-12 col-lg-5" data-aos="fade-right" data-aos-duration="650">
           <div class="about-founder-media">
-              <img
-                src="/yo.png"
-                alt="Marco Estay, ingeniero de software responsable de SoftwareCode"
-                width="680"
-                height="760"
-                loading="lazy"
-                decoding="async"
-                class="about-founder-image"
-              />
+            <img
+              src="/yo.png"
+              alt="Marco Estay, fundador y consultor de soluciones digitales en SoftwareCode"
+              width="680"
+              height="760"
+              loading="lazy"
+              decoding="async"
+              class="about-founder-image"
+            />
           </div>
         </div>
 
         <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-duration="650">
-          <span class="about-kicker">Responsable de SoftwareCode</span>
-          <h2 class="about-title mt-2 mb-3">Marco Estay, ingeniero de software</h2>
+          <span class="about-kicker">Dirección y experiencia</span>
+          <h2 class="about-title mt-2 mb-3">Una mirada técnica con criterio de negocio</h2>
           <p class="text-secondary">
-            Soy ingeniero de software con más de diez años de experiencia construyendo y
-            manteniendo sistemas web, APIs, integraciones, procesos backend y productos digitales
-            para empresas.
+            Lidero SoftwareCode con la visión de que la tecnología debe ser invisible: lo que importa es que el proceso funcione, sea trazable y genere resultados.
           </p>
           <p class="text-secondary">
-            He trabajado con tecnologías como Golang, Node.js, Java, PHP, Vue, React, Nuxt,
-            PostgreSQL, MySQL, Docker y AWS. Esta experiencia permite evaluar un proyecto desde
-            una mirada completa: negocio, arquitectura, implementación, rendimiento, seguridad,
-            posicionamiento y operación.
+            Soy Marco Estay, ingeniero de software con más de diez años de experiencia en plataformas empresariales, integraciones, servicios financieros, marketplaces B2B y sistemas vinculados a procesos críticos.
           </p>
           <p class="text-secondary">
-            En SoftwareCode participo directamente en el diagnóstico, diseño y seguimiento de cada
-            solución. Cuando un proyecto requiere otras especialidades, se organiza un equipo según
-            el alcance, manteniendo un punto de contacto claro para el cliente.
+            Participo directamente en el diagnóstico, la definición de la solución y el seguimiento de cada proyecto. Cuando el alcance requiere otras especialidades, se organiza el equipo adecuado manteniendo una dirección técnica y un punto de contacto claro.
           </p>
 
           <div class="row g-3 mt-1">
             <div class="col-12 col-sm-6">
               <div class="about-founder-point">
                 <i class="bi bi-check2-circle"></i>
-                <span>Experiencia backend y frontend</span>
+                <span>Diagnóstico de procesos</span>
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="about-founder-point">
                 <i class="bi bi-check2-circle"></i>
-                <span>Arquitectura e integraciones</span>
+                <span>Diseño de soluciones viables</span>
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="about-founder-point">
                 <i class="bi bi-check2-circle"></i>
-                <span>SEO técnico y rendimiento</span>
+                <span>Integración entre negocio y tecnología</span>
               </div>
             </div>
             <div class="col-12 col-sm-6">
               <div class="about-founder-point">
                 <i class="bi bi-check2-circle"></i>
-                <span>Infraestructura y despliegue</span>
+                <span>Seguimiento y evolución</span>
               </div>
             </div>
           </div>
@@ -369,10 +343,10 @@ const schemaExtras = [
               target="_blank"
               rel="noopener noreferrer"
             >
-              <i class="bi bi-linkedin me-2"></i>Ver LinkedIn
+              <i class="bi bi-linkedin me-2"></i>Ver trayectoria
             </a>
-            <a href="/blog/" class="btn about-btn-ghost">
-              Ver artículos y experiencia
+            <a href="/proyectos/" class="btn about-btn-ghost">
+              Conocer proyectos realizados
             </a>
           </div>
         </div>
@@ -380,17 +354,17 @@ const schemaExtras = [
     </div>
   </section>
 
-  <!-- ESPECIALIDADES -->
+  <!-- RESULTADOS -->
   <section class="py-5 about-section">
     <div class="container py-lg-4">
       <div class="row justify-content-between align-items-end g-4 mb-4 mb-lg-5">
         <div class="col-12 col-lg-8" data-aos="fade-up" data-aos-duration="650">
-          <span class="about-kicker">Especialidades</span>
+          <span class="about-kicker">Resultados que entregamos</span>
           <h2 class="about-title mt-2 mb-3">
-            Capacidades para construir y mejorar ecosistemas digitales completos
+            Soluciones orientadas a reducir fricción y mejorar el crecimiento
           </h2>
           <p class="text-secondary mb-0">
-            Cada servicio puede contratarse de forma independiente o combinarse dentro de un proyecto por etapas.
+            El alcance cambia según cada empresa, pero la prioridad se mantiene: resolver un problema concreto y dejar una operación más clara, conectada y medible.
           </p>
         </div>
       </div>
@@ -398,55 +372,55 @@ const schemaExtras = [
       <div class="row g-4">
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650">
           <article class="about-service-card h-100">
-            <span class="about-service-icon"><i class="bi bi-window-stack"></i></span>
-            <h3>Desarrollo de software y plataformas web</h3>
-            <p>Aplicaciones, portales, sistemas internos y soluciones web diseñadas según procesos reales de negocio.</p>
-            <a href="/desarrollo-web-a-medida/">Conocer desarrollo web <i class="bi bi-arrow-right"></i></a>
+            <span class="about-service-icon"><i class="bi bi-clipboard-data"></i></span>
+            <h3>Auditoría de eficiencia operativa</h3>
+            <p>Detectamos tareas repetitivas, duplicación de información, puntos de bloqueo y oportunidades de mejora dentro del proceso.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Evaluar mi operación <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
 
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
           <article class="about-service-card h-100">
             <span class="about-service-icon"><i class="bi bi-diagram-2"></i></span>
-            <h3>Integración de APIs y sistemas</h3>
-            <p>Conexión entre plataformas, servicios externos, bases de datos, formularios, CRM y procesos empresariales.</p>
+            <h3>Integración sin reemplazar todo</h3>
+            <p>Conectamos ERP, CRM, plataformas, APIs, formularios y bases de datos para evitar reprocesos y mantener la información sincronizada.</p>
             <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Consultar una integración <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
 
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
           <article class="about-service-card h-100">
-            <span class="about-service-icon"><i class="bi bi-search"></i></span>
-            <h3>SEO técnico y rendimiento web</h3>
-            <p>Auditoría, indexación, estructura, velocidad y contenido orientado a mejorar visibilidad y captación orgánica.</p>
-            <a href="/agencia-marketing-digital/">Ver marketing y SEO <i class="bi bi-arrow-right"></i></a>
+            <span class="about-service-icon"><i class="bi bi-gear-wide-connected"></i></span>
+            <h3>Automatización y trazabilidad</h3>
+            <p>Transformamos tareas manuales en flujos controlados, con estados, responsables, alertas y datos disponibles para seguimiento.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Revisar un proceso manual <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
 
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650">
           <article class="about-service-card h-100">
-            <span class="about-service-icon"><i class="bi bi-gear-wide-connected"></i></span>
-            <h3>Automatización de procesos</h3>
-            <p>Flujos para reducir tareas manuales, ordenar contactos, activar seguimientos y mejorar la trazabilidad.</p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Evaluar automatización <i class="bi bi-arrow-right"></i></a>
+            <span class="about-service-icon"><i class="bi bi-window-stack"></i></span>
+            <h3>Plataformas alineadas al negocio</h3>
+            <p>Construimos portales, sistemas internos, catálogos y aplicaciones web alrededor de la operación y los usuarios reales.</p>
+            <a href="/desarrollo-web-a-medida/">Conocer desarrollo a medida <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
 
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
           <article class="about-service-card h-100">
-            <span class="about-service-icon"><i class="bi bi-bar-chart-line"></i></span>
-            <h3>Medición y optimización</h3>
-            <p>Configuración de eventos, conversiones y paneles para comprender el comportamiento y priorizar mejoras.</p>
-            <a href="/blog/">Revisar guías técnicas <i class="bi bi-arrow-right"></i></a>
+            <span class="about-service-icon"><i class="bi bi-graph-up-arrow"></i></span>
+            <h3>Visibilidad digital para venta B2B</h3>
+            <p>Mejoramos estructura, rendimiento, indexación y contenido para que el canal digital atraiga oportunidades comerciales relevantes.</p>
+            <a href="/agencia-marketing-digital/">Ver estrategia SEO y digital <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
 
         <div class="col-12 col-md-6 col-xl-4" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
           <article class="about-service-card h-100">
-            <span class="about-service-icon"><i class="bi bi-cloud-check"></i></span>
-            <h3>Infraestructura y soporte</h3>
-            <p>Despliegue, nube, contenedores, monitoreo, mantenimiento y evolución técnica de soluciones digitales.</p>
-            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Consultar soporte <i class="bi bi-arrow-right"></i></a>
+            <span class="about-service-icon"><i class="bi bi-shield-check"></i></span>
+            <h3>Continuidad y evolución técnica</h3>
+            <p>Ordenamos despliegue, rendimiento, monitoreo y mantenimiento para reducir riesgos y permitir que la solución siga creciendo.</p>
+            <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">Evaluar una solución existente <i class="bi bi-arrow-right"></i></a>
           </article>
         </div>
       </div>
@@ -458,9 +432,9 @@ const schemaExtras = [
     <div class="container py-lg-4">
       <div class="text-center mx-auto about-section-heading" data-aos="fade-up" data-aos-duration="650">
         <span class="about-kicker">Metodología</span>
-        <h2 class="about-title mt-2 mb-3">Cómo trabajamos un proyecto digital</h2>
+        <h2 class="about-title mt-2 mb-3">Cómo convertimos un problema operativo en una solución digital</h2>
         <p class="text-secondary mb-0">
-          Un proceso simple, con decisiones visibles y entregables claros desde el inicio.
+          Decisiones visibles, prioridades claras y avances que pueden validarse desde las primeras etapas.
         </p>
       </div>
 
@@ -468,64 +442,63 @@ const schemaExtras = [
         <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650">
           <div class="about-step h-100">
             <span class="about-step__number">01</span>
-            <h3>Diagnóstico</h3>
-            <p>Revisamos objetivos, usuarios, procesos, tecnología existente y principales restricciones.</p>
+            <h3>Entender</h3>
+            <p>Revisamos el proceso, las personas, los sistemas actuales y el resultado que la empresa necesita mejorar.</p>
           </div>
         </div>
         <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="60">
           <div class="about-step h-100">
             <span class="about-step__number">02</span>
-            <h3>Propuesta y arquitectura</h3>
-            <p>Definimos alcance, prioridades, solución técnica, etapas, costos y criterios de éxito.</p>
+            <h3>Priorizar</h3>
+            <p>Definimos qué resolver primero según impacto, dependencia, costo y riesgo para la operación.</p>
           </div>
         </div>
         <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="120">
           <div class="about-step h-100">
             <span class="about-step__number">03</span>
-            <h3>Implementación</h3>
-            <p>Desarrollamos por avances verificables, validando funcionalidad, rendimiento y experiencia.</p>
+            <h3>Implementar</h3>
+            <p>Integramos, automatizamos o desarrollamos por etapas, validando cada avance con el proceso real.</p>
           </div>
         </div>
         <div class="col-12 col-md-6 col-xl-3" data-aos="fade-up" data-aos-duration="650" data-aos-delay="180">
           <div class="about-step h-100">
             <span class="about-step__number">04</span>
-            <h3>Medición y evolución</h3>
-            <p>Publicamos, medimos resultados y organizamos mejoras según impacto y nuevas necesidades.</p>
+            <h3>Medir y evolucionar</h3>
+            <p>Observamos el resultado, corregimos fricciones y organizamos nuevas mejoras según evidencia.</p>
           </div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- TECNOLOGÍAS Y SECTORES -->
+  <!-- IMPACTO Y DESAFÍOS -->
   <section class="py-5 about-section">
     <div class="container py-lg-4">
       <div class="row g-5">
         <div class="col-12 col-lg-7" data-aos="fade-up" data-aos-duration="650">
-          <span class="about-kicker">Tecnologías</span>
-          <h2 class="about-title mt-2 mb-3">Herramientas elegidas según cada solución</h2>
+          <span class="about-kicker">Impacto esperado</span>
+          <h2 class="about-title mt-2 mb-3">Qué debería cambiar después de una buena solución</h2>
           <p class="text-secondary">
-            No forzamos todos los proyectos a utilizar la misma tecnología. Evaluamos mantenimiento,
-            rendimiento, equipo, presupuesto e integración con la operación existente.
+            La tecnología utilizada importa, pero para la empresa importa más el efecto que produce sobre la operación, el equipo y la capacidad de crecimiento.
           </p>
           <div class="about-tech-list mt-4">
-            {technologies.map((technology) => (
-              <span>{technology}</span>
+            {businessOutcomes.map((outcome) => (
+              <span>{outcome}</span>
             ))}
           </div>
         </div>
 
         <div class="col-12 col-lg-5" data-aos="fade-left" data-aos-duration="650">
           <div class="about-sector-card">
-            <span class="about-kicker">Sectores y desafíos</span>
-            <h2 class="h3 fw-bold mt-2 mb-3">Experiencia aplicable a distintos negocios</h2>
+            <span class="about-kicker">Señales de oportunidad</span>
+            <h2 class="h3 fw-bold mt-2 mb-3">Podemos aportar cuando tu empresa...</h2>
             <ul class="about-check-list mb-0">
-              <li><i class="bi bi-check2"></i> Servicios profesionales y empresas B2B</li>
-              <li><i class="bi bi-check2"></i> Marketplaces y plataformas de operación</li>
-              <li><i class="bi bi-check2"></i> Comercio especializado y catálogos técnicos</li>
-              <li><i class="bi bi-check2"></i> Servicios financieros e integraciones críticas</li>
-              <li><i class="bi bi-check2"></i> Procesos internos y automatización comercial</li>
-              <li><i class="bi bi-check2"></i> Sitios con problemas de SEO y rendimiento</li>
+              <li><i class="bi bi-check2"></i> Copia información entre sistemas o planillas</li>
+              <li><i class="bi bi-check2"></i> Pierde seguimiento entre áreas o responsables</li>
+              <li><i class="bi bi-check2"></i> Depende de tareas manuales para operar</li>
+              <li><i class="bi bi-check2"></i> Tiene plataformas que no se comunican</li>
+              <li><i class="bi bi-check2"></i> Necesita crecer sin aumentar el desorden</li>
+              <li><i class="bi bi-check2"></i> No convierte su presencia digital en oportunidades</li>
             </ul>
           </div>
         </div>
@@ -539,9 +512,9 @@ const schemaExtras = [
       <div class="row g-5">
         <div class="col-12 col-lg-5" data-aos="fade-up" data-aos-duration="650">
           <span class="about-kicker">Preguntas frecuentes</span>
-          <h2 class="about-title mt-2 mb-3">Conoce mejor a SoftwareCode</h2>
+          <h2 class="about-title mt-2 mb-3">Antes de iniciar una conversación</h2>
           <p class="text-secondary mb-0">
-            Estas respuestas aclaran cómo se organiza el trabajo y qué tipo de proyectos podemos evaluar.
+            Algunas respuestas sobre el enfoque de SoftwareCode y el tipo de desafíos que podemos evaluar.
           </p>
         </div>
 
@@ -550,13 +523,12 @@ const schemaExtras = [
             <div class="accordion-item">
               <h3 class="accordion-header">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq1" aria-expanded="true" aria-controls="aboutFaq1">
-                  ¿Qué es SoftwareCode?
+                  ¿Qué hace SoftwareCode?
                 </button>
               </h3>
               <div id="aboutFaq1" class="accordion-collapse collapse show" data-bs-parent="#aboutFaq">
                 <div class="accordion-body">
-                  SoftwareCode es una empresa chilena de servicios digitales especializada en desarrollo de software,
-                  sitios web, SEO técnico, integraciones y automatización para empresas.
+                  Ayudamos a empresas B2B a conectar sistemas, automatizar procesos, desarrollar plataformas y mejorar sus canales digitales para operar con mayor eficiencia y trazabilidad.
                 </div>
               </div>
             </div>
@@ -564,13 +536,12 @@ const schemaExtras = [
             <div class="accordion-item">
               <h3 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq2" aria-expanded="false" aria-controls="aboutFaq2">
-                  ¿Quién está detrás de SoftwareCode?
+                  ¿Quién lidera SoftwareCode?
                 </button>
               </h3>
               <div id="aboutFaq2" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
                 <div class="accordion-body">
-                  SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia
-                  en backend, frontend, integraciones, bases de datos, nube y soluciones digitales para empresas.
+                  SoftwareCode es liderado por Marco Estay, ingeniero de software con más de diez años de experiencia en sistemas empresariales, integraciones, plataformas digitales y procesos críticos.
                 </div>
               </div>
             </div>
@@ -578,13 +549,12 @@ const schemaExtras = [
             <div class="accordion-item">
               <h3 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq3" aria-expanded="false" aria-controls="aboutFaq3">
-                  ¿Con qué tipo de empresas trabajan?
+                  ¿Es necesario reemplazar los sistemas que ya utilizamos?
                 </button>
               </h3>
               <div id="aboutFaq3" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
                 <div class="accordion-body">
-                  Trabajamos principalmente con empresas B2B, servicios profesionales, comercio especializado,
-                  industria y organizaciones que necesitan desarrollar, integrar u optimizar sus canales digitales.
+                  No necesariamente. Primero revisamos qué sistemas siguen aportando valor y evaluamos si conviene integrarlos, mejorarlos o reemplazar solo una parte del proceso.
                 </div>
               </div>
             </div>
@@ -592,13 +562,12 @@ const schemaExtras = [
             <div class="accordion-item">
               <h3 class="accordion-header">
                 <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#aboutFaq4" aria-expanded="false" aria-controls="aboutFaq4">
-                  ¿Atienden empresas fuera de Santiago?
+                  ¿Con qué tipo de empresas trabajan?
                 </button>
               </h3>
               <div id="aboutFaq4" class="accordion-collapse collapse" data-bs-parent="#aboutFaq">
                 <div class="accordion-body">
-                  Sí. Trabajamos de manera remota con empresas de Santiago y otras regiones de Chile,
-                  organizando cada proyecto mediante etapas, entregables y seguimiento.
+                  Principalmente con empresas B2B, servicios profesionales, comercio especializado y organizaciones que necesitan ordenar procesos, conectar plataformas o fortalecer su canal digital.
                 </div>
               </div>
             </div>
@@ -617,10 +586,10 @@ const schemaExtras = [
           <div class="col-12 col-lg-8">
             <span class="about-kicker about-kicker--light">Conversemos</span>
             <h2 class="fw-bold text-white mt-2 mb-3">
-              ¿Necesitas desarrollar, integrar u optimizar una solución digital?
+              ¿Tu operación depende demasiado de tareas manuales o sistemas desconectados?
             </h2>
             <p class="mb-0 text-white-50">
-              Cuéntanos tu situación actual y te orientaremos sobre el alcance, prioridades y próximos pasos.
+              Cuéntanos cómo funciona hoy el proceso y evaluaremos dónde puede existir una mejora realista, priorizada y medible.
             </p>
           </div>
           <div class="col-12 col-lg-4">
@@ -632,10 +601,10 @@ const schemaExtras = [
                 rel="noopener noreferrer"
                 data-about-cta="final-contact"
               >
-                Solicitar diagnóstico
+                Solicitar diagnóstico inicial
               </a>
-              <a href="/desarrollo-web-a-medida/" class="btn about-btn-dark-outline btn-lg">
-                Revisar servicios
+              <a href="/proyectos/" class="btn about-btn-dark-outline btn-lg">
+                Ver experiencia aplicada
               </a>
             </div>
           </div>

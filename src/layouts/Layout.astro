@@ -2,13 +2,13 @@
   const navServices = [
     {
       label: 'Desarrollo web',
-      href: '/desarrollo-web-a-medida',
+      href: '/desarrollo-web-a-medida/',
       icon: 'bi-braces',
       description: 'Software, plataformas e integraciones a medida',
     },
     {
       label: 'Marketing Digital',
-      href: '/agencia-marketing-digital',
+      href: '/agencia-marketing-digital/',
       icon: 'bi-graph-up-arrow',
       description: 'SEO técnico, rendimiento y conversión',
     },
@@ -49,9 +49,18 @@ export interface Props {
 
   const inferredPageUrl = new URL(normalizedPath, SITE_URL).toString();
 
-  const pageUrl = url
-    ? new URL(url, SITE_URL).toString()
-    : inferredPageUrl;
+  const requestedPageUrl = url
+    ? new URL(url, SITE_URL)
+    : new URL(inferredPageUrl);
+
+  if (
+    !requestedPageUrl.pathname.endsWith('/') &&
+    !/\.[a-z0-9]+$/i.test(requestedPageUrl.pathname)
+  ) {
+    requestedPageUrl.pathname = `${requestedPageUrl.pathname}/`;
+  }
+
+  const pageUrl = requestedPageUrl.toString();
 
 
   // Normaliza imagen a absoluta
@@ -126,12 +135,7 @@ export interface Props {
       "url": SITE_URL,
       "name": SITE_NAME,
       "publisher": { "@id": `${SITE_URL}#organization` },
-      "inLanguage": "es-CL",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": `${SITE_URL}blog?search={search_term_string}`,
-        "query-input": "required name=search_term_string"
-      }
+      "inLanguage": "es-CL"
     },
     {
       "@context": "https://schema.org",
@@ -303,8 +307,8 @@ export interface Props {
 
           <li class="nav-item">
             <a
-              href="/nosotros"
-              class={`nav-link sc-link ${currentPath.startsWith('/nosotros') ? 'active' : ''}`}
+              href="/nosotros/"
+              class={`nav-link sc-link ${currentPath.startsWith('/nosotros/') ? 'active' : ''}`}
             >
               Nosotros
             </a>
@@ -312,8 +316,8 @@ export interface Props {
 
           <li class="nav-item">
             <a
-              href="/proyectos"
-              class={`nav-link sc-link ${currentPath.startsWith('/proyectos') ? 'active' : ''}`}
+              href="/proyectos/"
+              class={`nav-link sc-link ${currentPath.startsWith('/proyectos/') ? 'active' : ''}`}
             >
               Proyectos
             </a>
@@ -324,8 +328,8 @@ export interface Props {
               id="scServicesToggle"
               type="button"
               class={`nav-link sc-link sc-dd-trigger ${
-                currentPath.startsWith('/desarrollo-web-a-medida') ||
-                currentPath.startsWith('/agencia-marketing-digital')
+                currentPath.startsWith('/desarrollo-web-a-medida/') ||
+                currentPath.startsWith('/agencia-marketing-digital/')
                   ? 'active'
                   : ''
               }`}
@@ -386,8 +390,8 @@ export interface Props {
 
           <li class="nav-item">
             <a
-              href="/blog"
-              class={`nav-link sc-link ${currentPath.startsWith('/blog') ? 'active' : ''}`}
+              href="/blog/"
+              class={`nav-link sc-link ${currentPath.startsWith('/blog/') ? 'active' : ''}`}
             >
               Blog
             </a>
@@ -460,9 +464,9 @@ export interface Props {
           </a>
 
           <a
-            href="/nosotros"
+            href="/nosotros/"
             class={`sc-mobile-link ${
-              currentPath.startsWith('/nosotros') ? 'active' : ''
+              currentPath.startsWith('/nosotros/') ? 'active' : ''
             }`}
           >
             <span class="sc-mobile-number">02</span>
@@ -471,9 +475,9 @@ export interface Props {
           </a>
 
           <a
-            href="/proyectos"
+            href="/proyectos/"
             class={`sc-mobile-link ${
-              currentPath.startsWith('/proyectos') ? 'active' : ''
+              currentPath.startsWith('/proyectos/') ? 'active' : ''
             }`}
           >
             <span class="sc-mobile-number">03</span>
@@ -482,9 +486,9 @@ export interface Props {
           </a>
 
           <a
-            href="/blog"
+            href="/blog/"
             class={`sc-mobile-link ${
-              currentPath.startsWith('/blog') ? 'active' : ''
+              currentPath.startsWith('/blog/') ? 'active' : ''
             }`}
           >
             <span class="sc-mobile-number">04</span>
@@ -502,9 +506,9 @@ export interface Props {
 
           <div class="sc-mobile-service-grid">
             <a
-              href="/desarrollo-web-a-medida"
+              href="/desarrollo-web-a-medida/"
               class={`sc-mobile-service ${
-                currentPath.startsWith('/desarrollo-web-a-medida')
+                currentPath.startsWith('/desarrollo-web-a-medida/')
                   ? 'active'
                   : ''
               }`}
@@ -522,9 +526,9 @@ export interface Props {
             </a>
 
             <a
-              href="/agencia-marketing-digital"
+              href="/agencia-marketing-digital/"
               class={`sc-mobile-service ${
-                currentPath.startsWith('/agencia-marketing-digital')
+                currentPath.startsWith('/agencia-marketing-digital/')
                   ? 'active'
                   : ''
               }`}

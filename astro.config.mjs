@@ -7,7 +7,7 @@ import cloudflare from '@astrojs/cloudflare';
 
 export default defineConfig({
   site: 'https://www.softwarecode.cl',
-
+  trailingSlash: 'always',
   // SSR habilitado globalmente.
   // Las rutas que declares con prerender=true quedan estáticas.
   output: 'server',
